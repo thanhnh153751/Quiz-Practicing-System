@@ -1,8 +1,41 @@
+.navbar{
+    height: 50px;
+    background-color: #fff;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.search{
+    position: relative;
+}
+
+.search>i{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.search>input{
+    width: 500px;
+    height: 35px;
+    border-radius: 1rem;
+}
+
+.auth>a{
+    padding-right: 10px;
+    text-decoration: none;
+}
+
 .wrapper{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
     position: relative;
     margin-bottom: 30px;
+    
 }
 
 h1{
