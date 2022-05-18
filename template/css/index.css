@@ -35,7 +35,11 @@
     border-radius: 10px;
     position: relative;
     margin-bottom: 30px;
-    
+}
+
+.wrapper>a{
+    text-decoration: none;
+    color: black;
 }
 
 h1{
