@@ -5,6 +5,8 @@
  */
 package Util;
 
+import static Util.ReadFileUtil.getDirPath;
+import static Util.ReadFileUtil.readFileToString;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -20,43 +22,15 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMailUtil {
 
-    private static Message htmlForm(Session session, String account, String to) {
-        final String content = "<!DOCTYPE html>\n"
-                + "<html lang=\"en\">\n"
-                + "<head>\n"
-                + "    <meta charset=\"UTF-8\">\n"
-                + "    \n"
-                + "</head>\n"
-                + "<body>\n"
-                + "    <div class=\"form\">\n"
-                + "        <div class=\"content\">\n"
-                + "            <h1>Online Quiz</h1>\n"
-                + "            <p>Please active your account first to join with us!\n"
-                + "                <a href=\"https://www.google.com/\">Click here</a> to join\n"
-                + "            </p>\n"
-                + "\n"
-                + "            <p>Online Quiz Group</p>\n"
-                + "        </div>\n"
-                + "    </div>\n"
-                + "</body>\n"
-                + "</html>";
-
+    private static Message htmlForm(Session session, String account, String to, String filename) {
+        String path = getDirPath().trim() + "\\web\\"+filename;
+        final String content = readFileToString(path);
+        
         try {
-//            File file = new File("");
-//            String currentDirectory = file.getAbsolutePath();
-
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(account));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Test!");
-//
-//            File myObj = new File("filename.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                System.out.println(data);
-//            }
-//            myReader.close();
+            message.setSubject("Hello");
             message.setContent(content, "text/html; charset=UTF-8");
             return message;
         } catch (MessagingException mex) {
@@ -65,9 +39,9 @@ public class SendMailUtil {
         return null;
     }
 
-    public void sendHTMLEmail(final String to) throws MessagingException {
+    public void sendHTMLEmail(final String to, String filename) throws MessagingException {
         final String account = "onlinequizo275@gmail.com";
-
+        final String password = "admin@123s";
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
@@ -77,21 +51,18 @@ public class SendMailUtil {
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("onlinequizo275@gmail.com", "admin@123s");
+                return new PasswordAuthentication(account, password);
             }
         });
 
         session.setDebug(true);
-        Message message = htmlForm(session, account, to);
+        Message message = htmlForm(session, account, to, filename);
         Transport.send(message);
     }
 
     public static void main(String[] args) throws MessagingException {
         SendMailUtil send = new SendMailUtil();
-            send.sendHTMLEmail("onlinequizo275@gmail.com");
+            send.sendHTMLEmail("onlinequizo275@gmail.com","mail.html");
 
-//        File file = new File("");
-//        String currentDirectory = file.getAbsolutePath();
-//        System.out.println("Current working directory : " + currentDirectory);
     }
 }
