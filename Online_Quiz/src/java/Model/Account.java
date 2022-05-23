@@ -11,6 +11,7 @@ package Model;
  */
 public class Account {
     private int id;
+    private String fullname;
     private String email;
     private String phone;
     private String password;
@@ -20,8 +21,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(int id, String email, String phone, String password, boolean gender, int status) {
+    public Account(int id, String fullname, String email, String phone, String password, boolean gender, int status) {
         this.id = id;
+        this.fullname = fullname;
         this.email = email;
         this.phone = phone;
         this.password = password;
@@ -35,6 +37,14 @@ public class Account {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -76,6 +86,8 @@ public class Account {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    
     
     
 }

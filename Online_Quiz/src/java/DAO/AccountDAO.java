@@ -19,9 +19,7 @@ public class AccountDAO extends DBContext{
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            if (rs != null) {
-                return new Account(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getNString(4), rs.getBoolean(5), rs.getInt(6));
-            }
+            
         } catch (Exception e) {
         }
         return null;

@@ -34,21 +34,5 @@ public class ReadFileUtil {
         return bs.toString();
     }
 
-    public static void main(String[] args) {
-//        String path = getDirPath().trim() + "\\web\\mail.html";
-//        String content = readFileToString(path);
-//        System.out.println(content);
-        try {
-            FileReader reader = new FileReader("config.properties");
-            // crate properties object
-            Properties properties = new Properties();
-            properties.load(reader);
-            System.out.println(properties.getProperty("username").getClass());
-            // show file info
-            System.out.println(properties.getProperty("password"));
-
-        } catch (IOException e) {
-        }
-
-    }
+    
 }
