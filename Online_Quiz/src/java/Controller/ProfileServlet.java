@@ -79,7 +79,12 @@ public class ProfileServlet extends HttpServlet {
         String email = request.getParameter("gmail");
         String phone = request.getParameter("phone");
         String gender_raw = request.getParameter("gender");
-
+        System.out.println(gender_raw);
+        if (gender_raw.equalsIgnoreCase("Female")) {
+            gender_raw = "false";
+        } else {
+            gender_raw = "true";
+        }
         HttpSession session = request.getSession();
         Account x = (Account) session.getAttribute("acc");
         try {
