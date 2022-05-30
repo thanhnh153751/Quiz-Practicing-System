@@ -1,78 +1,55 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+
 
 body {
-  background: rgb(255, 254, 254);
-  color: rgb(8, 7, 7);
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
+    background: rgb(255, 254, 254);
+    color: rgb(8, 7, 7);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
 }
 
-p {
-  margin: 0 0 13px 0;
+.course-item{
+    box-shadow: 0px 2px 5px #aaaaaa;
+    border: 1px solid #BFBFBF;
+
+}
+.search-box{
+    box-shadow: 0px 2px 5px #aaaaaa;
+    border: 1px solid #BFBFBF;
+
+
+}
+.sticky{
+    position: sticky; 
+    top: 50px;
+    height: fit-content;
+}
+.course-thumb img{
+    border: solid chartreuse 1px;
+}
+.img-fluid{
+    width: 100%;
+    height: auto;
 }
 
 a {
-  color: rgb(9, 8, 8);
+    color: rgb(9, 8, 8);
+    text-decoration: none;
 }
 
 .center { text-align: center; }
 
 .container {
-  width: 95%;
-  max-width: 1220px;
-  margin: 0 auto;
+    width: 95%;
+    max-width: 1220px;
+    margin: 0 auto;
 }
 
-.episode {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  position: relative;
+.jc-r{
+    justify-content: right;
 }
 
-/* .episode__number {
-  font-size: 10vw;
-  font-weight: 600;
-  padding: 10px 0;
-  position: sticky;
-  top: 0;
-  text-align: center;
-  height: calc(10vw + 20px);
-  transition: all 0.2s ease-in;
-} */
-.episode__number img{
-  border: solid 1px;
-}
-
-.episode__content {
-  border-top: 2px solid rgb(0, 0, 0);
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-gap: 10px;
-  padding: 15px 0;
-}
-
-.episode__content .title {
-  font-weight: 600
-}
-
-.episode__content .story {
-  line-height: 26px;
-}
-
-@media (max-width: 600px) {
-  .episode__content {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 576px) {
-  .episode__content .story {
-    font-size: 15px;
-  }
+.pdl-15{
+    padding-left: 15px;
 }
 
 .footer{
@@ -83,4 +60,27 @@ a {
     justify-content: center;
     background-color: black;
     color: white;
+}
+
+.pagination {
+    display: inline-block;
+}
+.pagination a {
+    color: black;
+    font-size: 22px;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.pagination a.active {
+    background-color: #ee3e0f;
+    color: black;
+}
+.pagination a:hover:not(.active) {
+    background-color: #ee3e0f;
+} 
+
+
+.btn-outline-primary{
+    padding: 0px;
 }

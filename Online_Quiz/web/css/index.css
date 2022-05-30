@@ -1,3 +1,6 @@
+
+
+
 .navbar{
     height: 50px;
     background-color: #fff;
@@ -35,6 +38,7 @@
     border-radius: 10px;
     position: relative;
     margin-bottom: 30px;
+    color: white;
 }
 
 .wrapper>a{
@@ -81,6 +85,11 @@ h3{
     transform: scale(1.05);
 }
 
+.wrapper img{
+    width: 100%;
+}
+
+
 .footer{
     width: 100%;
     height: 150px;
@@ -91,7 +100,43 @@ h3{
     color: white;
 }
 
+.btn-outline-primary{
+    width: 200px;
+    margin: 0 auto;
+}
 
 
 
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
 
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
+    }
+    
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}
