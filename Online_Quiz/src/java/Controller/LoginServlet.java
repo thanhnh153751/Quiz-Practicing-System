@@ -63,12 +63,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD:Online_Quiz/src/java/Controller/LoginController.java
+
         request.getRequestDispatcher("login_1.jsp").forward(request, response);
 //        processRequest(request, response);
-=======
+
         request.getRequestDispatcher("login.jsp").forward(request, response);
->>>>>>> thinh:Online_Quiz/src/java/Controller/LoginServlet.java
+
     }
 
     /**
@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-<<<<<<< HEAD:Online_Quiz/src/java/Controller/LoginController.java
+
         String r = request.getParameter("rem");
         DAO dao = new DAO();
         Account a = dao.login(email, password);
@@ -112,9 +112,9 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cr);
             session.setMaxInactiveInterval(60 * 60 ^ 24);
             response.sendRedirect("home.jsp");
-=======
-        AccountDAO dao = new AccountDAO();
-        Account a = dao.login(email, password);
+
+//        AccountDAO dao = new AccountDAO();
+//        Account a = dao.login(email, password);
         if (a == null || a.getStatus() == 0) {
             request.setAttribute("mess", "Wrong email or password!!!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -122,8 +122,9 @@ public class LoginServlet extends HttpServlet {
             HttpSession Session = request.getSession();
             Session.setAttribute("acc", a);
             response.sendRedirect("home");
->>>>>>> thinh:Online_Quiz/src/java/Controller/LoginServlet.java
+
         }
+    }
     }
 
     /**
