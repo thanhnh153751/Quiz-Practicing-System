@@ -5,25 +5,29 @@
  */
 package Controller;
 
-import DAO.AccountDAO;
 import DAO.DAO;
 import Model.Account;
+import Model.TokenEmail;
+import Util.CheckTimeToken;
+import Util.SendMailUtil;
+import Util.TokenUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author hongd
+ * @author Viet Dung
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "ResetpassController", urlPatterns = {"/reset"})
+public class ResetpassController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +46,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet ResetpassController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ResetpassController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,8 +67,20 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_1.jsp").forward(request, response);
-//        processRequest(request, response);
+        String tok = request.getParameter("tok");
+        DAO dao = new DAO();
+        TokenEmail token = dao.getEmailToken(tok);
+        
+        CheckTimeToken checktimetoken = new CheckTimeToken();
+        
+        if(checktimetoken.CheckTime(token.getTime())<=30){
+            dao.updateTokenStatus(tok);
+            request.setAttribute("email", token.getEmail());
+            request.getRequestDispatcher("resetpass.jsp").forward(request, response);
+        }else{
+            request.setAttribute("mess", "TimeOut and enter email again !!!");
+            request.getRequestDispatcher("sendmail.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -79,34 +95,29 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String r = request.getParameter("rem");
         DAO dao = new DAO();
-        Account a = dao.login(email, password);
+        
+        Account a = dao.checkAccount(email);
         if (a == null) {
-            request.setAttribute("mess", " USER OR PASSWORD WAS INCORRECT, PLEASE TRY AGAIN");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("mess", " This email not existed!");
+            request.getRequestDispatcher("sendmail.jsp").forward(request, response);
         } else {
-//            request.getRequestDispatcher("home").forward(request, response);
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", a);
-            Cookie cu = new Cookie("email", email);
-            Cookie cp = new Cookie("password", password);
-            Cookie cr = new Cookie("rem", r);
-            if (r != null) {
-                cu.setMaxAge(60 * 60 ^ 24);
-                cp.setMaxAge(60 * 60 ^ 24);
-                cr.setMaxAge(60 * 60 ^ 24);
-            } else {
-                cu.setMaxAge(0);
-                cp.setMaxAge(0);
-                cr.setMaxAge(0);
+            
+            
+                
+            try {
+                TokenUtil token = new TokenUtil();
+                String tok = token.tokenGenerate();
+                dao.addTokenEmail(tok, email);
+                
+                SendMailUtil send = new SendMailUtil();
+                send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/reset?tok=" + tok);
+                
+//            request.getRequestDispatcher("home").forward(request, response);           
+//            response.sendRedirect("home.jsp");
+            } catch (MessagingException ex) {
+                Logger.getLogger(ResetpassController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            response.addCookie(cu);
-            response.addCookie(cp);
-            response.addCookie(cr);
-            session.setMaxInactiveInterval(60 * 60 ^ 24);
-            response.sendRedirect("home.jsp");
         }
     }
 

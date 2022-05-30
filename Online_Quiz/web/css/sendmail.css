@@ -1,0 +1,73 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 25, 2022, 9:00:37 PM
+    Author     : Viet Dung
+*/
+/*.light-blue{
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}*/
+/*body{
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Maven Pro", sans-serif;
+}
+.main-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    
+
+}
+
+.form{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    width: 450px;
+    height: 450px;
+    display: flex;
+/*    justify-content: center;*/
+    align-items: center;
+    flex-direction: column;
+    font-family: sans-serif;
+
+
+}
+h1{
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+h6{
+    text-align: center;
+}
+
+.form-group{
+    padding: auto;
+}
+
+#newpassword,#password,#email,#mobile, #gender,#email,#button{
+    width:390px;
+}
+#email{
+    margin-top: 0px;
+}
+.text{
+    
+    margin-right: 30px;
+    margin-left: 30px;
+}
+a{
+    margin-top: 10px;
+}
+label{
+    display: inline;
+    text-align: center;
+}
