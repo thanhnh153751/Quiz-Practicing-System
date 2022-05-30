@@ -1,6 +1,10 @@
-<%-- Document : login Created on : May 19, 2022, 1:40:09 PM Author : hongd --%>
+<%-- 
+    Document   : login
+    Created on : May 16, 2022, 11:49:25 PM
+    Author     : PREDATOR
+--%>
 
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -14,7 +18,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="./css/login.css">
+                <link rel="stylesheet" href="css/login.css">
             <title>Document</title>
         </head>
 
@@ -28,9 +32,10 @@
                         <label for="password">Password</label>
                         <input type="text" id="password" name="password">
                     </div>
+                    <p class="text-danger">${mess}</p>
                     <input type="submit" value="Login" id="sm-btn">
-                    <a href="./register.html">Register new account.</a>
-                    <a href="./forgot.html">Forgot password?</a>
+                    <a href="./register.jsp">Register new account</a>
+                    <a href="./forgot.jsp">Forgot password?</a>
 
                 </form>
 
