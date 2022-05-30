@@ -10,6 +10,7 @@ import Model.PostCategory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,4 +112,62 @@ public class PostDAO extends DBContext{
         }
         return searchResult;
     }
+    
+    public List<Post> loadAllPost() {//tải lên tất cả các Post có trong db
+        List<Post> loadAllPost = new ArrayList<>();
+        String query = "Select * from Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            
+             
+            while (rs.next()) {
+                loadAllPost.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getNString("thumbnail")
+                ));
+            }
+            return loadAllPost;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    public List<Post> loadLatestPost() {//tải lên top 3 các Post mới nhất dựa theo date trong db
+        List<Post> loadLatestPost = new ArrayList<>();
+        String query = "select top 3 * from Post order by update_date desc";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            
+            
+             
+            while (rs.next()) {
+                loadLatestPost.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getNString("thumbnail")
+                ));
+            }
+            return loadLatestPost;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
 }

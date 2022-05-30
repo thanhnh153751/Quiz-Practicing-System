@@ -65,7 +65,7 @@ public class ListSubjectServlet extends HttpServlet {
         try {
             
             
-            SubjectDAO sd = new SubjectDAO();
+           SubjectDAO sd = new SubjectDAO();
             List<SubjectCategory> categorySubject=sd.loadAllSubjectCategory();
             request.setAttribute("categorySubject", categorySubject);
 

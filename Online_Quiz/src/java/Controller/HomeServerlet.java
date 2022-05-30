@@ -6,6 +6,8 @@
 package Controller;
 
 import DAO.SubjectDAO;
+import DAO.PostDAO;
+import Model.Post;
 import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +66,12 @@ public class HomeServerlet extends HttpServlet {
         SubjectDAO sjd = new SubjectDAO();
         List<Subject> subjectList = sjd.loadSubjectOnHome();
         request.setAttribute("subjectList", subjectList);
+        //dành cho blog
+        PostDAO pd = new PostDAO();
+        List<Post> loadAllPost = pd.loadAllPost();
+        List<Post> loadLatestPost = pd.loadLatestPost();
+        request.setAttribute("loadAllPost", loadAllPost);
+        request.setAttribute("loadLatestPost", loadLatestPost);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
