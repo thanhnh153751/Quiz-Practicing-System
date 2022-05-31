@@ -88,10 +88,11 @@ public class ProfileServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Account x = (Account) session.getAttribute("acc");
         try {
+            int id = x.getId();
             boolean gender = Boolean.parseBoolean(gender_raw);
             AccountDAO DAO = new AccountDAO();
             Account a = new Account(x.getId(), fullname, email, phone, x.getPassword(), gender, x.getStatus());
-            DAO.EditProfile(fullname, email, phone, gender);
+            DAO.EditProfile(fullname, email, phone, gender, id);
             Account lg = DAO.login(email, x.getPassword());
             session.setAttribute("acc", lg);
             request.setAttribute("mess", "Update successfully!");
