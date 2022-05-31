@@ -9,7 +9,6 @@ import DAO.PostDAO;
 import Model.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +40,7 @@ public class BlogSearchController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogSearchController</title>");            
+            out.println("<title>Servlet BlogSearchController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet BlogSearchController at " + request.getContextPath() + "</h1>");
@@ -63,10 +62,9 @@ public class BlogSearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        List<Post> rs = new ArrayList<>();
         String search = request.getParameter("searchname");
         PostDAO postdao = new PostDAO();
-        rs = postdao.searchPost(search);
+        List<Post> rs = postdao.searchPost(search);
         request.setAttribute("postlist", rs);
         request.getRequestDispatcher("searchblog.jsp").forward(request, response);
     }
