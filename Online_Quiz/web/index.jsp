@@ -35,17 +35,15 @@
                 Hello ${sessionScope.acc.fullname}
                 <c:if test="${sessionScope.acc != null}">
                     <a href="logout">Logout</a>
-                    <div class="dropdown-content">
-
+                    <div class="dropdown-content">=
                         <a href="<c:url value="/home"/>">Trang quản lí</a>
-
                         <a href="<c:url value="/profile"/>">Thông tin tài khoản</a>
                         <a href="<c:url value="/changepass"/>">Doi mat khau</a>
                         <a href="<c:url value="/logout"/>">Đăng xuất</a>
                     </div>
                 </c:if>
                 <c:if test="${sessionScope.acc == null}">
-                    <a href="./login.jsp">Login</a>
+                    <a href="/login">Login</a>
                 </c:if>
 
                
@@ -208,7 +206,7 @@
                              src="${p.thumbnail}"
                              alt="">
                     </div>
-                    <a href="./blogs.html">
+                             <a href="<c:url value="/postdetails?id=${p.id}"/>">
                         <div class="title">
                             <h2>${p.post_title}</h2>
                             <p class="blog-biref">${p.biref}</p>
@@ -221,7 +219,7 @@
 
 
         <!--view more hiển thị listBlogs-->
-        <a class="btn btn-outline-primary" href="#" role="button">View More</a>
+        <a class="btn btn-outline-primary" href="<c:url value="/bloglist"/>" role="button">View More</a>
 
         <footer class="footer text-center mt-auto"">
             <p>@Copy right of ..</p>
