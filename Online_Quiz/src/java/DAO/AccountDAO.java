@@ -83,14 +83,15 @@ public class AccountDAO extends DBContext{
         
     }
     
-    public void EditProfile(String fullname, String email, String phone, boolean gender){
-        String query = "update Account set fullname = ?, email = ?, phone = ?, gender = ?";
+    public void EditProfile(String fullname, String email, String phone, boolean gender, int id){
+        String query = "update Account set fullname = ?, email = ?, phone = ?, gender = ? where id=?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, fullname);
             ps.setString(2, email);
             ps.setString(3, phone);
             ps.setBoolean(4, gender);
+            ps.setInt(5, id);
             ps.executeUpdate();
 
         } catch (Exception e) {

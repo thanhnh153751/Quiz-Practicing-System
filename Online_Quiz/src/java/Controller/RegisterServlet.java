@@ -91,7 +91,7 @@ public class RegisterServlet extends HttpServlet {
                 DAO.Register(fullname, email, phone, password, gender);
                 SendMailUtil sendMailUltil = new SendMailUtil();
                 response.sendRedirect("confirmEmail.jsp");
-            sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/login/signup?email=" + email);
+            sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/register?email=" + email);
             }else{
                 request.setAttribute("mess", "Email is exist");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
