@@ -44,6 +44,32 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
+    
+    public Subject loadSubjectDetail(int id) {//tải lên subjecte detail có trong db
+        Subject loadSubject = new Subject();
+        String query = "Select * from Subject where id="+id;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                loadSubject = (new Subject(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getNString(3),
+                        rs.getNString(4),
+                        rs.getNString(5),
+                        rs.getDouble(6),
+                        rs.getDouble(7),
+                        rs.getNString(8),
+                        rs.getNString(9),
+                        rs.getInt(10)));
+            }
+            return loadSubject;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
     public List<SubjectCategory> loadAllSubjectCategory() {//tải lên tất cả các subject có trong db
         List<SubjectCategory> loadSubjectCategory = new ArrayList<>();
         String query = "Select * from Subject_Category";
