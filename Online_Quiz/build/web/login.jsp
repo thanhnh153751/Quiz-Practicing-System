@@ -35,7 +35,7 @@
                     <p class="text-danger">${mess}</p>
                     <input type="submit" value="Login" id="sm-btn">
                     <a href="./register.jsp">Register new account</a>
-                    <a href="./forgot.jsp">Forgot password?</a>
+                    <a href="./sendmail.jsp">Forgot password?</a>
 
                 </form>
 

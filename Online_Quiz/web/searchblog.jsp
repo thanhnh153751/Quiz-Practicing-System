@@ -1,9 +1,8 @@
 <%-- 
-    Document   : bloglist
-    Created on : May 26, 2022, 11:32:18 AM
+    Document   : searchblog
+    Created on : May 31, 2022, 11:40:07 AM
     Author     : hongd
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,8 +20,7 @@
         <link rel="stylesheet" href="./css/index.css">
         <link rel="stylesheet" href="./css/bloglist.css">
         <script src="./js/index.js"></script>
-        <title>blogs
-        </title>
+        <title>blogs</title>
     </head>
 
     <body class="d-flex flex-column min-vh-100">
@@ -33,32 +31,25 @@
                 <input type="search" placeholder="Search anything...">
             </div>
             <div class="auth">
-                <a href="./login.html">Login</a>
-                <a href="./register.html">Register</a>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
             </div>
-        </nav>  
+        </nav>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="blog-list">
-                        <h1 class="text-center">Blog list</h1>
+                        <h1 class="text-center">Result</h1>
 
-                        <form action="blogsearch">
+                        <form method="get" action="blogsearch" class="search-box">
                             <input name="searchname" type="text" placeholder="Search blogs">
-
-                            <select  id="">
-                                <option value="">Blog Category</option>
-                                <c:forEach items="${listc}" var="lst">
-                                    <option value="${lst.id}">${lst.name}</option>
-                                </c:forEach>
-                            </select>
                             <button>Search</button>
                         </form>
 
-                        <c:forEach items="${post}" var="pst">
+                        <c:forEach items="${postlist}" var="pst">
                             <div class="post-item">
                                 <a href="<c:url value="/postdetails?id=${pst.id}"/>">
-                                    <h1>${pst.post_title}</h1>
+                                   <h1>${pst.post_title}</h1>
                                     <p>${pst.biref}</p>
                                 </a>
                             </div>

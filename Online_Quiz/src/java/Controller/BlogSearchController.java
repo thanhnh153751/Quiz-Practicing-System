@@ -5,23 +5,24 @@
  */
 package Controller;
 
-import DAO.DAO;
-import Model.Account;
+import DAO.PostDAO;
+import Model.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Viet Dung
+ * @author hongd
  */
-@WebServlet(name = "ChangepassController", urlPatterns = {"/changepass"})
-public class ChangepassController extends HttpServlet {
+@WebServlet(name = "BlogSearchController", urlPatterns = {"/blogsearch"})
+public class BlogSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +41,10 @@ public class ChangepassController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangepassController</title>");            
+            out.println("<title>Servlet BlogSearchController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangepassController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BlogSearchController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +62,13 @@ public class ChangepassController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("changepass.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+        List<Post> rs = new ArrayList<>();
+        String search = request.getParameter("searchname");
+        PostDAO postdao = new PostDAO();
+        rs = postdao.searchPost(search);
+        request.setAttribute("postlist", rs);
+        request.getRequestDispatcher("searchblog.jsp").forward(request, response);
     }
 
     /**
@@ -75,24 +82,7 @@ public class ChangepassController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pass = request.getParameter("password");
-        String ppass = request.getParameter("newpassword");
-        String cpass = request.getParameter("connewpassword");
-        
-        DAO dao = new DAO();
-        HttpSession session = request.getSession();
-        Account ac = (Account)session.getAttribute("acc");
-        
-        Account a = dao.login(ac.getEmail(), pass);
-
-        if (ppass.equals(cpass) && a != null) {
-            request.setAttribute("mess", "Change password successful!");
-            dao.changepass(ppass, ac.getEmail());
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("mess", "Change password unsuccessful!");
-            request.getRequestDispatcher("changepass.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
