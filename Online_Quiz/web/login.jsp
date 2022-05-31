@@ -30,7 +30,7 @@
                         <label for="email">Email</label>
                         <input type="text" id="email" name="email">
                         <label for="password">Password</label>
-                        <input type="text" id="password" name="password">
+                        <input type="password" id="password" name="password">
                     </div>
                     <p class="text-danger">${mess}</p>
                     <input type="submit" value="Login" id="sm-btn">
