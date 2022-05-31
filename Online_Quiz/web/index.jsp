@@ -46,7 +46,7 @@
                     <a href="/login">Login</a>
                 </c:if>
 
-               
+
             </div>
         </nav>
 
@@ -206,7 +206,7 @@
                              src="${p.thumbnail}"
                              alt="">
                     </div>
-                             <a href="<c:url value="/postdetails?id=${p.id}"/>">
+                    <a href="<c:url value="/postdetails?id=${p.id}"/>">
                         <div class="title">
                             <h2>${p.post_title}</h2>
                             <p class="blog-biref">${p.biref}</p>
@@ -221,7 +221,7 @@
         <!--view more hiển thị listBlogs-->
         <a class="btn btn-outline-primary" href="<c:url value="/bloglist"/>" role="button">View More</a>
 
-        <footer class="footer text-center mt-auto"">
+        <footer class="footer text-center mt-auto">
             <p>@Copy right of ..</p>
         </footer>
         </body>
