@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/login.css">
     </head>
     <body>
-        <form action="signup" method="post">
+        <form action="register" method="post">
             <h3 style="color: red">${mess}</h3>
             <div class="container-fluid main-form">
                 <div class="form">

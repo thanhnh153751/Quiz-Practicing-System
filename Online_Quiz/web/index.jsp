@@ -32,8 +32,15 @@
                 <input type="search" placeholder="Search anything...">
             </div>
             <div class="auth">
-                <a href="./login.html">Login</a>
-                <a href="./register.html">Register</a>
+                Hello ${sessionScope.acc.fullname}
+                <c:if test="${sessionScope.acc != null}">
+                    <a href="logout">Logout</a>
+                </c:if>
+                <c:if test="${sessionScope.acc == null}">
+                    <a href="./login.jsp">Login</a>
+                </c:if>
+                <a href="./register.jsp">Register</a>
+                <a href="./profile.jsp">Profile</a>
             </div>
         </nav>
 
