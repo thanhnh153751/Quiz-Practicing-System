@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hongd
  */
-@WebServlet(name = "PostDetailController", urlPatterns = {"/postdetails"})
+@WebServlet(name = "PostDetailController", urlPatterns = {"/public/postdetails"})
 public class PostDetailController extends HttpServlet {
 
     /**
@@ -66,14 +66,13 @@ public class PostDetailController extends HttpServlet {
         
         String pid_raw = request.getParameter("id");
         int pid = Integer.parseInt(pid_raw);
-        Post p = new Post();
-        p = post.loadPostDetails(pid);
+        Post p = post.loadPostDetails(pid);
         List<Post> listp = post.loadPost();
         List<PostCategory> listpc = post.loadPostCategory();
         request.setAttribute("listc", listpc);
         request.setAttribute("post", listp);
         request.setAttribute("details", p);
-        request.getRequestDispatcher("blogs.jsp").forward(request, response);
+        request.getRequestDispatcher("/public/blogs.jsp").forward(request, response);
     }
 
     /**

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+@WebServlet(name = "LoginServlet", urlPatterns = {"/common/login"})
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 
     }
 
@@ -84,11 +84,11 @@ public class LoginServlet extends HttpServlet {
         Account a = dao.login(email, password);
         if (a == null || a.getStatus() == 0) {
             request.setAttribute("mess", "Wrong email or password!!!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         } else {
             HttpSession Session = request.getSession();
             Session.setAttribute("acc", a);
-            response.sendRedirect("home");
+            response.sendRedirect(request.getContextPath()+"/public/home");
         }
     }
 

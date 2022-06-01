@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/common/profile"})
 public class ProfileServlet extends HttpServlet {
 
     /**
@@ -91,12 +91,12 @@ public class ProfileServlet extends HttpServlet {
             int id = x.getId();
             boolean gender = Boolean.parseBoolean(gender_raw);
             AccountDAO DAO = new AccountDAO();
-            Account a = new Account(x.getId(), fullname, email, phone, x.getPassword(), gender, x.getStatus());
+            Account a = new Account(x.getId(), fullname, email, phone, x.getPassword(), gender, x.getStatus(), x.getAvatar());
             DAO.EditProfile(fullname, email, phone, gender, id);
             Account lg = DAO.login(email, x.getPassword());
             session.setAttribute("acc", lg);
             request.setAttribute("mess", "Update successfully!");
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/profile.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         }

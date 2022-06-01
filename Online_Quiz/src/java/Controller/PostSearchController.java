@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hongd
  */
-@WebServlet(name = "PostSearchController", urlPatterns = {"/postsearch"})
+@WebServlet(name = "PostSearchController", urlPatterns = {"/public/postsearch"})
 public class PostSearchController extends HttpServlet {
 
     /**
@@ -59,7 +59,7 @@ public class PostSearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getRequestDispatcher("blogsearch.jsp").forward(request, response);
+        request.getRequestDispatcher("/public/blogsearch.jsp").forward(request, response);
     }
 
     /**

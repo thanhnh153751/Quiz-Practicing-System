@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Viet Dung
  */
-@WebServlet(name = "ChangepassController", urlPatterns = {"/changepass"})
+@WebServlet(name = "ChangepassController", urlPatterns = {"/common/changepass"})
 public class ChangepassController extends HttpServlet {
 
     /**

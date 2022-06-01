@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.List;
+
 /**
  *
  * @author hongd
@@ -12,13 +14,15 @@ package Model;
 public class Permission {
     private int id;
     private String per_name;
-
+    private List<Action> alist;
+    
     public Permission() {
     }
 
-    public Permission(int id, String per_name) {
+    public Permission(int id, String per_name, List<Action> alist) {
         this.id = id;
         this.per_name = per_name;
+        this.alist = alist;
     }
 
     public int getId() {
@@ -36,6 +40,18 @@ public class Permission {
     public void setPer_name(String per_name) {
         this.per_name = per_name;
     }
+
+    public List<Action> getAlist() {
+        return alist;
+    }
+
+    public void setAlist(List<Action> alist) {
+        this.alist = alist;
+    }
+
+    
+
+   
     
     
 }

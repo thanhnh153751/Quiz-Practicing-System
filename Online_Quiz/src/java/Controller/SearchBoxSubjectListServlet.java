@@ -107,7 +107,7 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
         request.setAttribute("page", page);
         request.setAttribute("numPage", numPage);
         request.setAttribute("categorySubject", categoryList);
-        request.getRequestDispatcher("listSubject.jsp").forward(request, response);
+        request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);
 
     }
 

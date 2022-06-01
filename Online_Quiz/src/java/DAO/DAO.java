@@ -16,12 +16,12 @@ import Model.TokenEmail;
  *
  * @author Viet Dung
  */
-public class DAO extends DBContext{
+public class DAO extends DBContext {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
-    
+
     public Account login(String email, String pass) {
         String query = "select * from Account where email = ? and [password] = ?";
         try {
@@ -36,12 +36,14 @@ public class DAO extends DBContext{
                         rs.getString(4),
                         rs.getString(5),
                         rs.getBoolean(6),
-                        rs.getInt(7));
+                        rs.getInt(7),
+                        rs.getString(8));
             }
         } catch (Exception e) {
         }
         return null;
     }
+
     public void changepass(String pass, String email) {
         String sql = "update Account set [password] = ? where email = ?";
         try {
@@ -52,6 +54,7 @@ public class DAO extends DBContext{
         } catch (Exception e) {
         }
     }
+
     public Account checkAccount(String user) {
         String query = "select * from Account where email = ?";
         try {
@@ -65,26 +68,29 @@ public class DAO extends DBContext{
                         rs.getString(4),
                         rs.getString(5),
                         rs.getBoolean(6),
-                        rs.getInt(7));
+                        rs.getInt(7),
+                        rs.getString(8));
             }
         } catch (Exception e) {
         }
         return null;
     }
-    public void addTokenEmail(String token, String email){
+
+    public void addTokenEmail(String token, String email) {
         String query = "insert into Token_Management values (?,?,0,?)";
         Date date = new Date();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            
+
             ps.setString(1, email);
             ps.setString(2, token);
-            ps.setLong(3, date.getTime()/60000);
+            ps.setLong(3, date.getTime() / 60000);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-    public TokenEmail getEmailToken(String token){
+
+    public TokenEmail getEmailToken(String token) {
         String query = "select * from Token_Management where token = ?";
         try {
             ps = connection.prepareStatement(query);
@@ -101,20 +107,20 @@ public class DAO extends DBContext{
         }
         return null;
     }
-    public void updateTokenStatus(String token){
+
+    public void updateTokenStatus(String token) {
         String query = "update Token_Management set status = 1 where token = ?";
         Date date = new Date();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            
-            ps.setString(1, token);           
+
+            ps.setString(1, token);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
+
     public static void main(String[] args) {
         System.out.println(java.time.LocalDateTime.now());
     }
 }
-
-

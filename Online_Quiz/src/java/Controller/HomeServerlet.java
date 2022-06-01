@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author THANH
  */
-@WebServlet (name="Home",urlPatterns={"/home"})
+@WebServlet (name="HomeServerlet",urlPatterns={"/public/home"})
 public class HomeServerlet extends HttpServlet {
 
     /**
@@ -63,16 +63,18 @@ public class HomeServerlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        System.out.println(request.getRequestURI());
         SubjectDAO sjd = new SubjectDAO();
         List<Subject> subjectList = sjd.loadSubjectOnHome();
         request.setAttribute("subjectList", subjectList);
         //dành cho blog
+ 
         PostDAO pd = new PostDAO();
         List<Post> loadAllPost = pd.loadAllPost();
         List<Post> loadLatestPost = pd.loadLatestPost();
         request.setAttribute("loadAllPost", loadAllPost);
         request.setAttribute("loadLatestPost", loadLatestPost);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("/public/index.jsp").forward(request, response);
     }
 
     /**

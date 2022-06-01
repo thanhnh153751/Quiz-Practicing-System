@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Viet Dung
  */
-@WebServlet(name = "ResetpassController", urlPatterns = {"/reset"})
+@WebServlet(name = "ResetpassController", urlPatterns = {"/common/reset"})
 public class ResetpassController extends HttpServlet {
 
     /**
@@ -78,10 +78,10 @@ public class ResetpassController extends HttpServlet {
         if(checktimetoken.CheckTime(token.getTime())<=10&&token.isStatus()==false){
             request.setAttribute("tok", tok);
             request.setAttribute("email", token.getEmail());
-            request.getRequestDispatcher("resetpass.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/resetpass.jsp").forward(request, response);
         }else{
             request.setAttribute("mess", "TimeOut and enter email again !!!");
-            request.getRequestDispatcher("sendmail.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
         }
     }
 
@@ -102,7 +102,7 @@ public class ResetpassController extends HttpServlet {
         Account a = dao.checkAccount(email);
         if (a == null) {
             request.setAttribute("mess", " This email not existed!");
-            request.getRequestDispatcher("sendmail.jsp").forward(request, response);
+            request.getRequestDispatcher("/router/common/sendmail.jsp").forward(request, response);
         } else {
             
             

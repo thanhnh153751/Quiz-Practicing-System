@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author THANH
  */
-@WebServlet(name = "ListSubjectServlet", urlPatterns = {"/listsubject"})
+@WebServlet(name = "ListSubjectServlet", urlPatterns = {"/public/listsubject"})
 public class ListSubjectServlet extends HttpServlet {
 
     /**

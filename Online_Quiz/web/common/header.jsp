@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <nav class="navbar">
-    <div class="brand"><a href="<c:url value="/home"/>">Quiz Online</a></div>
+    <div class="brand"><a href="<c:url value="/public/home"/>">Quiz Online</a></div>
     <div class="search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="search" placeholder="Search anything...">
@@ -25,7 +25,7 @@
             </div>
         </c:if>
         <c:if test="${sessionScope.acc == null}">
-            <a href="<c:url value="/login"/>">Login</a>
+            <a href="<c:url value="/common/login"/>">Login</a>
         </c:if>
 
 

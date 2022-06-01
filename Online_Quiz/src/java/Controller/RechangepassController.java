@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Viet Dung
  */
-@WebServlet(name = "RechangepassController", urlPatterns = {"/rechange"})
+@WebServlet(name = "RechangepassController", urlPatterns = {"/common/rechange"})
 public class RechangepassController extends HttpServlet {
 
     /**
@@ -89,11 +89,15 @@ public class RechangepassController extends HttpServlet {
         if (ppass.equals(cpass) && a != null) {
             request.setAttribute("mess", "Change password successful!");
             dao.changepass(ppass, email);
+<<<<<<< HEAD
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+=======
             dao.updateTokenStatus(tok);
             request.getRequestDispatcher("login.jsp").forward(request, response);
+>>>>>>> a4033cc9b1b11eff587d9782d6a61801a4fb5f88
         } else {
             request.setAttribute("mess", "Change password unsuccessful!");
-            request.getRequestDispatcher("resetpass.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/resetpass.jsp").forward(request, response);
         }
     }
 

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/common/register"})
 public class RegisterServlet extends HttpServlet {
 
     /**
@@ -40,7 +40,7 @@ public class RegisterServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
+            out.println("<title>Servlet RegisterServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
@@ -64,7 +64,7 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         AccountDAO DAO = new AccountDAO();
         DAO.ChangeStatus(email);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("/common/register.jsp").forward(request, response);
     }
 
     /**
@@ -91,12 +91,12 @@ public class RegisterServlet extends HttpServlet {
                 DAO.Register(fullname, email, phone, password, gender);
                 SendMailUtil sendMailUltil = new SendMailUtil();
                 response.sendRedirect("confirmEmail.jsp");
-            sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/register?email=" + email);
-            }else{
+                sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/register?email=" + email);
+            } else {
                 request.setAttribute("mess", "Email is exist");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/register.jsp").forward(request, response);
             }
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }

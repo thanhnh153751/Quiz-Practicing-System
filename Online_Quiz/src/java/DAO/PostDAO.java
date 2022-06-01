@@ -32,7 +32,7 @@ public class PostDAO extends DBContext {
                 return postcategory;
             }
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO1: " + e);
         }
         return null;
     }
@@ -57,7 +57,7 @@ public class PostDAO extends DBContext {
             }
             return loadPost;
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO2: " + e);
         }
         return null;
     }
@@ -82,7 +82,7 @@ public class PostDAO extends DBContext {
                         rs.getString("thumbnail"));
             }
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO3: " + e);
         }
         return null;
     }
@@ -108,7 +108,7 @@ public class PostDAO extends DBContext {
             }
             return searchResult;
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO4: " + e);
         }
         return searchResult;
     }
@@ -135,7 +135,7 @@ public class PostDAO extends DBContext {
             }
             return loadAllPost;
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO5: " + e);
         }
         return null;
     }
@@ -157,12 +157,12 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getNString("thumbnail")
+                        rs.getString("thumbnail")
                 ));
             }
             return loadLatestPost;
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tPostDAO6: " + e);
         }
         return null;
     }

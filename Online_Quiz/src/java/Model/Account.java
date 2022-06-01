@@ -17,11 +17,12 @@ public class Account {
     private String password;
     private boolean gender;
     private int status;
-
+    private String avatar;
+    
     public Account() {
     }
 
-    public Account(int id, String fullname, String email, String phone, String password, boolean gender, int status) {
+    public Account(int id, String fullname, String email, String phone, String password, boolean gender, int status, String avatar) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
@@ -29,6 +30,7 @@ public class Account {
         this.password = password;
         this.gender = gender;
         this.status = status;
+        this.avatar = avatar;
     }
 
     public int getId() {
@@ -85,6 +87,14 @@ public class Account {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hongd
  */
-@WebServlet(name = "BlogListController", urlPatterns = {"/bloglist"})
+@WebServlet(name = "BlogListController", urlPatterns = {"/public/bloglist"})
 public class BlogListController extends HttpServlet {
 
     /**
@@ -64,13 +64,13 @@ public class BlogListController extends HttpServlet {
             throws ServletException, IOException {
         try {
             PostDAO post = new PostDAO();
-
+            
             List<Post> listp = post.loadPost();
             List<PostCategory> listpc = post.loadPostCategory();
             request.setAttribute("listc", listpc);
             request.setAttribute("post", listp);
             
-            request.getRequestDispatcher("bloglist.jsp").forward(request, response);
+            request.getRequestDispatcher("/public/bloglist.jsp").forward(request, response);
         } catch (Exception e) {
         }
 
