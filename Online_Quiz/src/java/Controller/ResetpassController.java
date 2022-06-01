@@ -10,7 +10,6 @@ import Model.Account;
 import Model.TokenEmail;
 import Util.CheckTimeToken;
 import Util.ReSendMailUtil;
-import Util.SendMailUtil;
 import Util.TokenUtil;
 import java.io.IOException;
 import java.io.PrintWriter;

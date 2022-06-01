@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author THANH
  */
-@WebServlet(name = "SearchBoxSubjectListServlet", urlPatterns = {"/searchboxsubjectlist"})
+@WebServlet(name = "SearchBoxSubjectListServlet", urlPatterns = {"/public/searchboxsubjectlist"})
 public class SearchBoxSubjectListServlet extends HttpServlet {
 
     /**

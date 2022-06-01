@@ -13,21 +13,20 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="search" placeholder="Search anything...">
     </div>
-    <div class="auth">
-        <c:if test="${sessionScope.acc != null}">
-            Hello ${sessionScope.acc.fullname}
-            <a href="logout">Logout</a>
-            <div class="dropdown-content">=
-                <a href="<c:url value="/home"/>">Trang quản lí</a>
-                <a href="<c:url value="/profile"/>">Thông tin tài khoản</a>
-                <a href="<c:url value="/changepass"/>">Doi mat khau</a>
-                <a href="<c:url value="/logout"/>">Đăng xuất</a>
-            </div>
-        </c:if>
-        <c:if test="${sessionScope.acc == null}">
+    <c:if test="${sessionScope.acc == null}">
+        <div class="auth">
             <a href="<c:url value="/common/login"/>">Login</a>
-        </c:if>
+        </div>
+    </c:if>
+    <c:if test="${sessionScope.acc != null}">
+        <div class="auth">
+            <div><i class="fa-solid fa-user" class="dropbtn"></i> Hello, ${sessionScope.acc.fullname}</div>
+            <div class="dropdown-content">
+                <a href="#">Hello Admin</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+    </c:if>
 
-
-    </div>
 </nav>
