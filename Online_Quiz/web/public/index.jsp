@@ -25,15 +25,7 @@
         <title>Home Page</title>
     </head>
     <body class="d-flex flex-column min-vh-100">
-<<<<<<< HEAD:Online_Quiz/web/public/index.jsp
         <jsp:include page="../common/header.jsp"></jsp:include>
-=======
-        <jsp:include page="./common/header.jsp"></jsp:include>
-        
->>>>>>> a4033cc9b1b11eff587d9782d6a61801a4fb5f88:Online_Quiz/build/web/index.jsp
-
-
-
         <!-- hot posts mới -->
         <div class="container-fluid text-center my-3">
             <h1 class="font-weight-light">Hot posts</h1>
@@ -109,20 +101,6 @@
                 </div>
             </div>
             <div class="row">
-
-                <!--                <div class="col-md-3">
-                                    <div class="wrapper">
-                                        <div class="img">
-                                            <img class="img-responsive"
-                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7S1meIBhm9Sl8CK8IWQkXc0jRu0ylN6lqLg&usqp=CAU"
-                                                alt="">
-                                        </div>
-                                        <div class="course-title">
-                                            <a href="listSubject.html"><h3>Course Name</h3></a>
-                                        </div>
-                                    </div>
-                                </div>-->
-
                 <c:forEach items="${requestScope.subjectList}" var="s">
                     <div class="col-md-3">
                         <div class="wrapper">

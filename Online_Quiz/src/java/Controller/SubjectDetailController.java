@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author THANH
  */
-@WebServlet(name = "SubjectDetailController", urlPatterns = {"/subjectdetail"})
+@WebServlet(name = "SubjectDetailController", urlPatterns = {"/public/subjectdetail"})
 public class SubjectDetailController extends HttpServlet {
 
     /**
@@ -73,7 +73,7 @@ public class SubjectDetailController extends HttpServlet {
             int id = Integer.parseInt(id_raw);
             Subject s = sd.loadSubjectDetail(id);
             request.setAttribute("subject", s);
-            request.getRequestDispatcher("subjectDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("/public/subjectDetail.jsp").forward(request, response);
         } catch (Exception e) {
         }
     }

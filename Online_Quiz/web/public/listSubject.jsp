@@ -28,18 +28,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
-
-<<<<<<< HEAD:Online_Quiz/web/public/listSubject.jsp
-
         <link rel="stylesheet" href="../css/listSubject.css">
         <script src="../js/index.js"></script>
-=======
-        
-        <link rel="stylesheet" href="./css/listSubject.css">
-        
-        <script src="./js/index.js"></script>
->>>>>>> a4033cc9b1b11eff587d9782d6a61801a4fb5f88:Online_Quiz/web/listSubject.jsp
+
         <title>JSP Page</title>
     </head>
     <body>

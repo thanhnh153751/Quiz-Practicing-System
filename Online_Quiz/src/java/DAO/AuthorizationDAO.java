@@ -66,30 +66,12 @@ public class AuthorizationDAO extends DBContext {
             while (rs.next()) {
                 actions.add(new Action(rs.getInt("id"), rs.getString("action_name"), rs.getString("action_code")));
             }
-            return actions
+            return actions;
         } catch (SQLException e) {
             System.out.println("[AuthorizationDAO]: " + e);
         }
         return null;
     }
-//    public Permission getPermissionByAccount(int id) {
-//        List<Permission> permissionlist = new ArrayList<>();
-//        String query = "select * from Account as a\n"
-//                + "join User_Permission as up on a.id = up.account_id\n"
-//                + "join Permission as p on up.permission_id = p.id\n"
-//                + "join Permission_Action as pa on p.id = pa.permission_id\n"
-//                + "join [Action] as ac on pa.action_id = ac.id\n"
-//                + "where a.id = ? and up.license = 1";
-//        try {
-//             PreparedStatement ps = connection.prepareStatement(query);
-//             ps.setInt(1, id);
-//             ResultSet rs = ps.executeQuery();
-//             while (rs.next()) {                
-//                
-//            }
-//        } catch (Exception e) {
-//        }
-//    }
     
     public static void main(String[] args) {
         AuthorizationDAO dao = new AuthorizationDAO();
