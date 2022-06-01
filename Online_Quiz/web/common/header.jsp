@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <nav class="navbar">
     <div class="brand"><a href="<c:url value="/home"/>">Quiz Online</a></div>
     <div class="search">
