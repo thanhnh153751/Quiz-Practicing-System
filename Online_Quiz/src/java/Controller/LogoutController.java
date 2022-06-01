@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
+@WebServlet(name = "LogoutController", urlPatterns = {"/public/logout"})
 public class LogoutController extends HttpServlet {
 
     /**

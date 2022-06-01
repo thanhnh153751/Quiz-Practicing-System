@@ -113,7 +113,7 @@ public class ResetpassController extends HttpServlet {
                 dao.addTokenEmail(tok, email);
                 
                 ReSendMailUtil send = new ReSendMailUtil();
-                send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/reset?tok=" + tok);
+                send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/common/reset?tok=" + tok);
                 
 //            request.getRequestDispatcher("home").forward(request, response);           
 //            response.sendRedirect("home.jsp");

@@ -36,7 +36,7 @@
                     <p class="text-danger">${requestScope.mess}</p>
                     <input type="submit" value="Login" id="sm-btn">
                     <a href="<c:url value="/common/register"/>">Register new account</a>
-                    <a href="<c:url value="/common/forgot.html"/>">Forgot password?</a>
+                    <a href="<c:url value="/common/sendmail.jsp"/>">Forgot password?</a>
 
                 </form>
 
