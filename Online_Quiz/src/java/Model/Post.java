@@ -6,6 +6,7 @@
 package Model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -87,6 +88,11 @@ public class Post{
 
     public Date getUpdate_date() {
         return update_date;
+    }
+    public String getDateFormat() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(this.update_date);
+        return strDate;
     }
 
     public void setUpdate_date(Date update_date) {

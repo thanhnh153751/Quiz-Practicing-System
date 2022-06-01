@@ -44,6 +44,31 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
+    public List<Subject> loadLastSubject() {//tải lên 3 subject mới nhất có trong db
+        List<Subject> loadSubject = new ArrayList<>();
+        String query = "select top 3 * from Subject Order by id desc";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                loadSubject.add(new Subject(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getNString(3),
+                        rs.getNString(4),
+                        rs.getNString(5),
+                        rs.getDouble(6),
+                        rs.getDouble(7),
+                        rs.getNString(8),
+                        rs.getNString(9),
+                        rs.getInt(10)));
+            }
+            return loadSubject;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
     
     public Subject loadSubjectDetail(int id) {//tải lên subjecte detail có trong db
         Subject loadSubject = new Subject();
@@ -141,7 +166,7 @@ public class SubjectDAO extends DBContext {
         if(featured != null)
         for (int i = 0; i < featured.length; i++) {
                 if(i==0) sql+="(";
-                sql+="s.tagline like N'%"+featured[i]+"%'";                
+                sql+="s.description like N'%"+featured[i]+"%'";                
                 if(i!=featured.length-1 ){
                     sql+=" or ";
                 }else{
