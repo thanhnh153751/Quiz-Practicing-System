@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="../css/login.css">
     </head>
     <body>
-        <form action="common/register" method="post">
+        <form action="/Online_Quiz/common/register" method="post">
             <h3 style="color: red">${mess}</h3>
             <div class="container-fluid main-form">
                 <div class="form">
@@ -34,8 +34,9 @@
                         </select>
                         <label for="mobile">Mobile</label>
                         <input type="text" id="mobile" name="mobile">
-
+                        <p class="text-center">${mess}</p>
                     </div>
+                    
                     <button type="submit">Register</button> 
                     <a href="<c:url value="/common/login"/>">You have an account? Login</a>
                 </div>

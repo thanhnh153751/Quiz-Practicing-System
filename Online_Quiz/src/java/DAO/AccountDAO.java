@@ -62,9 +62,9 @@ public class AccountDAO extends DBContext {
         return null;
     }
 
-    public void Register(String fullname, String email, String phone, String password, boolean gender) {
-        String query = "insert into Account(fullname,email, phone,password,gender)\n"
-                + "values(?,?,?,?,?)";
+    public void Register(String fullname, String email, String phone, String password, boolean gender, String avatar) {
+        String query = "insert into Account(fullname,email, phone,password,gender,avatar)\n"
+                + "values(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, fullname);
@@ -72,6 +72,7 @@ public class AccountDAO extends DBContext {
             ps.setString(3, phone);
             ps.setString(4, password);
             ps.setBoolean(5, gender);
+            ps.setString(6, avatar);
             ps.executeUpdate();
 
         } catch (Exception e) {

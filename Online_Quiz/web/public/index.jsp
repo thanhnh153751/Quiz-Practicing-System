@@ -121,7 +121,7 @@
 
             </div>
 
-            <a class="btn btn-outline-primary" href="listsubject" role="button">View More</a>
+            <a class="btn btn-outline-primary" href="<c:url value="/public/listsubject"/>" role="button">View More</a>
 
             <div class="row">
                 <div class="col-md-12">

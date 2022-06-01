@@ -68,13 +68,8 @@ public class ListSubjectServlet extends HttpServlet {
            SubjectDAO sd = new SubjectDAO();
             List<SubjectCategory> categorySubject=sd.loadAllSubjectCategory();
             request.setAttribute("categorySubject", categorySubject);
-
-            
             //phân trang
             List<Subject> listSubject = sd.loadAllSubject();
-            
-            
-            
             int page, numperpage = 8;
             int size = listSubject.size();
             int numPage = (size % numperpage == 0 ? (size / numperpage) : (size / numperpage) + 1);
@@ -91,7 +86,7 @@ public class ListSubjectServlet extends HttpServlet {
             request.setAttribute("listSubject", listItemsPage);
             request.setAttribute("page", page);
             request.setAttribute("numPage", numPage);
-            request.getRequestDispatcher("listSubject.jsp").forward(request, response);
+            request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);
         } catch (Exception e) {
 
         }

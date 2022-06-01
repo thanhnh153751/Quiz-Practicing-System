@@ -25,7 +25,7 @@
     </head>
     <body class="bg-info">
 
-        <form action="reset" method="post">
+        <form action="/Online_Quiz/common/reset" method="post">
             <div >
 
                 <div class="container-fluid main-form">

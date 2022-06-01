@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="container emp-profile">
-            <form action="profile" method="post">
+            <form action="/Online_Quiz/common/profile" method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">

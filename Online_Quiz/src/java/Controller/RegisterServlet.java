@@ -78,6 +78,9 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String img = "https://www.stregasystem.com/img/users/user.png";
+        
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String phone = request.getParameter("mobile");
@@ -88,12 +91,14 @@ public class RegisterServlet extends HttpServlet {
             AccountDAO DAO = new AccountDAO();
             Account a = DAO.checkAccountExist(email);
             if (a == null) {
-                DAO.Register(fullname, email, phone, password, gender);
+                DAO.Register(fullname, email, phone, password, gender, img);
                 SendMailUtil sendMailUltil = new SendMailUtil();
-                response.sendRedirect("confirmEmail.jsp");
-                sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/register?email=" + email);
+                request.setAttribute("mess", "Plase check your email!");
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+//                response.sendRedirect(request.getContextPath()+"/common/confirmEmail.jsp");
+                sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/common/register?email=" + email);
             } else {
-                request.setAttribute("mess", "Email is exist");
+                request.setAttribute("mess", "Email is existed!");
                 request.getRequestDispatcher("/common/register.jsp").forward(request, response);
             }
 
