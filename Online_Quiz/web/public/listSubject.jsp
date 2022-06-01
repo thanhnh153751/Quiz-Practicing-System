@@ -28,9 +28,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../css/listSubject.css">
-        <script src="../js/index.js"></script>
 
+
+        
+        <link rel="stylesheet" href="../css/listSubject.css">
+        
+        <script src="../js/index.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
@@ -58,11 +61,14 @@
 
                                         <div class="view-content">
                                             <h3 class="course-title">${s.title}</h3>
-                                            <p>${s.description}</p><span><a href="subjectdetail?ids=${s.id}" style="color: blue">..more</a></span>
+                                            <div class="taglineSbject">
+                                                <p>${s.tagline}</p><span><a href="subjectdetail?ids=${s.id}" style="color: blue">..more</a></span>
+                                            </div>
+                                            
                                         </div>
                                         <hr>
                                         <div class="course-info">
-                                            <span>${s.origin_price} $/Full</span>
+                                            <span>${s.origin_price} $</span>
                                             <span class="btn btn-outline-primary">Register</span>
                                         </div>
                                     </a>
@@ -151,13 +157,16 @@
             </div>
 
         </div>
-        <h3 class="center"></h3>
-        <c:set var="page" value="${requestScope.page}"/>
+        <br/>
+        <div class="paginatedly">
+            <c:set var="page" value="${requestScope.page}"/>
         <div class="pagination">
             <c:forEach begin="${1}" end="${requestScope.numPage}" var="i">
                 <a class="${i==page?"active":""}" href="listsubject?page=${i}">${i}</a>
             </c:forEach>
         </div>
+        </div>
+        
         <footer class="footer text-center mt-auto"">
             <p>@Copy right of ..</p>
         </footer>

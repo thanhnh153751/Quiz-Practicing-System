@@ -26,9 +26,11 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <jsp:include page="../common/header.jsp"></jsp:include>
-        <jsp:include page="../common/changepass.jsp"></jsp:include>
+
+
+
         <!-- hot posts mới -->
-        <div class="container-fluid text-center my-3">
+        <div class="container text-center my-3">
             <h1 class="font-weight-light">Hot posts</h1>
 
 
@@ -40,7 +42,7 @@
 
 
                         <!-- thành phần -->
-                        <div class="carousel-item active">
+<!--                        <div class="carousel-item active">
                             <div class="col-md-3">
                                 <div class="wrapper">
                                     <div class="img">
@@ -56,12 +58,18 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-
+                        </div>-->
+                    <%
+                        boolean onece = true;
+                    %>
                         <c:forEach items="${requestScope.loadLatestPost}" var="p"> 
-                            <div class="carousel-item">
-                                <div class="col-md-3">
-                                    <div class="wrapper">
+                            <div class="carousel-item <c:if test="<%= onece == true %>">active</c:if> ">
+                                
+                    <%
+                        onece = false;
+                    %>            
+                                <div class="col-md-3 subpost">
+                                    <div class="wrapper hotpost">
                                         <div class="img">
                                             <img class="img-responsive"
                                                  src="${p.thumbnail}"
@@ -70,7 +78,26 @@
                                         <a href="./blogs.html">
                                             <div class="title">
                                                 <h2>${p.post_title}</h2>
-                                                <p class="blog-biref">${p.biref}</p>
+                                                
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </c:forEach>
+                        <c:forEach items="${requestScope.subjectLast}" var="p"> 
+                            <div class="carousel-item">
+                                <div class="col-md-3 subpost">
+                                    <div class="wrapper hotpost">
+                                        <div class="img">
+                                            <img class="img-responsive"
+                                                 src="${p.thumbnail}"
+                                                 alt="">
+                                        </div>
+                                        <a href="./blogs.html">
+                                            <div class="title">
+                                                <h2>${p.title}</h2>
+                                                
                                             </div>
                                         </a>
                                     </div>
@@ -102,6 +129,20 @@
                 </div>
             </div>
             <div class="row">
+
+                <!--                <div class="col-md-3">
+                                    <div class="wrapper">
+                                        <div class="img">
+                                            <img class="img-responsive"
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7S1meIBhm9Sl8CK8IWQkXc0jRu0ylN6lqLg&usqp=CAU"
+                                                alt="">
+                                        </div>
+                                        <div class="course-title">
+                                            <a href="listSubject.html"><h3>Course Name</h3></a>
+                                        </div>
+                                    </div>
+                                </div>-->
+
                 <c:forEach items="${requestScope.subjectList}" var="s">
                     <div class="col-md-3">
                         <div class="wrapper">
@@ -135,16 +176,17 @@
 
                 <c:forEach items="${requestScope.loadAllPost}" var="p">
                     <div class="col-md-3">
-                        <div class="wrapper">
+                        <div class="wrapper hotpost">
                             <div class="img">
                                 <img class="img-responsive"
                                      src="${p.thumbnail}"
                                      alt="">
                             </div>
-                            <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
+                            <a href="<c:url value="/postdetails?id=${p.id}"/>">
                                 <div class="title">
                                     <h2>${p.post_title}</h2>
-                                    <p class="blog-biref">${p.biref}</p>
+                                    <br/>
+                                    <p class="datePost" style="float: right; margin-top: -11px; font-size:12px; ">${p.dateFormat}</p>
                                 </div>
                             </a>
                         </div>
