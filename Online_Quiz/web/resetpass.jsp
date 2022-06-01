@@ -39,6 +39,7 @@
                     <div class="form bg-light">
                         <h1 class="text-center font-weight-bold text-primary">Change Password</h1>
                         <input type="hidden" name="email" value="${email}">
+                        <input type="hidden" name="tok" value="${tok}">
                         <div class="form-group">
                             <label for="email"><h6>New Password</h6></label>
                             <input type="password" class="form-control" name="newpassword" id="password" placeholder="New Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required>

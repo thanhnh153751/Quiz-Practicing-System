@@ -9,6 +9,7 @@ import DAO.DAO;
 import Model.Account;
 import Model.TokenEmail;
 import Util.CheckTimeToken;
+import Util.ReSendMailUtil;
 import Util.SendMailUtil;
 import Util.TokenUtil;
 import java.io.IOException;
@@ -69,12 +70,13 @@ public class ResetpassController extends HttpServlet {
             throws ServletException, IOException {
         String tok = request.getParameter("tok");
         DAO dao = new DAO();
+        
         TokenEmail token = dao.getEmailToken(tok);
         
         CheckTimeToken checktimetoken = new CheckTimeToken();
         
-        if(checktimetoken.CheckTime(token.getTime())<=30){
-            dao.updateTokenStatus(tok);
+        if(checktimetoken.CheckTime(token.getTime())<=10&&token.isStatus()==false){
+            request.setAttribute("tok", tok);
             request.setAttribute("email", token.getEmail());
             request.getRequestDispatcher("resetpass.jsp").forward(request, response);
         }else{
@@ -110,7 +112,7 @@ public class ResetpassController extends HttpServlet {
                 String tok = token.tokenGenerate();
                 dao.addTokenEmail(tok, email);
                 
-                SendMailUtil send = new SendMailUtil();
+                ReSendMailUtil send = new ReSendMailUtil();
                 send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/reset?tok=" + tok);
                 
 //            request.getRequestDispatcher("home").forward(request, response);           

@@ -77,6 +77,9 @@ public class RechangepassController extends HttpServlet {
         String ppass = request.getParameter("newpassword");
         String cpass = request.getParameter("connewpassword");
         String email = request.getParameter("email");
+        String tok = request.getParameter("tok");
+        
+        
         DAO dao = new DAO();
 //        HttpSession session = request.getSession();
 //        String email = (String)session.getAttribute("email");
@@ -86,6 +89,7 @@ public class RechangepassController extends HttpServlet {
         if (ppass.equals(cpass) && a != null) {
             request.setAttribute("mess", "Change password successful!");
             dao.changepass(ppass, email);
+            dao.updateTokenStatus(tok);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             request.setAttribute("mess", "Change password unsuccessful!");
