@@ -24,25 +24,21 @@
     </head>
 
     <body class="d-flex flex-column min-vh-100">
-        <nav class="navbar">
-            <div class="brand">Quiz Online</div>
-            <div class="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" placeholder="Search anything...">
-            </div>
-            <div class="auth">
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
-            </div>
-        </nav>
+        <jsp:include page="../common/header.jsp"></jsp:include>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="blog-list">
                         <h1 class="text-center">Result</h1>
 
-                        <form method="get" action="blogsearch" class="search-box">
+                        <form method="get" action="/Online_Quiz/public/blogsearch" class="search-box">
                             <input name="searchname" type="text" placeholder="Search blogs">
+                            <select name="category"  id="">
+                                <option  value="">Blog Category</option>
+                                <c:forEach items="${postcate}" var="lst">
+                                    <option value="${lst.id}">${lst.name}</option>
+                                </c:forEach>
+                            </select>
                             <button>Search</button>
                         </form>
 
@@ -60,17 +56,9 @@
                 <div class="col-md-12">
                     <nav aria-label="...">
                         <ul class="pagination">
-                            <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active">
-                                <span class="page-link">2</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
+                            <c:forEach begin="1" end="${lastpage}" var="i">
+                                <li class="page-item"><a class="page-link" href="<c:url value="/public/blogsearch?indexP=${i}&category=${cate}&searchname=${search}"/>">${i}</a></li>
+                            </c:forEach>
                         </ul>
                     </nav>
                 </div>

@@ -21,7 +21,7 @@ public class PostDAO extends DBContext {
 
     public List<PostCategory> loadPostCategory() {
         List<PostCategory> postcategory = new ArrayList<>();
-        String query = "Select * from Post_Category";
+        String query = "select * from Post_Category";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -29,8 +29,8 @@ public class PostDAO extends DBContext {
                 postcategory.add(new PostCategory(
                         rs.getInt(1),
                         rs.getNString(2)));
-                return postcategory;
             }
+            return postcategory;
         } catch (SQLException e) {
             System.out.println("\tPostDAO1: " + e);
         }
@@ -87,12 +87,33 @@ public class PostDAO extends DBContext {
         return null;
     }
 
-    public List<Post> searchPost(String search) {
+    public List<Post> searchPost(String search, String category_raw) {
         List<Post> searchResult = new ArrayList<>();
-        String query = "Select * from post where post_title = ?";
+
+        String query = "Select * from post where";
+        if (search != null) {
+            query += " post_title like ? \n";
+//            if (category_raw != null) {
+//                query += "";
+//            }
+        }
+        if (category_raw != null) {
+            query += "and cid = ? ";
+        }
+//        query += "order by id desc offset ? \n"
+//                + "rows fetch next 3 rows only";
         try {
+
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, search);
+            if (search != null) {
+                ps.setNString(1, "%" + search + "%");
+
+            }
+            if (category_raw != null) {
+                int category = Integer.parseInt(category_raw);
+                ps.setInt(2, category);
+            }
+//            ps.setInt(3, next);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 searchResult.add(new Post(
@@ -110,12 +131,12 @@ public class PostDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("\tPostDAO4: " + e);
         }
-        return searchResult;
+        return null;
     }
 
     public List<Post> loadAllPost() {//tải lên tất cả các Post có trong db
         List<Post> loadAllPost = new ArrayList<>();
-        String query = "Select top 8 * from Post";
+        String query = "Select top 8 * from Post order by id desc";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -167,4 +188,11 @@ public class PostDAO extends DBContext {
         return null;
     }
 
+//    public static void main(String[] args) {
+//        PostDAO pdao = new PostDAO();
+//        List<PostCategory> categorys = pdao.loadPostCategory();
+//        for (PostCategory category : categorys) {
+//            System.out.println(category.getName());
+//        }
+//    }
 }

@@ -26,17 +26,7 @@
     </head>
 
     <body class="d-flex flex-column min-vh-100">
-        <nav class="navbar">
-            <div class="brand">Quiz Online</div>
-            <div class="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" placeholder="Search anything...">
-            </div>
-            <div class="auth">
-                <a href="./login.html">Login</a>
-                <a href="./register.html">Register</a>
-            </div>
-        </nav>  
+        <jsp:include page="../common/header.jsp"></jsp:include> 
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
