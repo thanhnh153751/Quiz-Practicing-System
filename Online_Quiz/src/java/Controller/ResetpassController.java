@@ -101,7 +101,7 @@ public class ResetpassController extends HttpServlet {
         Account a = dao.checkAccount(email);
         if (a == null) {
             request.setAttribute("mess", " This email not existed!");
-            request.getRequestDispatcher("/router/common/sendmail.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
         } else {
             
             
@@ -112,10 +112,9 @@ public class ResetpassController extends HttpServlet {
                 dao.addTokenEmail(tok, email);
                 
                 ReSendMailUtil send = new ReSendMailUtil();
+                request.setAttribute("mess", "Plase check your email!");
+                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
                 send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/common/reset?tok=" + tok);
-                
-//            request.getRequestDispatcher("home").forward(request, response);           
-//            response.sendRedirect("home.jsp");
             } catch (MessagingException ex) {
                 Logger.getLogger(ResetpassController.class.getName()).log(Level.SEVERE, null, ex);
             }

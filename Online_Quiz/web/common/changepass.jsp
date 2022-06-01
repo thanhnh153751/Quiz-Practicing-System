@@ -26,46 +26,52 @@
         <script src="../js/changepass.js"></script>
     </head>
     <body class="bg-info">
-        <form action="/Online_Quiz/common/changepass" method="post" id="myForm1">
+        <div id="changepass" class="modal fade" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/Online_Quiz/common/changepass" method="post" id="myForm1">
 
-            <div class="light-blue">
+                        <div class="light-blue">
 
-                <div class="container-fluid main-form">
+                            <div class="container-fluid main-form">
 
-                    <div class="form bg-light">
-                        <h1 class="text-center font-weight-bold text-primary">Change Password</h1>
-                        <div class="form-group">
-                            <label for="email"><h6>Password</h6></label>
-                            <input type="password" class="form-control" name="password" id="email" placeholder="Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required autofocus>
-                            <div class="valid-feedback">Valid</div>
-                            <div class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
+                                <div class="form bg-light">
+                                    <h1 class="text-center font-weight-bold text-primary">Change Password</h1>
+                                    <div class="form-group">
+                                        <label for="email"><h6>Password</h6></label>
+                                        <input type="password" class="form-control" name="password" id="email" placeholder="Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required autofocus>
+                                        <div class="valid-feedback">Valid</div>
+                                        <div class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"><h6>New Password</h6></label>
+                                        <input type="password" class="form-control" name="newpassword" id="password" placeholder="New Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required>
+                                        <div class="valid-feedback">Valid</div>
+                                        <div class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email"><h6>Confirm Password</h6></label>
+                                        <input type="password" class="form-control" name="connewpassword" id="repassword" placeholder="Confirm Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required>
+                                        <div id="cPwdValid" class="valid-feedback">Valid</div>
+                                        <div id="cPwdInvalid" class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">Change Password</button>
+                                    </div>
+                                    <p class="text-danger">${mess}</p>
+
+                                   
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email"><h6>New Password</h6></label>
-                            <input type="password" class="form-control" name="newpassword" id="password" placeholder="New Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required>
-                            <div class="valid-feedback">Valid</div>
-                            <div class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email"><h6>Confirm Password</h6></label>
-                            <input type="password" class="form-control" name="connewpassword" id="repassword" placeholder="Confirm Password" pattern="^[a-z]{1}[a-z0-9_]{3,13}$" required>
-                            <div id="cPwdValid" class="valid-feedback">Valid</div>
-                            <div id="cPwdInvalid" class="invalid-feedback">(a to z)(1 to 9)(3 to 13 long)</div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">Change Password</button>
-                        </div>
-                        <p class="text-danger">${mess}</p>
-
-                        <a class="" href="https://procraft.studio">Home</a>
-                    </div>
-
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                    </form>
                 </div>
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        </form>
+        </div>
     </body>
 
 </html>

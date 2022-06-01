@@ -26,6 +26,7 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <jsp:include page="../common/header.jsp"></jsp:include>
+        <jsp:include page="../common/changepass.jsp"></jsp:include>
         <!-- hot posts mới -->
         <div class="container-fluid text-center my-3">
             <h1 class="font-weight-light">Hot posts</h1>
