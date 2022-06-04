@@ -90,8 +90,8 @@ public class ChangepassController extends HttpServlet {
             dao.changepass(ppass, ac.getEmail());
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.setAttribute("mess", "Change password unsuccessful!");
-            request.getRequestDispatcher("changepass.jsp").forward(request, response);
+            request.setAttribute("mess", "Wrong password please login again!");
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         }
     }
 

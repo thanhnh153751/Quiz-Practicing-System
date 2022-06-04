@@ -26,11 +26,12 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <jsp:include page="../common/header.jsp"></jsp:include>
+        <jsp:include page="../common/changepass.jsp"></jsp:include>
 
 
 
         <!-- hot posts mới -->
-        <div class="container text-center my-3">
+        <div class="container-fluid text-center my-3">
             <h1 class="font-weight-light">Hot posts</h1>
 
 
@@ -75,7 +76,7 @@
                                                  src="${p.thumbnail}"
                                                  alt="">
                                         </div>
-                                        <a href="./blogs.html">
+                                        <a href="#">
                                             <div class="title">
                                                 <h2>${p.post_title}</h2>
                                                 
@@ -182,7 +183,7 @@
                                      src="${p.thumbnail}"
                                      alt="">
                             </div>
-                            <a href="<c:url value="/postdetails?id=${p.id}"/>">
+                            <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
                                 <div class="title">
                                     <h2>${p.post_title}</h2>
                                     <br/>
@@ -209,9 +210,7 @@
 <!--view more hiển thị listBlogs-->
 
 
-<footer class="footer text-center mt-auto">
-    <p>@Copy right of ..</p>
-</footer>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script src="../js/index.js"></script>
 </html>

@@ -21,7 +21,7 @@ public class SubjectDAO extends DBContext {
 
     public List<Subject> loadAllSubject() {//tải lên tất cả các subject có trong db
         List<Subject> loadSubject = new ArrayList<>();
-        String query = "Select * from Subject";
+        String query = "Select * from Subject order by id desc";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
