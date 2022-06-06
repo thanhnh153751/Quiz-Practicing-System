@@ -68,24 +68,45 @@ public class ListSubjectServlet extends HttpServlet {
            SubjectDAO sd = new SubjectDAO();
             List<SubjectCategory> categorySubject=sd.loadAllSubjectCategory();
             request.setAttribute("categorySubject", categorySubject);
-            //phân trang
-            List<Subject> listSubject = sd.loadAllSubject();
-            int page, numperpage = 8;
-            int size = listSubject.size();
-            int numPage = (size % numperpage == 0 ? (size / numperpage) : (size / numperpage) + 1);
-            String xpage = request.getParameter("page");
-            if (xpage == null) {
-                page = 1;
-            } else {
-                page = Integer.parseInt(xpage);
+            
+            //phân trang mới(8 item/page)
+            int count = sd.getTotalSubject();
+            int endPage = count/8;
+            if(count%8 != 0){
+                endPage++;
             }
-            int start, end;
-            start = (page - 1) * numperpage;
-            end = Math.min(page * numperpage, size);
-            List<Subject> listItemsPage = sd.getListByPage(listSubject, start, end);
-            request.setAttribute("listSubject", listItemsPage);
-            request.setAttribute("page", page);
-            request.setAttribute("numPage", numPage);
+            
+            
+            
+            String indexPage = request.getParameter("index");
+            if(indexPage == null){
+                indexPage ="1";
+            }
+            int index = Integer.parseInt(indexPage);
+            
+            List<Subject> list = sd.pagingSubject(index);
+            request.setAttribute("listSubject", list);
+            request.setAttribute("page", index);
+            request.setAttribute("endPage", endPage);
+            
+            //phân trang cũ
+//            List<Subject> listSubject = sd.loadAllSubject();
+//            int page, numperpage = 2;
+//            int size = listSubject.size();
+//            int numPage = (size % numperpage == 0 ? (size / numperpage) : (size / numperpage) + 1);
+//            String xpage = request.getParameter("page");
+//            if (xpage == null) {
+//                page = 1;
+//            } else {
+//                page = Integer.parseInt(xpage);
+//            }
+//            int start, end;
+//            start = (page - 1) * numperpage;
+//            end = Math.min(page * numperpage, size);
+//            List<Subject> listItemsPage = sd.getListByPage(listSubject, start, end);
+//            request.setAttribute("listSubject", listItemsPage);
+//            request.setAttribute("page", page);
+//            request.setAttribute("numPage", numPage);
             request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);
         } catch (Exception e) {
 

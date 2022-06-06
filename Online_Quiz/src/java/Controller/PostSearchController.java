@@ -5,17 +5,8 @@
  */
 package Controller;
 
-import DAO.DAO;
-import Model.Account;
-import Model.TokenEmail;
-import Util.CheckTimeToken;
-import Util.ReSendMailUtil;
-import Util.TokenUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Viet Dung
+ * @author hongd
  */
-@WebServlet(name = "ResetpassController", urlPatterns = {"/common/reset"})
-public class ResetpassController extends HttpServlet {
+@WebServlet(name = "PostSearchController", urlPatterns = {"/public/postsearch"})
+public class PostSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +37,10 @@ public class ResetpassController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ResetpassController</title>");            
+            out.println("<title>Servlet PostSearchController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ResetpassController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PostSearchController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,21 +58,8 @@ public class ResetpassController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String tok = request.getParameter("tok");
-        DAO dao = new DAO();
         
-        TokenEmail token = dao.getEmailToken(tok);
-        
-        CheckTimeToken checktimetoken = new CheckTimeToken();
-        
-        if(checktimetoken.CheckTime(token.getTime())<=10&&token.isStatus()==false){
-            request.setAttribute("tok", tok);
-            request.setAttribute("email", token.getEmail());
-            request.getRequestDispatcher("/common/resetpass.jsp").forward(request, response);
-        }else{
-            request.setAttribute("mess", "TimeOut and enter email again !!!");
-            request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("/public/blogsearch.jsp").forward(request, response);
     }
 
     /**
@@ -95,30 +73,7 @@ public class ResetpassController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        DAO dao = new DAO();
-        
-        Account a = dao.checkAccount(email);
-        if (a == null) {
-            request.setAttribute("mess", " This email not existed!");
-            request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
-        } else {
-            
-            
-                
-            try {
-                TokenUtil token = new TokenUtil();
-                String tok = token.tokenGenerate();
-                dao.addTokenEmail(tok, email);
-                
-                ReSendMailUtil send = new ReSendMailUtil();
-                request.setAttribute("mess", "Plase check your email!");
-                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
-                send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/common/reset?tok=" + tok);
-            } catch (MessagingException ex) {
-                Logger.getLogger(ResetpassController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        processRequest(request, response);
     }
 
     /**

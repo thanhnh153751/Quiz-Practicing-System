@@ -15,6 +15,7 @@
     </head>
     <body>
         <form action="/Online_Quiz/common/register" method="post">
+            <h3 style="color: red">${mess}</h3>
             <div class="container-fluid main-form">
                 <div class="form">
                     <h1>Register</h1>
@@ -28,8 +29,8 @@
                         <label for="gender">Gender</label>
                         <select id="gender" name="gender">
                             <option value="">Please choose your gender</option>
-                            <option value="1">Male</option>
-                            <option value="0">Female</option>
+                            <option value="true">Male</option>
+                            <option value="false">Female</option>
                         </select>
                         <label for="mobile">Mobile</label>
                         <input type="text" id="mobile" name="mobile">

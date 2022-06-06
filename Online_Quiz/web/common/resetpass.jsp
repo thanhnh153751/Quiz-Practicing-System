@@ -30,7 +30,7 @@
     </head>
 
     <body class="bg-info">
-        <form action="/Online_Quiz/common/rechange" method="post" id="myForm1">
+        <form action="rechange" method="post" id="myForm1">
 
             <div class="light-blue">
 
@@ -57,8 +57,6 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">Change Password</button>
                         </div>
-                        <p class="text-danger">${mess}</p>
-                         <a class="" href="/Online_Quiz/public/home">Home</a>
 
                     </div>
                 </div>

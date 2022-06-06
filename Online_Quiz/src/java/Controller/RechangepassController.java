@@ -7,10 +7,8 @@ package Controller;
 
 import DAO.DAO;
 import Model.Account;
-import com.google.common.hash.Hashing;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,8 +76,6 @@ public class RechangepassController extends HttpServlet {
             throws ServletException, IOException {
         String ppass = request.getParameter("newpassword");
         String cpass = request.getParameter("connewpassword");
-        String hashppass = Hashing.sha256().hashString(ppass, StandardCharsets.UTF_8).toString();
-        String hashcpass = Hashing.sha256().hashString(cpass, StandardCharsets.UTF_8).toString();
         String email = request.getParameter("email");
         String tok = request.getParameter("tok");
         
@@ -90,11 +86,11 @@ public class RechangepassController extends HttpServlet {
         
         Account a = dao.checkAccount(email);
 
-        if (hashppass.equals(hashcpass) && a != null) {
-            request.setAttribute("mess", "Change password successful please click home and login again!");
-            dao.changepass(hashppass, email);
+        if (ppass.equals(cpass) && a != null) {
+            request.setAttribute("mess", "Change password successful!");
+            dao.changepass(ppass, email);
             dao.updateTokenStatus(tok);
-            request.getRequestDispatcher("/common/resetpass.jsp").forward(request, response);
+            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         } else {
             request.setAttribute("mess", "Change password unsuccessful!");
             request.getRequestDispatcher("/common/resetpass.jsp").forward(request, response);
