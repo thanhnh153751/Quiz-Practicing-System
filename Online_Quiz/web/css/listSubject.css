@@ -96,6 +96,7 @@ a {
 
 .pagination {
     display: inline-block;
+    width: 600px;
 }
 .pagination a {
     color: black;

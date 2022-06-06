@@ -51,12 +51,7 @@
 
                 <div class="row editedit">
                     <div class="col-md-4">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <a href="<c:url value="/public/home"/>">Home</a>
-                        
+
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">

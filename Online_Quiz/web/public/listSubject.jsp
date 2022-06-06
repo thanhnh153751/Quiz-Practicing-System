@@ -30,31 +30,31 @@
         crossorigin="anonymous"></script>
 
 
-        
+
         <link rel="stylesheet" href="../css/listSubject.css">
-        
+
         <script src="../js/index.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <div class="header">
             <jsp:include page="../common/header.jsp"></jsp:include>
-        </div>
-        
-        <div class="container">
+            </div>
+
+            <div class="container">
 
 
-            <h1 class="center"><a href="#">Name Course</a></h1>
+                <h1 class="center"><a href="#">Name Course</a></h1>
 
 
-            <div class="row">
-                <div class="col-10">
-                    <div class="row list-courses">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row list-courses">
 
                         <c:forEach items="${requestScope.listSubject}" var="s">
                             <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
                                 <article class="course-item grid-style">
-                                    <a title="title name" href="listLessions.html" class="wrap-course-item">
+                                    <a title="title name" href="public/subjectdetail?ids=${s.id}" class="wrap-course-item">
                                         <div class="course-thumb ">
                                             <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
                                         </div>
@@ -62,9 +62,9 @@
                                         <div class="view-content">
                                             <h3 class="course-title">${s.title}</h3>
                                             <div class="taglineSbject">
-                                                <p>${s.tagline}</p><span><a href="subjectdetail?ids=${s.id}" style="color: blue">..more</a></span>
+                                                <p>${s.tagline}</p>
                                             </div>
-                                            
+
                                         </div>
                                         <hr>
                                         <div class="course-info">
@@ -83,7 +83,7 @@
                 <div class="col-2 sticky">
                     <div class="search-box">
                         <div class=" col-12 jc-r mb-4">
-                            <form action="searchboxsubjectlist" class="" role="search" id="search-bar">
+                            <form action="searchboxsubjectlist" class="" role="search" id="search-bar" method="post">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name" value="${requestScope.key}">
 
 
@@ -140,13 +140,14 @@
                                     }
                                 %>
                                 <!-- featured subjects -->
-                                <input type="checkbox" name="featured" value="Begin" <c:if test="<%= b %>">checked</c:if> class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btn-check-outlined">Begin</label><br>
-                                <br>
-                                <input type="checkbox" name="featured" value="Advanced" <c:if test="<%= a %>">checked</c:if>  class="btn-check" id="btn-check-2-outlined" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="btn-check-2-outlined">Advanced</label><br>
-                                <br>
-                                <button class ="btn btn-outline-success" type="submit">Search</button>
+                                <input type="checkbox" name="featured" value="Begin" <c:if test="<%= b%>">checked</c:if> class="btn-check" id="btn-check-outlined" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="btn-check-outlined">Begin</label><br>
+                                    <br>
+                                    <input type="checkbox" name="featured" value="Advanced" <c:if test="<%= a%>">checked</c:if>  class="btn-check" id="btn-check-2-outlined" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="btn-check-2-outlined">Advanced</label><br>
+                                    <br>
+                                    <button class ="btn btn-outline-success" type="submit">Search</button>
+                                    <input id="pageing" type="hidden" name="page" value="${requestScope.page}">
                                 <!--cần xem lại nếu cần type="submit"  onclick="document.getElementById('search-bar').submit()" -->
                             </form>
                         </div>
@@ -160,14 +161,50 @@
         <br/>
         <div class="paginatedly">
             <c:set var="page" value="${requestScope.page}"/>
-        <div class="pagination">
-            <c:forEach begin="${1}" end="${requestScope.numPage}" var="i">
-                <a class="${i==page?"active":""}" href="listsubject?page=${i}">${i}</a>
-            </c:forEach>
+            <div class="pagination">
+
+
+
+
+
+                <!--phân trang mới-->
+                <ul class="pagination">
+                    <c:if test="${requestScope.key == null && requestScope.cidF == null && requestScope.featured == null}">
+                        <c:if test="${page > 1}">
+                            <li class="page-item disabled"><a href="listsubject?index=${page -1}">Pre</a></li>
+                            </c:if>
+                            <c:forEach begin="1" end="${requestScope.endPage}" var="i">
+                            <a class="${i==page?"active":""}" href="listsubject?index=${i}">${i}</a>
+                        </c:forEach>
+                        <c:if test="${page < endPage}">
+                            <li class="page-item disabled"><a href="listsubject?index=${page +1}">Next</a></li>
+                            </c:if>
+                        </c:if>   
+                    <!--th2-->   
+                    <c:if test="${requestScope.key != null || requestScope.cidF != null || requestScope.featured != null}">
+                        <c:if test="${page > 1}">
+                            <li class="page-item disabled"><a onclick="setPage(${page-1})">Pre</a></li>
+                            </c:if>
+                            <c:forEach begin="1" end="${requestScope.endPage}" var="i">
+                            <a class="${i==page?"active":""}" onclick="setPage(${i})">${i}</a>
+                        </c:forEach>
+                        <c:if test="${page < endPage}">
+                            <li class="page-item disabled"><a onclick="setPage(${page+1})">Next</a></li>
+                            </c:if>
+                        </c:if>      
+
+                </ul>
+                <script>
+                    function setPage(pageNumber) {
+                        document.getElementById('pageing').value = pageNumber;
+                        document.getElementById('search-bar').submit();
+                        
+                    }
+                </script>
+            </div>
         </div>
-        </div>
-        
-        <footer class="footer text-center mt-auto"">
+
+        <footer class="footer text-center mt-auto">
             <p>@Copy right of ..</p>
         </footer>
 
