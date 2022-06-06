@@ -30,7 +30,7 @@
     </head>
 
     <body class="bg-info">
-        <form action="rechange" method="post" id="myForm1">
+        <form action="/Online_Quiz/common/rechange" method="post" id="myForm1">
 
             <div class="light-blue">
 

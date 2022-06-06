@@ -67,13 +67,13 @@ public class HomeServerlet extends HttpServlet {
         SubjectDAO sjd = new SubjectDAO();
         List<Subject> subjectList = sjd.loadSubjectOnHome();
         request.setAttribute("subjectList", subjectList);
-        List<Subject> subjectLast = sjd.loadLastSubject();
-        request.setAttribute("subjectLast", subjectLast);
         //dành cho blog
  
         PostDAO pd = new PostDAO();
         List<Post> loadAllPost = pd.loadAllPost();
         List<Post> loadLatestPost = pd.loadLatestPost();
+        List<Subject> subjectLast = sjd.loadLastSubject();
+        request.setAttribute("subjectLast", subjectLast);
         request.setAttribute("loadAllPost", loadAllPost);
         request.setAttribute("loadLatestPost", loadLatestPost);
         request.getRequestDispatcher("/public/index.jsp").forward(request, response);

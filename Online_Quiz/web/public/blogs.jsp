@@ -24,17 +24,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar">
-        <div class="brand">Quiz Online</div>
-        <div class="search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="search" placeholder="Search anything...">
-        </div>
-        <div class="auth">
-            <a href="./login.html">Login</a>
-            <a href="./register.html">Register</a>
-        </div>
-    </nav>
+    <jsp:include page="../common/header.jsp"></jsp:include>
     <div class="container">
         <div class="row">
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -50,17 +40,19 @@
 
                 <div class="blog-slider">
                     <h3 class="text-center">Maybe you know?</h3>
-                    <form action="" class="navigation">
+                    <form action="/Online_Quiz/public/blogsearch" class="navigation">
+                        
+                        <div class="blog-search">
+                            <input name="searchname" type="text" placeholder="Search blogs">
+                        </div>
+                        
                         <div class="blog-category">
-                            <select id="cars">
+                            <select name="category" id="cars">
                                 <option value="">Blog Category</option>
                                 <c:forEach items="${listc}" var="lst">
                                     <option value="${lst.id}">${lst.name}</option>
                                 </c:forEach>
                             </select>
-                        </div>
-                        <div class="blog-search">
-                            <input type="text" placeholder="Search blogs">
                         </div>
                         <button class="navigation-search">Search</button>
                     </form>

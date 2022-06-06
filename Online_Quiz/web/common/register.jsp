@@ -15,7 +15,6 @@
     </head>
     <body>
         <form action="/Online_Quiz/common/register" method="post">
-            <h3 style="color: red">${mess}</h3>
             <div class="container-fluid main-form">
                 <div class="form">
                     <h1>Register</h1>

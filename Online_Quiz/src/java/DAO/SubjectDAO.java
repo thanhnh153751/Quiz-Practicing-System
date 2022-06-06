@@ -21,7 +21,7 @@ public class SubjectDAO extends DBContext {
 
     public List<Subject> loadAllSubject() {//tải lên tất cả các subject có trong db
         List<Subject> loadSubject = new ArrayList<>();
-        String query = "Select * from Subject";
+        String query = "Select * from Subject order by id desc";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -44,49 +44,6 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
-
-    public int getTotalSubject() {
-        String query = "select count(*) from Subject";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
-        }
-        return 0;
-    }
-
-    public List<Subject> pagingSubject(int index) {
-        List<Subject> loadSubject = new ArrayList<>();
-        String query = "Select * from Subject order by id asc offset ? rows fetch next 8 rows only";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, (index-1)*8);//8 items/page
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                loadSubject.add(new Subject(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getNString(3),
-                        rs.getNString(4),
-                        rs.getNString(5),
-                        rs.getDouble(6),
-                        rs.getDouble(7),
-                        rs.getNString(8),
-                        rs.getNString(9),
-                        rs.getInt(10)));
-            }
-
-        } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
-        }
-        return loadSubject;
-    }
-
     public List<Subject> loadLastSubject() {//tải lên 3 subject mới nhất có trong db
         List<Subject> loadSubject = new ArrayList<>();
         String query = "select top 3 * from Subject Order by id desc";
@@ -112,10 +69,10 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
-
+    
     public Subject loadSubjectDetail(int id) {//tải lên subjecte detail có trong db
         Subject loadSubject = new Subject();
-        String query = "Select * from Subject where id=" + id;
+        String query = "Select * from Subject where id="+id;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -138,7 +95,6 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
-
     public List<SubjectCategory> loadAllSubjectCategory() {//tải lên tất cả các subject có trong db
         List<SubjectCategory> loadSubjectCategory = new ArrayList<>();
         String query = "Select * from Subject_Category";
@@ -147,7 +103,7 @@ public class SubjectDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 loadSubjectCategory.add(new SubjectCategory(
-                        rs.getInt(1),
+                        rs.getInt(1),                  
                         rs.getNString(2)));
             }
             return loadSubjectCategory;
@@ -191,45 +147,39 @@ public class SubjectDAO extends DBContext {
         return items;
     }
 
-    public List<Subject> getListSubjectBySearch(String key, int[] subjectId, String[] featured) {
+    public List<Subject> getListSubjectBySearch(String key,int[] subjectId,String[] featured) {
         List<Subject> list = new ArrayList<>();
         String sql = "select s.* from Subject s inner join Subject_Category sc on s.cid = sc.id";
-        if (key != null || (subjectId != null) || featured != null) {
-            sql += " where ";
-            if (subjectId != null) {
-                for (int i = 0; i < subjectId.length; i++) {
-                    if (i == 0) {
-                        sql += "(";
-                    }
-                    sql += "s.cid=" + subjectId[i];
-                    if (i != subjectId.length - 1) {
-                        sql += " or ";
-                    } else {
-
-                        sql += ") and ";
-                    }
+        if(key != null || (subjectId != null) || featured != null){
+            sql+=" where ";
+        if(subjectId != null)    
+        for (int i = 0; i < subjectId.length; i++) {
+                if(i==0) sql+="(";
+                sql+="s.cid="+subjectId[i];
+                if(i!=subjectId.length-1 ){
+                    sql+=" or ";
+                }else{
+                    
+                    sql+=") and ";
                 }
             }
-            if (featured != null) {
-                for (int i = 0; i < featured.length; i++) {
-                    if (i == 0) {
-                        sql += "(";
-                    }
-                    sql += "s.description like N'%" + featured[i] + "%'";
-                    if (i != featured.length - 1) {
-                        sql += " or ";
-                    } else {
-                        sql += ") and ";
-                    }
+        if(featured != null)
+        for (int i = 0; i < featured.length; i++) {
+                if(i==0) sql+="(";
+                sql+="s.description like N'%"+featured[i]+"%'";                
+                if(i!=featured.length-1 ){
+                    sql+=" or ";
+                }else{
+                    sql+=") and ";
                 }
             }
-
-            if (key != "" || key != null) {
-                sql += "(title like ? or tagline like ? or contact like ? or [description] like ? or [name] like ?)";
-            }
-
+        
+        if (key != "" || key != null) {         
+            sql += "(title like ? or tagline like ? or contact like ? or [description] like ? or [name] like ?)";
         }
-
+        
+        }
+          
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setNString(1, "%" + key + "%");
@@ -239,7 +189,7 @@ public class SubjectDAO extends DBContext {
             st.setNString(5, "%" + key + "%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-
+                
                 Subject p = new Subject(rs.getNString("thumbnail"), rs.getNString("title"), rs.getNString("tagline"), rs.getDouble("origin_price"), rs.getDouble("sale_price"), rs.getNString("contact"), rs.getNString("description"));
                 list.add(p);
             }
@@ -247,17 +197,20 @@ public class SubjectDAO extends DBContext {
         }
         return list;
     }
-
-    public static void main(String[] args) {
+    
+        public static void main(String[] args) {
         SubjectDAO d = new SubjectDAO();
-//        int[] subjectId = new int[]{5,6};
-//        String[] featured = new String[]{"demo"};
-        List<Subject> list = d.pagingSubject(3);
+        int[] subjectId = new int[]{5,6};
+        String[] featured = new String[]{"demo"};
+        List<Subject> list = d.getListSubjectBySearch("điện", null, null);
         for (Subject s : list) {
             System.out.println(s.getTitle());
         }
 
-        
+//        System.out.println(d.getMaxId());
     }
+
+    
+    
 
 }

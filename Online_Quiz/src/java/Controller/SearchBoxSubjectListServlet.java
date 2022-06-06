@@ -36,6 +36,32 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SearchBoxSubjectListServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SearchBoxSubjectListServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -62,10 +88,8 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
         }
         String[] featured = request.getParameterValues("featured");//lấy featured
         request.setAttribute("featured", featured);
-
         List<Subject> listSubject = sd.getListSubjectBySearch(nameSearch, cid, featured);
-
-
+        System.out.println(listSubject.size());
         int page, numperpage = 8;
         int size = listSubject.size();
         int numPage = (size % numperpage == 0 ? (size / numperpage) : (size / numperpage) + 1);
@@ -81,29 +105,10 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
         List<Subject> listItemsPage = sd.getListByPage(listSubject, start, end);
         request.setAttribute("listSubject", listItemsPage);
         request.setAttribute("page", page);
-        request.setAttribute("endPage", numPage);
-       
-
-        
-        
+        request.setAttribute("numPage", numPage);
         request.setAttribute("categorySubject", categoryList);
         request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);
 
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
