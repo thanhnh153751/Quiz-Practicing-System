@@ -17,6 +17,8 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <jsp:include page="../common/header.jsp"></jsp:include>
+        
+            
 
             <div class="container">
                 <div class="row">
@@ -25,18 +27,18 @@
                             <h2>Hot Post</h2>
                         </div>
                         <div class="slider">
-                            <c:forEach items="${requestScope.loadLatestPost}" var="p">
-                                <div class="card slider-item col-md-3" style="width: 16rem;">
-                                    <a href="">
-                                        <img src="https://codelearn.io/CodeCamp/CodeCamp/Upload/Course/bf4dca390c5742bda4dbf6344e859eb9.jpg"
-                                             class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h6 class="card-title">${p.post_title}</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                            </c:forEach>
-                        </div>
+                        <c:forEach items="${requestScope.loadLatestPost}" var="p">
+                            <div class="card slider-item col-md-3" style="width: 16rem;">
+                                <a href="">
+                                    <img src="${p.thumbnail}"
+                                         class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${p.post_title}</h6>
+                                    </div>
+                                </a>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
 

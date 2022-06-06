@@ -7,8 +7,12 @@ package Controller;
 
 import DAO.AccountDAO;
 import Model.Account;
+import Model.Mess;
+import com.google.common.hash.Hashing;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
@@ -78,15 +82,24 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String hash = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+
         AccountDAO dao = new AccountDAO();
-        Account a = dao.login(email, password);
+
+        Account a = dao.login(email, hash);
+
         if (a == null || a.getStatus() == 0) {
-            request.setAttribute("mess", "Wrong email or password!!!");
-            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+            Mess mess = new Mess("danger", "Wrong email or password!!!");
+            Gson gson = new Gson();
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(mess));
+//            request.setAttribute("mess", "Wrong email or password!!!");
+//            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         } else {
             HttpSession Session = request.getSession();
             Session.setAttribute("acc", a);
-            response.sendRedirect(request.getContextPath()+"/public/home");
+            response.sendRedirect(request.getContextPath() + "/public/home");
         }
     }
 
