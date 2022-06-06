@@ -7,8 +7,12 @@ package Controller;
 
 import DAO.DAO;
 import Model.Account;
+import Model.Mess;
+import com.google.common.hash.Hashing;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,20 +82,32 @@ public class ChangepassController extends HttpServlet {
         String pass = request.getParameter("password");
         String ppass = request.getParameter("newpassword");
         String cpass = request.getParameter("connewpassword");
-        
+        String hashpass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
+        String hashppass = Hashing.sha256().hashString(ppass, StandardCharsets.UTF_8).toString();
+        String hashcpass = Hashing.sha256().hashString(cpass, StandardCharsets.UTF_8).toString();
+        Gson gson = new Gson();
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Account ac = (Account)session.getAttribute("acc");
         
-        Account a = dao.login(ac.getEmail(), pass);
+        Account a = dao.login(ac.getEmail(), hashpass);
 
-        if (ppass.equals(cpass) && a != null) {
-            request.setAttribute("mess", "Change password successful!");
-            dao.changepass(ppass, ac.getEmail());
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        if (hashppass.equals(hashcpass) && a != null) {
+            Mess mess = new Mess("success", "Change password successful!");
+            
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(mess));
+//            request.setAttribute("mess", "Change password successful!");
+            dao.changepass(hashppass, ac.getEmail());
+//            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.setAttribute("mess", "Wrong password please login again!");
-            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+            Mess mess = new Mess("danger", "Wrong password please change password again!");          
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println(gson.toJson(mess));
+//            request.setAttribute("mess", "Wrong password please login again!");
+//            request.getRequestDispatcher("/common/login.jsp").forward(request, response);
         }
     }
 

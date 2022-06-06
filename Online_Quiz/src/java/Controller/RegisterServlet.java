@@ -7,9 +7,13 @@ package Controller;
 
 import DAO.AccountDAO;
 import Model.Account;
+import Model.Mess;
 import Util.SendMailUtil;
+import com.google.common.hash.Hashing;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,9 +66,15 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        AccountDAO DAO = new AccountDAO();
-        DAO.ChangeStatus(email);
-        request.getRequestDispatcher("/common/register.jsp").forward(request, response);
+        if (email != null) {
+            AccountDAO DAO = new AccountDAO();
+            DAO.ChangeStatus(email);
+        }
+
+//        Gson gson = new Gson();
+//        Mess mess = new Mess("success", "Register successfully!");
+//        response.setContentType("application/json;charset=UTF-8");
+        response.sendRedirect(request.getContextPath() + "/public/home?status=success&message=Register%20successfully");        
     }
 
     /**
@@ -80,26 +90,42 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String img = "https://www.stregasystem.com/img/users/user.png";
-        
+
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
-        String phone = request.getParameter("mobile");
+        String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String gender_raw = request.getParameter("gender");
+        String hash = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+//        System.out.println(fullname + " " + email + " " + phone + " " + password + " " + gender_raw);
         try {
             boolean gender = Boolean.parseBoolean(gender_raw);
             AccountDAO DAO = new AccountDAO();
             Account a = DAO.checkAccountExist(email);
+            Gson gson = new Gson();
             if (a == null) {
-                DAO.Register(fullname, email, phone, password, gender, img);
+                DAO.Register(fullname, email, phone, hash, gender, img);
                 SendMailUtil sendMailUltil = new SendMailUtil();
-                request.setAttribute("mess", "Plase check your email!");
-                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
-//                response.sendRedirect(request.getContextPath()+"/common/confirmEmail.jsp");
+                Mess mess = new Mess("success", "Plase check your email!");
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                out.println(gson.toJson(mess));
+                out.flush();
+                out.close();
                 sendMailUltil.sendHTMLEmail(email, "register", "http://localhost:8080/Online_Quiz/common/register?email=" + email);
+//                request.setAttribute("mess", "Plase check your email!");
+//                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+//                response.sendRedirect(request.getContextPath()+"/common/confirmEmail.jsp");
             } else {
-                request.setAttribute("mess", "Email is existed!");
-                request.getRequestDispatcher("/common/register.jsp").forward(request, response);
+                Mess mess = new Mess("danger", "Email is existed!");
+
+                response.setContentType("application/json;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                out.println(gson.toJson(mess));
+                out.flush();
+                out.close();
+//                request.setAttribute("mess", "Email is existed!");
+//                request.getRequestDispatcher("/common/register.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
