@@ -1,10 +1,9 @@
 <%-- 
-    Document   : bloglist
-    Created on : May 26, 2022, 11:32:18 AM
+    Document   : blogsearch
+    Created on : May 29, 2022, 9:38:02 PM
     Author     : hongd
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +20,7 @@
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/bloglist.css">
         <script src="../js/index.js"></script>
-        <title>blogs
-        </title>
+        <title>blogs</title>
     </head>
 
     <body class="d-flex flex-column min-vh-100">
@@ -36,33 +34,24 @@
                 <a href="./login.html">Login</a>
                 <a href="./register.html">Register</a>
             </div>
-        </nav>  
+        </nav>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="blog-list">
-                        <h1 class="text-center">Blog list</h1>
+                        <h1 class="text-center">Result</h1>
 
-                        <form action="blogsearch">
-                            <input name="searchname" type="text" placeholder="Search blogs">
-
-                            <select  id="">
-                                <option value="">Blog Category</option>
-                                <c:forEach items="${listc}" var="lst">
-                                    <option value="${lst.id}">${lst.name}</option>
-                                </c:forEach>
-                            </select>
+                        <form method="get" action="postsearch" class="search-box">
+                            <input type="text" placeholder="Search blogs">
                             <button>Search</button>
                         </form>
 
-                        <c:forEach items="${post}" var="pst">
-                            <div class="post-item">
-                                <a href="<c:url value="/public/postdetails?id=${pst.id}"/>">
-                                    <h1>${pst.post_title}</h1>
-                                    <p>${pst.biref}</p>
-                                </a>
-                            </div>
-                        </c:forEach>
+                        <div class="post-item">
+                            <a href="">
+                                <h1>Post title</h1>
+                                <p>biref</p>
+                            </a>
+                        </div>
 
                     </div>
                 </div>

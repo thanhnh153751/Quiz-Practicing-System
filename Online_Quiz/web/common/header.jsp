@@ -22,7 +22,7 @@
         <div class="auth">
             <div><i class="fa-solid fa-user" class="dropbtn"></i> Hello, ${sessionScope.acc.fullname}</div>
             <div class="dropdown-content">
-                <a href="<c:url value="/common/profile"/>">Profile</a>
+                <a href="#">Profile</a>
                 
                 <a href="#changepass"data-toggle="modal"> <span>Change password</span></a>
                 <a href="<c:url value="/public/logout"/>">Logout</a>

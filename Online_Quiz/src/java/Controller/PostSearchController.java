@@ -5,12 +5,8 @@
  */
 package Controller;
 
-import DAO.SubjectDAO;
-import Model.Subject;
-import Model.SubjectCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THANH
+ * @author hongd
  */
-@WebServlet(name = "ListSubjectServlet", urlPatterns = {"/public/listsubject"})
-public class ListSubjectServlet extends HttpServlet {
+@WebServlet(name = "PostSearchController", urlPatterns = {"/public/postsearch"})
+public class PostSearchController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +37,10 @@ public class ListSubjectServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListSubjectServlet</title>");
+            out.println("<title>Servlet PostSearchController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListSubjectServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PostSearchController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,56 +58,8 @@ public class ListSubjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            
-            
-           SubjectDAO sd = new SubjectDAO();
-            List<SubjectCategory> categorySubject=sd.loadAllSubjectCategory();
-            request.setAttribute("categorySubject", categorySubject);
-            
-            //phân trang mới(8 item/page)
-            int count = sd.getTotalSubject();
-            int endPage = count/8;
-            if(count%8 != 0){
-                endPage++;
-            }
-            
-            
-            
-            String indexPage = request.getParameter("index");
-            if(indexPage == null){
-                indexPage ="1";
-            }
-            int index = Integer.parseInt(indexPage);
-            
-            List<Subject> list = sd.pagingSubject(index);
-            request.setAttribute("listSubject", list);
-            request.setAttribute("page", index);
-            request.setAttribute("endPage", endPage);
-            
-            //phân trang cũ
-//            List<Subject> listSubject = sd.loadAllSubject();
-//            int page, numperpage = 2;
-//            int size = listSubject.size();
-//            int numPage = (size % numperpage == 0 ? (size / numperpage) : (size / numperpage) + 1);
-//            String xpage = request.getParameter("page");
-//            if (xpage == null) {
-//                page = 1;
-//            } else {
-//                page = Integer.parseInt(xpage);
-//            }
-//            int start, end;
-//            start = (page - 1) * numperpage;
-//            end = Math.min(page * numperpage, size);
-//            List<Subject> listItemsPage = sd.getListByPage(listSubject, start, end);
-//            request.setAttribute("listSubject", listItemsPage);
-//            request.setAttribute("page", page);
-//            request.setAttribute("numPage", numPage);
-            request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);
-        } catch (Exception e) {
-
-        }
-
+        
+        request.getRequestDispatcher("/public/blogsearch.jsp").forward(request, response);
     }
 
     /**
