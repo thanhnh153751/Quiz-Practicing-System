@@ -8,8 +8,6 @@
 
 <footer class="footer text-center mt-auto">
     <div>
-        
-    
     <p>@Copy right of ..</p>
     
     <h6>Contact us</h6>
