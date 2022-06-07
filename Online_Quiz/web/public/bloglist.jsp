@@ -30,10 +30,10 @@
                         <div class="blog-list">
                             <h1 class="text-center">Blog list</h1>
 
-                            <form action="blogsearch">
+                            <form action="/Online_Quiz/public/blogsearch">
                                 <input name="searchname" type="text" placeholder="Search blogs">
 
-                                <select  id="">
+                                <select  id="" name="category">
                                     <option value="">Blog Category</option>
                                 <c:forEach items="${listc}" var="lst">
                                     <option value="${lst.id}">${lst.name}</option>
