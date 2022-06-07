@@ -188,5 +188,45 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-
+    
+    
+    public List<Post> paging(int check) {
+        List<Post> paging = new ArrayList<>();
+        String query = "Select * from Post order by id desc offset ? rows fetch next 5 rows only";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, (check - 1) * 5);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                paging.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getString("thumbnail")));
+            }
+            return paging;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
+    public int countPost(){
+        String query = "Select COUNT(*) from Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return 0;
+    }
 }

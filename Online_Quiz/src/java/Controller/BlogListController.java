@@ -63,14 +63,33 @@ public class BlogListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
             PostDAO post = new PostDAO();
-            
             List<Post> listp = post.loadPost();
             List<PostCategory> listpc = post.loadPostCategory();
-            request.setAttribute("listc", listpc);
-            request.setAttribute("post", listp);
-            
-            request.getRequestDispatcher("/public/bloglist.jsp").forward(request, response);
+            String index_raw = request.getParameter("indexP");
+            if (index_raw == null) {
+                index_raw = "1";
+            }
+            try {
+//                List<Post> plist = post.loadPost();
+                int index = Integer.parseInt(index_raw);
+                int count = post.countPost();
+                int lastPage = count / 5;
+                if (count % 5 != 0) {
+                    lastPage++;
+                }
+                List<Post> listPost = post.paging(index);
+                if (listPost != null && !listPost.isEmpty()) {
+                    request.setAttribute("listc", listpc);
+                    request.setAttribute("post", listp);
+                    request.setAttribute("lastP", lastPage);
+                }
+                request.getRequestDispatcher("/public/bloglist.jsp").forward(request, response);
+            } catch (Exception e) {
+            }
+
         } catch (Exception e) {
         }
 
