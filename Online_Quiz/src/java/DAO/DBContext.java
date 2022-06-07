@@ -25,7 +25,7 @@ public class DBContext {
 //            Properties p = new Properties();
 //            p.load(reader);  
             String username = "sa";
-            String password = "123456";
+            String password = "123";
             String url = "jdbc:sqlserver://localhost:1433;databaseName=Online_Quiz";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
