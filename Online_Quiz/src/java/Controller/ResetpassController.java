@@ -113,7 +113,7 @@ public class ResetpassController extends HttpServlet {
                 
                 ReSendMailUtil send = new ReSendMailUtil();
                 request.setAttribute("mess", "Plase check your email!");
-                request.getRequestDispatcher("/common/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
                 send.sendHTMLEmail(email, "Reset Password", "http://localhost:8080/Online_Quiz/common/reset?tok=" + tok);
             } catch (MessagingException ex) {
                 Logger.getLogger(ResetpassController.class.getName()).log(Level.SEVERE, null, ex);

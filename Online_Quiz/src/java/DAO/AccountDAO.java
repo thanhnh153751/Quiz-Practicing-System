@@ -105,4 +105,9 @@ public class AccountDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+        dao.Register("Abc", "abc", "12345", "1245", true, "a");
+    }
 }
+

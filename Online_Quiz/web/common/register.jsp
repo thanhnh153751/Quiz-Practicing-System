@@ -29,8 +29,8 @@
                         <label for="gender">Gender</label>
                         <select id="gender" name="gender">
                             <option value="">Please choose your gender</option>
-                            <option value="true">Male</option>
-                            <option value="false">Female</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
                         </select>
                         <label for="mobile">Mobile</label>
                         <input type="text" id="mobile" name="mobile">
