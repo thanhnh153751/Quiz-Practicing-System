@@ -36,19 +36,19 @@
 
                 <div class="blog-slider">
                     <h3 class="text-center">Maybe you know?</h3>
-                    <form action="" class="navigation">
+                    <form action="/Online_Quiz/public/blogsearch" class="navigation">
                         <div class="blog-category">
-                            <select id="cars">
-                                <option value="">Blog Category</option>
+                            <select id="cars" name="category">
+                                <option  value="">Blog Category</option>
                                 <c:forEach items="${listc}" var="lst">
                                     <option value="${lst.id}">${lst.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
                         <div class="blog-search">
-                            <input type="text" placeholder="Search blogs">
+                            <input name="searchname" type="text" placeholder="Search blogs">
                         </div>
-                        <button class="navigation-search">Search</button>
+                        <button class="navigation-search" >Search</button>
                     </form>
 
                     <c:forEach items="${post}" var="list">

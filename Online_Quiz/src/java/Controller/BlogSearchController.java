@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.PostDAO;
 import Model.Post;
+import Model.PostCategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -63,10 +64,39 @@ public class BlogSearchController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String search = request.getParameter("searchname");
-        PostDAO postdao = new PostDAO();
-        List<Post> rs = postdao.searchPost(search);
-        request.setAttribute("postlist", rs);
-        request.getRequestDispatcher("searchblog.jsp").forward(request, response);
+        String category = request.getParameter("category");
+//        String index_raw = request.getParameter("indexP");
+//        if (index_raw == null) {
+//            index_raw = "1";
+//        }
+        if ("".equals(category)) {
+            category = null;
+        }
+        if ("".equals(search)) {
+            search = null;
+        }
+        try {
+            PostDAO postdao = new PostDAO();
+//            int index = Integer.parseInt(index_raw);
+            List<Post> rs = postdao.searchPost(search, category);
+//            List<Post> posts = postdao.loadAllPost();
+            List<PostCategory> cate = postdao.loadPostCategory();
+
+            List<PostCategory> listpc = postdao.loadPostCategory();
+//            int postscount = rs.size();
+//            int lastpage = postscount / 3;
+//            if (postscount % 3 != 0) {
+//                lastpage ++;
+//            }
+            request.setAttribute("cate", category);
+            request.setAttribute("search", search);
+            request.setAttribute("postcate", cate);
+            request.setAttribute("postlist", rs);
+//            request.setAttribute("lastpage", lastpage);
+            request.setAttribute("listc", listpc);
+            request.getRequestDispatcher("/public/searchblog.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
     }
 
     /**

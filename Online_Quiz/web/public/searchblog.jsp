@@ -29,19 +29,33 @@
                         <div class="blog-list">
                             <h1 class="text-center">Result</h1>
 
-                            <form method="get" action="blogsearch" class="search-box">
+                            <form action="/Online_Quiz/public/blogsearch">
                                 <input name="searchname" type="text" placeholder="Search blogs">
-                                <button>Search</button>
-                            </form>
 
-                        <c:forEach items="${postlist}" var="pst">
-                            <div class="post-item">
-                                <a href="<c:url value="/public/postdetails?id=${pst.id}"/>">
-                                    <h1>${pst.post_title}</h1>
-                                    <p>${pst.biref}</p>
-                                </a>
-                            </div>
-                        </c:forEach>
+                                <select  id="" name="category">
+                                    <option value="">Blog Category</option>
+                                <c:forEach items="${listc}" var="lst">
+                                    <option value="${lst.id}">${lst.name}</option>
+                                </c:forEach>
+                            </select>
+                            <button>Search</button>
+                        </form>
+                        <c:if test="${!postlist.isEmpty()}">
+                            <c:forEach items="${postlist}" var="pst">
+                                <div class="post-item">
+                                    <a href="<c:url value="/public/postdetails?id=${pst.id}"/>">
+                                        <h1>${pst.post_title}</h1>
+                                        <p>${pst.biref}</p>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${postlist.isEmpty()}">
+
+                            <h2>Not Found</h2>
+
+                        </c:if>
+
 
                     </div>
                 </div>

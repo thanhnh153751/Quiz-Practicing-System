@@ -30,10 +30,10 @@
                         <div class="blog-list">
                             <h1 class="text-center">Blog list</h1>
 
-                            <form action="blogsearch">
+                            <form action="/Online_Quiz/public/blogsearch">
                                 <input name="searchname" type="text" placeholder="Search blogs">
 
-                                <select  id="">
+                                <select  id="" name="category">
                                     <option value="">Blog Category</option>
                                 <c:forEach items="${listc}" var="lst">
                                     <option value="${lst.id}">${lst.name}</option>
@@ -56,17 +56,20 @@
                 <div class="col-md-12">
                     <nav aria-label="...">
                         <ul class="pagination">
-                            <li class="page-item disabled">
+                        <c:forEach begin="1" end="${lastP}" var="i">
+                            <li class="page-item"><a class="page-link" href="<c:url value="/public/bloglist?indexP=${i}"/>">${i}</a></li>
+                        </c:forEach>
+<!--                            <li class="page-item disabled">
                                 <span class="page-link">Previous</span>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            
                             <li class="page-item active">
                                 <span class="page-link">2</span>
                             </li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item">
                                 <a class="page-link" href="#">Next</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </nav>
                 </div>

@@ -29,8 +29,9 @@ public class PostDAO extends DBContext {
                 postcategory.add(new PostCategory(
                         rs.getInt(1),
                         rs.getNString(2)));
-                return postcategory;
+                
             }
+            return postcategory;
         } catch (SQLException e) {
             System.out.println("\tPostDAO1: " + e);
         }
@@ -87,12 +88,33 @@ public class PostDAO extends DBContext {
         return null;
     }
 
-    public List<Post> searchPost(String search) {
+    public List<Post> searchPost(String search, String category_raw) {
         List<Post> searchResult = new ArrayList<>();
-        String query = "Select * from post where post_title = ?";
+
+        String query = "Select * from post where";
+        if (search != null) {
+            query += " post_title like ? \n";
+//            if (category_raw != null) {
+//                query += "";
+//            }
+        }
+        if (category_raw != null) {
+            query += "and cid = ? ";
+        }
+//        query += "order by id desc offset ? \n"
+//                + "rows fetch next 3 rows only";
         try {
+
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setString(1, search);
+            if (search != null) {
+                ps.setNString(1, "%" + search + "%");
+
+            }
+            if (category_raw != null) {
+                int category = Integer.parseInt(category_raw);
+                ps.setInt(2, category);
+            }
+//            ps.setInt(3, next);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 searchResult.add(new Post(
@@ -110,7 +132,7 @@ public class PostDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("\tPostDAO4: " + e);
         }
-        return searchResult;
+        return null;
     }
 
     public List<Post> loadAllPost() {//tải lên tất cả các Post có trong db
@@ -166,5 +188,45 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-
+    
+    
+    public List<Post> paging(int check) {
+        List<Post> paging = new ArrayList<>();
+        String query = "Select * from Post order by id desc offset ? rows fetch next 5 rows only";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, (check - 1) * 5);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                paging.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getString("thumbnail")));
+            }
+            return paging;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
+    public int countPost(){
+        String query = "Select COUNT(*) from Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return 0;
+    }
 }
