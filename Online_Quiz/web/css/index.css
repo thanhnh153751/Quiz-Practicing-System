@@ -1,156 +1,4 @@
-.navbar {
-    height: 50px;
-    background-color: #fff;
-    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-}
 
-.brand{
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
-}
-
-.search {
-    position: relative;
-}
-
-.search>i {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-.search>input {
-    width: 500px;
-    height: 35px;
-    border-radius: 1rem;
-}
-
-.auth>input {
-    border: none;
-    border-radius: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-right: 10px;
-}
-
-#nav-login {
-    background-color: #04AA6D;
-    color: #ffffff;
-}
-
-.modal-header .btn-close{
-    margin-right: 5px;
-}
-
-
-
-.footer {
-    width: 100%;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    color: white;
-}
-
-.dropbtn {
-    background-color: #04AA6D;
-    color: black;
-    font-size: 25px;
-    /* font-size: 16px; */
-    border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.auth {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 10px;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.auth:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.auth:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
-
-/* Css for modal */
-
-.modal-header {
-    padding: 0;
-}
-
-.modal-header .close {
-    padding: 10px 15px;
-}
-
-.modal-header ul {
-    border: none;
-}
-
-.modal-header ul li {
-    margin: 0;
-}
-
-.modal-header ul li a {
-    border: none;
-    border-radius: 0;
-}
-
-.modal-header ul li.active a {
-    color: #e12f27;
-}
-
-.modal-header ul li a:hover {
-    border: none;
-}
-
-.modal-header ul li a span {
-    margin-left: 10px;
-}
-
-.modal-body .form-group {
-    margin-bottom: 10px;
-}
-
-.alert{
-    display: none;
-}
 
 /* Css for slider */
 .header{
@@ -168,6 +16,11 @@ h2{
 
 .slider-item{
     margin: 2px 10px 2px 0px;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slider-item a{
@@ -178,6 +31,13 @@ h2{
 .slider-item:hover{
     transform: scale(1.02);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.slider-item-body{
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 /* Css for body */
@@ -243,7 +103,12 @@ h6{
     padding: 0;
     margin-right: 10px;
     margin-bottom: 10px;
-
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      
 }
 
 .blog-item:hover{
@@ -254,6 +119,19 @@ h6{
 
 .blog-item a{
     text-decoration: none;
+}
+.img-warper{
+    display: flex;
+    justify-content: center;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.img-warper>img{
+    /*width: auto;*/
+    max-height: 300px;
+    max-width: 300px
+        
 }
 
 .date-update{

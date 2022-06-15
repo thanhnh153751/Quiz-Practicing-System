@@ -63,7 +63,7 @@ public class SubjectDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SubjectDAO sd = new SubjectDAO();
-    
+        System.out.println("VCLLLLLLLLLLLLLLLLLLLLLLLL");
         List<SubjectCategory> categorySubject = sd.loadAllSubjectCategory();
         request.setAttribute("categorySubject", categorySubject);
         
@@ -72,6 +72,7 @@ public class SubjectDetailController extends HttpServlet {
         try {
             int id = Integer.parseInt(id_raw);
             Subject s = sd.loadSubjectDetail(id);
+            
             request.setAttribute("subject", s);
             request.getRequestDispatcher("/public/subjectDetail.jsp").forward(request, response);
         } catch (Exception e) {

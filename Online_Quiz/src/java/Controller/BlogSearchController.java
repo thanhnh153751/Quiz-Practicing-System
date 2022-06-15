@@ -78,10 +78,11 @@ public class BlogSearchController extends HttpServlet {
         try {
             PostDAO postdao = new PostDAO();
 //            int index = Integer.parseInt(index_raw);
-            List<Post> rs = postdao.searchPost(search,category);
+            List<Post> rs = postdao.searchPost(search, category);
 //            List<Post> posts = postdao.loadAllPost();
             List<PostCategory> cate = postdao.loadPostCategory();
-            
+
+            List<PostCategory> listpc = postdao.loadPostCategory();
 //            int postscount = rs.size();
 //            int lastpage = postscount / 3;
 //            if (postscount % 3 != 0) {
@@ -92,10 +93,10 @@ public class BlogSearchController extends HttpServlet {
             request.setAttribute("postcate", cate);
             request.setAttribute("postlist", rs);
 //            request.setAttribute("lastpage", lastpage);
+            request.setAttribute("listc", listpc);
             request.getRequestDispatcher("/public/searchblog.jsp").forward(request, response);
         } catch (Exception e) {
         }
-
     }
 
     /**

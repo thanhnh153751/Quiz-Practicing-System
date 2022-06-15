@@ -21,7 +21,7 @@ public class PostDAO extends DBContext {
 
     public List<PostCategory> loadPostCategory() {
         List<PostCategory> postcategory = new ArrayList<>();
-        String query = "select * from Post_Category";
+        String query = "Select * from Post_Category";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -29,6 +29,7 @@ public class PostDAO extends DBContext {
                 postcategory.add(new PostCategory(
                         rs.getInt(1),
                         rs.getNString(2)));
+                
             }
             return postcategory;
         } catch (SQLException e) {
@@ -136,7 +137,7 @@ public class PostDAO extends DBContext {
 
     public List<Post> loadAllPost() {//tải lên tất cả các Post có trong db
         List<Post> loadAllPost = new ArrayList<>();
-        String query = "Select top 8 * from Post order by id desc";
+        String query = "Select top 8 * from Post";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -187,12 +188,45 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-
-//    public static void main(String[] args) {
-//        PostDAO pdao = new PostDAO();
-//        List<PostCategory> categorys = pdao.loadPostCategory();
-//        for (PostCategory category : categorys) {
-//            System.out.println(category.getName());
-//        }
-//    }
+    
+    
+    public List<Post> paging(int check) {
+        List<Post> paging = new ArrayList<>();
+        String query = "Select * from Post order by id desc offset ? rows fetch next 5 rows only";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, (check - 1) * 5);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                paging.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getString("thumbnail")));
+            }
+            return paging;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
+    public int countPost(){
+        String query = "Select COUNT(*) from Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return 0;
+    }
 }

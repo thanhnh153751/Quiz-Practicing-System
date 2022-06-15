@@ -13,12 +13,13 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/nav.css">
         <title>JSP Page</title>
     </head>
     <body class="d-flex flex-column min-vh-100">
         <jsp:include page="../common/header.jsp"></jsp:include>
-        
-            
+
+
 
             <div class="container">
                 <div class="row">
@@ -31,8 +32,8 @@
                             <div class="card slider-item col-md-3" style="width: 16rem;">
                                 <a href="">
                                     <img src="${p.thumbnail}"
-                                         class="card-img-top" alt="...">
-                                    <div class="card-body">
+                                         class="card-img-top img-responsive" alt="...">
+                                    <div class="card-body slider-item-body">
                                         <h6 class="card-title">${p.post_title}</h6>
                                     </div>
                                 </a>
@@ -97,7 +98,9 @@
                     <div class="col-md-3">
                         <div class="card blog-item" style="width: 18rem;" >
                             <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
-                                <img src="https://i.pinimg.com/originals/14/f1/55/14f15590d4723f4826076d0620979cfa.jpg" class="card-img-top" alt="...">
+                                <div class="img-warper">
+                                    <img src="${p.thumbnail}" class="card-img-top img-responsive" alt="...">
+                                </div>
                                 <div class="blog-card-body d-flex justify-content-between">
                                     <h6 class="card-title">${p.post_title}</h6>
                                     <p class="date-update">${p.dateFormat}</p>

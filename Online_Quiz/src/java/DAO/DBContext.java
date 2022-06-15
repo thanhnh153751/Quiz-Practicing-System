@@ -25,8 +25,12 @@ public class DBContext {
 //            Properties p = new Properties();
 //            p.load(reader);  
             String username = "sa";
+<<<<<<< HEAD
             String password = "123";
 
+=======
+            String password = "12345";
+>>>>>>> d38d3a8f3bf54a3afcb21f60f830e16a198eef30
             String url = "jdbc:sqlserver://localhost:1433;databaseName=Online_Quiz";
 
 
