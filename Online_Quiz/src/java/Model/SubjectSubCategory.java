@@ -7,17 +7,19 @@ package Model;
 
 /**
  *
- * @author THANH
+ * @author Viet Dung
  */
-public class SubjectCategory {
-    int id;
-    String name;
+public class SubjectSubCategory {
+    private int id;
+    private int cid;
+    private String name;
 
-    public SubjectCategory() {
+    public SubjectSubCategory() {
     }
 
-    public SubjectCategory(int id, String name) {
+    public SubjectSubCategory(int id, int cid, String name) {
         this.id = id;
+        this.cid = cid;
         this.name = name;
     }
 
@@ -29,6 +31,14 @@ public class SubjectCategory {
         this.id = id;
     }
 
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
+
     public String getName() {
         return name;
     }
@@ -36,10 +46,7 @@ public class SubjectCategory {
     public void setName(String name) {
         this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return "SubjectCategory{" + "id=" + id + ", name=" + name + '}';
-    }
+    
+    
     
 }

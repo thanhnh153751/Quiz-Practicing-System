@@ -16,6 +16,7 @@ import java.sql.Date;
 public class Subject {
     private int id;
     private int cid;
+    private int lid;
     private String thumbnail;
     private String title;
     private String tagline;
@@ -24,10 +25,58 @@ public class Subject {
     private String contact;
     private String description;
     private int status;
+    private SubjectCategory sub;
+    private String cname;
+    private String csname;
+    private int numoflesson;
+    
+    private String simulation;
+    private String level;
+    private int numoffquess;
+    private int ducation;
+    private int passrate;
+
+ 
+
+   
+    
+    
 
     public Subject() {
     }
+    public Subject(int id, String title) {
+        this.id = id;
+        this.title = title;
+        
+    }
+    public Subject(int id,int lid, String title, String simulation,String level,int numoffquess,int ducation,int passrate ) {
+        this.id = id;
+        this.lid = lid;
+        this.title = title;
+        this.simulation = simulation;
+        this.level = level;
+        this.numoffquess = numoffquess;
+        this.ducation = ducation;
+        this.passrate = passrate;
+    }
 
+    public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
+        this.id = id;
+        this.title = title;
+        this.contact = contact;
+        this.status = status;
+        this.cname = cname;
+        this.csname = scname;
+        this.numoflesson = numoflesson;
+    }
+    
+    
+     
+
+    
+     
+     
+    
     public Subject(String thumbnail, String title, String tagline, double origin_price, double sale_price, String contact, String description) {
        
         this.thumbnail = thumbnail;
@@ -52,8 +101,88 @@ public class Subject {
         this.status = status;
     }
 
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public SubjectCategory getSub() {
+        return sub;
+    }
+
+    public void setSub(SubjectCategory sub) {
+        this.sub = sub;
+    }
+
+    public String getCsname() {
+        return csname;
+    }
+
+    public int getLid() {
+        return lid;
+    }
+
+    public void setLid(int lid) {
+        this.lid = lid;
+    }
+
+    public void setCsname(String csname) {
+        this.csname = csname;
+    }
+
+    public String getSimulation() {
+        return simulation;
+    }
+
+    public void setSimulation(String simulation) {
+        this.simulation = simulation;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getNumoffquess() {
+        return numoffquess;
+    }
+
+    public void setNumoffquess(int numoffquess) {
+        this.numoffquess = numoffquess;
+    }
+
+    public int getDucation() {
+        return ducation;
+    }
+
+    public void setDucation(int ducation) {
+        this.ducation = ducation;
+    }
+
+    public int getPassrate() {
+        return passrate;
+    }
+
+    public void setPassrate(int passrate) {
+        this.passrate = passrate;
+    }
+
+    public int getNumoflesson() {
+        return numoflesson;
+    }
+
+    public void setNumoflesson(int numoflesson) {
+        this.numoflesson = numoflesson;
     }
 
     public void setId(int id) {
@@ -131,6 +260,12 @@ public class Subject {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Subject{" + "id=" + id + ", cid=" + cid + ", thumbnail=" + thumbnail + ", title=" + title + ", tagline=" + tagline + ", origin_price=" + origin_price + ", sale_price=" + sale_price + ", contact=" + contact + ", description=" + description + ", status=" + status + ", sub=" + sub + '}';
+    }
+
     
     
     

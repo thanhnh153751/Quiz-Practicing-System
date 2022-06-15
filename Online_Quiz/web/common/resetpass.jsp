@@ -37,7 +37,7 @@
                 <div class="container-fluid main-form">
 
                     <div class="form bg-light">
-                        <h1 class="text-center font-weight-bold text-primary">Change Password</h1>
+                        <h1 class="text-center font-weight-bold text-primary">Reset Password</h1>
                         <input type="hidden" name="email" value="${email}">
                         <input type="hidden" name="tok" value="${tok}">
                         <div class="form-group">
