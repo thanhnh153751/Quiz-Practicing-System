@@ -11,9 +11,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
+
+
+
         <title>JSP Page</title>
     </head>
     <body class="d-flex flex-column min-vh-100">
@@ -25,36 +30,93 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="header">
-                            <h2>Hot Post</h2>
+
+                            <div id="slider_1" class="slider">
+                            <c:forEach items="${requestScope.loadLatestPost}" var="p">
+                                <div class="card slider-item col-md-3" style="width: 16rem;">
+                                    <a href="">
+                                        <img src="${p.thumbnail}"
+                                             class="card-img-top img-responsive" alt="...">
+                                        <div class="card-body slider-item-body">
+                                            <h6 class="card-title">${p.post_title}</h6>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </c:forEach>
+                            <c:forEach items="${requestScope.subjectLast}" var="p">
+                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                        <a href="">
+                                            <img src="${p.thumbnail}"
+                                                 class="card-img-top img-responsive" alt="...">
+                                            <div class="card-body slider-item-body">
+                                                <h6 class="card-title">${p.title}</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                            </c:forEach>
+                        </div> 
+                    </div>
+                    <!--static link-->    
+                    <div class="so_si">
+                        <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
+                    </div>
+
+
+                        <div class="row combo_head">
+
+                            <div class="col-3 lastPost">
+                                <h2>Latest Posts</h2>
+                                <div class="overflow-auto">
+                                <c:forEach items="${requestScope.loadLatestPost}" var="p">
+                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                        <a href="">
+                                            <img src="${p.thumbnail}"
+                                                 class="card-img-top img-responsive" alt="...">
+                                            <div class="card-body slider-item-body">
+                                                <h6 class="card-title">${p.post_title}</h6>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
-                        <div class="slider">
-                        <c:forEach items="${requestScope.loadLatestPost}" var="p">
-                            <div class="card slider-item col-md-3" style="width: 16rem;">
-                                <a href="/Online_Quiz/public/postdetails?id=${p.id}">
-                                    <img src="${p.thumbnail}"
-                                         class="card-img-top img-responsive" alt="...">
-                                    <div class="card-body slider-item-body">
-                                        <h6 class="card-title">${p.post_title}</h6>
+
+                        <div class="col-9">    
+                            <h2>Hot Post</h2>
+                            <div id="slider_2" class="slider_2">
+                                <c:forEach items="${requestScope.loadHotPost}" var="p">
+                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                        <a href="">
+                                            <img src="${p.thumbnail}"
+                                                 class="card-img-top img-responsive" alt="...">
+                                            <div class="card-body slider-item-body">
+                                                <h6 class="card-title">${p.post_title}</h6>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                </c:forEach>
+
                             </div>
-                        </c:forEach>
-                        <!--add-->
-                        <c:forEach items="${requestScope.subjectLast}" var="p"> 
-                            <div class="card slider-item col-md-3" style="width: 16rem;">
-                                <a href="">
-                                    <img src="${p.thumbnail}"
-                                         class="card-img-top img-responsive" alt="...">
-                                    <div class="card-body slider-item-body">
-                                        <h6 class="card-title">${p.title}</h6>
+
+                            <h2>featured subjects</h2>
+                            <div id="slider_2" class="slider_2">
+                                <c:forEach items="${requestScope.subjectLast}" var="p">
+                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                        <a href="">
+                                            <img src="${p.thumbnail}"
+                                                 class="card-img-top img-responsive" alt="...">
+                                            <div class="card-body slider-item-body">
+                                                <h6 class="card-title">${p.title}</h6>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                </c:forEach>
                             </div>
-                            
-                        </c:forEach>
-                        
-                        <!--end-->
-                            
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -67,6 +129,7 @@
                 </div>
 
                 <c:forEach items="${requestScope.subjectList}" var="s">
+                    
                     <div class="col-md-3">
                         <div class="card course-item" style="width: 18rem;">
                             <a href="">
@@ -74,6 +137,19 @@
                                      class="card-img-top" alt="...">
                                 <div class="course-card-body">
                                     <h6 class="card-title">${s.title}</h6>
+
+                                </div>
+                            </a>
+                            <!--tag line-->      
+                            <div class="card-body">
+                                <div data-type="tagline">${s.tagline}</div>
+                            </div>          
+                        </div>
+                    </div>
+
+
+
+                </c:forEach>
 
                                 </div>
                             </a>

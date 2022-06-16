@@ -35,8 +35,20 @@ h2{
 
 .slider-item-body{
     position: absolute;
-    bottom: 0;
+    bottom: 36px;
     background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 10px 0px 5px 10px;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.wrapper:hover{
+    transform: scale(1.05);
+}
+
+.wrapper img{
     width: 100%;
 }
 
@@ -142,5 +154,98 @@ h6{
 footer{
     background-color: black;
     color: white;
+}
+
+.btn-outline-primary{
+    width: 200px;
+    margin: 0 auto;
+}
+
+
+
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+    }
+
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+    }
+}
+
+footer{
+    background-color: black;
+    color: white;
     height: 8rem;
 }
+
+.slider-next, .slider-previous{
+    font-size: 36px;
+    position: absolute;
+    z-index: 2;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 5px;
+    cursor: pointer;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+.slider-next{
+    top: 50%;
+    right: -10px;
+}
+
+.slider-previous{
+    top: 50%;
+    left: -15px;
+}
+
+.slider-next:hover, .slider-previous:hover{
+    transform: scale(1.05);
+    background-color: rgb(21, 147, 220);
+}
+
+.overflow-auto{
+    height: 51.5%;
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+}
+
+.combo_head{
+    height: 780px;
+    margin-top: 50px;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1px 1px;
+}
+
+.tagline{
+    background-color: #0a53be;
+    color: #ffffff;
+    border-radius: 17px;
+    font-size: 15px;
+}
+
+
+

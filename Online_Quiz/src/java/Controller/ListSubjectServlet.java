@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.SubjectDAO;
+import Model.SubSubjectCategory;
 import Model.Subject;
 import Model.SubjectCategory;
 
@@ -69,6 +70,10 @@ public class ListSubjectServlet extends HttpServlet {
            SubjectDAO sd = new SubjectDAO();
             List<SubjectCategory> categorySubject=sd.loadAllSubjectCategory();
             request.setAttribute("categorySubject", categorySubject);
+            List<SubSubjectCategory> subCategorySubject=sd.loadAllSubSubjectCategory();
+            request.setAttribute("subCategorySubject", subCategorySubject);
+            
+            
             
             //phân trang mới(8 item/page)
             int count = sd.getTotalSubject();
@@ -89,6 +94,9 @@ public class ListSubjectServlet extends HttpServlet {
             request.setAttribute("listSubject", list);
             request.setAttribute("page", index);
             request.setAttribute("endPage", endPage);
+            
+            List<Subject> featuredSubject = sd.loadLastSubject();
+            request.setAttribute("featuredSubject", featuredSubject);
             
             //phân trang cũ
 //            List<Subject> listSubject = sd.loadAllSubject();

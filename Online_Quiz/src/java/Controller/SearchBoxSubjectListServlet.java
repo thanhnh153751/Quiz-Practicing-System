@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.SubjectDAO;
+import Model.SubSubjectCategory;
 import Model.Subject;
 import Model.SubjectCategory;
 
@@ -43,6 +44,8 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
 
         SubjectDAO sd = new SubjectDAO();
         List<SubjectCategory> categoryList = sd.loadAllSubjectCategory();
+        List<SubSubjectCategory> subCategorySubject=sd.loadAllSubSubjectCategory();
+        request.setAttribute("subCategorySubject", subCategorySubject);
 
         String[] cid_raw = request.getParameterValues("cid_checkbox");//lấy mảng cid
         int[] cid;
@@ -85,7 +88,8 @@ public class SearchBoxSubjectListServlet extends HttpServlet {
         request.setAttribute("endPage", numPage);
        
 
-        
+        List<Subject> featuredSubject = sd.loadLastSubject();
+        request.setAttribute("featuredSubject", featuredSubject);
         
         request.setAttribute("categorySubject", categoryList);
         request.getRequestDispatcher("/public/listSubject.jsp").forward(request, response);

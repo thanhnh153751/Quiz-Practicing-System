@@ -23,7 +23,6 @@ public class Subject {
     private String contact;
     private String description;
     private double list_price;
-    private double origin_price;
     private double sale_price;   
     private int status;
     private SubjectCategory sub;
@@ -61,33 +60,6 @@ public class Subject {
         this.passrate = passrate;
     }
 
-    public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
-        this.id = id;
-        this.title = title;
-        this.contact = contact;
-        this.status = status;
-        this.cname = cname;
-        this.csname = scname;
-        this.numoflesson = numoflesson;
-    }
-    
-    
-     
-
-    
-     
-     
-    
-    public Subject(String thumbnail, String title, String tagline, double origin_price, double sale_price, String contact, String description) {
-        this.thumbnail = thumbnail;
-        this.title = title;
-        this.tagline = tagline;
-        this.origin_price = origin_price;
-        this.sale_price = sale_price;
-        this.contact = contact;
-        this.description = description;
-    }
-       
     public Subject(String thumbnail, String title, String tagline, String contact, String description, double list_price, double sale_price) {
         this.thumbnail = thumbnail;
         this.title = title;
@@ -133,14 +105,6 @@ public class Subject {
 
     
     
-
-    public String getCname() {
-        return cname;
-    }
-
-    public void setCname(String cname) {
-        this.cname = cname;
-    }
 
     public int getId() {
         return id;

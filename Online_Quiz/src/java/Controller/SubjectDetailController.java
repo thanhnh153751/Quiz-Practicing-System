@@ -5,7 +5,10 @@
  */
 package Controller;
 
+import DAO.LessonDAO;
 import DAO.SubjectDAO;
+import Model.Lesson;
+import Model.SubSubjectCategory;
 import Model.Subject;
 import Model.SubjectCategory;
 
@@ -64,15 +67,23 @@ public class SubjectDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SubjectDAO sd = new SubjectDAO();
-        System.out.println("VCLLLLLLLLLLLLLLLLLLLLLLLL");
+        
         List<SubjectCategory> categorySubject = sd.loadAllSubjectCategory();
         request.setAttribute("categorySubject", categorySubject);
+        List<SubSubjectCategory> subCategorySubject=sd.loadAllSubSubjectCategory();
+        request.setAttribute("subCategorySubject", subCategorySubject);
+        
+        LessonDAO ld = new LessonDAO();
         
         
         String id_raw = request.getParameter("ids");
         try {
             int id = Integer.parseInt(id_raw);
             Subject s = sd.loadSubjectDetail(id);
+            List<Lesson> lesson = ld.loadLessonBySubject(id);
+            request.setAttribute("lesson", lesson);
+            List<Subject> featuredSubject = sd.loadLastSubject();
+        request.setAttribute("featuredSubject", featuredSubject);
             
             request.setAttribute("subject", s);
             request.getRequestDispatcher("/public/subjectDetail.jsp").forward(request, response);
