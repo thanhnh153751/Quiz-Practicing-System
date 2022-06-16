@@ -53,7 +53,9 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
             }
             return loadPost;
         } catch (SQLException e) {
@@ -79,7 +81,9 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail"));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count"));
             }
         } catch (SQLException e) {
             System.out.println("\tPostDAO3: " + e);
@@ -104,7 +108,9 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
             }
             return searchResult;
         } catch (SQLException e) {
@@ -130,8 +136,9 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")
-                ));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
             }
             return loadAllPost;
         } catch (SQLException e) {
@@ -140,9 +147,9 @@ public class PostDAO extends DBContext {
         return null;
     }
 
-    public List<Post> loadLatestPost() {//tải lên top 3 các Post mới nhất dựa theo date trong db
+    public List<Post> loadLatestPost() {//tải lên top 6 các Post mới nhất dựa theo date trong db
         List<Post> loadLatestPost = new ArrayList<>();
-        String query = "select top 3 * from Post order by update_date desc";
+        String query = "select top 6 * from Post order by update_date desc";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -157,8 +164,9 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")
-                ));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
             }
             return loadLatestPost;
         } catch (SQLException e) {
@@ -166,5 +174,74 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
+    public List<Post> loadHostPost() {//tải lên top 6 các Hot Post mới nhất dựa theo view trong db
+        List<Post> loadLatestPost = new ArrayList<>();
+        String query = "select top 6 * from Post order by view_count desc";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
 
+            while (rs.next()) {
+                loadLatestPost.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
+            }
+            return loadLatestPost;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO6: " + e);
+        }
+        return null;
+    }
+    
+    
+    public List<Post> paging(int check) {
+        List<Post> paging = new ArrayList<>();
+        String query = "Select * from Post order by id desc offset ? rows fetch next 5 rows only";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, (check - 1) * 5);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                paging.add(new Post(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("post_title"),
+                        rs.getNString("biref"),
+                        rs.getNString("details"),
+                        rs.getNString("author"),
+                        rs.getDate("update_date"),
+                        rs.getNString("contact"),
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"),
+                        rs.getInt("view_count")));
+            }
+            return paging;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
+    public int countPost(){
+        String query = "Select COUNT(*) from Post";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return 0;
+    }
 }

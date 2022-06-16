@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,15 +15,21 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-        
-        <link rel="stylesheet" href="./css/subjectDetail.css">
-        <script src="./js/index.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/nav.css">
+
+        <link rel="stylesheet" href="../css/subjectDetail.css">
+        <!--<script src="./js/index.js"></script>-->
         <title>JSP Page</title>
+        <style>
+            a:hover{
+                color: black!important;
+                text-decoration: none!important;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -37,38 +44,123 @@
                     <div class="row list-courses">
 
                         <c:set var="s" value="${requestScope.subject}"/>
-                            <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
-                                <article class="course-item grid-style">
-                                    <a title="title name" href="#" class="wrap-course-item">
-                                        <div class="course-thumb ">
-                                            <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
-                                        </div>
+                        <div class=" mb-4">
+                            <article class="course-item grid-style p-3">
+                                <a title="title name" href="#" class="wrap-course-itemDetail">
+                                    <div class="course-thumb ">
+                                        <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
+                                    </div>
 
-                                        <div class="view-content">
-                                            <h3 class="course-title">${s.title}</h3>
-                                            <p>${s.description}</p>
+                                    <div class="view-content">
+                                        <h3 class="course-title">${s.title}</h3>
+
+                                        <div class="taglineSbject">
+                                            <div class="tag" data-type="tagline">${s.tagline}</div>
                                         </div>
-                                        <hr>
-                                        <div class="course-info">
-                                            <span>${s.origin_price} $/Full</span>
-                                            <span class="btn btn-outline-primary">Register</span>
+                                        <p>${s.description}</p>
+                                        <h3 class="course-title">Lesson</h3>
+                                        <div class="list-group">
+
+                                            <c:forEach items="${requestScope.lesson}" var="les">
+                                                <a href="#" class="list-group-item">${les.name}</a>  
+                                            </c:forEach>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="course-info d-flex justify-content-between">
+                                        <div>
+                                            <fmt:setLocale value = "en_US"/>
+                                            <c:if test="${s.sale_price != 0}">
+                                                <span class="text-decoration-line-through"><fmt:formatNumber maxIntegerDigits = "4" value="${s.list_price}" type="currency" currencySymbol="$" /></span>
+                                                &nbsp;
+
+                                                <span style="color: red;"> 
+                                                    <fmt:formatNumber value = "${s.sale_price}" type = "currency"/></span>
+                                                </c:if>
+                                                <c:if test="${s.sale_price == 0}"><span><fmt:formatNumber maxIntegerDigits = "4" value="${s.list_price}" type="currency" currencySymbol="$"/></span></c:if>
+
+                                            </div>
+                                            <div>
+                                                <a id="myBtn" class="btn btn-outline-primary" onclick="loadData()"> Register</a>
+                                                <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+
+                                                <!--<button >Open Modal</button>-->
+                                                <div class="sreg">
+                                                <jsp:include page="../common/subjectRegister.jsp"></jsp:include>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </a>
                                 </article>
                             </div>
-                                  
 
 
+
+                        </div>
+                        <div class="so_si">
+                        <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
+                        </div>
+                    </div>
+                    <div class="col-2 sticky search-box-container">
+                    <jsp:include page="../common/searchboxSubject.jsp"></jsp:include>
                     </div>
 
                 </div>
-                <div class="col-2 sticky">
-                <%@include file="/sider.jsp" %>
-                </div>
 
             </div>
-
-        </div>
-                <jsp:include page="../common/footer.jsp"></jsp:include>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
+    <script src="../js/jquery/jquery.js"></script>
+    <script src="../js/jquery/jquery-migrate.js"></script>
+    <script src="../js/boostrap/bootstrap.min.js"></script>
+    <script src="../js/slick/slick.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/subjectdetails.js"></script>
+    <script>
+                                                    $(document).ready(function () {
+                                                        $('#myBtn').click(function () {
+
+                                                            $.ajax({
+                                                                url: "/Online_Quiz/public/subjectregister",
+                                                                type: "get", //send it through get method
+                                                                
+                                                                success: function (response) {
+                                                                    $('#message').html(response);
+
+                                                                    //Do Something
+                                                                },
+                                                                error: function (xhr) {
+                                                                    //Do Something to handle error
+                                                                }
+                                                            })
+                                                        });
+
+
+                                                    });
+                                                    function getData() {
+                                                        var a = $("input[type='radio'][name='package']:checked").val();
+                                                        
+                                                        $.ajax({
+                                                            url: "/Online_Quiz/public/subjectregister",
+                                                            type: "get", //send it through get method
+                                                            data: {
+                                                                idpac: a,
+                                                                
+                                                            },
+                                                            success: function (response) {
+                                                                document.getElementById("arler").innerHTML=response;
+                                                            },
+                                                            error: function (xhr) {
+                                                                //Do Something to handle error
+                                                            }
+                                                        });
+                                                    }
+                                                    
+
+
+
+
+    </script>
 </html>

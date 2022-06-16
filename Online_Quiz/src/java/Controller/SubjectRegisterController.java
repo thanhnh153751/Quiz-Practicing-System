@@ -5,27 +5,29 @@
  */
 package Controller;
 
-import DAO.LessonDAO;
+import DAO.OrderDAO;
+import DAO.PackageDAO;
 import DAO.SubjectDAO;
-import Model.Lesson;
-import Model.SubSubjectCategory;
-import Model.Subject;
-import Model.SubjectCategory;
+import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import Model.Package;
+import Model.Subject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author THANH
  */
-@WebServlet(name = "SubjectDetailController", urlPatterns = {"/public/subjectdetail"})
-public class SubjectDetailController extends HttpServlet {
+@WebServlet(name = "SubjectRegisterController", urlPatterns = {"/public/subjectregister"})
+public class SubjectRegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,18 +41,53 @@ public class SubjectDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SubjectDetailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SubjectDetailController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        PackageDAO d = new PackageDAO();
+        SubjectDAO sd = new SubjectDAO();
+        OrderDAO od = new OrderDAO();
+        String id_raw = request.getParameter("ids");
+        String id_pac_raw = request.getParameter("idpac");
+        if (id_pac_raw != null) {
+            int id_pac = Integer.parseInt(id_pac_raw);
+            Package p = d.loadPackagesByPid(id_pac);
+            Subject s = sd.loadSubjectDetail(p.getSid());
+            HttpSession session = request.getSession();
+            Account x = (Account) session.getAttribute("acc");
+            od.addOrder(x, s, p);
+            
+            out.println("succesfully");
+            
         }
+        else
+        try {
+            //int id = Integer.parseInt(id_raw);
+            List<Model.Package> packages = d.loadPackagesByCid(1);
+            request.setAttribute("packages", packages);
+
+            
+
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<h4>select the appropriate subscription package</h4>");
+            out.println("<fmt:setLocale value = \"en_US\"/>");
+            for (Package pac : packages) {
+                // out.println("<p>" + pac.getName() + "</p>");
+                if (pac.getSale_price() != 0) {
+                    out.println("<span style=\"color: red;\" >Sale :" + pac.getSale_price() + "$</span>");
+                } else {
+                    out.println("<span>" + pac.getList_price() + "$</span>");
+                }
+
+                out.println("<input type=\"radio\" id=\"html\" name=\"package\" value=\"" + pac.getId() + "\"" + pac.getId() + "\">");
+                out.println("<label for=\"vehicle1\"> " + pac.getName() + "</label><br>");
+
+            }
+            
+            
+            out.println("<a id=\"myBtn2\" class=\"btn btn-outline-primary\" onclick=\"getData()\" > Register</a>");
+
+        } catch (Exception e) {
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,29 +102,8 @@ public class SubjectDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SubjectDAO sd = new SubjectDAO();
-        
-        List<SubjectCategory> categorySubject = sd.loadAllSubjectCategory();
-        request.setAttribute("categorySubject", categorySubject);
-        List<SubSubjectCategory> subCategorySubject=sd.loadAllSubSubjectCategory();
-        request.setAttribute("subCategorySubject", subCategorySubject);
-        
-        LessonDAO ld = new LessonDAO();
-        
-        
-        String id_raw = request.getParameter("ids");
-        try {
-            int id = Integer.parseInt(id_raw);
-            Subject s = sd.loadSubjectDetail(id);
-            List<Lesson> lesson = ld.loadLessonBySubject(id);
-            request.setAttribute("lesson", lesson);
-            List<Subject> featuredSubject = sd.loadLastSubject();
-        request.setAttribute("featuredSubject", featuredSubject);
-            
-            request.setAttribute("subject", s);
-            request.getRequestDispatcher("/public/subjectDetail.jsp").forward(request, response);
-        } catch (Exception e) {
-        }
+        processRequest(request, response);
+
     }
 
     /**

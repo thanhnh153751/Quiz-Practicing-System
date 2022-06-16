@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,9 +53,9 @@
                         <div class="row list-courses">
 
                         <c:forEach items="${requestScope.listSubject}" var="s">
-                            <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
-                                <article class="course-item grid-style">
-                                    <a title="title name" href="public/subjectdetail?ids=${s.id}" class="wrap-course-item">
+                            <div class=" col-xs-12 col-sm-6 col-lg-3 mb-4 courseInfor">
+                                <article class="course-item grid-style p-2">
+                                    <a title="title name" href="subjectdetail?ids=${s.id}" class="wrap-course-item">
                                         <div class="course-thumb ">
                                             <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
                                         </div>
@@ -62,104 +63,50 @@
                                         <div class="view-content">
                                             <h3 class="course-title">${s.title}</h3>
                                             <div class="taglineSbject">
-                                                <p>${s.tagline}</p>
+                                                <div class="tag" data-type="tagline">${s.tagline}</div>
                                             </div>
+
+
 
                                         </div>
                                         <hr>
-                                        <div class="course-info">
-                                            <span>${s.origin_price} $</span>
-                                            <span class="btn btn-outline-primary">Register</span>
-                                        </div>
-                                    </a>
-                                </article>
-                            </div>
+                                        <div class="course-info d-flex justify-content-between">
+                                            <div>
+                                                <fmt:setLocale value = "en_US"/>
+                                                <c:if test="${s.sale_price != 0}">
+                                                    <span class="text-decoration-line-through"><fmt:formatNumber maxIntegerDigits = "4" value="${s.list_price}" type="currency" currencySymbol="$" /></span>
+                                                    &nbsp;
+
+                                                    <span style="color: red;"> 
+                                                        <fmt:formatNumber value = "${s.sale_price}" type = "currency"/></span>
+                                                    </c:if>
+                                                    <c:if test="${s.sale_price == 0}"><span><fmt:formatNumber maxIntegerDigits = "4" value="${s.list_price}" type="currency" currencySymbol="$"/></span></c:if>
+                                                </div>
+                                                <div>
+                                                    <span class="btn btn-outline-primary">Register</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </article>
+                                </div>
                         </c:forEach>              
 
+                        <div class="so_si">
+                            <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
+                            </div>
+                        </div>
 
+                    </div>
+                    <!--include search box-->
+                    <div class="col-2 sticky search-box-container">
+                    <jsp:include page="../common/searchboxSubject.jsp"></jsp:include>
                     </div>
 
                 </div>
-                <div class="col-2 sticky">
-                    <div class="search-box">
-                        <div class=" col-12 jc-r mb-4">
-                            <form action="searchboxsubjectlist" class="" role="search" id="search-bar" method="post">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name" value="${requestScope.key}">
-
-
-                                <br>
-
-                                <!--check box categori-->
-                                <div>
-                                    <%
-                                        int[] clist = (int[]) request.getAttribute("cidF");
-
-                                        boolean pos = false;
-                                        if (clist != null) {
-                                            pos = true;
-                                        }
-
-                                        List<SubjectCategory> calist = (List<SubjectCategory>) request.getAttribute("categorySubject");
-                                        int index = 0;
-                                    %>
-                                    <h5 class="sub_fiter">Category</h5>
-                                    <c:forEach items="${requestScope.categorySubject}" var="c">
-                                        <%
-                                            boolean status = false;
-                                            if (pos) {
-                                                for (int i = 0; i < clist.length; i++) {
-                                                    if (clist[i] == calist.get(index).getId()) {
-                                                        status = true;//chỉ cần true là có checked từ phiên trước
-                                                    }
-
-                                                }
-                                            }
-                                        %>
-                                        <input type="checkbox" name="cid_checkbox" value="${c.id}" <c:if test="<%= pos && status%>">checked</c:if>/>${c.name}<br/>
-                                        <%
-                                            index++;
-                                        %>
-                                    </c:forEach>
-
-                                </div>
-                                <br>
-                                <%
-                                    boolean b = false;
-                                    boolean a = false;
-                                    String[] color = (String[]) request.getAttribute("featured");
-                                    if (color != null) {
-                                        for (int i = 0; i < color.length; i++) {
-                                            if (color[i].equals("Begin")) {
-                                                b = true;
-                                            }
-                                            if (color[i].equals("Advanced")) {
-                                                a = true;
-                                            }
-
-                                        }
-                                    }
-                                %>
-                                <!-- featured subjects -->
-                                <input type="checkbox" name="featured" value="Begin" <c:if test="<%= b%>">checked</c:if> class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btn-check-outlined">Begin</label><br>
-                                    <br>
-                                    <input type="checkbox" name="featured" value="Advanced" <c:if test="<%= a%>">checked</c:if>  class="btn-check" id="btn-check-2-outlined" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="btn-check-2-outlined">Advanced</label><br>
-                                    <br>
-                                    <button class ="btn btn-outline-success" type="submit">Search</button>
-                                    <input id="pageing" type="hidden" name="page" value="${requestScope.page}">
-                                <!--cần xem lại nếu cần type="submit"  onclick="document.getElementById('search-bar').submit()" -->
-                            </form>
-                        </div>
-
-                    </div>  
-                </div>
 
             </div>
-
-        </div>
-        <br/>
-        <div class="paginatedly">
+            <br/>
+            <div class="paginatedly">
             <c:set var="page" value="${requestScope.page}"/>
             <div class="pagination">
 

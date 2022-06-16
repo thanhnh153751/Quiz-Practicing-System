@@ -12,7 +12,8 @@ import java.text.SimpleDateFormat;
  *
  * @author hongd
  */
-public class Post{
+public class Post {
+
     private int id;
     private int cid;
     private String post_title;
@@ -22,11 +23,13 @@ public class Post{
     private Date update_date;
     private String contact;
     private String thumbnail;
-    
+    private int status;
+    private int view_count;
+
     public Post() {
     }
 
-    public Post(int id, int cid, String post_title, String biref, String details, String author, Date update_date, String contact, String thumbnail) {
+    public Post(int id, int cid, String post_title, String biref, String details, String author, Date update_date, String contact, String thumbnail, int status, int view_count) {
         this.id = id;
         this.cid = cid;
         this.post_title = post_title;
@@ -36,7 +39,27 @@ public class Post{
         this.update_date = update_date;
         this.contact = contact;
         this.thumbnail = thumbnail;
+        this.status = status;
+        this.view_count = view_count;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getView_count() {
+        return view_count;
+    }
+
+    public void setView_count(int view_count) {
+        this.view_count = view_count;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -89,6 +112,7 @@ public class Post{
     public Date getUpdate_date() {
         return update_date;
     }
+
     public String getDateFormat() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = formatter.format(this.update_date);
@@ -115,9 +139,4 @@ public class Post{
         this.thumbnail = thumbnail;
     }
 
-    
-
-    
-
-    
 }

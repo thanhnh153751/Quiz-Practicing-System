@@ -19,38 +19,60 @@ public class Subject {
     private String thumbnail;
     private String title;
     private String tagline;
-    private double origin_price;
-    private double sale_price;
     private String contact;
     private String description;
+    private double list_price;
+    private double sale_price;   
     private int status;
 
     public Subject() {
     }
 
-    public Subject(String thumbnail, String title, String tagline, double origin_price, double sale_price, String contact, String description) {
-       
+    public Subject(String thumbnail, String title, String tagline, String contact, String description, double list_price, double sale_price) {
         this.thumbnail = thumbnail;
         this.title = title;
         this.tagline = tagline;
-        this.origin_price = origin_price;
-        this.sale_price = sale_price;
         this.contact = contact;
         this.description = description;
-        
+        this.list_price = list_price;
+        this.sale_price = sale_price;
     }
-    public Subject(int id, int cid, String thumbnail, String title, String tagline, double origin_price, double sale_price, String contact, String description, int status) {
+
+    
+
+    public Subject(int id, int cid, String thumbnail, String title, String tagline, String contact, String description, double list_price, double sale_price, int status) {
         this.id = id;
         this.cid = cid;
         this.thumbnail = thumbnail;
         this.title = title;
         this.tagline = tagline;
-        this.origin_price = origin_price;
-        this.sale_price = sale_price;
         this.contact = contact;
         this.description = description;
+        this.list_price = list_price;
+        this.sale_price = sale_price;
         this.status = status;
     }
+    
+    
+
+    public double getList_price() {
+        return list_price;
+    }
+
+    public void setList_price(double list_price) {
+        this.list_price = list_price;
+    }
+
+    public double getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(double sale_price) {
+        this.sale_price = sale_price;
+    }
+
+    
+    
 
     public int getId() {
         return id;
@@ -90,22 +112,6 @@ public class Subject {
 
     public void setTagline(String tagline) {
         this.tagline = tagline;
-    }
-
-    public double getOrigin_price() {
-        return origin_price;
-    }
-
-    public void setOrigin_price(double origin_price) {
-        this.origin_price = origin_price;
-    }
-
-    public double getSale_price() {
-        return sale_price;
-    }
-
-    public void setSale_price(double sale_price) {
-        this.sale_price = sale_price;
     }
 
     public String getContact() {

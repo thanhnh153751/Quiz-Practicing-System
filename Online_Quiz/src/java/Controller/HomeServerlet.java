@@ -67,15 +67,21 @@ public class HomeServerlet extends HttpServlet {
         SubjectDAO sjd = new SubjectDAO();
         List<Subject> subjectList = sjd.loadSubjectOnHome();
         request.setAttribute("subjectList", subjectList);
-        List<Subject> subjectLast = sjd.loadLastSubject();
+        List<Subject> subjectLast = sjd.loadFeaturedSubject();
         request.setAttribute("subjectLast", subjectLast);
         //dành cho blog
  
         PostDAO pd = new PostDAO();
         List<Post> loadAllPost = pd.loadAllPost();
         List<Post> loadLatestPost = pd.loadLatestPost();
+        List<Post> loadHotPost = pd.loadHostPost();
         request.setAttribute("loadAllPost", loadAllPost);
         request.setAttribute("loadLatestPost", loadLatestPost);
+        request.setAttribute("loadHotPost", loadHotPost);
+        
+        
+        
+        
         request.getRequestDispatcher("/public/index.jsp").forward(request, response);
     }
 
@@ -91,6 +97,7 @@ public class HomeServerlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**
