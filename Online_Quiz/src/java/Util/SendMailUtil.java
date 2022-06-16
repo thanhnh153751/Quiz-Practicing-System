@@ -55,8 +55,8 @@ public class SendMailUtil {
     }
 
     public void sendHTMLEmail(final String to, final String subject, final String link) throws MessagingException {
-        final String account = "onlinequizo275@gmail.com";
-        final String password = "admin@123s";
+        final String account = "duongphhe151097@fpt.edu.vn";
+        final String password = "Phd@123a";
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
