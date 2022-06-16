@@ -167,9 +167,10 @@ $(document).ready(function () {
 
     if (status == "success" && message != undefined) {
 //        console.log(status + message);
-        $("#alert-login-modal").addClass("alert-success");
-        $("#alert-login-modal").text(message);
-        $("#alert-login-modal").show();
+        $("#alert-register-modal").addClass("alert-success");
+        $("#alert-register-modal").text(message);
+        $("#alert-register-modal").show();
+        $("#register-tab").tab('show');
         $('#staticBackdrop').modal('show');
 
     }

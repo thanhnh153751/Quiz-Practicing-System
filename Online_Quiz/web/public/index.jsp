@@ -30,7 +30,7 @@
                         <div class="slider">
                         <c:forEach items="${requestScope.loadLatestPost}" var="p">
                             <div class="card slider-item col-md-3" style="width: 16rem;">
-                                <a href="">
+                                <a href="/Online_Quiz/public/postdetails?id=${p.id}">
                                     <img src="${p.thumbnail}"
                                          class="card-img-top img-responsive" alt="...">
                                     <div class="card-body slider-item-body">
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="blog-card-body d-flex justify-content-between">
                                     <h6 class="card-title">${p.post_title}</h6>
-                                    <p class="date-update">${p.dateFormat}</p>
+                                    <p class="date-update">${p.update_date}</p>
                                 </div>
                             </a>
                         </div>

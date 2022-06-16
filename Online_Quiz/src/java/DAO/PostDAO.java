@@ -29,7 +29,7 @@ public class PostDAO extends DBContext {
                 postcategory.add(new PostCategory(
                         rs.getInt(1),
                         rs.getNString(2)));
-                
+
             }
             return postcategory;
         } catch (SQLException e) {
@@ -54,7 +54,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status")));
             }
             return loadPost;
         } catch (SQLException e) {
@@ -80,7 +81,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail"));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status"));
             }
         } catch (SQLException e) {
             System.out.println("\tPostDAO3: " + e);
@@ -126,7 +128,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status")));
             }
             return searchResult;
         } catch (SQLException e) {
@@ -152,7 +155,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")
+                        rs.getString("thumbnail"),
+                        rs.getInt("status")
                 ));
             }
             return loadAllPost;
@@ -179,7 +183,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")
+                        rs.getString("thumbnail"),
+                        rs.getInt("status")
                 ));
             }
             return loadLatestPost;
@@ -188,8 +193,7 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-    
-    
+
     public List<Post> paging(int check) {
         List<Post> paging = new ArrayList<>();
         String query = "Select * from Post order by id desc offset ? rows fetch next 5 rows only";
@@ -207,7 +211,8 @@ public class PostDAO extends DBContext {
                         rs.getNString("author"),
                         rs.getDate("update_date"),
                         rs.getNString("contact"),
-                        rs.getString("thumbnail")));
+                        rs.getString("thumbnail"),
+                        rs.getInt("status")));
             }
             return paging;
         } catch (SQLException e) {
@@ -215,8 +220,8 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-    
-    public int countPost(){
+
+    public int countPost() {
         String query = "Select COUNT(*) from Post";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -228,5 +233,71 @@ public class PostDAO extends DBContext {
             System.out.println("\tPostDAO: " + e);
         }
         return 0;
+    }
+
+    public void inputPost(String post_title, String bief, String details, String author, String date, String contact, String category, int status) {
+        String query = "insert into Post(cid,post_title, biref, details,author,update_date,contact,  status)\n"
+                + "values(?,?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, category);
+
+            ps.setString(2, post_title);
+            ps.setString(3, bief);
+            ps.setString(4, details);
+            ps.setString(5, author);
+
+            ps.setString(6, date);
+
+            ps.setString(7, contact);
+
+            ps.setInt(8, status);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void EditPost(String post_title, String bief, String details, String category, int status, int id) {
+        String query = "update Post set cid=?, post_title = ?, biref = ?, details = ?, status = ? where id=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, category);
+            ps.setString(2, post_title);
+            ps.setString(3, bief);
+            ps.setString(4, details);
+//            ps.setString(4, thumbnail);
+            ps.setInt(5, status);
+            ps.setInt(6, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void changestatus(int id, int status) {
+        String query = "update Post set status = ? where id =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            if (status == 0) {
+                ps.setInt(1,1);
+
+            }
+            if (status == 1) {
+                ps.setInt(1,0);
+
+            }
+            ps.setInt(2, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static void main(String[] args) {
+        PostDAO dao = new PostDAO();
+        System.out.println(dao.loadPostCategory());
     }
 }

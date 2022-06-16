@@ -5,25 +5,28 @@
  */
 package Controller;
 
-import DAO.SubjectDAO;
-import Model.Subject;
-import Model.SubjectCategory;
-
+import DAO.OrderDAO;
+import Model.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
- * @author THANH
+ * @author PREDATOR
  */
-@WebServlet(name = "SubjectDetailController", urlPatterns = {"/public/subjectdetail"})
-public class SubjectDetailController extends HttpServlet {
+@WebServlet(name = "MyRegistrationsController", urlPatterns = {"/public/myregistrations"})
+public class MyRegistrationsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +40,15 @@ public class SubjectDetailController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SubjectDetailController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SubjectDetailController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
+        OrderDAO dao = new OrderDAO();
+        List<Order> listO = dao.Order();
+        request.setAttribute("listO", listO);
+        request.getRequestDispatcher("/public/myregistrations.jsp").forward(request, response);
+//      
+//        List<Order> listO = dao.order(aid, registration_time, subject, Package, totalcost, status, valid_from, valid_to, thumbnail);
+//        request.setAttribute("listO", listO);
+//        response.sendRedirect("/Online_Quiz/public/myregistrations");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,21 +63,10 @@ public class SubjectDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SubjectDAO sd = new SubjectDAO();
-        System.out.println("VCLLLLLLLLLLLLLLLLLLLLLLLL");
-        List<SubjectCategory> categorySubject = sd.loadAllSubjectCategory();
-        request.setAttribute("categorySubject", categorySubject);
-        
-        
-        String id_raw = request.getParameter("ids");
-        try {
-            int id = Integer.parseInt(id_raw);
-            Subject s = sd.loadSubjectDetail(id);
-            
-            request.setAttribute("subject", s);
-            request.getRequestDispatcher("/public/subjectDetail.jsp").forward(request, response);
-        } catch (Exception e) {
-        }
+        OrderDAO dao = new OrderDAO();
+        List<Order> listO = dao.Order();
+        request.setAttribute("listO", listO);
+        request.getRequestDispatcher("/public/myregistrations.jsp").forward(request, response);
     }
 
     /**

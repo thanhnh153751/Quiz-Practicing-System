@@ -22,11 +22,12 @@ public class Post{
     private Date update_date;
     private String contact;
     private String thumbnail;
-    
+    private int status;
+
     public Post() {
     }
 
-    public Post(int id, int cid, String post_title, String biref, String details, String author, Date update_date, String contact, String thumbnail) {
+    public Post(int id, int cid, String post_title, String biref, String details, String author, Date update_date, String contact, String thumbnail, int status) {
         this.id = id;
         this.cid = cid;
         this.post_title = post_title;
@@ -36,6 +37,7 @@ public class Post{
         this.update_date = update_date;
         this.contact = contact;
         this.thumbnail = thumbnail;
+        this.status = status;
     }
 
     public int getId() {
@@ -89,11 +91,6 @@ public class Post{
     public Date getUpdate_date() {
         return update_date;
     }
-    public String getDateFormat() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = formatter.format(this.update_date);
-        return strDate;
-    }
 
     public void setUpdate_date(Date update_date) {
         this.update_date = update_date;
@@ -115,9 +112,14 @@ public class Post{
         this.thumbnail = thumbnail;
     }
 
-    
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+ 
     
-
     
 }

@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 11, 2022, 3:28:31 PM
+    Author     : PREDATOR
+*/
+
+.main-form{
+    display: flex;
+    
+    margin-top: 30px;
+}.form{
+    border: 3px solid blue;
+    width: 450px;
+    height: 480px;
+    display: flex;
+    padding-left: 15px;
+    flex-direction: column;
+    background: #ffffff;
+}
+h2{
+    padding-bottom: 20px;
+}
+
+#subject, #number, #question, #group{
+    width: 200px;
+}
+
+#practice-btn{
+    width: 100px;
+    height: 30px;
+    padding-bottom: 10px;
+    background-color: #d0d0d0;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid #666666;
+}
+input{
+    border: 1px solid #000;
+}
+
+#practice-btn:hover{
+    transform: scale(1.05);
+}
