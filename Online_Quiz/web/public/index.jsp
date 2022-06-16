@@ -39,6 +39,22 @@
                                 </a>
                             </div>
                         </c:forEach>
+                        <!--add-->
+                        <c:forEach items="${requestScope.subjectLast}" var="p"> 
+                            <div class="card slider-item col-md-3" style="width: 16rem;">
+                                <a href="">
+                                    <img src="${p.thumbnail}"
+                                         class="card-img-top img-responsive" alt="...">
+                                    <div class="card-body slider-item-body">
+                                        <h6 class="card-title">${p.title}</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                        </c:forEach>
+                        
+                        <!--end-->
+                            
                     </div>
                 </div>
             </div>
