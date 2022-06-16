@@ -1,0 +1,106 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 14, 2022, 1:07:10 AM
+    Author     : hongd
+*/
+
+
+/* Css for quiz timer */
+.quiz-timer {
+    background-color: #358856;
+    height: 3rem;
+    color: #FFFFFF;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: auto;
+}
+
+h5 {
+    font-size: 35px;
+}
+
+
+/* Css for quiz form */
+.quiz-form {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+}
+
+.quiz-header {
+    /* font-size: 20px; */
+}
+
+.quiz-content img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.quiz-answser{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input {
+    cursor: pointer;
+}
+
+.input input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.input span {
+    padding: 4px 0px;
+    border: 1px solid #2C9E4B;
+    display: inline-block;
+    color: #fff;
+    background-color: #37C75E;
+    width: 20rem;
+    height: 5rem;
+    padding-left: 10px;
+    border-radius: 3px;
+    margin-top: 7px;
+    text-transform: uppercase;
+}
+
+.input span:hover{
+    transform: scale(1.01);
+}
+
+.input input:checked+span {
+    border-color: #2C9E4B;
+    background-color: #2C9E4B;
+    color: #fff;
+}
+
+/* Css for quiz footer */
+
+.quiz-footer{
+    background-color: #358856;
+    padding: 1rem;
+}
+
+.quiz-footer input{
+    border: 2px solid #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    background-color: #358856;
+    color: #fff;
+}
+
+.quiz-footer input:hover{
+    background-color: #2C9E4B;
+}
+
+.btn-hide{
+    visibility: hidden;
+}

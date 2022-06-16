@@ -129,25 +129,33 @@ $(document).ready(function () {
                 .end();
     });
 
-    function getUrlParameter(sParam) {
-        var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
-        for (i = 0; i < sURLVariables.length; i++) {
-            sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] === sParam) {
-                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-            }
-        }
-        return false;
-    }
-    ;
 
-    let status = getUrlParameter('status');
-    let message = getUrlParameter('message');
-    if (status == "success" && message != undefined) {
+    function findGetParameter(parameterName) {
+        var result = null,
+                tmp = [];
+        location.search
+                .substr(1)
+                .split("&")
+                .forEach(function (item) {
+                    tmp = item.split("=");
+                    if (tmp[0] === parameterName)
+                        result = decodeURIComponent(tmp[1]);
+                });
+        return result;
+    }
+
+    let status = findGetParameter('status');
+    let message = findGetParameter('message');
+    let type = findGetParameter('type');
+
+
+    if (status === "success" && message !== undefined && type === "signin") {
 //        console.log(status + message);
+        $("#alert-login-modal").addClass("alert-success");
+        $("#alert-login-modal").text(message);
+        $("#alert-login-modal").show();
+        $('#staticBackdrop').modal('show');
+    } else if (status === "success" && message !== undefined && type === "register") {
         $("#alert-login-modal").addClass("alert-success");
         $("#alert-login-modal").text(message);
         $("#alert-login-modal").show();
