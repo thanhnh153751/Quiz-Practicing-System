@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("/common/login.jsp").forward(request, response);
-
+        
     }
 
     /**
@@ -83,11 +83,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String hash = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-
+        
         AccountDAO dao = new AccountDAO();
-
+        
         Account a = dao.login(email, hash);
-
+        
         if (a == null || a.getStatus() == 0) {
             Mess mess = new Mess("danger", "Wrong email or password!!!");
             Gson gson = new Gson();
@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             HttpSession Session = request.getSession();
             Session.setAttribute("acc", a);
-            response.sendRedirect(request.getContextPath() + "/public/home");
+//            response.sendRedirect(request.getContextPath() + "/public/home");
         }
     }
 

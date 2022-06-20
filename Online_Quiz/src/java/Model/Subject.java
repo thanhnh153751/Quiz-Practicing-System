@@ -242,18 +242,9 @@ public class Subject {
         this.status = status;
     }
 
-    public double getOrigin_price() {
-        return origin_price;
-    }
 
-    public void setOrigin_price(double origin_price) {
-        this.origin_price = origin_price;
-    }
 
-    @Override
-    public String toString() {
-        return "Subject{" + "id=" + id + ", cid=" + cid + ", thumbnail=" + thumbnail + ", title=" + title + ", tagline=" + tagline + ", origin_price=" + origin_price + ", sale_price=" + sale_price + ", contact=" + contact + ", description=" + description + ", status=" + status + ", sub=" + sub + '}';
-    }
+   
 
     
     

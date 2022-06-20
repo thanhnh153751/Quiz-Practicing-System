@@ -63,7 +63,7 @@ public class SubjectDAO extends DBContext {
 
     public List<Subject> pagingSubject(int index) {
         List<Subject> loadSubject = new ArrayList<>();
-        String query = "select s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid order by id asc offset ? rows fetch next 8 rows only";
+        String query = "select s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid where p.name like 'unlimited' order by id asc offset ? rows fetch next 8 rows only";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, (index-1)*8);//8 items/page
@@ -141,7 +141,7 @@ public class SubjectDAO extends DBContext {
 
     public Subject loadSubjectDetail(int id) {//tải lên subjecte detail có trong db
         Subject loadSubject = new Subject();
-        String query = "select s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid where s.id=" + id;
+        String query = "select s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid where p.name like 'unlimited' and s.id=" + id;
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -238,9 +238,9 @@ public class SubjectDAO extends DBContext {
 
     public List<Subject> getListSubjectBySearch(String key, int[] subjectId, String[] featured) {
         List<Subject> list = new ArrayList<>();
-        String sql = "select s.*,sc.name ,p.list_price,p.sale_price from Subject s inner join Subject_Sub_Category sc on s.cid = sc.id inner join Package p on s.id = p.sid";
+        String sql = "select s.*,sc.name ,p.list_price,p.sale_price from Subject s inner join Subject_Sub_Category sc on s.cid = sc.id inner join Package p on s.id = p.sid ";
         if (key != null || (subjectId != null) || featured != null) {
-            sql += " where ";
+            sql += " where (p.name like 'unlimited') and";
             if (subjectId != null) {
                 for (int i = 0; i < subjectId.length; i++) {
                     if (i == 0) {

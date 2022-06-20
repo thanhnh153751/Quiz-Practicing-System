@@ -15,10 +15,10 @@
         <title>JSP Page</title>
 
         <style>
-           body {font-family: Arial, Helvetica, sans-serif;}
+            body {font-family: Arial, Helvetica, sans-serif;}
 
             /* The Modal (background) */
-           .sreg .modal {
+            .sreg .modal {
                 display: none; /* Hidden by default */
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
@@ -33,7 +33,7 @@
             }
 
             /* Modal Content */
-           .sreg .modal-content {
+            .sreg .modal-content {
                 background-color: #fefefe;
                 margin: auto;
                 padding: 20px;
@@ -42,15 +42,15 @@
             }
 
             /* The Close Button */
-           .sreg .close {
+            .sreg .close {
                 color: #aaaaaa;
                 float: right;
                 font-size: 28px;
                 font-weight: bold;
             }
 
-           .sreg .close:hover,
-           .sreg .close:focus {
+            .sreg .close:hover,
+            .sreg .close:focus {
                 color: #000;
                 text-decoration: none;
                 cursor: pointer;
@@ -58,10 +58,10 @@
         </style>
     </head>
     <body>
-        
+
 
         <!-- Trigger/Open The Modal -->
-        
+
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -71,39 +71,46 @@
                 <span class="close">&times;</span>
                 <div class="col">
                     <div id="message">
-                        
+
                     </div>
                     <h3 style="color: green" id="arler"></h3>
                 </div>
             </div>
+            <script>
+                function login() {
+                    $('#staticBackdrop').modal('show');
+                    // $("#register-tab").tab('show');
 
+                };
+            </script>
         </div>
         <script>
 // Get the modal
-var modal = document.getElementById("myModal");
+            var modal = document.getElementById("myModal");
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+            var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+            var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
     </body>
+    <script src="../js/index.js"></script>
 </html>

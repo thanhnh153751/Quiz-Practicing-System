@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="../css/listSubject.css">
         <link rel="stylesheet" href="../css/nav.css">
 
-        <!--<script src="../js/index.js"></script>-->
+        
         <title>JSP Page</title>
     </head>
     <body>
@@ -72,7 +72,7 @@
                                                     <c:if test="${s.sale_price == 0}"><span><fmt:formatNumber maxIntegerDigits = "4" value="${s.list_price}" type="currency" currencySymbol="$"/></span></c:if>
                                                 </div>
                                                 <div>
-                                                    <span class="btn btn-outline-primary">Register</span>
+                                                    <span class="btn btn-outline-primary"  onclick="loadData()" >Register</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -148,4 +148,5 @@
     <script src="../js/boostrap/bootstrap.min.js"></script>
     <script src="../js/slick/slick.min.js"></script>
     <script src="../js/index.js"></script>
+
 </html>

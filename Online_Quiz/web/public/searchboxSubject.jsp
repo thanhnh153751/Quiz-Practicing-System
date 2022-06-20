@@ -188,7 +188,7 @@
                     <c:forEach items="${requestScope.featuredSubject}" var="s">
                         <div class="col-4">
                             <article class="course-item grid-style">
-                                <a title="title name" href="public/subjectdetail?ids=${s.id}" class="wrap-course-item">
+                                <a title="title name" href="subjectdetail?ids=${s.id}" class="wrap-course-item">
                                     <div class="course-thumb ">
                                         <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
                                     </div>

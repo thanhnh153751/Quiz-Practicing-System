@@ -52,7 +52,7 @@
                                     <div class="course-thumb ">
                                         <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
                                     </div>
-
+                                    <input type="hidden" id="sid" value="${s.id}" >
                                     <div class="view-content">
                                         <h3 class="course-title">${s.title}</h3>
 
@@ -121,13 +121,16 @@
     <script src="../js/index.js"></script>
     <script src="../js/subjectdetails.js"></script>
     <script>
-                                                    $(document).ready(function () {
+                                                    $(document).ready(function () {//chuyển sid về sever
                                                         $('#myBtn').click(function () {
-
+                                                            var sid = document.getElementById('sid').value;
                                                             $.ajax({
                                                                 url: "/Online_Quiz/public/subjectregister",
                                                                 type: "get", //send it through get method
-                                                                
+                                                                data: {
+                                                                    ids: sid,
+
+                                                                },
                                                                 success: function (response) {
                                                                     $('#message').html(response);
 
@@ -143,23 +146,23 @@
                                                     });
                                                     function getData() {
                                                         var a = $("input[type='radio'][name='package']:checked").val();
-                                                        
+
                                                         $.ajax({
                                                             url: "/Online_Quiz/public/subjectregister",
                                                             type: "get", //send it through get method
                                                             data: {
                                                                 idpac: a,
-                                                                
+
                                                             },
                                                             success: function (response) {
-                                                                document.getElementById("arler").innerHTML=response;
+                                                                document.getElementById("arler").innerHTML = response;
                                                             },
                                                             error: function (xhr) {
                                                                 //Do Something to handle error
                                                             }
                                                         });
                                                     }
-                                                    
+
 
 
 

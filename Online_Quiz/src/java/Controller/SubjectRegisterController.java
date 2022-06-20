@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.OrderDAO;
+import DAO.OrderTDAO;
 import DAO.PackageDAO;
 import DAO.SubjectDAO;
 import Model.Account;
@@ -44,48 +45,52 @@ public class SubjectRegisterController extends HttpServlet {
         PrintWriter out = response.getWriter();
         PackageDAO d = new PackageDAO();
         SubjectDAO sd = new SubjectDAO();
-        OrderDAO od = new OrderDAO();
+        OrderTDAO od = new OrderTDAO();
         String id_raw = request.getParameter("ids");
         String id_pac_raw = request.getParameter("idpac");
         if (id_pac_raw != null) {
             int id_pac = Integer.parseInt(id_pac_raw);
             Package p = d.loadPackagesByPid(id_pac);
             Subject s = sd.loadSubjectDetail(p.getSid());
+
             HttpSession session = request.getSession();
             Account x = (Account) session.getAttribute("acc");
-            od.addOrder(x, s, p);
-            
-            out.println("succesfully");
-            
-        }
-        else
-        try {
-            //int id = Integer.parseInt(id_raw);
-            List<Model.Package> packages = d.loadPackagesByCid(1);
-            request.setAttribute("packages", packages);
+            if (x != null) {
+                od.addOrder(x, s, p);
+                out.println("succesfully");
+            } else {
+                out.println("Please log in to your account");
+                out.println("<div class=\"auth\">\n"
+                        + "            <input type=\"button\" value=\"Login\" id=\"nav-login\" onclick=\"login()\">"
+                        + "        </div>");
+            }
 
-            
+        } else {
+            try {
+                //int id = Integer.parseInt(id_raw);
+                List<Model.Package> packages = d.loadPackagesByCid(Integer.parseInt(id_raw));
+                request.setAttribute("packages", packages);
 
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<h4>select the appropriate subscription package</h4>");
-            out.println("<fmt:setLocale value = \"en_US\"/>");
-            for (Package pac : packages) {
-                // out.println("<p>" + pac.getName() + "</p>");
-                if (pac.getSale_price() != 0) {
-                    out.println("<span style=\"color: red;\" >Sale :" + pac.getSale_price() + "$</span>");
-                } else {
-                    out.println("<span>" + pac.getList_price() + "$</span>");
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<h4>select the appropriate subscription package</h4>");
+                out.println("<fmt:setLocale value = \"en_US\"/>");
+                for (Package pac : packages) {
+                    // out.println("<p>" + pac.getName() + "</p>");
+                    if (pac.getSale_price() != 0) {
+                        out.println("<span style=\"color: red;\" >Sale :" + pac.getSale_price() + "$</span>");
+                    } else {
+                        out.println("<span>" + pac.getList_price() + "$</span>");
+                    }
+
+                    out.println("<input type=\"radio\" id=\"html\" name=\"package\" value=\"" + pac.getId() + "\"" + pac.getId() + "\">");
+                    out.println("<label for=\"vehicle1\"> " + pac.getName() + "</label><br>");
+
                 }
 
-                out.println("<input type=\"radio\" id=\"html\" name=\"package\" value=\"" + pac.getId() + "\"" + pac.getId() + "\">");
-                out.println("<label for=\"vehicle1\"> " + pac.getName() + "</label><br>");
+                out.println("<a id=\"myBtn2\" class=\"btn btn-outline-primary\" onclick=\"getData()\" > Register</a>");
 
+            } catch (Exception e) {
             }
-            
-            
-            out.println("<a id=\"myBtn2\" class=\"btn btn-outline-primary\" onclick=\"getData()\" > Register</a>");
-
-        } catch (Exception e) {
         }
 
     }

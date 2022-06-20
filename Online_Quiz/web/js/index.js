@@ -43,7 +43,7 @@ $(document).ready(function () {
             method: "POST",
             data: {
                 email: $("#login-email").val(),
-                password: $("#login-pwd").val(),
+                password: $("#login-pwd").val()
             },
             success: function (result) {
                 if (result != undefined && result.status === "danger") {
@@ -51,7 +51,7 @@ $(document).ready(function () {
                     $("#alert-login-modal").text(result.mess);
                     $("#alert-login-modal").show();
                 } else {
-                    window.location.replace("/Online_Quiz/public/home");
+                    window.location.reload();
                 }
 
             }
