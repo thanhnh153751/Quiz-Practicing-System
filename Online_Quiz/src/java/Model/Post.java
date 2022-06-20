@@ -139,7 +139,7 @@ public class Post {
         this.thumbnail = thumbnail;
     }
 
-
+   
  
     
     

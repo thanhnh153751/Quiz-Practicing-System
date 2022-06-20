@@ -67,7 +67,7 @@
                             </tbody>
                         </table>
 
-                        <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to Subject Register</span></div>
+                                        <div class="back-to-shop"><a href="/Online_Quiz/common/subjectRegister.jsp">&leftarrow;</a><span class="text-muted">Back to Subject Register</span></div>
 
                     </div>
 
@@ -95,6 +95,9 @@
                 </div>
             <!--</form>-->
         </div>
+                                        <div class="so_si">
+                        <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
+                    </div>
 
 
     </body>

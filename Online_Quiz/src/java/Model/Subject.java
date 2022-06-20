@@ -49,6 +49,15 @@ public class Subject {
         this.title = title;
         
     }
+    public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
+        this.id = id;
+        this.title = title;
+        this.contact = contact;
+        this.status = status;
+        this.cname = cname;
+        this.csname = scname;
+        this.numoflesson = numoflesson;
+    }
     public Subject(int id,int lid, String title, String simulation,String level,int numoffquess,int ducation,int passrate ) {
         this.id = id;
         this.lid = lid;
@@ -101,6 +110,14 @@ public class Subject {
 
     public void setSale_price(double sale_price) {
         this.sale_price = sale_price;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 
     
@@ -244,7 +261,6 @@ public class Subject {
 
 
 
-   
 
     
     

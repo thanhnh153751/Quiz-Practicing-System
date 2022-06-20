@@ -17,6 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import static jdk.nashorn.internal.runtime.Debug.id;
 
+import Model.Account;
+import Model.Subject;
+import Model.Package;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author PREDATOR
@@ -139,21 +146,5 @@ public class OrderDAO extends DBContext {
    
 
 
-
-/**
- *
- * @author THANH
- */
-
-
-
-    public static void main(String[] args) {
-//        OrderDAO o = new OrderDAO();
-//        Account c = new Account(1, "nguyen huu", "thsdf@dfd.com", "04545", "123456", true, 0, "");
-//        Subject s = new Subject(1, 1, "", "lap trin", "tag", "thasd", "sadasd", 123, 0321, 1);
-//        Package p = new Package(1, 1, "unlimit",5 , 0, 3434, 1, "casdasd");
-//        
-//        o.addOrder(c, s, p);
-    }
 }
 

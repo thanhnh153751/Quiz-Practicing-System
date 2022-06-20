@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/blogs.css">
     <!--<script src="../js/index.js"></script>-->
-    <title>blogs
-    </title>
+    <title>Blogs</title>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
