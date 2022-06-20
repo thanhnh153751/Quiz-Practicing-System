@@ -3,7 +3,7 @@
     Created on : Jun 11, 2022, 6:41:06 PM
     Author     : PREDATOR
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -89,8 +89,15 @@
                                             <dl class="item-property">
                                                 <dt>Status</dt>
                                                 <dd><p>
-                                                        ${details.status}
-                                                    </p></dd>
+                                                <c:if test="${details.status == 1 }">
+                                                    <td>Active</td>
+
+                                                </c:if>
+                                                <c:if test="${details.status == 0}">
+                                                    <td>Inactive</td>
+
+                                                </c:if>
+                                                </p></dd>
                                             </dl>
                                             <hr>
                                             <a href="/Online_Quiz/marketing/postdetails?do=add"> Input </a>

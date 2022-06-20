@@ -98,7 +98,7 @@ public class QuizHandleController extends HttpServlet {
             Question currentQuestion = questionList.get(questionIndex - 1);
             QuizTake quiztake = quiz.getQuizTake(account.getId());
             List<Answer> answerList = quiz.getAnswerList(quiz_id, questionIndex);
-
+            
             QuizTakeDetails qtDetails = quiz.getQtDetails(take_id, questionIndex);
 
             request.setAttribute("quiz_take_details", qtDetails);

@@ -149,12 +149,7 @@
 
 
 
-                </c:forEach>
 
-                                </div>
-                            </a>
-                        </div>
-                    </div>
                 </c:forEach>
 
                 <div class="col-md-12 d-flex justify-content-center show-more-btn">

@@ -66,7 +66,7 @@
                                         <td>${o.numoffquess} </td>
                                         <td>${o.ducation}p </td>
                                         <td>${o.passrate}%</td>
-                                        <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Go Quiz Handle</span></a></td>
+                                        <td><a href="/Online_Quiz/learning/quiztake?quiz_id=4" class="btn btn-danger" data-toggle="modal"><span>Go Quiz Handle</span></a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
