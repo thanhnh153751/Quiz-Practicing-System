@@ -59,13 +59,21 @@ $(document).ready(function () {
                 quiz_take: findGetParameter('quiz_take')
             },
             success: function (result) {
-                let minutes = Math.floor(result / 60);
+                console.log(result);
+                if (result === "redirect") {
+                    window.location = "/Online_Quiz/learning/quizsubmit?quiz_take=" + findGetParameter('quiz_take');
+                } else {
+                    let minutes = Math.floor(result / 60);
+                    let seconds = Math.floor(result % 60);
 //                let seconds = Math.floor((result % (1000 * 60)) / 1000);
-                $('#timer').html(`${minutes}mins`);
-                if (result < 0) {
-                    clearInterval(x);
-                    $('#timer').html(`EXPIRED`);
+                    $('#timer').html(`${minutes}m:${seconds}s`);
+                    if (result < 0) {
+                        clearInterval(x);
+                        $('#timer').html(`EXPIRED`);
+                        window.location = "/Online_Quiz/learning/quizsubmit?quiz_take=" + findGetParameter('quiz_take');
+                    }
                 }
+
 
             }
         });
@@ -74,6 +82,15 @@ $(document).ready(function () {
     }, 1000)
 
 
+
+    $("#btn-submit").click(function () {
+        $('#exampleModalCenter').modal('show');
+    });
+
+    $("#modal-btn-submit").click(function () {
+        console.log("submit");
+        window.location = "/Online_Quiz/learning/quizsubmit?quiz_take=" + findGetParameter('quiz_take');
+    });
 
 
     function findGetParameter(parameterName) {
