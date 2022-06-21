@@ -14,6 +14,9 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link href="../css/postdetails.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
         <style>
             .gallery-wrap .img-big-wrap img {
                 height: 450px;
@@ -52,7 +55,7 @@
         <form action="/marketing/postdetails" method="post">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <div class="container">
                             <div class="card">
                                 <div class="row">
@@ -67,6 +70,26 @@
                                     </aside>
                                     <aside class="col-sm-7">
                                         <article class="card-body p-5">
+                                            <div style="float: right; font-size: 28px">
+                                                <a href="/Online_Quiz/marketing/postdetails?do=add">
+                                                    <i class="fa-solid fa-plus"></i> 
+                                                </a>
+                                                &nbsp;&nbsp;
+                                                <a href="/Online_Quiz/marketing/postdetails?do=edit&id=${details.id}"> <i class="fas fa-edit"></i></a>
+                                                &nbsp;&nbsp;
+                                                <c:if test="${details.status == 1 }">
+                                                    <a href="/Online_Quiz/marketing/postdetails?do=changing&check=0&id=${details.id}&status=${details.status}"><i class="fas fa-flag" style="color: red"></i></a>
+
+
+                                                </c:if>
+                                                <c:if test="${details.status == 0}">
+                                                    <a href="/Online_Quiz/marketing/postdetails?do=changing&check=0&id=${details.id}&status=${details.status}"><i class="fas fa-flag" style="color: green"></i></a>
+
+
+                                                </c:if>
+                                            </div>
+                                            <br>
+                                            <br>
                                             <dl class="item-property">
                                                 <dt>Title</dt>
                                                 <dd><p>
@@ -89,7 +112,7 @@
                                             <dl class="item-property">
                                                 <dt>Status</dt>
                                                 <dd><p>
-                                                <c:if test="${details.status == 1 }">
+                                                        <c:if test="${details.status == 1 }">
                                                     <td>Active</td>
 
                                                 </c:if>
@@ -100,8 +123,7 @@
                                                 </p></dd>
                                             </dl>
                                             <hr>
-                                            <a href="/Online_Quiz/marketing/postdetails?do=add"> Input </a>
-                                            <a href="/Online_Quiz/marketing/postdetails?do=edit&id=${details.id}"> Edit </a>
+
                                         </article> <!-- card-body.// -->
                                     </aside> <!-- col.// -->
                                 </div> <!-- row.// -->

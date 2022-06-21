@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.DAO;
+import Model.Level;
 import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,11 +62,17 @@ public class SimulationExamsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
         String didStr = request.getParameter("did");
         int did = -1;
         if (didStr != null) {
             did = Integer.parseInt(didStr);
+        }
+        String lidStr = request.getParameter("lid");
+        int lid = -1;
+        if (didStr != null) {
+            lid = Integer.parseInt(lidStr);
         }
         String search = request.getParameter("search");
         String txt = request.getParameter("index");
@@ -75,16 +82,18 @@ public class SimulationExamsController extends HttpServlet {
         } else {
             index = Integer.parseInt(txt);
         }
-        List<Subject> list = dao.getAllSimulation(did,search,index);
+        List<Subject> list = dao.getAllSimulation(did,lid,search,index);
         List<Subject> list2 = dao.getAllSimulationByname();
-        int numpage = dao.totalPagesimulation(did, search);
+        List<Level> listlevel = dao.getAllSimulationBylevel();
+        int numpage = dao.totalPagesimulation(did,lid, search);
         
-        
+        request.setAttribute("listbylevel", listlevel);
         request.setAttribute("listbysubject", list2);
         request.setAttribute("listS", list);
         request.setAttribute("numpage", numpage);
         request.setAttribute("index", index);
         request.setAttribute("did", did);
+        request.setAttribute("lid", lid);
         request.setAttribute("ts", search);
         request.getRequestDispatcher("/common/SimulationExams.jsp").forward(request, response);
     }

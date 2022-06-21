@@ -66,21 +66,36 @@ public class PostDetailController extends HttpServlet {
                 request.getRequestDispatcher("/marketing/inputPost.jsp").forward(request, response);
 
             } else {
+
                 String post_title = request.getParameter("posttitle");
+                System.out.println(post_title);
                 String brif = request.getParameter("biref");
+                System.out.println(brif);
+
                 String details = request.getParameter("details");
+                System.out.println(details);
+
                 String author = request.getParameter("author");
+                System.out.println(author);
 
                 String contact = request.getParameter("contact");
+                System.out.println(contact);
 
 //            String thumbail = request.getParameter("thumbail");
                 String category = request.getParameter("category");
+                System.out.println(category);
+
                 String status_raw = request.getParameter("status");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                System.out.println(status_raw);
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date();
                 String date1 = String.valueOf(dateFormat.format(date));
+                System.out.println(date1);
+
                 post.inputPost(post_title, brif, details, author, date1, contact, category, Integer.parseInt(status_raw));
-                request.getRequestDispatcher("/public/home").forward(request, response);
+                response.sendRedirect("/Online_Quiz/marketing/postdetails");
+
             }
         } else if (service.equalsIgnoreCase("list")) {
 
@@ -121,11 +136,18 @@ public class PostDetailController extends HttpServlet {
         } else if (service.equalsIgnoreCase("changing")) {
 
             String pid_raw = request.getParameter("id");
-           String status_raw = request.getParameter("status");
-           post.changestatus(Integer.parseInt(pid_raw), Integer.parseInt(status_raw));
+            String status_raw = request.getParameter("status");
+            String check_raw = request.getParameter("check");
 
-            response.sendRedirect("/Online_Quiz/marketing/postdetails");
-            return;
+            post.changestatus(Integer.parseInt(pid_raw), Integer.parseInt(status_raw));
+            if (check_raw == null) {
+                response.sendRedirect("/Online_Quiz/marketing/postdetails");
+                return;
+            } else {
+                response.sendRedirect("/Online_Quiz/marketing/postdetails?do=details&id="+pid_raw);
+
+            }
+
         }
     }
 

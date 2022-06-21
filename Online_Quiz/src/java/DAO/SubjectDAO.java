@@ -223,7 +223,7 @@ public class SubjectDAO extends DBContext {
             }
             return loadSubject;
         } catch (SQLException e) {
-            System.out.println("\tPostDAO: " + e);
+            System.out.println("\tSubjectDAO: " + e);
         }
         return null;
     }
@@ -314,8 +314,9 @@ public class SubjectDAO extends DBContext {
 //        String[] featured = new String[]{"demo"};
 //        int[] subjectId = {1};
 //        String[] featured = {};
-//        List<Subject> list = d.getListSubjectBySearch("", subjectId, featured);
-//        System.out.println(list.size());
+       List<Subject> list = d.loadSubjectOnHome();
+  //     System.out.println("??????????????????????");
+        //System.out.println(list.size());
 //        for (Subject s : list) {
 //            
 //            System.out.println(s.getTitle());

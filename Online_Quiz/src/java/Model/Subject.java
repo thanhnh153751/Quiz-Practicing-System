@@ -30,6 +30,7 @@ public class Subject {
     private String csname;
     private int numoflesson;
     
+    private int levelid;
     private String simulation;
     private String level;
     private int numoffquess;

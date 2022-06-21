@@ -37,7 +37,15 @@
                                 <option value="${D.id}" ${D.id == did ?"selected":""}>${D.title}</option>
                             </c:forEach>
                         </select>
+                            
+                        <select name="lid" onchange="this.form.submit()">
+                            <option value="-1">------------------Level------------------</option>
+                            <c:forEach items="${listbylevel}" var="D">
+                                <option value="${D.id}" ${D.id == lid ?"selected":""}>${D.level}</option>
+                            </c:forEach>
+                        </select>
                         <br>
+
 
                         <div class="input-group input-group-sm" style="padding-right:14px">
                             <input name="search" type="text" value="${ts}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
@@ -66,7 +74,7 @@
                                     <h2>Simulation<b>Exam</b></h2>
                                 </div>
                                 <div class="col-sm-2">
-                                    
+
 
                                 </div>
                             </div>
@@ -108,7 +116,7 @@
 
                         <ul class="pagination">
                             <c:forEach begin="1" end="${numpage}" var="i">
-                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="simulationexams?index=${i}&did=${did}&search=${ts}">${i}</a></li>
+                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="simulationexams?index=${i}&did=${did}&lid=${lid}&search=${ts}">${i}</a></li>
                                 </c:forEach>
                         </ul>
 
@@ -121,7 +129,7 @@
                 </div>
                 <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
             </div>
-                        
+
 
     </body>
 

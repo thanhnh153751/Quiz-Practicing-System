@@ -20,36 +20,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
         <link rel="stylesheet" href="../css/post.css"/>
         <script src="../js/post.js"></script>
         <title>Document</title>
+        <style>
+            .back-to-home{
+    margin-top: 4.5rem;
+}
+        </style>
     </head>
 
     <body>
-        <nav class="navbar">
-            <div class="brand">Quiz Online
-                <a href="#" onclick="openNav()"><i class="fa-solid fa-bars"></i></a>
-
-            </div>
-            <div class="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" placeholder="Search anything...">
-            </div>
-            <div class="auth">
-                <a href="./login.html">Login</a>
-                <a href="./register.html">Register</a>
-            </div>
-        </nav>
-
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="./admin.html">Dashboard</a>
-            <a href="/Online_Quiz/marketing/postdetails">Post</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
+       
 
         <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
         <div id="main">
@@ -57,9 +43,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-11"> <h1>List of Post</h1>
+                            <div class="col-md-10"> <h1>List of Post</h1>
                             </div>
-                            <div class="col-md-1" style=""> <a href="/Online_Quiz/marketing/postdetails?do=add">Add New Post</a>
+                            <div class="col-md-2" style=""> 
+                                <a href="/Online_Quiz/marketing/postdetails?do=add">Add New Post</a>
+
                             </div>
                         </div>
                     </div>
@@ -96,12 +84,14 @@
 
                                         <td><a href="/Online_Quiz/marketing/postdetails?do=details&id=${o.id}"><i class="fas fa-eye"></i></a> 
                                                 <c:if test="${o.status == 1 }">
-                                                <a href="/Online_Quiz/marketing/postdetails?do=changing&id=${o.id}&status=${o.status}"><i class="fas fa-flag" style="color: red"></i></a>
+                                                <a href="/Online_Quiz/marketing/postdetails?do=changing&id=${o.id}&status=${o.status}" 
+                                                   data-bs-toggle="modal" data-bs-target="#exampleModal${o.id}"><i class="fas fa-flag" style="color: red"></i></a>
 
 
                                             </c:if>
                                             <c:if test="${o.status == 0}">
-                                                <a href="/Online_Quiz/marketing/postdetails?do=changing&id=${o.id}&status=${o.status}"><i class="fas fa-flag" style="color: green"></i></a>
+                                                <a href="/Online_Quiz/marketing/postdetails?do=changing&id=${o.id}&status=${o.status}" 
+                                                   data-bs-toggle="modal" data-bs-target="#exampleModal${o.id}"><i class="fas fa-flag" style="color: green"></i></a>
 
 
                                             </c:if>
@@ -110,29 +100,50 @@
 
 
                                     </tr>
-                                </c:forEach>
+                                <div class="modal fade" id="exampleModal${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Acceptance</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Do You Want To Change Status?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                <a href="/Online_Quiz/marketing/postdetails?do=changing&id=${o.id}&status=${o.status}"  type="button" class="btn btn-primary">Yes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </c:forEach>
                             </tbody>
                         </table>
-<!--                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
+                                                <div class="back-to-home"><a href="/Online_Quiz/public/home">&leftarrow;</a><span class="text-muted">Back to Home</span></div>
 
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>-->
+                        <!--                        <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="#" aria-label="Next">
+                        
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>-->
                     </div>
                 </div>
             </div>

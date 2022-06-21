@@ -10,6 +10,7 @@ import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import Model.Account;
+import Model.Level;
 import Model.Subject;
 import Model.SubjectCategory;
 import Model.SubjectSubCategory;
@@ -384,7 +385,7 @@ public class DAO extends DBContext {
 //        }
 //        return arr;
 //    }
-    public List<Subject> getAllSimulation(int id, String quiz_name, int index) {
+    public List<Subject> getAllSimulation(int id,int lid, String quiz_name, int index) {
         List<Subject> list = new ArrayList<>();
         DAO dao = new DAO();
         String query = "select s.id,l.id, s.title,q.quiz_name, qul.[level],count(*)'numoffquess',q.duration,q.passrate from Subject s\n"
@@ -393,7 +394,7 @@ public class DAO extends DBContext {
                 + "                               join Quiz_Lesson ql on ld.id = ql.lesson_id\n"
                 + "                                join Quiz q on ql.quiz_id = q.id\n"
                 + "                                join Quiz_Level qul on q.level = qul.id\n"
-                + "                                join Question qus on q.id = qus.quiz_id where s.id between ? and ? and q.quiz_name like ?\n"
+                + "                                join Question qus on q.id = qus.quiz_id where s.id between ? and ? and qul.id between ? and ? and q.quiz_name like ?\n"
                 + "                               group by s.id, l.id, s.title,q.quiz_name, qul.[level],q.duration,q.passrate order by s.id offset ? rows fetch first 3 rows only";
         try {
             ps = connection.prepareStatement(query);
@@ -405,13 +406,20 @@ public class DAO extends DBContext {
                 ps.setInt(1, id);
                 ps.setInt(2, id);
             }
+            if (lid == -1) {
+                ps.setInt(3, 1);
+                ps.setInt(4, 3);
+            } else {
+                ps.setInt(3, lid);
+                ps.setInt(4, lid);
+            }
 
             if (quiz_name == null) {
-                ps.setString(3, "%" + "%");
+                ps.setString(5, "%" + "%");
             } else {
-                ps.setString(3, "%" + quiz_name + "%");
+                ps.setString(5, "%" + quiz_name + "%");
             }
-            ps.setInt(4, (index - 1) * 3);
+            ps.setInt(6, (index - 1) * 3);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Subject(rs.getInt(1),
@@ -420,7 +428,7 @@ public class DAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getInt(7) / 60000,
+                        rs.getInt(7),
                         rs.getInt(8)
                 ));
             }
@@ -451,7 +459,7 @@ public class DAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getInt(7) / 60000,
+                        rs.getInt(7),
                         rs.getInt(8)
                 ));
             }
@@ -482,8 +490,32 @@ public class DAO extends DBContext {
         }
         return list;
     }
+    public List<Level> getAllSimulationBylevel() {
+        List<Level> list = new ArrayList<>();
+        String query = "select q.level,qul.level from Subject s \n" +
+"                join Lesson l on s.id = l.sid\n" +
+"                join Lesson_Details ld on l.id = ld.lid\n" +
+"                join Quiz_Lesson ql on ld.id = ql.lesson_id\n" +
+"                join Quiz q on ql.quiz_id = q.id\n" +
+"                join Quiz_Level qul on q.level = qul.id\n" +
+"                join Question qus on q.id = qus.quiz_id\n" +
+"                group by q.level,qul.level";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Level(rs.getInt(1),
+                        rs.getString(2)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
 
-    public int totalPagesimulation(int id, String quiz_name) {
+
+    public int totalPagesimulation(int id, int lid, String quiz_name) {
 
         String query = "				select count(*) from Subject s\n"
                 + "                join Lesson l on s.id = l.sid\n"
@@ -491,7 +523,7 @@ public class DAO extends DBContext {
                 + "                join Quiz_Lesson ql on ld.id = ql.lesson_id\n"
                 + "                join Quiz q on ql.quiz_id = q.id\n"
                 + "                join Quiz_Level qul on q.level = qul.id\n"
-                + "				where s.id between ? and ? and q.quiz_name like ?";
+                + "				where s.id between ? and ? and qul.id between ? and ? and q.quiz_name like ?";
         int total = 0;
         DAO dao = new DAO();
         try {
@@ -504,10 +536,17 @@ public class DAO extends DBContext {
                 ps.setInt(1, id);
                 ps.setInt(2, id);
             }
-            if (quiz_name == null) {
-                ps.setString(3, "%" + "%");
+            if (lid == -1) {
+                ps.setInt(3, 1);
+                ps.setInt(4, 3);
             } else {
-                ps.setString(3, "%" + quiz_name + "%");
+                ps.setInt(3, lid);
+                ps.setInt(4, lid);
+            }
+            if (quiz_name == null) {
+                ps.setString(5, "%" + "%");
+            } else {
+                ps.setString(5, "%" + quiz_name + "%");
             }
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -522,8 +561,8 @@ public class DAO extends DBContext {
         return total;
     }
 
-    public static void main(String[] args) {
-        DAO dao = new DAO();
-        System.out.println(dao.totalPagesimulation(-1, ""));
-    }
+//    public static void main(String[] args) {
+//        DAO dao = new DAO();
+//        System.out.println(dao.getAllSimulation(0, 0, quiz_name, 0));
+//    }
 }

@@ -67,7 +67,7 @@
                             </tbody>
                         </table>
 
-                                        <div class="back-to-shop"><a href="/Online_Quiz/common/subjectRegister.jsp">&leftarrow;</a><span class="text-muted">Back to Subject Register</span></div>
+                                        <div class="back-to-shop"><a href="/Online_Quiz/public/listsubject">&leftarrow;</a><span class="text-muted">Back to Subject Register</span></div>
 
                     </div>
 

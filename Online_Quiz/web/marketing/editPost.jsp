@@ -42,7 +42,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/Online_Quiz/public/postdetails?do=${do}&filteredit=1" method="post">
+                        <form action="/Online_Quiz/marketing/postdetails?do=${do}&filteredit=1" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Edit Product</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

@@ -268,8 +268,8 @@ public class PostDAO extends DBContext {
     }
 
     public void inputPost(String post_title, String bief, String details, String author, String date, String contact, String category, int status) {
-        String query = "insert into Post(cid,post_title, biref, details,author,update_date,contact,  status)\n"
-                + "values(?,?,?,?,?,?,?,?)";
+        String query = "insert into Post(cid,post_title, biref, details,author,update_date,contact, status,view_count)\n"
+                + "values(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, category);
@@ -284,10 +284,12 @@ public class PostDAO extends DBContext {
             ps.setString(7, contact);
 
             ps.setInt(8, status);
+            ps.setInt(9, 0);
 
             ps.executeUpdate();
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
