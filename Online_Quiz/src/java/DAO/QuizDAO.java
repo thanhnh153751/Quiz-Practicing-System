@@ -24,6 +24,10 @@ import java.util.List;
  */
 public class QuizDAO extends DBContext {
 
+    public void closeConnection() throws SQLException{
+        connection.close();
+    }
+    
     public List<Quiz> getAll() {
         String query = "Select * from Quiz";
         List<Quiz> lists = new ArrayList<>();
@@ -302,7 +306,7 @@ public class QuizDAO extends DBContext {
 
     public void submitQuiz(int take_id) {
         String query = "Update quiz_take\n"
-                + "Set status = 1, finish_time = CURRENT_TIMESTAMP\n"
+                + "Set [status] = 1, finish_time = CURRENT_TIMESTAMP\n"
                 + "where id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);

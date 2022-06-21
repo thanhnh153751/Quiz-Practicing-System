@@ -93,27 +93,35 @@ public class QuizHandleController extends HttpServlet {
 
             HttpSession session = request.getSession();
             Account account = (Account) session.getAttribute("acc");
+            if (account == null) {
+                response.sendRedirect(request.getContextPath() + "/public/home?status=success&message=Please%20login%20first&type=signin");
+            } else {
+                List<Question> questionList = quiz.getQuestionList(quiz_id);
+                Question currentQuestion = questionList.get(questionIndex - 1);
+                QuizTake quiztake = quiz.getQuizTake(account.getId());
+                List<Answer> answerList = quiz.getAnswerList(quiz_id, questionIndex);
 
-            List<Question> questionList = quiz.getQuestionList(quiz_id);
-            Question currentQuestion = questionList.get(questionIndex - 1);
-            QuizTake quiztake = quiz.getQuizTake(account.getId());
-            List<Answer> answerList = quiz.getAnswerList(quiz_id, questionIndex);
+                QuizTakeDetails qtDetails = quiz.getQtDetails(take_id, questionIndex);
+                if (quiztake.getStatus() == 0) {
+                    request.setAttribute("quiz_take_details", qtDetails);
+                    request.setAttribute("quiz_take", quiztake);
+                    request.setAttribute("quizId", quiz_id);
+                    request.setAttribute("answerList", answerList);
+                    request.setAttribute("questionInfo", currentQuestion);
+                    request.setAttribute("questionIndex", questionIndex);
+                    request.setAttribute("numberOfQuestion", numberOfQuestion);
+                    request.getRequestDispatcher("/learning/quizhandle.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("message", "Time out!");
+                    request.getRequestDispatcher("/learning/quizfinish.jsp").forward(request, response);
+                }
 
-            QuizTakeDetails qtDetails = quiz.getQtDetails(take_id, questionIndex);
-
-            request.setAttribute("quiz_take_details", qtDetails);
-            request.setAttribute("quiz_take", quiztake);
-            request.setAttribute("quizId", quiz_id);
-            request.setAttribute("answerList", answerList);
-            request.setAttribute("questionInfo", currentQuestion);
-            request.setAttribute("questionIndex", questionIndex);
-            request.setAttribute("numberOfQuestion", numberOfQuestion);
+            }
 
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
 
-        request.getRequestDispatcher("/learning/quizhandle.jsp").forward(request, response);
     }
 
     /**
@@ -141,10 +149,11 @@ public class QuizHandleController extends HttpServlet {
                 long takeTime = TimeUnit.MILLISECONDS.toSeconds(quiztake.getStart_time().getTime());
                 long currentTime = TimeUnit.MILLISECONDS.toSeconds(date.getTime());
                 long targetTime = takeTime + quizObj.getDuration() * 60;
-                if ((targetTime - currentTime) > (quizObj.getDuration() * 60)) {
-                    quiz.submitQuiz(take_id);
-                } else {
+                if ((targetTime - currentTime) <= (quizObj.getDuration() * 60)&&(targetTime - currentTime)>=0) {
                     out.println(targetTime - currentTime);
+                } else if ((targetTime - currentTime) < 0) {
+                    quiz.submitQuiz(take_id);
+                    out.println(-6);
                 }
             } else {
                 long takeTime = TimeUnit.MILLISECONDS.toSeconds(quiztake.getStart_time().getTime());

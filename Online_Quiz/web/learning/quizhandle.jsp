@@ -16,7 +16,27 @@
     </head>
     <body>
         <jsp:include page="../common/header.jsp"></jsp:include>
-
+            <div class="container">
+                <div class="row">
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Submit</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want submit?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary " id="modal-btn-submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="container">
                 <div class="row">
@@ -45,12 +65,12 @@
                             </div>
                             <div class="quiz-answser col-md-12">
                                 <div class="row">
-                                        <c:forEach items="${requestScope.answerList}" var="answer">
-                                            <div class="answer-content col-md-6 ">
-                                                <label class="input"><input type="radio" name="choice" <c:if test="${answer.id == requestScope.quiz_take_details.answer_id}">checked</c:if>
-                                                                            value="${answer.id}"><span>&nbsp;${answer.answer}</span></label>
-                                            </div>
-                                        </c:forEach>
+                                    <c:forEach items="${requestScope.answerList}" var="answer">
+                                        <div class="answer-content col-md-6 ">
+                                            <label class="input"><input type="radio" name="choice" <c:if test="${answer.id == requestScope.quiz_take_details.answer_id}">checked</c:if>
+                                                                        value="${answer.id}"><span>&nbsp;${answer.answer}</span></label>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
 
@@ -59,12 +79,12 @@
                     </div>
                     <div class="quiz-footer d-flex justify-content-between ">
                         <div class="quiz-footer-left">
-                            <input type="button" id="btn-submit" value="Submit">
+                            <input type="button" id="btn-submit" value="Submit" >
                             <!-- <button>Submit</button> -->
                         </div>
                         <div class="quiz-footer-right">
-                            <input type="button" name="nxtp" onclick="previousQuestion('${requestScope.questionIndex}','${requestScope.quizId}','${requestScope.quiz_take.id}')" id="btn-previous" value="Previous" class="<c:if test="${requestScope.questionIndex == 1}">btn-hide</c:if>">
-                            <input type="button" name="nxtp" onclick="nextQuestion('${requestScope.questionIndex}','${requestScope.quizId}','${requestScope.quiz_take.id}')" id="btn-next" value="Next" class="<c:if test="${requestScope.questionIndex >= requestScope.numberOfQuestion}">btn-hide</c:if>">
+                            <input type="button" name="nxtp" onclick="previousQuestion('${requestScope.questionIndex}', '${requestScope.quizId}', '${requestScope.quiz_take.id}')" id="btn-previous" value="Previous" class="<c:if test="${requestScope.questionIndex == 1}">btn-hide</c:if>">
+                            <input type="button" name="nxtp" onclick="nextQuestion('${requestScope.questionIndex}', '${requestScope.quizId}', '${requestScope.quiz_take.id}')" id="btn-next" value="Next" class="<c:if test="${requestScope.questionIndex >= requestScope.numberOfQuestion}">btn-hide</c:if>">
                             <!-- <button>Previous</button>
                             <button>Next</button> -->
                         </div>
