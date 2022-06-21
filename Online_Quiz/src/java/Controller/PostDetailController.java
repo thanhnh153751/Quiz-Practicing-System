@@ -38,7 +38,7 @@ public class PostDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         PostDAO post = new PostDAO();
         String service = request.getParameter("do");
         String filter = request.getParameter("filter");

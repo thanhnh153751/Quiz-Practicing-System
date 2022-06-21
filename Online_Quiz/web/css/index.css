@@ -79,7 +79,7 @@ body{
 
 .course-card-body{
     position: absolute;
-    bottom: 0;
+    bottom: 35px;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     padding: 10px 0px 5px 10px;

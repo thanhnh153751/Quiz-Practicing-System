@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.OrderDAO;
+import Model.Account;
 import Model.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
@@ -42,7 +44,11 @@ public class MyRegistrationsController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         OrderDAO dao = new OrderDAO();
-        List<Order> listO = dao.Order();
+        HttpSession session = request.getSession();           
+        Account a = (Account)session.getAttribute("acc");
+        System.out.println(a.getId());
+        int id = a.getId();
+        List<Order> listO = dao.Order(id);
         request.setAttribute("listO", listO);
         request.getRequestDispatcher("/public/myregistrations.jsp").forward(request, response);
 //      
@@ -64,9 +70,7 @@ public class MyRegistrationsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         OrderDAO dao = new OrderDAO();
-        List<Order> listO = dao.Order();
-        request.setAttribute("listO", listO);
-        request.getRequestDispatcher("/public/myregistrations.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

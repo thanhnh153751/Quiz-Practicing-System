@@ -274,14 +274,14 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, category);
 
-            ps.setString(2, post_title);
-            ps.setString(3, bief);
-            ps.setString(4, details);
-            ps.setString(5, author);
+            ps.setNString(2, post_title);
+            ps.setNString(3, bief);
+            ps.setNString(4, details);
+            ps.setNString(5, author);
 
             ps.setString(6, date);
 
-            ps.setString(7, contact);
+            ps.setNString(7, contact);
 
             ps.setInt(8, status);
             ps.setInt(9, 0);
@@ -299,9 +299,9 @@ public class PostDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, category);
-            ps.setString(2, post_title);
-            ps.setString(3, bief);
-            ps.setString(4, details);
+            ps.setNString(2, post_title);
+            ps.setNString(3, bief);
+            ps.setNString(4, details);
 //            ps.setString(4, thumbnail);
             ps.setInt(5, status);
             ps.setInt(6, id);

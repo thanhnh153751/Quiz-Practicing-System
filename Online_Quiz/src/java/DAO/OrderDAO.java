@@ -87,11 +87,12 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
-    public List<Order> Order() {//tải lên tất cả các Order có trong db
+    public List<Order> Order(int aid) {//tải lên tất cả các Order có trong db
         List<Order> Order = new ArrayList<>();
-        String query = "select id, registration_time, [subject], [package], total_cost, [status], valid_from, valid_to from [Order] ";
+        String query = "select id, registration_time, [subject], [package], total_cost, [status], valid_from, valid_to from [Order] where aid = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, aid);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
