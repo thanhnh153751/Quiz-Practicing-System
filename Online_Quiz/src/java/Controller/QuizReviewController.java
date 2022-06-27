@@ -6,26 +6,27 @@
 package Controller;
 
 import DAO.QuizDAO;
+import Model.Account;
 import Model.Answer;
-import Model.Quiz;
+import Model.Question;
 import Model.QuizTake;
 import Model.QuizTakeDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author hongd
  */
-@WebServlet(name = "QuizSubmitController", urlPatterns = {"/learning/quizsubmit"})
-public class QuizSubmitController extends HttpServlet {
+@WebServlet(name = "QuizReviewController", urlPatterns = {"/learning/review"})
+public class QuizReviewController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +45,10 @@ public class QuizSubmitController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet QuizSubmitController</title>");
+            out.println("<title>Servlet QuizReviewController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet QuizSubmitController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet QuizReviewController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,56 +66,61 @@ public class QuizSubmitController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String take_id = request.getParameter("quiz_take");
+
         QuizDAO quiz = new QuizDAO();
-        
-        int total_question_correct=0;
+
+        String quiz_id_raw = request.getParameter("quiz_id");
+        String index_question_raw = request.getParameter("index_quiz");
+        String take_id_raw = request.getParameter("quiz_take");
+
         try {
-            int takeid = Integer.parseInt(take_id);
-            QuizTake quiztake = quiz.getQuizTakeById(takeid);
-            Quiz quizObj = quiz.getQuiz(quiztake.getQuiz_id());
 
-            java.util.Date date = new java.util.Date();
-            long takeTime = TimeUnit.MILLISECONDS.toSeconds(quiztake.getStart_time().getTime());
-            long currentTime = TimeUnit.MILLISECONDS.toSeconds(date.getTime());
-//            System.out.println(quizObj.getDuration() * 60);
-            long targetTime = takeTime + quizObj.getDuration() * 60;
-
-            
-            long time = targetTime - currentTime;
-
-            List<QuizTakeDetails> qd = quiz.getTakeDetails(takeid);
-            
-            for (QuizTakeDetails quizTakeDetails : qd) {
-//                System.out.println(quizTakeDetails.getQues_id());
-                Answer ans = quiz.getCorrectAnswers(quiztake.getQuiz_id(),quizTakeDetails.getQues_id());
-//                System.out.println(ans.getAnswer());
-                if (quizTakeDetails!=null&&ans!=null&&quizTakeDetails.getAnswer_id() == ans.getId()) {
-                    total_question_correct++;
-                }
+            int quiz_id = Integer.parseInt(quiz_id_raw);
+            int numberOfQuestion = quiz.getTotalQuestion(quiz_id); //Get total question
+            int questionIndex; //Get current question index
+            if (index_question_raw != null && !index_question_raw.isEmpty()) {
+                questionIndex = Integer.parseInt(index_question_raw);
+            } else {
+                questionIndex = 1;
             }
-//            System.out.println(Math.round(total_question_correct/100));
-            int numberOfAnswer = quiz.getTotalQuestion(quiztake.getQuiz_id());
-            System.out.println(numberOfAnswer);
-            System.out.println(total_question_correct);
-            double score_raw = (double)total_question_correct/(double)numberOfAnswer;
-            System.out.println(score_raw);
-            if (time <= (quizObj.getDuration() * 60) && time >= 0) {
-                quiz.submitQuiz(takeid);
-                request.setAttribute("message", "Quiz submit successfully");
-                request.setAttribute("status", true);
-                request.setAttribute("duration", quizObj.getDuration());
-                request.setAttribute("take_time", time);
-                request.setAttribute("score", Math.round(score_raw*100));
-                request.setAttribute("quiz_id", quiztake.getQuiz_id());
-                request.setAttribute("quiz_take", takeid);
-            } else if (time < 0) {
-                request.setAttribute("message", "Quiz submit fail");
+            if (questionIndex < 0 || questionIndex > numberOfQuestion) {
+                questionIndex = 1;
             }
+            int take_id = 0;
+            if (take_id_raw != null) {
+                take_id = Integer.parseInt(take_id_raw);
+            }
+
+            HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("acc");
+            if (account == null) {
+                response.sendRedirect(request.getContextPath() + "/public/home?status=success&message=Please%20login%20first&type=signin");
+            } else {
+                List<Question> questionList = quiz.getQuestionList(quiz_id);
+                Question currentQuestion = questionList.get(questionIndex - 1);
+                QuizTake quiztake = quiz.getQuizTake(account.getId());
+                List<Answer> answerList = quiz.getAnswerList(quiz_id, questionIndex);
+
+                QuizTakeDetails qtDetails = quiz.getQtDetails(take_id, questionIndex);
+//                if (quiztake.getStatus() == 1) {
+                    request.setAttribute("quiz_take_details", qtDetails);
+                    request.setAttribute("quiz_take", quiztake);
+                    request.setAttribute("quizId", quiz_id);
+                    request.setAttribute("answerList", answerList);
+                    request.setAttribute("questionInfo", currentQuestion);
+                    request.setAttribute("questionIndex", questionIndex);
+                    request.setAttribute("numberOfQuestion", numberOfQuestion);
+                    request.getRequestDispatcher("/learning/quizreview.jsp").forward(request, response);
+//                } else {
+//                    request.setAttribute("message", "Time out!");
+//                    request.getRequestDispatcher("/learning/quizfinish.jsp").forward(request, response);
+//                }
+
+            }
+
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        request.getRequestDispatcher("/learning/quizfinish.jsp").forward(request, response);
     }
 
     /**
