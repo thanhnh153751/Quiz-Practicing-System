@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "SubjectLessonController", urlPatterns = {"/CourseContent/subjectlesson"})
+@WebServlet(name = "SubjectLessonController", urlPatterns = {"/courseContent/subjectlesson"})
 public class SubjectLessonController extends HttpServlet {
 
     /**
@@ -63,7 +63,7 @@ public class SubjectLessonController extends HttpServlet {
         request.setAttribute("listl", list1);
         request.setAttribute("index", page);
         request.setAttribute("num", num);
-        request.getRequestDispatcher("/CourseContent/SubjectLessons.jsp").forward(request, response);
+        request.getRequestDispatcher("/courseContent/SubjectLessons.jsp").forward(request, response);
         }else if (service.equalsIgnoreCase("changing")){
             String id = request.getParameter("id");
             String status = request.getParameter("status");

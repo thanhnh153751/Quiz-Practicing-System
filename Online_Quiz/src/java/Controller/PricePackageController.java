@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PREDATOR
  */
-@WebServlet(name = "PricePackageController", urlPatterns = {"/CourseContent/pricepackage"})
+@WebServlet(name = "PricePackageController", urlPatterns = {"/courseContent/pricepackage"})
 public class PricePackageController extends HttpServlet {
 
     /**
@@ -68,12 +68,12 @@ public class PricePackageController extends HttpServlet {
             
         List<Model.Package> list1 = dao.getListbyPage(listPk, start, end);
         request.setAttribute("listPP", list1);
-            request.getRequestDispatcher("/CourseContent/Package.jsp").forward(request, response);
+            request.getRequestDispatcher("/courseContent/Package.jsp").forward(request, response);
         } else if (service.equalsIgnoreCase("add")) {
             String submit = request.getParameter("submit");
             if (submit == null) {
                 
-                request.getRequestDispatcher("/CourseContent/inputPackage.jsp").forward(request, response);
+                request.getRequestDispatcher("/courseContent/inputPackage.jsp").forward(request, response);
             } else {
                 String subject = request.getParameter("subject");
                 
@@ -96,7 +96,7 @@ public class PricePackageController extends HttpServlet {
                 String id = request.getParameter("id");
                 Model.Package pack = dao.loadPackagesByPid(Integer.parseInt(id));
                 request.setAttribute("details", pack);
-                request.getRequestDispatcher("/CourseContent/editPackage.jsp").forward(request, response);
+                request.getRequestDispatcher("/courseContent/editPackage.jsp").forward(request, response);
             } else {
                 String subject = request.getParameter("subject");
                 String id = request.getParameter("id");
