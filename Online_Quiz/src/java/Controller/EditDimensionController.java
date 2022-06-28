@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import DAO.SubjectDAO;
-import DAO.PostDAO;
-import Model.Post;
+import DAO.DAO;
 import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THANH
+ * @author Viet Dung
  */
-@WebServlet (name="HomeServerlet",urlPatterns={"/public/home"})
-public class HomeServerlet extends HttpServlet {
+@WebServlet(name = "EditDimensionController", urlPatterns = {"/common/editdimension"})
+public class EditDimensionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,18 +35,42 @@ public class HomeServerlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Home</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }   
+        request.setCharacterEncoding("UTF-8");
+        String submit = request.getParameter("submit");
+        DAO dao = new DAO();
+        if (submit == null) {
+            String did = request.getParameter("id");
+//            System.out.println(did);
+            int id = Integer.parseInt(did);
+            String sid = request.getParameter("sid");
+            Subject list = dao.getAllSubjectDimensionbypid(id);
+//        String Strdid = request.getParameter("did");
+//        int did = Integer.parseInt(Strdid);
+//        List<Subject> list1 = dao.getAllSubjectDimensionbyid(did);
+//        request.setAttribute("list1", list1);
+            request.setAttribute("listD", list);
+            request.setAttribute("id", id);
+            request.setAttribute("sid", sid);
+            request.getRequestDispatcher("/common/EditDimension.jsp").forward(request, response);
+        } else {
+
+            String sid = request.getParameter("sid");
+//            System.out.println(sid);
+            String did = request.getParameter("id");
+//            System.out.println(did);
+            int id = Integer.parseInt(did);
+            String type = request.getParameter("type");
+//            System.out.println(type);
+            String name = request.getParameter("name");
+//            System.out.println(name);
+            String description = request.getParameter("description");
+            System.out.println(description);
+            dao.editDimension(id, Integer.parseInt(sid), type, name, description);
+
+            response.sendRedirect("/Online_Quiz/common/subdimension");
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,26 +85,7 @@ public class HomeServerlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        System.out.println(request.getRequestURI());
-        SubjectDAO sjd = new SubjectDAO();
-        List<Subject> subjectList = sjd.loadSubjectOnHome();
-        request.setAttribute("subjectList", subjectList);
-        List<Subject> subjectLast = sjd.loadFeaturedSubject();
-        request.setAttribute("subjectLast", subjectLast);
-        //dành cho blog
-
-        PostDAO pd = new PostDAO();
-        List<Post> loadAllPost = pd.loadAllPost();
-        List<Post> loadLatestPost = pd.loadLatestPost();
-        List<Post> loadHotPost = pd.loadHostPost();
-        request.setAttribute("loadAllPost", loadAllPost);
-        request.setAttribute("loadLatestPost", loadLatestPost);
-        request.setAttribute("loadHotPost", loadHotPost);
-        
-        
-        
-        
-        request.getRequestDispatcher("/public/index.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -97,7 +100,6 @@ public class HomeServerlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
     }
 
     /**

@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import DAO.SubjectDAO;
-import DAO.PostDAO;
-import Model.Post;
+import DAO.DAO;
 import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THANH
+ * @author Viet Dung
  */
-@WebServlet (name="HomeServerlet",urlPatterns={"/public/home"})
-public class HomeServerlet extends HttpServlet {
+@WebServlet(name = "SubDimensionController", urlPatterns = {"/common/subdimension"})
+public class SubDimensionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,13 +40,13 @@ public class HomeServerlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");            
+            out.println("<title>Servlet SubDimensionController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubDimensionController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }   
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,26 +61,26 @@ public class HomeServerlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        System.out.println(request.getRequestURI());
-        SubjectDAO sjd = new SubjectDAO();
-        List<Subject> subjectList = sjd.loadSubjectOnHome();
-        request.setAttribute("subjectList", subjectList);
-        List<Subject> subjectLast = sjd.loadFeaturedSubject();
-        request.setAttribute("subjectLast", subjectLast);
-        //dành cho blog
+        DAO dao = new DAO();
+        String txt = request.getParameter("index");
+        int index = 0;
+        if (txt == null) {
+            index = 1;
+        } else {
+            index = Integer.parseInt(txt);
+        }
+        int numpage = dao.totalSubjectDimension(1);
+        List<Subject> list = dao.getAllSubjectDimension(1,index);
+//        String Strdid = request.getParameter("did");
+//        int did = Integer.parseInt(Strdid);
+//        List<Subject> list1 = dao.getAllSubjectDimensionbyid(did);
+//        request.setAttribute("list1", list1);
 
-        PostDAO pd = new PostDAO();
-        List<Post> loadAllPost = pd.loadAllPost();
-        List<Post> loadLatestPost = pd.loadLatestPost();
-        List<Post> loadHotPost = pd.loadHostPost();
-        request.setAttribute("loadAllPost", loadAllPost);
-        request.setAttribute("loadLatestPost", loadLatestPost);
-        request.setAttribute("loadHotPost", loadHotPost);
-        
-        
-        
-        
-        request.getRequestDispatcher("/public/index.jsp").forward(request, response);
+        request.setAttribute("listD", list);
+        request.setAttribute("numpage", numpage);
+        request.setAttribute("index", index);
+//        request.setAttribute("did", did);
+        request.getRequestDispatcher("/common/SubjectDimension.jsp").forward(request, response);
     }
 
     /**
@@ -96,8 +94,7 @@ public class HomeServerlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
+
     }
 
     /**

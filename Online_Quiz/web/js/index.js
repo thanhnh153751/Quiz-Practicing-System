@@ -24,11 +24,56 @@ $(document).ready(function () {
     });
 
 
+    $('#open-add').click(function () {
+        $('#addEmployeeModal').modal('show');
+    })
+
+    $("#add").click(function () {
+        $.ajax({
+            url: "/Online_Quiz/common/loadadddimension",
+            method: "POST",
+            data: {
+                type: $("input[name = type]").val(),
+                name: $("input[name = names]").val(),
+                description: $("input[name = description]").val()
+            }
+        });
+        $('#addEmployeeModal').modal('hide');
+        $('#addmd').modal('show');
+        // $("#register-tab").tab('show');
+    });
+
+    $("#edit").click(function () {
+        console.log($("input[name = id]").val());
+        console.log($("input[name = sid]").val());
+
+        $.ajax({
+            url: "/Online_Quiz/common/editdimension",
+            method: "GET",
+            data: {
+                submit: $("input[name = submit]").val(),
+                id: $("input[name = id]").val(),
+                sid: $("input[name = sid]").val(),
+                type: $("input[name = typemd]").val(),
+                name: $("input[name = namemd]").val(),
+                description: $("input[name = descriptionmd").val()
+            }
+        });
+        $('#editmd').modal('show');
+
+        // $("#register-tab").tab('show');
+    });
+
+    $('#editmd').on('hidden.bs.modal', function (e) {
+        window.location = "/Online_Quiz/common/subdimension"
+    })
+
     $("#nav-login").click(function () {
         $('#staticBackdrop').modal('show');
         // $("#register-tab").tab('show');
 
     });
+
     $("#redirect-forgot").click(function () {
         $('#staticBackdrop').modal('hide');
         $("#forgot-modal").modal('show');
@@ -109,7 +154,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     $('#staticBackdrop').on('hidden.bs.modal', function (e) {
         $(this).find("input,textarea,select").val('').end()
                 .find("input[type=checkbox], input[type=radio]")
@@ -163,19 +208,19 @@ $(document).ready(function () {
 
     }
 
-    
+
 })
 
 document.querySelectorAll('div[data-type="tagline"]').forEach(c => {
-        var content = c.innerHTML;
-        var x = content.split("|");
+    var content = c.innerHTML;
+    var x = content.split("|");
 
-        c.innerHTML = "";
-        x.forEach(a => {
-            c.innerHTML += '<a href="searchboxsubjectlist?name=' + a + '" class="btn btn-primary rounded-pill px-2 py-0 mb-2">' + a + '</a>';
-            
-        })
-    });
+    c.innerHTML = "";
+    x.forEach(a => {
+        c.innerHTML += '<a href="searchboxsubjectlist?name=' + a + '" class="btn btn-primary rounded-pill px-2 py-0 mb-2">' + a + '</a>';
+
+    })
+});
 
 
 //    let url = window.location.href;!

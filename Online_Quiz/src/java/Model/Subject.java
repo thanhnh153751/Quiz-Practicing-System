@@ -30,12 +30,16 @@ public class Subject {
     private String csname;
     private int numoflesson;
     
-    private int levelid;
     private String simulation;
     private String level;
     private int numoffquess;
     private int ducation;
     private int passrate;
+    
+    private int did;
+    private String dtype;
+    private String dname;
+    private String ddescription;
 
  
 
@@ -50,8 +54,15 @@ public class Subject {
         this.title = title;
         
     }
-    
-    public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
+    public Subject(int did, int id, String dtype, String dname, String ddescription) {
+        this.did = did;
+        this.id = id;
+        this.dtype = dtype;
+        this.dname = dname;
+        this.ddescription = ddescription;
+        
+    }
+    public Subject(int id, String title, String dname, int status, String cname,String scname,int numoflesson) {
         this.id = id;
         this.title = title;
         this.contact = contact;
@@ -154,6 +165,38 @@ public class Subject {
 
     public void setCname(String cname) {
         this.cname = cname;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
+
+    public String getDname() {
+        return dname;
+    }
+
+    public int getDid() {
+        return did;
+    }
+
+    public void setDid(int did) {
+        this.did = did;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
+    public String getDdescription() {
+        return ddescription;
+    }
+
+    public void setDdescription(String ddescription) {
+        this.ddescription = ddescription;
     }
 
     
@@ -295,6 +338,12 @@ public class Subject {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Subject{" + "id=" + id + ", cid=" + cid + ", lid=" + lid + ", thumbnail=" + thumbnail + ", title=" + title + ", tagline=" + tagline + ", contact=" + contact + ", description=" + description + ", list_price=" + list_price + ", sale_price=" + sale_price + ", status=" + status + ", sub=" + sub + ", cname=" + cname + ", csname=" + csname + ", numoflesson=" + numoflesson + ", simulation=" + simulation + ", level=" + level + ", numoffquess=" + numoffquess + ", ducation=" + ducation + ", passrate=" + passrate + ", did=" + did + ", dtype=" + dtype + ", dname=" + dname + ", ddescription=" + ddescription + '}';
+    }
+
+    
 
 
 

@@ -158,7 +158,8 @@
 
                                                             },
                                                             success: function (response) {
-                                                                if (a != null) {
+                                                               // document.getElementById("arler").innerHTML = response;
+                                                               if (a != null) {
                                                                     document.getElementById("arler").innerHTML = response;
                                                                     document.getElementById("message").style.display = "none";
                                                                     

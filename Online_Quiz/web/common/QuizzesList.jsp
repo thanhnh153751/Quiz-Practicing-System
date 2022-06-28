@@ -25,33 +25,32 @@
             <div class="header">
             <jsp:include page="../common/header.jsp"></jsp:include>
             </div>
-            <div class="container"style="padding-top: 50px">
+            <div class="container "style="padding-top: 50px">
                 <div class="row">
                     <div class="col-sm-3 filter">
                         <div class="text-primary text-center h3">Filter</div>
                         <br>
-                        
-                        <form action="/Online_Quiz/common/simulationexams">
+                        <form action="/Online_Quiz/common/quizzeslist">
                             <div class="h6">Subject:</div>
                             <select class="select-css" name="did" onchange="this.form.submit()">
-                                <option value="-1">--------------------Subject--------------------</option>
-                            <c:forEach items="${listbysubject}" var="D">
+                                <option value="-1">-------------------All Subject------------------</option>
+                            <c:forEach items="${listquizname}" var="D">
                                 <option value="${D.id}" ${D.id == did ?"selected":""}>${D.title}</option>
                             </c:forEach>
                         </select>
-                            <div class="h6">Level:</div>
-                            
-                            <select class="select-css" name="lid" onchange="this.form.submit()">
-                            <option value="-1">---------------------Level--------------------</option>
-                            <c:forEach items="${listbylevel}" var="D">
-                                <option value="${D.id}" ${D.id == lid ?"selected":""}>${D.level}</option>
+                        <div class="h6">Type:</div>
+                        <select class="select-css" name="tid" onchange="this.form.submit()">
+                            <option value="-1">--------------------All Type-----------------</option>
+                            <c:forEach items="${listquiztype}" var="D">
+                                <option value="${D.id}" ${D.id == tid ?"selected":""}>${D.qtype}</option>
                             </c:forEach>
                         </select>
+
+
+
                         <br>
-                        <div class="h6">Search by ExamName: </div>
-
-
-                        <div class="input-group input-group-sm" style="padding-right:14px">
+                        <div class="h6">Search by Name:</div>
+                        <div class="input-group input-group-sm">
                             <input name="search" type="text" value="${ts}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
 
                             <div class="input-group-append">
@@ -75,52 +74,51 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-10 text-primary">
-                                    <h2>Simulation<b>Exam</b></h2>
+                                    <h2>Quizzes <b>List</b></h2>
                                 </div>
                                 <div class="col-sm-2">
-
+                                    <a href="#"  class="btn btn-success" data-toggle="modal"> <span>Add New Quiz</span></a>
 
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover table-sm table-bordered">
-                            <thead class="table-success" >
+                        <table class="table table-striped table-hover">
+                            <thead>
                                 <tr>
 
                                     <th>ID</th>
+                                    <th>Name</th>
                                     <th>Subject</th>
-                                    <th>Simulation exam</th>
-                                    <th>Level</th>
-                                    <th>#Question</th>
+                                    <th>level</th>
+                                    <th>Number Of Lessons</th>
                                     <th>Duration</th>
-                                    <th>Pass rate</th>
-                                    <th>Take Exam</th>
+                                    <th>Passrate</th>
+                                    <th>type</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <c:forEach items="${listS}" var="o">
 
+                                <c:forEach items="${listQ}" var="o">
                                     <tr>
-                                        <td>${o.lid}</td>
-                                        <td>${o.title}</td>
-                                        <td>${o.simulation}</td>
-                                        <td>${o.level} </td>
-                                        <td>${o.numoffquess} </td>
-                                        <td>${o.ducation}p </td>
-                                        <td>${o.passrate}%</td>
-                                        <td><a href="examdetail?id=${o.lid}" class="btn btn-danger" data-toggle="modal"><span>Take Exam</span></a></td>
+                                        <td>${o.id}</td>
+                                        <td>${o.quiz_name}</td>
+                                        <td>${o.subject}</td>
+                                        <td>${o.qlevel}</td>
+                                        <td>${o.numofquess} </td>
+                                        <td>${o.duration}p </td>
+                                        <td>${o.passrate}% </td>
+                                        <td>${o.qtype} </td>
+                                        <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
-                                
                         <c:set var="index" value="${requestScope.index}"/>                
 
 
                         <ul class="pagination">
                             <c:forEach begin="1" end="${numpage}" var="i">
-                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="simulationexams?index=${i}&did=${did}&lid=${lid}&search=${ts}">${i}</a></li>
+                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="quizzeslist?index=${i}&did=${did}&tid=${tid}&search=${ts}">${i}</a></li>
                                 </c:forEach>
                         </ul>
 
@@ -133,9 +131,18 @@
                 </div>
                 <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
             </div>
-
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
 
     </body>
+
 
 
 </html>

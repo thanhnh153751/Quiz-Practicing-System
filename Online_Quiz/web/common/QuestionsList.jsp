@@ -22,6 +22,7 @@
     </head>
     <body>
         <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
+        
             <div class="header">
             <jsp:include page="../common/header.jsp"></jsp:include>
             </div>
@@ -30,31 +31,47 @@
                     <div class="col-sm-3 filter">
                         <div class="text-primary text-center h3">Filter</div>
                         <br>
-                        <form action="/Online_Quiz/common/managersubjectlist">
-                            <div class="h6">Category:</div>
-                            <select class="select-css" name="did" onchange="this.form.submit()">
-                                <option value="-1">-------------------Category------------------</option>
-                            <c:forEach items="${listCategory}" var="D">
-                                <option value="${D.id}" ${D.id == did ?"selected":""}>${D.name}</option>
+                        <form action="/Online_Quiz/common/questionlist">
+                            <div class="h6">Subject:</div>
+                            <select class="select-css" name="sid" onchange="this.form.submit()">
+                                <option value="-1">-------------------All Subject------------------</option>
+                            <c:forEach items="${listbysubject}" var="D">
+                                <option value="${D.id}" ${D.id == sid ?"selected":""}>${D.title}</option>
                             </c:forEach>
                         </select>
-                        <div class="h6">Sub_Category:</div>
-                        <select class="select-css" name="cid" onchange="this.form.submit()">
-                            <option value="-1">----------------Sub_Category--------------</option>
-                            <c:forEach items="${listSubCategory}" var="D">
-                                <option value="${D.id}" ${D.id == cid ?"selected":""}>${D.name}</option>
+                            
+                        <div class="h6">Lession:</div>
+                        <select class="select-css" name="lid" onchange="this.form.submit()">
+                            <option value="all">--------------------All Lession-----------------</option>
+                            <c:forEach items="${listLesson}" var="D">
+                                <option value="${D.name}" ${D.name == lid ?"selected":""}>${D.name}</option>
                             </c:forEach>
                         </select>
-
+                        
+                        <div class="h6">Dimension:</div>
+                        <select class="select-css" name="sdid" onchange="this.form.submit()">
+                            <option value="-1">--------------------All Dimension-----------------</option>
+                            <c:forEach items="${listdimension}" var="D">
+                                <option value="${D.sid}" ${D.sid == sdid ?"selected":""}>${D.name}</option>
+                            </c:forEach>
+                        </select>
+                        
+                        <div class="h6">Level:</div>
+                        <select class="select-css" name="lvid" onchange="this.form.submit()">
+                            <option value="-1">--------------------All Level-----------------</option>
+                            <c:forEach items="${listbylevel}" var="D">
+                                <option value="${D.id}" ${D.id == lvid ?"selected":""}>${D.level}</option>
+                            </c:forEach>
+                        </select>
+                        
                         <div class="h6">Status:</div>
                         <select class="select-css" name="status" onchange="this.form.submit()">
                             <option value="-1"${-1 == status ?"selected":""}>--------------------Status------------------</option>
                             <option value="1" ${1 == status ?"selected":""}>---------------------Enable-----------------</option>
                             <option value="0" ${0 == status ?"selected":""}>---------------------Disable----------------</option>
                         </select>
-
-                        <br>
-                        <div class="h6">Search by Name:</div>
+                        
+                        <div class="h6">Search by Content:</div>
                         <div class="input-group input-group-sm">
                             <input name="search" type="text" value="${ts}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
 
@@ -68,21 +85,18 @@
                         </div>
 
                     </form>
-
-
-
                 </div>
 
-                <div class="col-sm-9"
+                <div class="col-sm-9">
 
                      <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-9 text-primary">
-                                    <h2>Subjects <b>List</b></h2>
+                                    <h2>Questions <b>List</b></h2>
                                 </div>
-                                <div class="col-sm-2">
-                                    <a href="/Online_Quiz/courseContent/newsuject"  class="btn btn-success" data-toggle="modal"> <span>Add New Course</span></a>
+                                <div class="col-sm-3">
+                                    <a href="#"  class="btn btn-success" data-toggle="modal"> <span>Questions Import</span></a>
 
                                 </div>
                             </div>
@@ -90,44 +104,35 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Sub_Category</th>
-                                    <th>Number Of Lessons</th>
-                                    <th>Owner</th>
-                                    <th>Status</th>
+                                    <th>Content</th>
+                                    <th>Subject</th>
+                                    <th>Dimension </th>
+                                    <th>Lesson</th>
+                                    <th>Level</th>
+                                    <th>Status </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <c:forEach items="${listS}" var="o">
+                                <c:forEach items="${listQ}" var="o">                                 
                                     <tr>
                                         <td>${o.id}</td>
-                                        <td>${o.title}</td>
-                                        <td>${o.cname}</td>
-                                        <td>${o.csname}</td>
-                                        <td>${o.numoflesson} </td>
-                                        <td>${o.contact} </td>
-                                        <c:if test="${o.status==1}">
-                                            <td>Enable </td>
-                                        </c:if>
-                                        <c:if test="${o.status==0}">
-                                            <td>Disable </td>
-                                        </c:if>
+                                        <td>${o.question_content}</td>
+                                        <td>${o.sname}</td>
+                                        <td>${o.dimenname}</td>
+                                        <td>${o.lessionname} </td>
+                                        <td>${o.level}</td>
+                                        <td>${o.status} </td>                                  
                                         <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                         <c:set var="index" value="${requestScope.index}"/>                
-
-
                         <ul class="pagination">
-                            <c:forEach begin="1" end="${numpage}" var="i">
-                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="managersubjectlist?index=${i}&status=${status}&did=${did}&cid=${cid}&search=${ts}">${i}</a></li>
+                            <c:forEach begin="1" end="${requestScope.num}" var="i">
+                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="questionlist?index=${i}&sid=${sid}&lid=${lid}&sdid=${sdid}&lvid=${lvid}&status=${status}&search=${ts}">${i}</a></li>
                                 </c:forEach>
                         </ul>
 
@@ -140,9 +145,11 @@
                 </div>
                 <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
             </div>
+                        
 
 
     </body>
+
 
 
 </html>

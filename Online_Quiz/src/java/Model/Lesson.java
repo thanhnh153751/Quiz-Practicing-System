@@ -18,6 +18,13 @@ public class Lesson {
 
     public Lesson() {
     }
+    public Lesson(int id,String name) {
+        this.id = id;
+        this.name = name;
+    }
+    public Lesson(String name) {
+        this.name = name;
+    }
 
     public Lesson(int id, int sid, int type_id, String name, int status) {
         this.id = id;

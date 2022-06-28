@@ -5,9 +5,8 @@
  */
 package Controller;
 
-import DAO.SubjectDAO;
-import DAO.PostDAO;
-import Model.Post;
+import DAO.DAO;
+import Model.Quiz;
 import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author THANH
+ * @author Viet Dung
  */
-@WebServlet (name="HomeServerlet",urlPatterns={"/public/home"})
-public class HomeServerlet extends HttpServlet {
+@WebServlet(name = "QuizzesListController", urlPatterns = {"/common/quizzeslist"})
+public class QuizzesListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,13 +41,13 @@ public class HomeServerlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Home</title>");            
+            out.println("<title>Servlet QuizzesListController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet QuizzesListController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }   
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,26 +62,40 @@ public class HomeServerlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        System.out.println(request.getRequestURI());
-        SubjectDAO sjd = new SubjectDAO();
-        List<Subject> subjectList = sjd.loadSubjectOnHome();
-        request.setAttribute("subjectList", subjectList);
-        List<Subject> subjectLast = sjd.loadFeaturedSubject();
-        request.setAttribute("subjectLast", subjectLast);
-        //dành cho blog
-
-        PostDAO pd = new PostDAO();
-        List<Post> loadAllPost = pd.loadAllPost();
-        List<Post> loadLatestPost = pd.loadLatestPost();
-        List<Post> loadHotPost = pd.loadHostPost();
-        request.setAttribute("loadAllPost", loadAllPost);
-        request.setAttribute("loadLatestPost", loadLatestPost);
-        request.setAttribute("loadHotPost", loadHotPost);
+        DAO dao = new DAO();
         
         
-        
-        
-        request.getRequestDispatcher("/public/index.jsp").forward(request, response);
+        String didStr = request.getParameter("did");
+        int did = -1;
+        if (didStr != null) {
+            did = Integer.parseInt(didStr);
+        }
+        String lidStr = request.getParameter("tid");
+        int tid = -1;
+        if (didStr != null) {
+            tid = Integer.parseInt(lidStr);
+        }
+        String search = request.getParameter("search");
+        String txt = request.getParameter("index");
+        int index = 0;
+        if (txt == null) {
+            index = 1;
+        } else {
+            index = Integer.parseInt(txt);
+        }
+        int numpage = dao.totalPagesimulation(did,tid, search);
+        List<Quiz> list = dao.getAllQuizzest(did, tid, search,index);
+        List<Subject> list2 = dao.getAllQuizByname();
+        List<Quiz> listtype = dao.getAllQuizBytype();
+        request.setAttribute("listquizname", list2);
+        request.setAttribute("listquiztype", listtype);
+        request.setAttribute("listQ", list);
+        request.setAttribute("numpage", numpage);
+        request.setAttribute("index", index);
+        request.setAttribute("did", did);
+        request.setAttribute("tid", tid);
+        request.setAttribute("ts", search);
+        request.getRequestDispatcher("/common/QuizzesList.jsp").forward(request, response);
     }
 
     /**
@@ -97,7 +110,6 @@ public class HomeServerlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
     }
 
     /**

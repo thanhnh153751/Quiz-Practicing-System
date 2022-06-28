@@ -16,8 +16,23 @@ public class Question {
     private String img_link;
     private int score;
     private String explantion;
+    
+    private String sname;
+    private String dimenname;
+    private String lessionname;
+    private String level;
+    private boolean status;
 
     public Question() {
+    }
+    public Question(int id, String question_content,String sname,String dimenname,String lessionname,String level,boolean status) {
+        this.id = id;
+        this.question_content = question_content;
+        this.sname = sname;
+        this.dimenname = dimenname;
+        this.lessionname = lessionname;
+        this.level = level;
+        this.status = status;
     }
 
     public Question(int id, int quiz_id, String question_content, String img_link, int score, String explantion) {
@@ -43,6 +58,46 @@ public class Question {
 
     public void setQuiz_id(int quiz_id) {
         this.quiz_id = quiz_id;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public String getLessionname() {
+        return lessionname;
+    }
+
+    public void setLessionname(String lessionname) {
+        this.lessionname = lessionname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getDimenname() {
+        return dimenname;
+    }
+
+    public void setDimenname(String dimenname) {
+        this.dimenname = dimenname;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public String getQuestion_content() {

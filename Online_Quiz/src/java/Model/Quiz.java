@@ -18,10 +18,32 @@ public class Quiz {
     private float passrate;
     private int type;
     private long duration;
+    
+    private String subject;
+    private String qlevel;
+    private String qtype;
+    private int numofquess;
+    
 
     public Quiz() {
     }
-
+    public Quiz(int id, String qtype) {
+        this.id = id;
+        this.qtype = qtype;
+    }
+    
+    public Quiz(int id, String quiz_name, String subject, String qlevel, int numofquess, long duration, float passrate,String qtype) {
+        this.id = id;
+        this.quiz_name = quiz_name;
+        this.subject = subject;
+        this.qlevel = qlevel;
+        this.numofquess = numofquess;
+        this.duration = duration;
+        this.passrate = passrate;
+        this.qtype = qtype;
+        
+    }
+    
     public Quiz(int id, int lid, String quiz_name, int total_score, int level, float passrate, int type, long duration) {
         this.id = id;
         this.lid = lid;
@@ -63,6 +85,38 @@ public class Quiz {
 
     public void setTotal_score(int total_score) {
         this.total_score = total_score;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getQlevel() {
+        return qlevel;
+    }
+
+    public void setQlevel(String qlevel) {
+        this.qlevel = qlevel;
+    }
+
+    public String getQtype() {
+        return qtype;
+    }
+
+    public void setQtype(String qtype) {
+        this.qtype = qtype;
+    }
+
+    public int getNumofquess() {
+        return numofquess;
+    }
+
+    public void setNumofquess(int numofquess) {
+        this.numofquess = numofquess;
     }
 
     public int getLevel() {
