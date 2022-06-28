@@ -12,24 +12,26 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="../css/nav.css">
         <link rel="stylesheet" href="../css/quizhandle.css">
+        
         <title>Quiz Handle</title>
     </head>
     <body>
         <jsp:include page="../common/header.jsp"></jsp:include>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="quiz-timer d-flex justify-content-between ">
-
-                    </div>
-                    <div class="quiz-form ">
-                        <div class="quiz-header">
-                            <h1>${message}</h1>
-                        </div>
-                        <div class="quiz-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="quiz-timer d-flex justify-content-between ">
 
                         </div>
+                        <div class="quiz-form ">
+                            <h1>${message}!</h1>
+                        <c:if test="${status == true}">
+                            <h3>Total: ${score}/100</h3>
+                            
+                            <input onclick="Redirect('${quiz_take}','${quiz_id}')" type="button" id="v-details" value="Click here to view details">
+                            
+                        </c:if>
 
                     </div>
                     <div class="quiz-footer d-flex justify-content-between ">
@@ -38,11 +40,12 @@
                     </div>
                 </div>
             </div>
+        </div>
     </body>
     <script src="../js/jquery/jquery.js"></script>
     <script src="../js/jquery/jquery-migrate.js"></script>
     <script src="../js/boostrap/bootstrap.min.js"></script>
     <script src="../js/slick/slick.min.js"></script>
     <script src="../js/index.js"></script>
-    <!--<script src="../js/quizhandle.js"></script>-->
+    <script src="../js/quizfinish.js"></script>
 </html>

@@ -75,10 +75,16 @@ h5 {
     transform: scale(1.01);
 }
 
-.input input:checked+span {
-    border-color: #2C9E4B;
-    background-color: #2C9E4B;
+.correct+span{
+    background-color: #D51515;
+    border-color: #D51515;
     color: #fff;
+}
+
+.input input:checked+span {
+    border-color: #FFC300;
+    background-color: #FFC300;
+    color: #0c0c0c;
 }
 
 /* Css for quiz footer */
@@ -103,4 +109,14 @@ h5 {
 
 .btn-hide{
     visibility: hidden;
+}
+
+.icon-check{
+    font-size: 20px;
+    color: #37C75E;
+}
+
+.icon-wrong{
+    font-size: 20px;
+    color: #D51515;
 }

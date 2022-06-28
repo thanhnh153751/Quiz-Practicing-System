@@ -96,6 +96,21 @@ public class QuizDAO extends DBContext {
         return null;
     }
 
+    public int getNumberOfAnswer(int quiz_id, int ques_id){
+        String query = "Select count(*) from Answer where quiz_id = ? and ques_id=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, quiz_id);
+            ps.setInt(2, ques_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
     public List<Answer> getAnswerList(int quiz_id, int ques_id) {
         String query = "Select * from Answer where quiz_id = ? and ques_id =?";
         List<Answer> lists = new ArrayList<>();
@@ -118,22 +133,20 @@ public class QuizDAO extends DBContext {
         return null;
     }
 
-    public List<Answer> getCorrectAnswers(int quiz_id, int ques_id) {
+    public Answer getCorrectAnswers(int quiz_id, int ques_id) {
         String query = "Select * from Answer where quiz_id = ? and ques_id =? and correct = 1";
-        List<Answer> lists = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, quiz_id);
             ps.setInt(2, ques_id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                lists.add(new Answer(rs.getInt("id"),
+            if (rs.next()) {
+                return new Answer(rs.getInt("id"),
                         rs.getInt("quiz_id"),
                         rs.getInt("ques_id"),
                         rs.getNString("answer"),
-                        rs.getBoolean("correct")));
+                        rs.getBoolean("correct"));
             }
-            return lists;
         } catch (SQLException e) {
             System.out.println("\t[QuizDAO]-getCorrectAnswers: " + e);
         }
@@ -150,7 +163,7 @@ public class QuizDAO extends DBContext {
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println("\t[QuizDAO]-ggetTotalQuestion: " + e);
+            System.out.println("\t[QuizDAO]-getTotalQuestion: " + e);
         }
         return 0;
     }
@@ -200,6 +213,30 @@ public class QuizDAO extends DBContext {
         return null;
     }
 
+    public List<QuizTakeDetails> getTakeDetails(int takeid){
+        String query = "select * from quiz_take_details where take_id = ?";
+        List<QuizTakeDetails> quiztd = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, takeid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                quiztd.add(new QuizTakeDetails(
+                        rs.getInt("id"), 
+                        rs.getInt("take_id"), 
+                        rs.getInt("ques_id"), 
+                        rs.getInt("answer_id"), 
+                        rs.getTimestamp("create_time"), 
+                        rs.getTimestamp("update_time")));
+            }
+            return quiztd;
+            
+        } catch (SQLException e) {
+            System.out.println("\t[QuizDAO]-getTakeDetails: " + e);
+        }
+        return null;
+    }
+    
     public void createQuizTake(Account acc, int quiz_id) {
         final int status = 0;
         final int score = 0;
@@ -319,8 +356,14 @@ public class QuizDAO extends DBContext {
 
     public static void main(String[] args) {
         QuizDAO qdao = new QuizDAO();
-        Account a = new Account(2, "", "", "", "", true, 0, "");
-        qdao.createQuizTake(a, 4);
+        Answer a = qdao.getCorrectAnswers(4, 1);
+        System.out.println(a.getAnswer());
+//        List<QuizTakeDetails> qt = qdao.getTakeDetails(36);
+//        for (QuizTakeDetails quizTakeDetails : qt) {
+//            System.out.println(quizTakeDetails.getAnswer_id());
+//        }
+//        Account a = new Account(2, "", "", "", "", true, 0, "");
+//        qdao.createQuizTake(a, 4);
 
 //        List<Question> lists = qdao.getQuestionList(4);
 //        for (Question list : lists) {
