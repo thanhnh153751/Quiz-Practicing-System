@@ -57,7 +57,7 @@ public class SubjectRegisterController extends HttpServlet {
             Account x = (Account) session.getAttribute("acc");
             if (x != null) {
                 od.addOrder(x, s, p);
-                out.println("succesfully");
+                out.println("succesfull register-"+s.getTitle()+"- packege:"+p.getName());
             } else {
                 out.println("Please log in to your account");
                 out.println("<div class=\"auth\">\n"

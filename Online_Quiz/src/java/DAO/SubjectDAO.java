@@ -32,7 +32,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -66,7 +66,7 @@ public class SubjectDAO extends DBContext {
         String query = "select s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid where p.name like 'unlimited' order by id asc offset ? rows fetch next 8 rows only";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, (index-1)*8);//8 items/page
+            ps.setInt(1, (index - 1) * 8);//8 items/page
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 loadSubject.add(new Subject(
@@ -74,7 +74,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -100,7 +100,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -113,6 +113,7 @@ public class SubjectDAO extends DBContext {
         }
         return null;
     }
+
     public List<Subject> loadFeaturedSubject() {//tải lên 6 subject mới nhất có trong db
         List<Subject> loadSubject = new ArrayList<>();
         String query = "select top 6 s.*,p.list_price,p.sale_price from [Subject] s inner join Package p on s.id = p.sid Order by id desc";
@@ -125,7 +126,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -151,7 +152,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -183,6 +184,42 @@ public class SubjectDAO extends DBContext {
         return null;
     }
     
+    public SubSubjectCategory loadSubSubjectCategoryBySubjectId(int sid) {//tải lên tất cả các subject có trong db
+        SubSubjectCategory SubjectCategory = new SubSubjectCategory();
+        String query = "select ssc.* from [Subject] s inner join Subject_Sub_Category ssc on s.cid = ssc.id where s.id="+sid;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                SubjectCategory = new SubSubjectCategory(rs.getInt("id"), rs.getInt("cid"), rs.getNString("name"));
+            }
+            return SubjectCategory;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+    
+
+    public List<SubSubjectCategory> loadAllSubSubjectCategoryBySid(int id) {//tải lên tất cả các Subsubject by CategorySubject có trong db
+        List<SubSubjectCategory> loadSubSubjectCategory = new ArrayList<>();
+        String query = "select sub.* from [Subject_Sub_Category] sub inner join [Subject_Category] s on s.id=sub.cid where s.id=" + id;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                loadSubSubjectCategory.add(new SubSubjectCategory(
+                        rs.getInt("id"),
+                        rs.getInt("cid"),
+                        rs.getNString("name")));
+            }
+            return loadSubSubjectCategory;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO: " + e);
+        }
+        return null;
+    }
+
     public List<SubSubjectCategory> loadAllSubSubjectCategory() {//tải lên tất cả các Subsubject có trong db
         List<SubSubjectCategory> loadSubSubjectCategory = new ArrayList<>();
         String query = "select sub.* from [Subject_Sub_Category] sub inner join [Subject_Category] s on s.id=sub.cid";
@@ -214,7 +251,7 @@ public class SubjectDAO extends DBContext {
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
@@ -269,44 +306,92 @@ public class SubjectDAO extends DBContext {
                 }
             }
 
-            if (key !=  "" || key != null) {
+            if (key != "" || key != null) {
                 sql += "(s.title like ? or s.tagline like ? or s.contact like ? or s.[description] like ? or sc.[name] like ?)";
             }
 
         }
 
         try {
-            
+
             PreparedStatement st = connection.prepareStatement(sql);
             st.setNString(1, "%" + key + "%");
             st.setNString(2, "%" + key + "%");
             st.setNString(3, "%" + key + "%");
             st.setNString(4, "%" + key + "%");
             st.setNString(5, "%" + key + "%");
-            
+
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                
+
                 Subject p = new Subject(
                         rs.getInt("id"),
                         rs.getInt("cid"),
                         rs.getNString("thumbnail"),
                         rs.getNString("title"),
-                        rs.getNString("tagline"),                     
+                        rs.getNString("tagline"),
                         rs.getNString("contact"),
                         rs.getNString("description"),
                         rs.getDouble("list_price"),
                         rs.getDouble("sale_price"),
                         rs.getInt("status"));
-                
+
                 list.add(p);
             }
         } catch (Exception e) {
         }
         return list;
     }
+
+    public void insertNewSubject(Subject s) {
+
+        String sql = "INSERT INTO [Subject] (cid, thumbnail, title, contact, [description], [status])\n"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, s.getCid());
+            st.setNString(2, s.getThumbnail());
+            st.setNString(3, s.getTitle());
+            st.setNString(4, s.getContact());
+            st.setNString(5, s.getDescription());
+            st.setInt(6, s.getStatus());          
+            st.executeUpdate();//1 - 0
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
     
-    
+        public void updateGeneralSubject(Subject s) {
+        String sql = "UPDATE [Subject] SET cid=? , title =?, thumbnail =?, [description] =?, contact=?, [status] =? WHERE id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, s.getCid());
+            st.setNString(2, s.getTitle());
+            st.setNString(3, s.getThumbnail());
+            st.setNString(4, s.getDescription());
+            st.setNString(5, s.getContact());
+            st.setInt(6, s.getStatus());
+            st.setInt(7, s.getId());          
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+        public void updateGeneralSubjectWithoutImg(Subject s) {
+        String sql = "UPDATE [Subject] SET cid=? , title =?, [description] =?, contact=?, [status] =? WHERE id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, s.getCid());
+            st.setNString(2, s.getTitle());           
+            st.setNString(3, s.getDescription());
+            st.setNString(4, s.getContact());
+            st.setInt(5, s.getStatus());
+            st.setInt(6, s.getId());          
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public static void main(String[] args) {
         SubjectDAO d = new SubjectDAO();
@@ -314,16 +399,14 @@ public class SubjectDAO extends DBContext {
 //        String[] featured = new String[]{"demo"};
 //        int[] subjectId = {1};
 //        String[] featured = {};
-       List<Subject> list = d.loadSubjectOnHome();
-  //     System.out.println("??????????????????????");
+        List<Subject> list = d.loadLastSubject();
+        //     System.out.println("??????????????????????");
         //System.out.println(list.size());
-//        for (Subject s : list) {
-//            
-//            System.out.println(s.getTitle());
-//        }
-        
+        for (Subject s : list) {
+            
+            System.out.println(s.getTitle());
+        }
 
-        
     }
 
 }

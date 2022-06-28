@@ -52,76 +52,81 @@
             .content ul li{
                 list-style: none;
             }
+            .searchBox{
+                border: none;
+                border-bottom: 1px solid;
+                border-radius: inherit;
+            }
         </style>
     </head>
     <body>
         <div class="search-box">
-            <div class=" col-12 jc-r mb-4">
+            <div class=" col-12 jc-r px-0 mb-4">
                 <form action="searchboxsubjectlist" class="" role="search" id="search-bar" method="post">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name" value="${requestScope.key}">
+                    <input class="form-control me-2 searchBox" type="search" placeholder="Search course by title,tag,description,..." aria-label="Search" name="name" value="${requestScope.key}">
 
 
                     <br>
 
 
-                    
+
 
                     <!--test below-->  
 
-                    
+
                     <c:forEach items="${requestScope.categorySubject}" var="c">
                         <%
-                        int[] clist = (int[]) request.getAttribute("cidF");
+                            int[] clist = (int[]) request.getAttribute("cidF");
 
-                        boolean pos = false;
-                        if (clist != null) {
-                            pos = true;
-                        }
+                            boolean pos = false;
+                            if (clist != null) {
+                                pos = true;
+                            }
 
-                        List<SubSubjectCategory> calist = (List<SubSubjectCategory>) request.getAttribute("subCategorySubject");
-                        int index = 0;
-                    %>
+                            List<SubSubjectCategory> calist = (List<SubSubjectCategory>) request.getAttribute("subCategorySubject");
+                            int index = 0;
+                        %>
 
-                    <div class="drop_sub">
-                        <button type="button" class="collapsible">${c.name}</button>
-
-
-                        <c:set var="id" value="${c.id}"></c:set>
+                        <div class="drop_sub">
+                            <button type="button" class="collapsible">${c.name}<i class="fa-solid fa-angle-down"></i></button>
 
 
-                            <div class="content">
-                                <ul class="items">
-                                    
-                                    
-
-                                <c:forEach items="${requestScope.subCategorySubject}" var="sub">
-
-                                    <%
-                                        boolean status = false;
-                                        if (pos) {
-                                            for (int i = 0; i < clist.length; i++) {
-                                                if (clist[i] == calist.get(index).getId()) {
-                                                    status = true;//chỉ cần true là có checked từ phiên trước
-                                                }
-
-                                            }
-                                        }
-                                    %>    
+                            <c:set var="id" value="${c.id}"></c:set>
 
 
-                                    <c:if test="${id==sub.cid}">
-                                        <li><input type="checkbox" name="cid_checkbox" value="${sub.id}" <c:if test="<%= pos && status%>">checked</c:if>/>${sub.name} </li> 
-                                    </c:if>
+                                <div class="content">
+                                    <ul class="items">
+
+
+
+                                    <c:forEach items="${requestScope.subCategorySubject}" var="sub">
+
                                         <%
-                                            index++;
-                                        %>   
+                                            boolean status = false;
+                                            if (pos) {
+                                                for (int i = 0; i < clist.length; i++) {
+                                                    if (clist[i] == calist.get(index).getId()) {
+                                                        status = true;//chỉ cần true là có checked từ phiên trước
+                                                    }
 
-                                </c:forEach>    
+                                                }
+                                            }
+                                        %>    
 
-                            </ul>
 
+                                        <c:if test="${id==sub.cid}">
+                                            <li><input type="checkbox" name="cid_checkbox" value="${sub.id}" <c:if test="<%= pos && status%>">checked</c:if>/>${sub.name} </li> 
+                                            </c:if>
+                                            <%
+                                                index++;
+                                            %>   
+
+                                    </c:forEach>    
+
+                                </ul>
+
+                            </div>
                         </div>
-                    </div>
 
                     </c:forEach>
 
@@ -130,7 +135,7 @@
                             var button = d.querySelector('button');
                             var content = d.querySelector('.content');
                             d.querySelectorAll('input[type="checkbox"]').forEach(i => {
-                                if(i.checked){
+                                if (i.checked) {
                                     button.classList.add("active");
                                     content.style = "display: block";
                                 }
@@ -146,38 +151,15 @@
 
 
                     <!--check box categori-->
-                    
+
                     <!-- end check box categori-->    
                     <br>
 
-                    <%
-                        boolean b = false;
-                        boolean a = false;
-                        String[] color = (String[]) request.getAttribute("featured");
-                        if (color != null) {
-                            for (int i = 0; i < color.length; i++) {
-                                if (color[i].equals("Begin")) {
-                                    b = true;
-                                }
-                                if (color[i].equals("Advanced")) {
-                                    a = true;
-                                }
-
-                            }
-                        }
-                    %>
-
-                    <div style="display: flex;justify-content: space-between; margin-bottom: 2px;">
-                        <input type="checkbox" name="featured" value="Begin" <c:if test="<%= b%>">checked</c:if> class="btn-check" id="btn-check-outlined" autocomplete="off">
-                            <label class="btn btn-outline-primary" for="btn-check-outlined">Begin</label><br>
-
-                            <input type="checkbox" name="featured" value="Advanced" <c:if test="<%= a%>">checked</c:if>  class="btn-check" id="btn-check-2-outlined" autocomplete="off">
-                            <label style="" class="btn btn-outline-primary" for="btn-check-2-outlined">Advanced</label><br>
-                        </div>
 
 
-                        <button class ="btn btn-outline-success" type="submit">Search</button>
-                        <input id="pageing" type="hidden" name="page" value="${requestScope.page}">
+
+                    <button class ="btn btn-outline-success" type="submit">Search</button>
+                    <input id="pageing" type="hidden" name="page" value="${requestScope.page}">
                     <!--cần xem lại nếu cần type="submit"  onclick="document.getElementById('search-bar').submit()" -->
 
                 </form>
@@ -213,24 +195,24 @@
     <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
 
     <script src="../js/slick/slick.min.js"></script>
-   
 
+    <script src="https://kit.fontawesome.com/0e3f31cc48.js" crossorigin="anonymous"></script>
 
     <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+                        var coll = document.getElementsByClassName("collapsible");
+                        var i;
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        }
+                        for (i = 0; i < coll.length; i++) {
+                            coll[i].addEventListener("click", function () {
+                                this.classList.toggle("active");
+                                var content = this.nextElementSibling;
+                                if (content.style.display === "block") {
+                                    content.style.display = "none";
+                                } else {
+                                    content.style.display = "block";
+                                }
+                            });
+                        }
     </script> 
 
 </html>

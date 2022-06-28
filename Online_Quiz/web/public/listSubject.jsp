@@ -34,7 +34,7 @@
             <div class="container">
 
 
-                <h1 class="center"><a href="#">Name Course</a></h1>
+                <h1 class="center"><a href="#">List Course</a></h1>
 
 
                 <div class="row">
@@ -148,5 +148,6 @@
     <script src="../js/boostrap/bootstrap.min.js"></script>
     <script src="../js/slick/slick.min.js"></script>
     <script src="../js/index.js"></script>
+                                                                
 
 </html>

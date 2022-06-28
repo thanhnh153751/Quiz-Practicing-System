@@ -50,6 +50,7 @@ public class Subject {
         this.title = title;
         
     }
+    
     public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
         this.id = id;
         this.title = title;
@@ -94,6 +95,40 @@ public class Subject {
         this.sale_price = sale_price;
         this.status = status;
     }
+    
+    //dành cho add new subject
+
+    public Subject(int cid, String thumbnail, String title, String contact, String description, int status) {
+        this.cid = cid;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.contact = contact;
+        this.description = description;
+        this.status = status;
+    }
+
+    //dành cho update
+    public Subject(int id, int cid, String thumbnail, String title, String contact, String description, int status) {
+        this.id = id;
+        this.cid = cid;
+        this.thumbnail = thumbnail;
+        this.title = title;
+        this.contact = contact;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Subject(int id, int cid, String title, String contact, String description, int status) {
+        this.id = id;
+        this.cid = cid;
+        this.title = title;
+        this.contact = contact;
+        this.description = description;
+        this.status = status;
+    }
+    
+    
+    
     
     
 

@@ -84,7 +84,7 @@
                                     <h2>Subjects <b>List</b></h2>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="#"  class="btn btn-success" data-toggle="modal"> <span>Add New Course</span></a>
+                                    <a href="/Online_Quiz/courseContent/newsuject"  class="btn btn-success" data-toggle="modal"> <span>Add New Course</span></a>
 
                                 </div>
                             </div>

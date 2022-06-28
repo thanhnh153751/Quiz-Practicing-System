@@ -32,18 +32,19 @@
         </style>
     </head>
     <body>
-        <jsp:include page="../common/header.jsp"></jsp:include>
-
-            <div class="container">
-
-
-                <h1 class="center"><a href="#">Name Course</a></h1>
+        <div class="header">
+            <jsp:include page="../common/header.jsp"></jsp:include>
+            </div>
+        <div class="container">
 
 
-                <div class="row">
-                    <div class="col-10">
+            <h1 class="center"><a href="#"></a></h1>
 
-                        <div class="row list-courses">
+
+            <div class="row">
+                <div class="col-10">
+                    
+                    <div class="row list-courses">
 
                         <c:set var="s" value="${requestScope.subject}"/>
                         <div class=" mb-4">
@@ -144,6 +145,8 @@
 
 
                                                     });
+                                                    
+                                                    //gửi trả lại từ pop-up
                                                     function getData() {
                                                         var a = $("input[type='radio'][name='package']:checked").val();
 
@@ -155,7 +158,12 @@
 
                                                             },
                                                             success: function (response) {
-                                                                document.getElementById("arler").innerHTML = response;
+                                                                if (a != null) {
+                                                                    document.getElementById("arler").innerHTML = response;
+                                                                    document.getElementById("message").style.display = "none";
+                                                                    
+                                                                }
+
                                                             },
                                                             error: function (xhr) {
                                                                 //Do Something to handle error

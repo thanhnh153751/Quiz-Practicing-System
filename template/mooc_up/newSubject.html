@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <title>Document</title>
+    <style>
+        .center {
+            background-color: #04AA6D;
+        }
+
+        /* tbody, td, tfoot, th, thead, tr {
+            padding: 10px;
+        } */
+        
+        .table_1 td {
+            padding: 30px 5px;
+            
+        }
+        .table_1 tr td:nth-child(1){
+           text-align: right;
+            
+        }
+        .table_2 tr td:nth-child(1){
+            padding: 1% 5%;
+           text-align: right;
+            
+        }
+
+
+
+        .table_2 {
+            margin-top: 30px;
+        }
+
+        
+
+        .description {
+            padding-bottom: 225px;
+        }
+
+        /* below for upload img */
+
+        .image-upload>input {
+            display: none;
+        }
+
+        .upload-icon {
+            width: 200px;
+            height: 97px;
+            border: 2px solid #5642BE;
+            border-style: dotted;
+            border-radius: 18px;
+            float: left;
+        }
+        
+
+        .upload-icon .icon {
+            width: 60px;
+            height: 60px;
+            margin: 19px;
+            cursor: pointer;
+        }
+
+        .prev {
+            display: none;
+            width: 95px;
+            height: 92px;
+            margin: 2px;
+            border-radius: 15px;
+        }
+        .input-text{
+            width: 100%;
+        }
+
+        .body-main    {
+            background-color: gainsboro;
+            box-shadow: 0px 2px 14px #aaaaaa;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="center">Add new Course</h1>
+    <div class="container">
+        <div class="row body-main">
+            <h3 class="text-center">Please enter the information of a course in the form</h3>
+            <div class="col-6">
+
+                <table class="table_1">
+
+                    <tr>
+                        <td>Title Course</td>
+                        <td><input class="input-text" type="text" placeholder="enter name,title of course"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Category Course</td>
+                        <td>
+                            <select name="category" id="">
+                                <option value="">slect category</option>
+                            </select>
+                            <select name="categorySub" id="">
+                                <option value="">slect Subcategory</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>featured flag</td>
+                        <td><input type="checkbox"></td>
+                    </tr>
+
+                    <tr>
+                        <td>thumbnail image</td>
+                        <td>
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                            <form>
+                                <div class="image-upload">
+                                    <label for="file-input" id="thumbnail-image-label">
+                                        <div class="upload-icon">
+                                            <img class="icon" src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                                            <img class="prev" src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                                        </div>
+                                    </label>
+                                    <input id="file-input" type="file" onchange="loadFile(event)" />
+                                    
+                                    <div id="cont">
+                                        
+                                    </div>
+                                </div>
+                                
+                            </form>
+
+                        </td>
+                    </tr>
+
+
+
+
+
+                </table>
+            </div>
+
+            <div class="col-6">
+                <table class="table_2">
+                    <tr>
+                        <td>owner</td>
+                        <td><input class="input-text" type="text" placeholder="enter the name of the author or owner of the course"></td>
+                    </tr>
+                    <tr>
+                        <td>status</td>
+                        <td>
+                            <select name="status" id="">
+                                <option value="">slect status</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="description" style="padding-bottom: 225px;">description</td>
+                        <td>
+                            <textarea oninput="auto_grow(this)" style="width: 100%; min-height: 250px" name="paragraph_text" cols="50" rows="10" placeholder="Enter a description of the course,..."></textarea>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><button style="width: 134px;">Add new course</button></td>
+                        <td style="float: right;"><button>back</button></td>
+
+                    </tr>
+                </table>
+            </div>
+
+
+            
+
+
+
+        </div>
+    </div>
+
+</body>
+<script>
+    // function readURL(input) {
+    //     var id = $(input).attr("id");
+
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+
+    //         reader.onload = function (e) {
+    //             // $('label[for="' + id + '"] .upload-icon').css("border", "none");
+    //             // $('label[for="' + id + '"] .icon').hide();             
+    //             // $('label[for="' + id + '"] .prev').attr('src', e.target.result).show();
+
+    //         }
+
+    //         reader.readAsDataURL(input.files[0]);
+
+    //     }
+    // }
+
+    // $("input[id^='file-input']").change(function () {
+    //     readURL(this);
+
+    // });
+
+
+    //dưới là dấu x
+    var loadFile = function (event) {
+        var imgCont = document.getElementById("cont");
+        imgCont.innerHTML = "";
+        var label = document.getElementById('thumbnail-image-label')
+        label.style = "display: none;"
+
+        for (let i = 0; i < event.target.files.length; i++) {
+            var divElm = document.createElement('div');
+            divElm.id = "rowdiv" + i;
+            
+
+
+            var spanElm = document.createElement('span');
+            var image = document.createElement('img');
+            image.src = URL.createObjectURL(event.target.files[i]);
+            image.id = "output" + i;
+            image.width = "200";
+
+            spanElm.appendChild(image);
+            var deleteImg = document.createElement('button');
+            deleteImg.innerHTML = "x";
+            deleteImg.style = "cursor: pointer";
+
+            deleteImg.onclick = function () { 
+            this.parentNode.remove(); label.style = "";
+            document.getElementById('file-input').value = null;
+            };
+
+            divElm.appendChild(spanElm);
+            divElm.appendChild(deleteImg);
+            imgCont.appendChild(divElm);
+        }
+    };
+    // var loadFile = function (event) {
+    //     var imgCont = document.getElementById("cont");
+    //     for (let i = 0; i < event.target.files.length; i++) {
+    //         var divElm = document.createElement('div');
+    //         divElm.id = "rowdiv" + i;
+    //         var spanElm = document.createElement('span');
+    //         var image = document.createElement('img');
+    //         image.src = URL.createObjectURL(event.target.files[i]);
+    //         image.id = "output" + i;
+    //         image.width = "200";
+    //         spanElm.appendChild(image);
+    //         var deleteImg = document.createElement('button');
+    //         deleteImg.innerHTML = "x";
+    //         deleteImg.style = "cursor: pointer";
+    //         deleteImg.onclick = function () { this.parentNode.remove() };
+    //         divElm.appendChild(spanElm);
+    //         divElm.appendChild(deleteImg);
+    //         imgCont.appendChild(divElm);
+    //     }
+    // };
+
+    //for text description
+    function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
+</script>
+<script src="../js/jquery/jquery.js"></script>
+<script src="../js/jquery/jquery-migrate.js"></script>
+<script src="../js/boostrap/bootstrap.min.js"></script>
+
+</html>

@@ -8,6 +8,9 @@ package DAO;
 import Model.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -61,6 +64,31 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
+    
+        public List<Account> loadAccountBySearch(String key) {
+        List<Account> listAcc = new ArrayList<>();
+        String query = "select * from Account where fullname like ? or email like ? or phone like ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(query);
+            st.setNString(1, "%" + key + "%");
+            st.setNString(2, "%" + key + "%");
+            st.setNString(3, "%" + key + "%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                listAcc.add(new Account(rs.getInt("id"),
+                        rs.getNString("fullname"),
+                        rs.getNString("email"),
+                        rs.getNString("phone"),
+                        (rs.getInt("gender") == 1) ? true : false ,
+                        rs.getInt("status")));
+
+            }
+            return listAcc;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO1: " + e);
+        }
+        return null;
+    }
 
     public void Register(String fullname, String email, String phone, String password, boolean gender, String avatar) {
         String query = "insert into Account(fullname,email, phone,password,gender,avatar)\n"
@@ -107,7 +135,11 @@ public class AccountDAO extends DBContext {
     }
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
-        dao.Register("Abc", "abc", "12345", "1245", true, "a");
+//        dao.Register("Abc", "abc", "12345", "1245", true, "a");
+        List<Account> listAcc = dao.loadAccountBySearch("nguyen");
+        for (Account account : listAcc) {
+//            System.out.println(account.getFullname());
+        }
     }
 }
 

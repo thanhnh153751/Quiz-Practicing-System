@@ -22,6 +22,17 @@ public class Account {
     public Account() {
     }
 
+    public Account(int id, String fullname, String email, String phone, boolean gender, int status) {
+        this.id = id;
+        this.fullname = fullname;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.status = status;
+    }
+
+    
+     
     public Account(int id, String fullname, String email, String phone, String password, boolean gender, int status, String avatar) {
         this.id = id;
         this.fullname = fullname;
