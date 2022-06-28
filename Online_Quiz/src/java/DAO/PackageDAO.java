@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Package;
+import Model.Subject;
 
 /**
  *
@@ -59,7 +60,7 @@ public class PackageDAO extends DBContext {
                         rs.getInt("status"),
                         rs.getNString("description"));
             }
-            
+
             return packages;
         } catch (SQLException e) {
             System.out.println("\tPostDAO1: " + e);
@@ -67,11 +68,97 @@ public class PackageDAO extends DBContext {
         return null;
     }
 
+    public List<Package> ListOfPackage() {
+        List<Package> listofpackage = new ArrayList<>();
+        String query = "select id, [sid], [name], duration, list_price, sale_price, [status], [description] from Package";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listofpackage.add(new Model.Package(
+                        rs.getInt("id"),
+                        rs.getInt("sid"),
+                        rs.getNString("name"),
+                        rs.getInt("duration"),
+                        rs.getInt("list_price"),
+                        rs.getInt("sale_price"),
+                        rs.getInt("status"),
+                        rs.getNString("description")));
+            }
+            return listofpackage;
+        } catch (SQLException e) {
+            System.out.println("\tPostDAO1: " + e);
+        }
+        return null;
+    }
+
+    public List<Subject> ListOfSubjectP() {
+
+        List<Subject> listofsubjectp = new ArrayList<>();
+        String query = " select id, title from Subject";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listofsubjectp.add(new Subject(
+                        rs.getInt("id"),
+                        rs.getString("title")
+                ));
+            }
+            return listofsubjectp;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void inputPackage(int sid, String name, int duration, int list_price, int sale_price, int status, String description) {
+        String query = "insert into Package values(?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ps.setString(2, name);
+            ps.setInt(3, duration);
+            ps.setInt(4, list_price);
+            ps.setInt(5, sale_price);
+            ps.setInt(6, status);
+            ps.setString(7, description);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void editPackage(int id, int sid, String name, int duration, int list_price, int sale_price, int status, String description) {
+        String query = "update Package set sid = ?,[name]=?,[duration]=?,[list_price]=?,[sale_price]=?,[status]=?,[description]=? where id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ps.setString(2, name);
+            ps.setInt(3, duration);
+            ps.setInt(4, list_price);
+            ps.setInt(5, sale_price);
+            ps.setInt(6, status);
+            ps.setString(7, description);
+            ps.setInt(8, id);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    public List<Package> getListbyPage(List<Package> list, int start, int end) {
+
+        List<Package> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
     public static void main(String[] args) {
-//        PackageDAO d = new PackageDAO();
-//        List<Package> packages = d.loadPackagesByCid(1);
-//        for (Package aPackage : packages) {
-//            System.out.println(aPackage.getName());
-//        }
+        PackageDAO dao = new PackageDAO();
+        System.out.println(dao.ListOfPackage());
+        System.out.println(dao.ListOfSubjectP());
     }
 }

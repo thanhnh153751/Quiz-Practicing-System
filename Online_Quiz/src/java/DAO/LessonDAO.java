@@ -32,4 +32,58 @@ public class LessonDAO extends DBContext{
         }
         return null;
     }
+    
+    public List<Lesson> ListOfLesson() {//tải lên tất cả các Lesson có trong db
+        List<Lesson> ListOfLesson = new ArrayList<>();
+        String query = "select l.*, lt.type from [Lesson] as l Join [Lesson_Type] as lt on l.type_id = lt.id";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ListOfLesson.add(new Lesson(
+                        rs.getInt("id"),
+                        rs.getInt("sid"),
+                        rs.getInt("type_id"),
+                        rs.getString("name"),
+                        rs.getInt("status"),
+                        rs.getString("type")
+                ));
+            }
+            return ListOfLesson;
+        } catch (SQLException e) {
+            System.out.println("\tOrderDAO5: " + e);
+        }
+        return null;
+    }
+        public void changestatus(int id, int status) {
+        String query = "update Lesson set status = ? where id =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            if (status == 0) {
+                ps.setInt(1,1);
+
+            }
+            if (status == 1) {
+                ps.setInt(1,0);
+
+            }
+            ps.setInt(2, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+        public List<Lesson> getListbyPage(List<Lesson> list, int start, int end) {
+
+        List<Lesson> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+    public static void main(String[] args) {
+        LessonDAO dao = new LessonDAO();
+        System.out.println(dao.ListOfLesson());
+    }
 }

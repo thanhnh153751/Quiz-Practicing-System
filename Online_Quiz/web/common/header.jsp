@@ -25,7 +25,9 @@
                 <a href="<c:url value="/common/managersubjectlist"/>">Subject List</a>
                 <a href="<c:url value="/common/profile"/>">Profile</a>
                 <a href="<c:url value="/marketing/postdetails"/>">Post</a>
-                <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
+                <a href="<c:url value="/Online_Quiz/public/myregistrations"/>">My Registrations</a>
+                <a href="/Online_Quiz/CourseContent/pricepackage">Package List</a>
+                <a href="/Online_Quiz/CourseContent/subjectlesson">Lesson List</a>
                 <a id="changepass-nav" data-toggle="modal"> Change password</a>
                 <a href="<c:url value="/public/logout"/>">Logout</a>
             </div>

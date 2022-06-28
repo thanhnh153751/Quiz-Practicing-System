@@ -15,6 +15,7 @@ public class Lesson {
     int type_id;
     String name;
     int status;
+    String type;
 
     public Lesson() {
     }
@@ -33,6 +34,25 @@ public class Lesson {
         this.name = name;
         this.status = status;
     }
+
+    public Lesson(int id, int sid, int type_id, String name, int status, String type) {
+        this.id = id;
+        this.sid = sid;
+        this.type_id = type_id;
+        this.name = name;
+        this.status = status;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -73,5 +93,12 @@ public class Lesson {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Lesson{" + "id=" + id + ", sid=" + sid + ", type_id=" + type_id + ", name=" + name + ", status=" + status + ", type=" + type + '}';
+    }
+    
+    
     
 }
