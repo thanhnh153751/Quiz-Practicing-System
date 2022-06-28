@@ -972,6 +972,6 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        System.out.println(dao.getAllSubjectDimensionbypid(1));
+        System.out.println(dao.getAllNew(-1, -1, -1, "", 1));
     }
 }

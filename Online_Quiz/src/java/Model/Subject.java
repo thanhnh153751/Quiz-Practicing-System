@@ -62,7 +62,7 @@ public class Subject {
         this.ddescription = ddescription;
         
     }
-    public Subject(int id, String title, String dname, int status, String cname,String scname,int numoflesson) {
+    public Subject(int id, String title, String contact, int status, String cname,String scname,int numoflesson) {
         this.id = id;
         this.title = title;
         this.contact = contact;

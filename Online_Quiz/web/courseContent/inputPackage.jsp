@@ -48,7 +48,7 @@
 
                                         </div>
                                         <div class="col-md-4">
-                                            <input name="status"  type="radio" value="0" > Inactive
+<!--                                            <input name="status"  type="radio" value="0" > Inactive-->
 
                                         </div>
                                     </div>

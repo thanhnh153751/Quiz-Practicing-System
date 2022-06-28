@@ -55,6 +55,7 @@
                                 <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                <th>ChangeStatus</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,8 +76,12 @@
 
                                 </c:if>
 
-                                <td><a href="#"><i class="fas fa-eye"></i></a>
+                                <td><a href="#"><i class="fas fa-eye"></i>View</a>
                                     <a class="btn btn-danger" href="#">Edit</a> 
+                                    
+
+                                </td>
+                                <td>
                                     <c:if test="${o.status == 1 }">
                                         <a class="btn btn-warning" href="subjectlesson?do=changing&id=${o.id}&status=${o.status}" 
                                            data-bs-toggle="modal" data-bs-target="#exampleModal${o.id}">Inactivate</a>
@@ -89,7 +94,6 @@
 
 
                                     </c:if>
-
                                 </td>
 
                             </tr>
