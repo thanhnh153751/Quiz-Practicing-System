@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.AccountDAO;
 import DAO.SubjectDAO;
+import DAO.UserPermissionDAO;
 import Model.Account;
 import Model.SubSubjectCategory;
 import Model.Subject;
@@ -77,6 +78,8 @@ public class SubjectDetailManagerController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         AccountDAO ad = new AccountDAO();
         SubjectDAO sd = new SubjectDAO();
+        
+        
         String key = request.getParameter("key");
         if(key!= ""){
             List<Account> listAcc = ad.loadAccountBySearch(key);
@@ -84,14 +87,15 @@ public class SubjectDetailManagerController extends HttpServlet {
         }
         
         request.setAttribute("key", key);
+        int sid = Integer.parseInt(request.getParameter("sid"));
         
 
-        Subject subject = sd.loadSubjectDetail(12);//fix sau này
+        Subject subject = sd.loadSubjectDetail(sid);//fix sau này
 
         List<SubjectCategory> category = sd.loadAllSubjectCategory();
         request.setAttribute("category", category);
 
-        SubSubjectCategory SubjectCategory = sd.loadSubSubjectCategoryBySubjectId(12);//fix sau này
+        SubSubjectCategory SubjectCategory = sd.loadSubSubjectCategoryBySubjectId(sid);//fix sau này
         request.setAttribute("subcategory", SubjectCategory);
 
         List<SubSubjectCategory> allsubCategory = sd.loadAllSubSubjectCategoryBySid(SubjectCategory.getCid());
@@ -148,14 +152,15 @@ public class SubjectDetailManagerController extends HttpServlet {
                 sd.updateGeneralSubject(s);
                 request.setAttribute("mess", "update success course");
             }
-
+            
             //gửi lại data
-            Subject subject = sd.loadSubjectDetail(12);//fix sau này
+            int sid = Integer.parseInt(request.getParameter("sid"));
+            Subject subject = sd.loadSubjectDetail(sid);//fix sau này
 
             List<SubjectCategory> category = sd.loadAllSubjectCategory();
             request.setAttribute("category", category);
 
-            SubSubjectCategory SubjectCategory = sd.loadSubSubjectCategoryBySubjectId(12);//fix sau này
+            SubSubjectCategory SubjectCategory = sd.loadSubSubjectCategoryBySubjectId(sid);//fix sau này
             request.setAttribute("subcategory", SubjectCategory);
 
             List<SubSubjectCategory> allsubCategory = sd.loadAllSubSubjectCategoryBySid(SubjectCategory.getCid());

@@ -116,19 +116,26 @@
             .input-text{
                 width: 100%;
             }
+            .body-main    {
+                background-color: fff;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 66px -3px;
+            }
         </style>
     </head>
 
     <body>
-        <h1 class="center">Course Details</h1>
-        <div class="container">
-            <div class="body-main">
-                <div class="container ">
-                    <div class="row shadow-sm rounded  py-4">
-                        <div class="col-md-5 mx-auto">
-                            <h3 class="text-center">Choose the assigned expert for this course</h3>
-                            <div class="input-group">
-                                <form class="d-flex w-100" action="subjectdetailmanager">
+        <c:set value="${requestScope.subject}" var="sub"></c:set>
+            <h1 class="center">Course Details</h1>
+            <div class="container">
+                <div class="">
+                    <div class="container ">
+                        <div class="row body-main rounded  py-4">
+                            <div class="col-md-5 mx-auto">
+                                <h3 class="text-center">Choose the assigned expert for this course</h3>
+                                <div class="input-group">
+                                    <form class="d-flex w-100" action="subjectdetailmanager">
+
+                                        <input hidden="true" name="sid" value="${sub.id}">
                                     <input class="form-control mr-sm-2" type="search" name="key" value="${requestScope.key}"
                                            placeholder="enter account name,email,phone want to become Expert" aria-label="Search">
                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -163,6 +170,7 @@
                                                             </tr>-->
                                 <c:forEach items="${requestScope.listAcc}" var="ac">
                                     <input type="hidden" id="aid" value="${ac.id}" >
+                                    <!--thẻ input khong dùng đc vì có nhiều id gioog nhau-->
                                     <tr>
                                         <td>${ac.id}</td>
                                         <td>${ac.fullname}</td>
@@ -177,10 +185,54 @@
                                             <c:if test="${ac.status == 0}">inactive</c:if>
                                             </td>
                                             <td>
-                                                <input onclick="return false;" type="checkbox">
+                                                <input onclick="return false;" type="checkbox"  <c:if test="${ac.licensed == 1}">checked</c:if>>
                                             </td>
                                             <td>
-                                                <button class="btn btn-outline-success btn-sm" onclick="doSet('${ac.id}','${ac.fullname}','${ac.email}')">set role</button>
+                                                <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-for-${ac.id}">set role</button>
+
+                                            <!-- Modal -->
+                                            <div class="modal modal-set-role fade" id="modal-for-${ac.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">confirm role change for this account</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td>ID</td>
+                                                                    <td>${ac.id}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Full Name</td>
+                                                                    <td>${ac.fullname}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>${ac.email}</td>
+                                                                </tr>
+                                                            </table>
+                                                            <p style="color: red">turn ON the user will become an Expert</p>
+                                                            <p style="color: red">turn OFF to remove the role</p>
+                                                            <div class="form-check form-switch d-flex">
+
+                                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="role${ac.id}" <c:if test="${ac.licensed == 1}">checked</c:if>>
+                                                                <label class="form-check-label" for="flexSwitchCheckDefault">(OFF/On)</label>
+                                                            </div>
+                                                            <div id="message${ac.id}">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button id="${ac.id}" type="button" class="btn btn-primary" onclick="getSubmit(this.id)">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr> 
                                 </c:forEach>
@@ -199,9 +251,10 @@
 
 
                 <div class="container">
-                    <div class="row shadow-sm rounded py-4 mt-5">
+                    <div class="row body-main rounded py-4 mt-5">
                         <h3 class="text-center">Edit the general information of course</h3>
-                        <c:set value="${requestScope.subject}" var="sub"></c:set>
+
+                        <input hidden="true" name="sid" value="${sub.id}">
                         <c:set value="${requestScope.subcategory}" var="subcate"></c:set>
                             <form action="subjectdetailmanager" method="post" class="row" enctype="multipart/form-data">
                                 <div class="col-6">
@@ -314,28 +367,47 @@
                 </div>
 
                 <div class="container">
-                    <div class="row shadow-sm rounded py-4 mt-5">
+                    <div class="row body-main rounded py-4 mt-5">
                         <h3 class="text-center mt-5">Edit advanced information of course</h3>
                         <!-- dimetion price package -->
                         <div class="d-flex justify-content-around mt-5">
                             <a href="#"><button type="button" class="btn btn-outline-success btn-lg">Lesson</button></a>
-                            <a href="#"><button type="button" class="btn btn-outline-success btn-lg">Dimension</button></a>
+                            <a href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Dimension</button></a>
                             <a href="#"><button type="button" class="btn btn-outline-success btn-lg">Price Package</button></a>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
     </body>
     <script>
-        function doSet(id,name,email) {
-            if (confirm("Account ID : " + id 
-                    + " \nName : "+name
-                    + " \nEmail : "+email
-                    +" \nwill become an Expert for this Course ?")) {
-//                window.location = "delete?id=" + id;
-            }
-        }
 
+
+        function getSubmit(id) {
+            var status = $("input[type='checkbox'][name='role"+id+"']:checked").val();
+
+
+            $.ajax({
+                url: "/Online_Quiz/courseContent/setrolecoursecontent",
+                type: "get", //send it through get method
+                data: {
+                    aid: id,
+                    role: status,
+                },
+                success: function (response) {
+                    $('#message' + id).html(response);
+                    document.getElementById(id).style.display = "none";
+                    document.getElementById('modal-for-' + id).addEventListener('hidden.bs.modal', function (event) {
+                        window.location.reload();
+                    });
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }
 
 
         function del() {

@@ -17,7 +17,7 @@ import java.util.List;
  * @author hongd
  */
 public class AccountDAO extends DBContext {
-
+    
     public Account login(String email, String password) {
         String query = "select * from Account\n"
                 + "where email = ?\n"
@@ -41,7 +41,7 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
-
+    
     public Account checkAccountExist(String email) {
         String query = "select * from Account\n"
                 + "where [email] = ?\n";
@@ -50,24 +50,24 @@ public class AccountDAO extends DBContext {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new Account(rs.getInt(1), 
-                        rs.getString(2), 
-                        rs.getString(3), 
-                        rs.getString(4), 
-                        rs.getString(5), 
-                        rs.getBoolean(6), 
-                        rs.getInt(7), 
+                return new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getBoolean(6),
+                        rs.getInt(7),
                         rs.getString(8));
             }
-
+            
         } catch (Exception e) {
         }
         return null;
     }
     
-        public List<Account> loadAccountBySearch(String key) {
+    public List<Account> loadAccountBySearch(String key) {
         List<Account> listAcc = new ArrayList<>();
-        String query = "select * from Account where fullname like ? or email like ? or phone like ?";
+        String query = "select * from Account a inner join User_Permission u on a.id = u.account_id where fullname like ? or email like ? or phone like ?";
         try {
             PreparedStatement st = connection.prepareStatement(query);
             st.setNString(1, "%" + key + "%");
@@ -79,9 +79,11 @@ public class AccountDAO extends DBContext {
                         rs.getNString("fullname"),
                         rs.getNString("email"),
                         rs.getNString("phone"),
-                        (rs.getInt("gender") == 1) ? true : false ,
-                        rs.getInt("status")));
-
+                        (rs.getInt("gender") == 1) ? true : false,
+                        rs.getInt("status"),
+                        rs.getInt("licensed")
+                ));
+                
             }
             return listAcc;
         } catch (SQLException e) {
@@ -89,7 +91,7 @@ public class AccountDAO extends DBContext {
         }
         return null;
     }
-
+    
     public void Register(String fullname, String email, String phone, String password, boolean gender, String avatar) {
         String query = "insert into Account(fullname,email, phone,password,gender,avatar)\n"
                 + "values(?,?,?,?,?,?)";
@@ -102,12 +104,12 @@ public class AccountDAO extends DBContext {
             ps.setBoolean(5, gender);
             ps.setString(6, avatar);
             ps.executeUpdate();
-
+            
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     public void ChangeStatus(String email) {
         String query = "update Account set status = 1 where email = ?";
         try {
@@ -116,9 +118,9 @@ public class AccountDAO extends DBContext {
             ps.executeUpdate();
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     public void EditProfile(String fullname, String email, String phone, boolean gender, int id) {
         String query = "update Account set fullname = ?, email = ?, phone = ?, gender = ? where id=?";
         try {
@@ -129,10 +131,11 @@ public class AccountDAO extends DBContext {
             ps.setBoolean(4, gender);
             ps.setInt(5, id);
             ps.executeUpdate();
-
+            
         } catch (Exception e) {
         }
     }
+    
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
 //        dao.Register("Abc", "abc", "12345", "1245", true, "a");
@@ -142,4 +145,3 @@ public class AccountDAO extends DBContext {
         }
     }
 }
-

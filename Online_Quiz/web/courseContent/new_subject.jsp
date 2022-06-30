@@ -87,13 +87,14 @@
             }
 
             .body-main    {
-                background-color: gainsboro;
-                box-shadow: 0px 2px 14px #aaaaaa;
-            }
+            background-color: fff;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 66px;
+        }
         </style>
     </head>
 
     <body>
+        <jsp:include page="../common/header.jsp"></jsp:include>
         <h1 class="center">Add new Course</h1>
         <div class="container">
             <div class="row body-main">

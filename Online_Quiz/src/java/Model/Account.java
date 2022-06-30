@@ -19,16 +19,21 @@ public class Account {
     private int status;
     private String avatar;
     
+    private int licensed;
+
+    
+    
     public Account() {
     }
 
-    public Account(int id, String fullname, String email, String phone, boolean gender, int status) {
+    public Account(int id, String fullname, String email, String phone, boolean gender, int status,int licensed) {
         this.id = id;
         this.fullname = fullname;
         this.email = email;
         this.phone = phone;
         this.gender = gender;
         this.status = status;
+        this.licensed = licensed;
     }
 
     
@@ -42,6 +47,14 @@ public class Account {
         this.gender = gender;
         this.status = status;
         this.avatar = avatar;
+    }
+    
+    public int getLicensed() {
+        return licensed;
+    }
+
+    public void setLicensed(int licensed) {
+        this.licensed = licensed;
     }
 
     public int getId() {

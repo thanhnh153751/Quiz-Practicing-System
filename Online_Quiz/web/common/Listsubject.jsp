@@ -117,7 +117,7 @@
                                         <c:if test="${o.status==0}">
                                             <td>Disable </td>
                                         </c:if>
-                                        <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a></td>
+                                        <td><a href="/Online_Quiz/courseContent/subjectdetailmanager?sid=${o.id}" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

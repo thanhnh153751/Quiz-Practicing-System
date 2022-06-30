@@ -5,11 +5,9 @@
  */
 package Controller;
 
-import DAO.DAO;
-import Model.Subject;
+import DAO.UserPermissionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Viet Dung
+ * @author THANH
  */
-@WebServlet(name = "SubDimensionController", urlPatterns = {"/common/subdimension"})
-public class SubDimensionController extends HttpServlet {
+@WebServlet(name = "SetRoleCourseContentController", urlPatterns = {"/courseContent/setrolecoursecontent"})
+public class SetRoleCourseContentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,18 +33,23 @@ public class SubDimensionController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SubDimensionController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SubDimensionController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        UserPermissionDAO ud = new UserPermissionDAO();
+        PrintWriter out = response.getWriter();
+        try {
+            int id = Integer.parseInt(request.getParameter("aid"));
+            String role = request.getParameter("role");
+            if(role == null){
+                ud.updateRoleCourseContent(id, false);
+                
+            } else ud.updateRoleCourseContent(id, true);
+            
+           out.println("<h3 style=\"color: rgb(0, 167, 20);\">save successfully</h3>"); 
+        } catch (Exception e) {
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,27 +64,7 @@ public class SubDimensionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO dao = new DAO();
-        String txt = request.getParameter("index");
-        int index = 0;
-        if (txt == null) {
-            index = 1;
-        } else {
-            index = Integer.parseInt(txt);
-        }
-        int sid = Integer.parseInt(request.getParameter("sid"));
-        int numpage = dao.totalSubjectDimension(sid);
-        List<Subject> list = dao.getAllSubjectDimension(sid,index);
-//        String Strdid = request.getParameter("did");
-//        int did = Integer.parseInt(Strdid);
-//        List<Subject> list1 = dao.getAllSubjectDimensionbyid(did);
-//        request.setAttribute("list1", list1);
-
-        request.setAttribute("listD", list);
-        request.setAttribute("numpage", numpage);
-        request.setAttribute("index", index);
-//        request.setAttribute("did", did);
-        request.getRequestDispatcher("/common/SubjectDimension.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -95,7 +78,7 @@ public class SubDimensionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
