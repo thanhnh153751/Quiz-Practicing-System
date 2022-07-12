@@ -47,7 +47,8 @@ public class PricePackageController extends HttpServlet {
             service = "list";
         }
         if (service.equalsIgnoreCase("list")) {
-            List<Model.Package> listPk = dao.ListOfPackage();
+            int sid = Integer.parseInt(request.getParameter("sid"));
+            List<Model.Package> listPk = dao.ListOfPackage(sid);
             
             
             //phantrang
@@ -65,6 +66,7 @@ public class PricePackageController extends HttpServlet {
         end = Math.min(page*numberpage,size );
         request.setAttribute("index", page);
         request.setAttribute("num", num);
+        request.setAttribute("sid", sid);
             
         List<Model.Package> list1 = dao.getListbyPage(listPk, start, end);
         request.setAttribute("listPP", list1);
@@ -72,11 +74,12 @@ public class PricePackageController extends HttpServlet {
         } else if (service.equalsIgnoreCase("add")) {
             String submit = request.getParameter("submit");
             if (submit == null) {
-                
+                String sid = request.getParameter("sid");
+                request.setAttribute("sid", sid);
                 request.getRequestDispatcher("/courseContent/inputPackage.jsp").forward(request, response);
             } else {
                 String subject = request.getParameter("subject");
-                
+                String sid = request.getParameter("sid");
                 String name = request.getParameter("name");
                 String duration = request.getParameter("duration");
                 String status = request.getParameter("status");
@@ -85,8 +88,8 @@ public class PricePackageController extends HttpServlet {
                 String description = request.getParameter("description");
                 
                 dao.inputPackage(Integer.parseInt(subject), name, Integer.parseInt(duration), Integer.parseInt(list_price), Integer.parseInt(sale_price), Integer.parseInt(status), description);
-                
-                response.sendRedirect("pricepackage");
+                request.setAttribute("sid", sid);
+                response.sendRedirect("pricepackage?sid="+sid);
                 
             }
             
@@ -94,10 +97,13 @@ public class PricePackageController extends HttpServlet {
             String submit = request.getParameter("submit");
             if (submit == null) {
                 String id = request.getParameter("id");
+                String sid = request.getParameter("sid");
                 Model.Package pack = dao.loadPackagesByPid(Integer.parseInt(id));
+                request.setAttribute("sid", sid);
                 request.setAttribute("details", pack);
                 request.getRequestDispatcher("/courseContent/editPackage.jsp").forward(request, response);
             } else {
+                String sid = request.getParameter("sid");
                 String subject = request.getParameter("subject");
                 String id = request.getParameter("id");
                 String name = request.getParameter("name");
@@ -111,8 +117,9 @@ public class PricePackageController extends HttpServlet {
                 String list_price = request.getParameter("list_price");
                 String sale_price = request.getParameter("sale_price");
                 String description = request.getParameter("description");
+                request.setAttribute("sid", sid);
                 dao.editPackage(Integer.parseInt(id), Integer.parseInt(subject), name, Integer.parseInt(duration), Integer.parseInt(list_price), Integer.parseInt(sale_price), Integer.parseInt(status), description);
-                response.sendRedirect("pricepackage");
+                response.sendRedirect("pricepackage?sid="+sid);
             }
         }
         

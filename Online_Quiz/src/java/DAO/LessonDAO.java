@@ -33,11 +33,12 @@ public class LessonDAO extends DBContext{
         return null;
     }
     
-    public List<Lesson> ListOfLesson() {//tải lên tất cả các Lesson có trong db
+    public List<Lesson> ListOfLesson(int id) {//tải lên tất cả các Lesson có trong db
         List<Lesson> ListOfLesson = new ArrayList<>();
-        String query = "select l.*, lt.type from [Lesson] as l Join [Lesson_Type] as lt on l.type_id = lt.id";
+        String query = "  select l.*, ld.type from Subject s join Lesson l on s.id = l.sid join [Lesson_Type] ld on l.[type_id] = ld.id where s.id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -84,6 +85,6 @@ public class LessonDAO extends DBContext{
     }
     public static void main(String[] args) {
         LessonDAO dao = new LessonDAO();
-        System.out.println(dao.ListOfLesson());
+
     }
 }

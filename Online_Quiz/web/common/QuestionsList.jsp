@@ -22,7 +22,7 @@
     </head>
     <body>
         <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
-        
+
             <div class="header">
             <jsp:include page="../common/header.jsp"></jsp:include>
             </div>
@@ -39,7 +39,7 @@
                                 <option value="${D.id}" ${D.id == sid ?"selected":""}>${D.title}</option>
                             </c:forEach>
                         </select>
-                            
+
                         <div class="h6">Lession:</div>
                         <select class="select-css" name="lid" onchange="this.form.submit()">
                             <option value="all">--------------------All Lession-----------------</option>
@@ -47,7 +47,7 @@
                                 <option value="${D.name}" ${D.name == lid ?"selected":""}>${D.name}</option>
                             </c:forEach>
                         </select>
-                        
+
                         <div class="h6">Dimension:</div>
                         <select class="select-css" name="sdid" onchange="this.form.submit()">
                             <option value="-1">--------------------All Dimension-----------------</option>
@@ -55,7 +55,7 @@
                                 <option value="${D.sid}" ${D.sid == sdid ?"selected":""}>${D.name}</option>
                             </c:forEach>
                         </select>
-                        
+
                         <div class="h6">Level:</div>
                         <select class="select-css" name="lvid" onchange="this.form.submit()">
                             <option value="-1">--------------------All Level-----------------</option>
@@ -63,14 +63,14 @@
                                 <option value="${D.id}" ${D.id == lvid ?"selected":""}>${D.level}</option>
                             </c:forEach>
                         </select>
-                        
+
                         <div class="h6">Status:</div>
                         <select class="select-css" name="status" onchange="this.form.submit()">
-                            <option value="-1"${-1 == status ?"selected":""}>--------------------Status------------------</option>
-                            <option value="1" ${1 == status ?"selected":""}>---------------------Enable-----------------</option>
-                            <option value="0" ${0 == status ?"selected":""}>---------------------Disable----------------</option>
+                            <option value="-1"${-1 == status ?"selected":""}>--------------------All Status------------------</option>
+                            <option value="1" ${1 == status ?"selected":""}>---------------------Active-----------------</option>
+                            <option value="0" ${0 == status ?"selected":""}>---------------------Inactive----------------</option>
                         </select>
-                        
+
                         <div class="h6">Search by Content:</div>
                         <div class="input-group input-group-sm">
                             <input name="search" type="text" value="${ts}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
@@ -89,7 +89,7 @@
 
                 <div class="col-sm-9">
 
-                     <div class="table-wrapper">
+                    <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-9 text-primary">
@@ -111,7 +111,8 @@
                                     <th>Lesson</th>
                                     <th>Level</th>
                                     <th>Status </th>
-                                    <th>Action</th>
+                                    <th style="width: 15%">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,10 +124,69 @@
                                         <td>${o.dimenname}</td>
                                         <td>${o.lessionname} </td>
                                         <td>${o.level}</td>
-                                        <td>${o.status} </td>                                  
-                                        <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a></td>
+
+
+                                        <c:if test="${o.status == true }">
+                                            <td>Active</td>
+
+                                        </c:if>
+                                        <c:if test="${o.status == false}">
+                                            <td>Inactive</td>
+
+                                        </c:if>                                 
+                                        <td><a href="#" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a>
+                                        
+                                            <c:if test="${o.status == true }">
+                                                <a class="btn btn-warning" href="questionlist?do=changing&id=${o.id}&status=${o.status}" 
+                                                   data-bs-toggle="modal" data-bs-target="#exampleModalh${o.id}">Hide</a>
+                                            </c:if>
+                                            <c:if test="${o.status == false}">
+                                                <a class="btn btn-warning" href="questionlist?do=changing&id=${o.id}&status=${o.status}" 
+                                                   data-bs-toggle="modal" data-bs-target="#exampleModals${o.id}">Show</a>
+
+
+                                            </c:if>
+                                        </td>
+
                                     </tr>
-                                </c:forEach>
+                                <div class="modal fade" id="exampleModalh${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Acceptance</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Do You Want To Hide Question?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                <a href="questionlist?do=changing&id=${o.id}&status=${o.status}"  type="button" class="btn btn-primary">Yes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="modal fade" id="exampleModals${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Acceptance</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Do You Want To Show Question?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                <a href="questionlist?do=changing&id=${o.id}&status=${o.status}"  type="button" class="btn btn-primary">Yes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </c:forEach>
                             </tbody>
                         </table>
                         <c:set var="index" value="${requestScope.index}"/>                
@@ -145,7 +205,7 @@
                 </div>
                 <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
             </div>
-                        
+
 
 
     </body>

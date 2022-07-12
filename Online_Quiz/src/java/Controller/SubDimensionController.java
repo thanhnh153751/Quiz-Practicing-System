@@ -77,6 +77,7 @@ public class SubDimensionController extends HttpServlet {
 //        List<Subject> list1 = dao.getAllSubjectDimensionbyid(did);
 //        request.setAttribute("list1", list1);
 
+        request.setAttribute("sid", sid);
         request.setAttribute("listD", list);
         request.setAttribute("numpage", numpage);
         request.setAttribute("index", index);

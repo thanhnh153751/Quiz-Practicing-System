@@ -38,7 +38,7 @@
                                     <h2>Price<b>Package</b></h2>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a class="btn btn-success" href="pricepackage?do=add">Add New Package</a>
+                                    <a class="btn btn-success" href="pricepackage?do=add&sid=${requestScope.sid}">Add New Package</a>
 
                                 </div>
 
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <table class="table table-striped table-hover table-sm table-bordered">
-                        <thead class="table-success" >
+                        <thead >
                             <tr>
 
                                 <th>ID</th>
@@ -80,7 +80,7 @@
                                 <td>$${o.list_price} </td>
                                 <td>$${o.sale_price} </td>
                                 <td>${o.description} </td>
-                                <td><a class="btn btn-danger" href="pricepackage?do=edit&id=${o.id}">Edit</a> 
+                                <td><a class="btn btn-danger" href="pricepackage?do=edit&id=${o.id}&sid=${requestScope.sid}">Edit</a> 
                                 </td>
 
                             </tr>
@@ -88,11 +88,12 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                        <input type="hidden" name="sid" value="${requestScope.sid}">
                 <c:set var="index" value="${requestScope.index}"/>                
 
                 <ul class="pagination">
                     <c:forEach begin="1" end="${requestScope.num}" var="i">
-                        <li class="page-item ${i==index?"active":""}"><a class="page-link" href="pricepackage?index=${i}">${i}</a></li>
+                        <li class="page-item ${i==index?"active":""}"><a class="page-link" href="pricepackage?index=${i}&sid=${requestScope.sid}">${i}</a></li>
                         </c:forEach>
                 </ul>
 

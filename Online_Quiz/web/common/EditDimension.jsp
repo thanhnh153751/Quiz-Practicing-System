@@ -70,18 +70,18 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">ADD Successfully</h4>
+                        <h4 class="modal-title">Edit Successfully</h4>
                         
                     </div>
 
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        ADD Successfully
-                    </div>
+
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
+                        <input type="hidden" id="sid" value="${requestScope.sid}">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        
                     </div>
 
                 </div>

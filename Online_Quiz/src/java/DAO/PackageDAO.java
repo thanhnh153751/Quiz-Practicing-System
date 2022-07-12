@@ -68,11 +68,12 @@ public class PackageDAO extends DBContext {
         return null;
     }
 
-    public List<Package> ListOfPackage() {
+    public List<Package> ListOfPackage(int id) {
         List<Package> listofpackage = new ArrayList<>();
-        String query = "select id, [sid], [name], duration, list_price, sale_price, [status], [description] from Package";
+        String query = "  select p.id, p.[sid], p.[name], p.duration, p.list_price, p.sale_price, p.[status], p.[description] from Subject s join Package p on s.id = p.sid where s.id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listofpackage.add(new Model.Package(
@@ -158,7 +159,7 @@ public class PackageDAO extends DBContext {
 
     public static void main(String[] args) {
         PackageDAO dao = new PackageDAO();
-        System.out.println(dao.ListOfPackage());
+
         System.out.println(dao.ListOfSubjectP());
     }
 }

@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <table class="table table-striped table-hover table-sm table-bordered">
-                        <thead class="table-success" >
+                        <thead  >
                             <tr>
 
                                 <th>ID</th>
@@ -120,12 +120,12 @@
                     </tbody>
                 </table>
 
-
+                <input type="hidden" name="sid" value="${requestScope.sid}">
                 <c:set var="index" value="${requestScope.index}"/>                
 
                 <ul class="pagination">
                     <c:forEach begin="1" end="${requestScope.num}" var="i">
-                        <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subjectlesson?index=${i}">${i}</a></li>
+                        <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subjectlesson?index=${i}&sid=${requestScope.sid}">${i}</a></li>
                         </c:forEach>
                 </ul>
 

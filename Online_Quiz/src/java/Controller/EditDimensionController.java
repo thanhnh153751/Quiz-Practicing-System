@@ -55,19 +55,15 @@ public class EditDimensionController extends HttpServlet {
         } else {
 
             String sid = request.getParameter("sid");
-//            System.out.println(sid);
             String did = request.getParameter("id");
-//            System.out.println(did);
             int id = Integer.parseInt(did);
             String type = request.getParameter("type");
-//            System.out.println(type);
             String name = request.getParameter("name");
-//            System.out.println(name);
             String description = request.getParameter("description");
-            System.out.println(description);
             dao.editDimension(id, Integer.parseInt(sid), type, name, description);
-
-            response.sendRedirect("/Online_Quiz/common/subdimension");
+            request.setAttribute("sid", sid);
+            request.getRequestDispatcher("/common/SubjectDimension.jsp").forward(request, response);
+//            response.sendRedirect("/Online_Quiz/common/subdimension");
 
         }
 

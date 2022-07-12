@@ -67,6 +67,12 @@ public class QuestionListController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         DAO dao = new DAO();
+        String service = request.getParameter("do");
+        if(service == null){
+            service = "list";
+        }
+        
+        if(service.equalsIgnoreCase("list")){
         String sidStr = request.getParameter("sid");       
         int sid = -1;
         if (sidStr != null) {
@@ -99,7 +105,7 @@ public class QuestionListController extends HttpServlet {
         }
         
         String search = request.getParameter("search");
-     
+        
         List<Question> list = dao.getAllQuestion(sid, lid, sdid, lvid, status, search);
         
         int page, numperpage = 5;
@@ -116,8 +122,7 @@ public class QuestionListController extends HttpServlet {
          end = Math.min(page*numperpage,size );
         
         List<Question> list1 = dao.getListByPage(list, start, end);
-
-       
+        
         List<Subject> list2 = dao.getAllSimulationByname();
         List<Level> listlevel = dao.getAllSimulationBylevel();
         List<Lesson> listLesson = dao.getAllQuestionBylession();
@@ -139,6 +144,12 @@ public class QuestionListController extends HttpServlet {
               
         request.setAttribute("ts", search);
         request.getRequestDispatcher("/common/QuestionsList.jsp").forward(request, response);
+        }else if (service.equalsIgnoreCase("changing")){
+            String id = request.getParameter("id");
+            String status = request.getParameter("status");
+            dao.changestatusQuestion(Integer.parseInt(id), status);
+            response.sendRedirect("/Online_Quiz/common/questionlist");
+        }
     }
 
     /**

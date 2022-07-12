@@ -102,10 +102,7 @@ public class ResetpassController extends HttpServlet {
         if (a == null) {
             request.setAttribute("mess", " This email not existed!");
             request.getRequestDispatcher("/common/sendmail.jsp").forward(request, response);
-        } else {
-            
-            
-                
+        } else {           
             try {
                 TokenUtil token = new TokenUtil();
                 String tok = token.tokenGenerate();

@@ -25,7 +25,7 @@
             <jsp:include page="../common/header.jsp"></jsp:include>
             </div>
             <div class="container "style="padding-top: 50px">
-                <div class="row shadow-sm rounded  py-4">                    
+                <div class="row ">                    
                     <div class="col-sm-12">
 
                         <div class="table-wrapper">
@@ -68,10 +68,11 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                            <input type="hidden" name="sid" value="${requestScope.sid}">     
                         <c:set var="index" value="${requestScope.index}"/>                
                         <ul class="pagination">
                             <c:forEach begin="1" end="${numpage}" var="i">
-                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subdimension?index=${i}">${i}</a></li>
+                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subdimension?index=${i}&sid=${requestScope.sid}">${i}</a></li>
                                 </c:forEach>
                         </ul>
 
@@ -153,7 +154,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="close" data-bs-dismiss="modal">Close</button>
                     </div>
 
                 </div>

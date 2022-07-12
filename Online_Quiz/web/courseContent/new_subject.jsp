@@ -17,6 +17,7 @@
 
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/nav.css">
         <title>Add new Subject</title>
         <style>
             .center {

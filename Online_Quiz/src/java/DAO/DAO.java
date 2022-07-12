@@ -962,6 +962,25 @@ public class DAO extends DBContext {
         return list;
     }
     
+    public void changestatusQuestion(int id, String status) {
+        String query = "update Question set status = ? where id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            if (status.equalsIgnoreCase("false")) {
+                ps.setString(1,"true");
+
+            }
+            if (status.equalsIgnoreCase("true")) {
+                ps.setString(1,"false");
+
+            }
+            ps.setInt(2, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    
     public List<Question> getListByPage(List<Question> list, int start, int end) {
         ArrayList<Question> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {

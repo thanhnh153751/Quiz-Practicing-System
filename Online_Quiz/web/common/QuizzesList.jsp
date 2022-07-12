@@ -93,7 +93,8 @@
                                     <th>Number Of Lessons</th>
                                     <th>Duration</th>
                                     <th>Passrate</th>
-                                    <th>type</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

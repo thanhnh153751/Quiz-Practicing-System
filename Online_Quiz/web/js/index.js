@@ -65,8 +65,14 @@ $(document).ready(function () {
     });
 
     $('#editmd').on('hidden.bs.modal', function (e) {
-        window.location = "/Online_Quiz/common/subdimension"
+        var sid = document.getElementById('sid').value;
+        window.location = "/Online_Quiz/common/subdimension?sid="+sid;
     })
+    $("#close").click(function () {
+        window.location.reload();
+        // $("#register-tab").tab('show');
+
+    });
 
     $("#nav-login").click(function () {
         $('#staticBackdrop').modal('show');

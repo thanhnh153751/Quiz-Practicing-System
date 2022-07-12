@@ -32,12 +32,13 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="pricepackage?do=edit" method="post">
+                        <form action="pricepackage?do=edit&sid=${sid}" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Edit Package</h4>
                                 <a href="/Online_Quiz/courseContent/pricepackage"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> </a>
                             </div>
-                            <div class="modal-body">					
+                            <div class="modal-body">				
+                                <input type="hidden" name="sid" value="${requestScope.sid}">
 
                                 <input type="hidden" name="id" value="${details.id}">
                                 <div class="form-group">

@@ -16,6 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/nav.css">
         <title>Document</title>
         <style>
             .center {
@@ -125,6 +126,7 @@
 
     <body>
         <c:set value="${requestScope.subject}" var="sub"></c:set>
+        <jsp:include page="../common/header.jsp"></jsp:include>
             <h1 class="center">Course Details</h1>
             <div class="container">
                 <div class="">
@@ -371,9 +373,9 @@
                         <h3 class="text-center mt-5">Edit advanced information of course</h3>
                         <!-- dimetion price package -->
                         <div class="d-flex justify-content-around mt-5">
-                            <a href="#"><button type="button" class="btn btn-outline-success btn-lg">Lesson</button></a>
+                            <a href="/Online_Quiz/courseContent/subjectlesson?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Lesson</button></a>
                             <a href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Dimension</button></a>
-                            <a href="#"><button type="button" class="btn btn-outline-success btn-lg">Price Package</button></a>
+                            <a href="/Online_Quiz/courseContent/pricepackage?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Price Package</button></a>
                         </div>
                     </div>
                 </div>

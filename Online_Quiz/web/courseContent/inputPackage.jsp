@@ -27,6 +27,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <form action="pricepackage?do=add&filter=1" method="post">
+                            <input type="hidden" name="sid" value="${requestScope.sid}">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Package</h4>
                                 <a href="/Online_Quiz/courseContent/pricepackage"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> </a>

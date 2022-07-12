@@ -42,11 +42,13 @@ public class SubjectLessonController extends HttpServlet {
         }
         
         if(service.equalsIgnoreCase("list")){
-            List<Lesson> lesson = dao.ListOfLesson();
+            int sid = Integer.parseInt(request.getParameter("sid"));
+
+            List<Lesson> lesson = dao.ListOfLesson(sid);
             
-            int page,numberpage = 3;
+            int page,numberpage = 5;
         int size = lesson.size();
-        int num = (size%3==0?(size/3):((size/3)+1));
+        int num = (size%5==0?(size/5):((size/5)+1));
         String xpage = request.getParameter("index");
         if(xpage==null){
             page = 1;
@@ -63,6 +65,7 @@ public class SubjectLessonController extends HttpServlet {
         request.setAttribute("listl", list1);
         request.setAttribute("index", page);
         request.setAttribute("num", num);
+        request.setAttribute("sid", sid);
         request.getRequestDispatcher("/courseContent/SubjectLessons.jsp").forward(request, response);
         }else if (service.equalsIgnoreCase("changing")){
             String id = request.getParameter("id");
