@@ -10,6 +10,7 @@ package Model;
  * @author hongd
  */
 public class Quiz {
+
     private int id;
     private int lid;
     private String quiz_name;
@@ -18,21 +19,21 @@ public class Quiz {
     private float passrate;
     private int type;
     private long duration;
-    
+
     private String subject;
     private String qlevel;
     private String qtype;
     private int numofquess;
-    
 
     public Quiz() {
     }
+
     public Quiz(int id, String qtype) {
         this.id = id;
         this.qtype = qtype;
     }
-    
-    public Quiz(int id, String quiz_name, String subject, String qlevel, int numofquess, long duration, float passrate,String qtype) {
+
+    public Quiz(int id, String quiz_name, String subject, String qlevel, int numofquess, long duration, float passrate, String qtype) {
         this.id = id;
         this.quiz_name = quiz_name;
         this.subject = subject;
@@ -41,9 +42,9 @@ public class Quiz {
         this.duration = duration;
         this.passrate = passrate;
         this.qtype = qtype;
-        
+
     }
-    
+
     public Quiz(int id, int lid, String quiz_name, int total_score, int level, float passrate, int type, long duration) {
         this.id = id;
         this.lid = lid;
@@ -53,6 +54,16 @@ public class Quiz {
         this.passrate = passrate;
         this.type = type;
         this.duration = duration;
+    }
+
+    public Quiz(int lid, String subject, String quiz_name, String qtype, long duration, float passrate) {
+        this.lid = lid;
+        this.subject = subject;
+        this.quiz_name = quiz_name;
+        this.qtype = qtype;
+        this.duration = duration;
+        this.passrate = passrate;
+
     }
 
     public int getId() {
@@ -150,6 +161,5 @@ public class Quiz {
     public void setDuration(long duration) {
         this.duration = duration;
     }
-    
-    
+
 }

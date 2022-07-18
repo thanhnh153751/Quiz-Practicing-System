@@ -72,6 +72,9 @@
 
 
                     <!--test below-->  
+                    <div>
+                        Filter by Category: 
+                    </div>
 
 
                     <c:forEach items="${requestScope.categorySubject}" var="c">
@@ -88,7 +91,7 @@
                         %>
 
                         <div class="drop_sub">
-                            <button type="button" class="collapsible">${c.name}<i class="fa-solid fa-angle-down"></i></button>
+                            <button type="button" class="collapsible">- ${c.name}<i class="fa-solid fa-angle-down"></i></button>
 
 
                             <c:set var="id" value="${c.id}"></c:set>
@@ -96,6 +99,7 @@
 
                                 <div class="content">
                                     <ul class="items">
+                                        Sub_Category:
 
 
 

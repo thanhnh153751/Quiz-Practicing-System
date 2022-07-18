@@ -29,6 +29,9 @@
                 color: black!important;
                 text-decoration: none!important;
             }
+            body{
+                font-family: inherit;
+            }
         </style>
     </head>
     <body>

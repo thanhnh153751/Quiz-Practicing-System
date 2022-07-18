@@ -102,7 +102,7 @@ $(document).ready(function () {
                     $("#alert-login-modal").text(result.mess);
                     $("#alert-login-modal").show();
                 } else {
-                    window.location.reload();
+                    window.location.replace("http://localhost:8080/Online_Quiz/public/home");
                 }
 
             }
