@@ -46,7 +46,6 @@ public class MyRegistrationsController extends HttpServlet {
         OrderDAO dao = new OrderDAO();
         HttpSession session = request.getSession();           
         Account a = (Account)session.getAttribute("acc");
-        System.out.println(a.getId());
         int id = a.getId();
         List<Order> listO = dao.Order(id);
         request.setAttribute("listO", listO);
@@ -69,7 +68,6 @@ public class MyRegistrationsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderDAO dao = new OrderDAO();
         processRequest(request, response);
     }
 

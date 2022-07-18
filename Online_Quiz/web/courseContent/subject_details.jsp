@@ -14,14 +14,22 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         
+        
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/slick/slick.css">
+        <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/sidenav.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/ManageListSubject.css">
         <title>Document</title>
         <style>
-            .center {
-                background-color: #04AA6D;
-            }
+            
 
             /* .body-main {
                 background-color: gainsboro;
@@ -127,22 +135,62 @@
     <body>
         <c:set value="${requestScope.subject}" var="sub"></c:set>
         <jsp:include page="../common/header.jsp"></jsp:include>
+        <br>
+        <br>       
+            <div id="main">
+            
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a class="activenav" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
+                <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
+                <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>             
+            </div>
+               <header id="page-header" class="row" style="margin-top: -15px; padding-left: -30px">
+                            <div class="col-12 pt-3 pb-3" >
+                                <div class="card ">
+                                    <div class="card-body " style="margin-left: 20px">
+                                        <div class="d-flex">
+                                            <div class="mr-auto">
+                                                <div class="page-context-header"><div class="page-header-headings "><h1 style="color: rgb(35, 35, 201)">Quiz<b> Online</b></h1></div></div>
+                                            </div>                                       
+                                        </div>
+                                        <div class="d-flex flex-wrap">
+                                            <div id="page-navbar">
+                                                <nav role="navigation" aria-label="Breadcrumb trail">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">Subjects List</li>
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/newsuject">Add new Course</a>
+                                                        </li>
+                                                    </ol>
+                                                </nav>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                
+                
             <h1 class="center">Course Details</h1>
             <div class="container">
                 <div class="">
                     <div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">Suject Detail</button>
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">Subject Detail</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lesson</button>
+                                <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/subjectlesson?sid=${sub.id}"><button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lesson</button></a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Dimention</button></a>
+                                <a style="text-decoration: none" href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Dimention</button></a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button>
+                                <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/pricepackage?sid=${sub.id}"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button></a>
                             </li>
                         </ul>
                     </div>
@@ -396,7 +444,23 @@
                     </div>
                 </div>-->
             </div>
+            </div>
 
+<br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                        
+                        <jsp:include page="../common/footer.jsp"></jsp:include>
+                        </div>
+                        
+            <script src="../js/jquery/jquery.js"></script>
+            <script src="../js/jquery/jquery-migrate.js"></script>
+            <script src="../js/boostrap/bootstrap.min.js"></script>
+            <script src="../js/slick/slick.min.js"></script>
+            <script src="../js/index.js"></script>
+            <script src="../js/sidenav.js"></script>
 
 
     </body>

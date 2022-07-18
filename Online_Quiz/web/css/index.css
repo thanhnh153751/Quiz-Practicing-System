@@ -329,7 +329,7 @@ footer{
 
 /*css tag-late*/
 .tag-late{
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
     padding-left: 9px;
     padding-top: 8px;
 }
@@ -338,11 +338,11 @@ footer{
     width: 193px;
     border-radius: 10px 10px 0px 0px;
     padding-left: 10px;
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
 }
 
 .hotPost h3{
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
     margin-bottom: 0px;
     border-radius: 10px 10px 0px 0px;
     padding-left: 10px;
@@ -350,14 +350,14 @@ footer{
 }
 
 .slider_2{
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
 /*    padding-left: 9px;
     padding-bottom: 4px;*/
     padding: 8px 0px 8px 9px;
     border-radius: 0px 6px 6px 6px;
 }
 #featured-subjects h3{
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
     margin-bottom: 0px;
     border-radius: 10px 10px 0px 0px;
     padding-left: 10px;
@@ -367,7 +367,7 @@ footer{
 
 /*làm thẻ cho course và blog*/
 .course-tag-home {
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
 
 /*    padding: 8px 0px 8px 9px;*/
     border-radius: 0px 6px 6px 6px;
@@ -377,7 +377,7 @@ footer{
      padding-bottom: 10px;
 }
 .course-tag{
-    background-color: #04aa6d;
+    background-color: #F0F0F0;
     margin-bottom: 0px;
     border-radius: 10px 10px 0px 0px;
     padding-left: 30px;

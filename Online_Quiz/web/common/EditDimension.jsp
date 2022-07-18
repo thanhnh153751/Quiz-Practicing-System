@@ -14,13 +14,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>CRUD Data </title>
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-
+        
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/sidenav.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"        
         <link href="css/manager.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="../css/nav.css">
         <style>
             img{
                 width: 200px;
@@ -30,9 +34,46 @@
     <body>
         
         <jsp:include page="../common/header.jsp"></jsp:include>
-        <br>
-        <br>
-        <div class="container">
+            <div id="main">
+
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a class="activenav" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
+                    <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
+                    <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>             
+                </div>
+                <div class="container "style="padding-top: 50px">
+                    <div class="row">
+                        <header id="page-header" class="row" style="margin-top: -15px; padding-left: -30px">
+                            <div class="col-12 pt-3 pb-3" >
+                                <div class="card ">
+                                    <div class="card-body " style="margin-left: 20px">
+                                        <div class="d-flex">
+                                            <div class="mr-auto">
+                                                <div class="page-context-header"><div class="page-header-headings "><h1 style="color: rgb(35, 35, 201)">Quiz<b> Online</b></h1></div></div>
+                                            </div>                                       
+                                        </div>
+                                        <div class="d-flex flex-wrap">
+                                            <div id="page-navbar">
+                                                <nav role="navigation" aria-label="Breadcrumb trail">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">Subjects List</li>
+                                                        <li class="breadcrumb-item">
+
+                                                        </li>
+                                                    </ol>
+                                                </nav>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+                        
+
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -94,16 +135,16 @@
         </div>
 
 
+        </div>
         
-        
-                        <br>
-                        <br>
                         <br>
                         <br>
                         <br>
                         <br>
                         
+                        
                         <jsp:include page="../common/footer.jsp"></jsp:include>
+                        </div>
     </body>
     <script src="js/manager.js" type="text/javascript"></script>
     <script src="../js/jquery/jquery.js"></script>
