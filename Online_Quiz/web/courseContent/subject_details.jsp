@@ -91,8 +91,8 @@
             }
 
             .upload-icon {
-                width: 200px;
-                height: 97px;
+                width: 221px;
+                height: 150px;
                 border: 2px solid #5642BE;
                 border-style: dotted;
                 border-radius: 18px;
@@ -101,8 +101,8 @@
 
 
             .upload-icon .icon {
-                width: 60px;
-                height: 60px;
+                width: 170px;
+                height: 110px;
                 margin: 19px;
                 cursor: pointer;
             }
@@ -130,6 +130,22 @@
             <h1 class="center">Course Details</h1>
             <div class="container">
                 <div class="">
+                    <div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">Suject Detail</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lesson</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Dimention</button></a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="container ">
                         <div class="row body-main rounded  py-4">
                             <div class="col-md-5 mx-auto">
@@ -221,9 +237,9 @@
                                                             <div class="form-check form-switch d-flex">
 
                                                                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="role${ac.id}" <c:if test="${ac.licensed == 1}">checked</c:if>>
-                                                                <label class="form-check-label" for="flexSwitchCheckDefault">(OFF/On)</label>
-                                                            </div>
-                                                            <div id="message${ac.id}">
+                                                                    <label class="form-check-label" for="flexSwitchCheckDefault">(OFF/On)</label>
+                                                                </div>
+                                                                <div id="message${ac.id}">
 
                                                             </div>
                                                         </div>
@@ -302,9 +318,9 @@
                                                 <label for="file-input" id="thumbnail-image-label">
                                                     <div class="upload-icon">
                                                         <img class="icon"
-                                                             src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                                                             src="../img/insert-image.png">
                                                         <img class="prev"
-                                                             src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                                                             src="../img/insert-image.png">
                                                     </div>
                                                 </label>
                                                 <input id="file-input" type="file" name="file" onchange="loadFile(event)"  />
@@ -368,17 +384,17 @@
 
                 </div>
 
-                <div class="container">
+<!--                <div class="container">
                     <div class="row body-main rounded py-4 mt-5">
                         <h3 class="text-center mt-5">Edit advanced information of course</h3>
-                        <!-- dimetion price package -->
+                         dimetion price package 
                         <div class="d-flex justify-content-around mt-5">
                             <a href="/Online_Quiz/courseContent/subjectlesson?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Lesson</button></a>
                             <a href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Dimension</button></a>
                             <a href="/Online_Quiz/courseContent/pricepackage?sid=${sub.id}"><button type="button" class="btn btn-outline-success btn-lg">Price Package</button></a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
 
@@ -388,7 +404,7 @@
 
 
         function getSubmit(id) {
-            var status = $("input[type='checkbox'][name='role"+id+"']:checked").val();
+            var status = $("input[type='checkbox'][name='role" + id + "']:checked").val();
 
 
             $.ajax({

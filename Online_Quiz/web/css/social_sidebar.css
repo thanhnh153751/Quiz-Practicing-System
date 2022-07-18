@@ -20,7 +20,7 @@ and open the template in the editor.
  font-family: 'entypo', sans-serif;
 }
 body {
-  background: #e6e6e6;
+  /*background: #e6e6e6;*/
 }
 #social-sidebar {
  left: -38px;

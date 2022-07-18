@@ -22,6 +22,8 @@ $(document).ready(function () {
         prevArrow: '<i class="bi bi-caret-right-fill slider-next"></i>',
         nextArrow: '<i class="bi bi-caret-left-fill slider-previous"></i>'
     });
+    
+
 
 
     $('#open-add').click(function () {
@@ -223,7 +225,7 @@ document.querySelectorAll('div[data-type="tagline"]').forEach(c => {
 
     c.innerHTML = "";
     x.forEach(a => {
-        c.innerHTML += '<a href="searchboxsubjectlist?name=' + a + '" class="btn btn-primary rounded-pill px-2 py-0 mb-2">' + a + '</a>';
+        c.innerHTML += '&nbsp;<a href="searchboxsubjectlist?name=' + a + '" class="btn btn-primary rounded-pill px-2 py-0 mb-2">' + a + '</a>';
 
     })
 });

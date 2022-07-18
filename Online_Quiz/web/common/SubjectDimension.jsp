@@ -95,13 +95,49 @@
 
                 </div>
             </div>
-            <div id="addEmployeeModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form action="/Online_Quiz/common/loadadddimension" method="post">
-                            <div class="modal-header">						
-                                <h4 class="modal-title">  Add New Dimension</h4>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div id="addEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/Online_Quiz/common/loadadddimension" method="post">
+                        <div class="modal-header">						
+                            <h4 class="modal-title">  Add New Dimension</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label>Type</label>
+                                <input name="type" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input name="names" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input name="description" type="text" class="form-control" required>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg" data-bs-dismiss="modal">Close</button>
+                            <input type="button" id="add" class="btn btn-success" value="Add">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                             <div class="modal-body">
 

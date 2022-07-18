@@ -306,7 +306,7 @@ public class SubjectDAO extends DBContext {
                 }
             }
 
-            if (key != "" || key != null) {
+            if (  key != null || key != "") {
                 sql += "(s.title like ? or s.tagline like ? or s.contact like ? or s.[description] like ? or sc.[name] like ?)";
             }
 
@@ -339,6 +339,7 @@ public class SubjectDAO extends DBContext {
                 list.add(p);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
         return list;
     }

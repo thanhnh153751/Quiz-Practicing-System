@@ -15,8 +15,9 @@ import java.sql.SQLException;
  *
  * @author THANH
  */
-public class OrderTDAO extends DBContext{
-            public void addOrder(Account c, Subject s, Model.Package p) {
+public class OrderTDAO extends DBContext {
+
+    public void addOrder(Account c, Subject s, Model.Package p) {
 //        LocalDate curDate = LocalDate.now();
 //        String date = curDate.toString();
         try {
@@ -53,5 +54,5 @@ public class OrderTDAO extends DBContext{
 
         }
     }
-    
+
 }

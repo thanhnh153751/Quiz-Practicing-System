@@ -13,17 +13,17 @@
 <html>
     <head>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/listSubject.css">
-        <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/nav.css">-->
         <title>JSP Page</title>
         <style>
             .collapsible {
@@ -56,17 +56,21 @@
                 border: none;
                 border-bottom: 1px solid;
                 border-radius: inherit;
+                
             }
         </style>
     </head>
     <body>
         <div class="search-box">
-            <div class=" col-12 jc-r px-0 mb-4">
+            <div class=" col-12 jc-r px-0 mb-4 ">
                 <form action="searchboxsubjectlist" class="" role="search" id="search-bar" method="post">
-                    <input class="form-control me-2 searchBox" type="search" placeholder="Search course by title,tag,description,..." aria-label="Search" name="name" value="${requestScope.key}">
+                    <div class="d-flex">
+                     <input class="form-control me-2 searchBox" type="search" placeholder="Search course by title,tag,description,..." aria-label="Search" name="name" value="${requestScope.key}">
+                    <i class="fas fa-search"></i>   
+                    </div>
+                    
 
-
-                    <br>
+                    <h5>Subject category</h5>
 
 
 
@@ -102,7 +106,7 @@
                                         Sub_Category:
 
 
-
+                                        <p>Subject_Subcategory</p>
                                     <c:forEach items="${requestScope.subCategorySubject}" var="sub">
 
                                         <%
@@ -117,8 +121,9 @@
                                             }
                                         %>    
 
-
+                                        
                                         <c:if test="${id==sub.cid}">
+                                            
                                             <li><input type="checkbox" name="cid_checkbox" value="${sub.id}" <c:if test="<%= pos && status%>">checked</c:if>/>${sub.name} </li> 
                                             </c:if>
                                             <%
@@ -161,29 +166,35 @@
 
 
 
-
-                    <button class ="btn btn-outline-success" type="submit">Search</button>
+                    
+                    <button class ="btn btn-outline-success" type="submit" style="margin-left: 39%">Search</button>
+                    <hr>
+                    
+                    
                     <input id="pageing" type="hidden" name="page" value="${requestScope.page}">
                     <!--cần xem lại nếu cần type="submit"  onclick="document.getElementById('search-bar').submit()" -->
 
                 </form>
                 <!-- featured subjects -->
-                <h5 class="">featured subjects</h5>
-                <div class="row">
+                <h5 class="">Featured subjects</h5>
+                <div class="row col-featsb-search">
 
                     <c:forEach items="${requestScope.featuredSubject}" var="s">
-                        <div class="col-4">
-                            <article class="course-item grid-style">
+                        <div class="featsb-search">
+                            <article class="course-item-search grid-style">
                                 <a title="title name" href="subjectdetail?ids=${s.id}" class="wrap-course-item">
-                                    <div class="course-thumb ">
+                                    
+                                    <div class="course-thumb d-flex mb-4">
                                         <img class="img-fluid" src="${s.thumbnail}" alt="name courses">
+                                        <span><p style="margin-left: 10px;">${s.title}</p></span>
                                     </div>
-
-
-
+                                    
+                                   
                                 </a>
                             </article>
+                            
                         </div>
+                                   
                     </c:forEach> 
 
                 </div>
@@ -196,7 +207,7 @@
     <script src="../js/jquery/jquery.js"></script>
     <script src="../js/jquery/jquery-migrate.js"></script>
     <script src="../js/boostrap/bootstrap.min.js"></script>
-    <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="../js/slick/slick.min.js"></script>
 
