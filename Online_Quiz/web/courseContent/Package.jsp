@@ -56,7 +56,7 @@
                                             </li>
                                             <li class="breadcrumb-item">Subjects List</li>
                                             <li class="breadcrumb-item">
-                                                <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/newsuject">Add new Course</a>
+                                                <a style="text-decoration: none" href="#">Price Package</a>
                                             </li>
                                         </ol>
                                     </nav>
@@ -88,7 +88,7 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-10 text-primary">
-                                    <h2>Price<b>Package</b></h2>
+                                    <h2>Price<b> Package</b></h2>
                                 </div>
                                 <div class="col-sm-2">
                                     <a class="btn btn-success" href="pricepackage?do=add&sid=${requestScope.sid}">Add New Package</a>

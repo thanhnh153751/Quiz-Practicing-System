@@ -163,7 +163,7 @@
                                                         </li>
                                                         <li class="breadcrumb-item">Subjects List</li>
                                                         <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/newsuject">Add new Course</a>
+                                                            <a style="text-decoration: none" href="#">Course Details</a>
                                                         </li>
                                                     </ol>
                                                 </nav>

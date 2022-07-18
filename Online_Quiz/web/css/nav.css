@@ -19,7 +19,7 @@ and open the template in the editor.
     padding-right: 10px;
     position: fixed;
     width: 100%;
-    z-index: 8;
+    z-index: 12;
 }
 
 .brand{

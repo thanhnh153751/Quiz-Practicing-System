@@ -34,7 +34,7 @@
                 <c:forEach items="${requestScope.listrole}" var="role">
                     <c:if test="${role.permission_id == 3 && role.licensed == true}">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a href="#">My Registrations</a>
+                    <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
                     <a href="/Online_Quiz/common/practicesList">Practices List</a>
                         
                     </c:if>
