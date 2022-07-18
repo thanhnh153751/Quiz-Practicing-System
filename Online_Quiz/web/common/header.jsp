@@ -27,7 +27,7 @@
                 <a href="/Online_Quiz/common/questionlist">Question List</a>
                 <a href="<c:url value="/common/profile"/>">Profile</a>
                 <a href="<c:url value="/marketing/postdetails"/>">Post</a>
-                <a href="<c:url value="/Online_Quiz/public/myregistrations"/>">My Registrations</a>
+                <a href="<c:url value="/public/myregistrations"/>">My Registrations</a>
                 
                 <a id="changepass-nav" data-toggle="modal"> Change password</a>
                 <a href="<c:url value="/public/logout"/>">Logout</a>

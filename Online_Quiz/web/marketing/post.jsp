@@ -24,7 +24,9 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="../css/post.css"/>
+        <link rel="stylesheet" href="../css/nav.css">
         <script src="../js/post.js"></script>
         <title>Document</title>
         <style>
@@ -35,7 +37,10 @@
     </head>
 
     <body>
-       
+        <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
+            <div class="header">
+            <jsp:include page="../common/header.jsp"></jsp:include>
+            </div>
 
         <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
         <div id="main">
@@ -122,7 +127,7 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                                                <div class="back-to-home"><a href="/Online_Quiz/public/home">&leftarrow;</a><span class="text-muted">Back to Home</span></div>
+                                                
 
                         <!--                        <nav aria-label="Page navigation example">
                                                     <ul class="pagination">
@@ -148,6 +153,7 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
 
 </html>
