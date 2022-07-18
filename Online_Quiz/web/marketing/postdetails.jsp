@@ -13,6 +13,8 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/nav.css">
         <link href="../css/postdetails.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -52,17 +54,21 @@
         </style>
     </head>
     <body>
-        <form action="/marketing/postdetails" method="post">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="container">
-                            <div class="card">
-                                <div class="row">
-                                    <aside class="col-sm-5 border-right">
-                                        <article class="gallery-wrap"> 
-                                            <div class="img-big-wrap">
-                                                <div><img src="${details.thumbnail}"></a></div>
+        <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
+            <div class="header">
+            <jsp:include page="../common/header.jsp"></jsp:include>
+            </div>
+            <form action="/marketing/postdetails" method="post">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="container">
+                                <div class="card">
+                                    <div class="row">
+                                        <aside class="col-sm-5 border-right">
+                                            <article class="gallery-wrap"> 
+                                                <div class="img-big-wrap">
+                                                    <div><img src="${details.thumbnail}"></a></div>
                                             </div> <!-- slider-product.// -->
                                             <div class="img-small-wrap">
                                             </div> <!-- slider-nav.// -->
@@ -135,5 +141,6 @@
                 </div>
             </div>
         </form>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
 </html>

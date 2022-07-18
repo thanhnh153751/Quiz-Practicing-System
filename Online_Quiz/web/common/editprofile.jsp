@@ -1,9 +1,3 @@
-<%-- 
-    Document   : profile
-    Created on : May 27, 2022, 4:40:32 PM
-    Author     : PREDATOR
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,18 +66,15 @@
                                                 <div class="image-upload">
                                                     <label for="file-input" id="thumbnail-image-label">
                                                         <div class="upload-icon">
-                                                            <img class="icon" src="../img/insert-image.png">
+                                                            <img class="icon" src="${acc.avatar}">
 
-                                                            <img class="prev" src="../img/insert-image.png">
+                                                            <img class="prev" src="${acc.avatar}">
                                                         </div>
                                                     </label>
                                                     <input id="file-input" type="file" name="file" onchange="loadFile(event)" />
 
                                                     <div id="cont">
-                                                        <div id="rowdiv0" onchange="loadFile(event)">
-                                                            <span><img src="${acc.avatar}" id="output0" width="200"></span>
-                                                            <button id="btn" onclick="del()" style="cursor: pointer;" >x</button>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +83,7 @@
                                             <div class="profile-header-info">
                                                 <h4 class="m-t-10 m-b-5">${acc.fullname}</h4> 
                                             <p class="m-b-10 ">UXUI + Frontend Developer</p>
-                                            <a href="editprofile.jsp"><button  type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" >Edit Profile</button></a><h5 style="color: red"> ${mess}</h5>
+                                            <input  type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /><h5 style="color: red"> ${mess}</h5>
 
                                         </div>
                                         <!-- END profile-header-info -->
@@ -100,7 +91,7 @@
                                     <!-- END profile-header-content -->
                                     <!-- BEGIN profile-header-tab -->
                                     <ul class="profile-header-tab nav nav-tabs">
-                                        <li class="nav-item"><a>ABOUT</a></li>
+                                        <li class="nav-item"><a>No</a></li>
                                     </ul>
                                     <!-- END profile-header-tab -->
                                 </div>
@@ -127,14 +118,14 @@
                                                 <tbody>
                                                     <tr class="highlight">
                                                         <td class="field">Fullname</td>
-                                                        <td>${acc.fullname}</td>
+                                                        <td><input name="fullname" placeholder="fullname" value="${acc.fullname}" ></td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="field">Mobile</td>
-                                                        <td>${acc.phone}
+                                                        <td><input name="phone" placeholder="phone" value="${acc.phone}" >
                                                         </td>
                                                     </tr>
                                                     <tr class="divider">
@@ -142,7 +133,7 @@
                                                     </tr>
                                                     <tr class="highlight">
                                                         <td class="field">Email</td>
-                                                        <td>${acc.email}</td>
+                                                        <td><input name="gmail" placeholder="gmail" value="${acc.email}" readonly></td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
@@ -151,11 +142,13 @@
                                                         <td class="field">Gender</td>
                                                         <td>
                                                             <c:if test="${acc.gender==true}">
-                                                                Male
+                                                                <input name="gender" placeholder="gender" value="Male"
+                                                                       readonly>
 
                                                             </c:if>
                                                             <c:if test="${acc.gender==false}">
-                                                                Female
+                                                                <input name="gender" placeholder="gender" value="Female"
+                                                                       readonly >
 
                                                             </c:if>
                                                         </td>
@@ -231,30 +224,7 @@
                                                                     }
                                                                 };
 
-                                                                function del() {
-                                                                    document.getElementById('cont').innerHTML = "";
-                                                                    var label = document.getElementById('thumbnail-image-label')
-                                                                    label.style = "";
-                                                                }
-                                                                ;
                                                                 
-                                                                var something = (function () {
-                                                                    var executed = false;
-                                                                    return function () {
-                                                                        if (!executed) {
-                                                                            executed = true;
-                                                                            // do something
-                                                                            var label = document.getElementById('thumbnail-image-label')
-                                                                            label.style = "display: none;"
-                                                                            var del = function () {
-
-                                                                            }
-
-                                                                        }
-                                                                    };
-                                                                })();
-                                                                something(); // "do something" happens
-                                                                something();
 
 
 

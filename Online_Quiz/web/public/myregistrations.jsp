@@ -12,32 +12,59 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-        <link href="../css/myregistrations.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="../js/boostrap/bootstrap.bundle.min.js"/>
+        <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/ManageListSubject.css">
     </head>
     <body>
-
-        <div class="card">
-            <!--<form action="/Online_Quiz/public/myregistrations" method="post">-->
+        <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
+            <div class="header">
+            <jsp:include page="../common/header.jsp"></jsp:include>
+            </div>
+            <div class="container"style="padding-top: 50px">
+                  
+                
                 <div class="row">
-                    <div class="col-md-12 cart">
-                        <div class="title">
+                    <div class="col-sm-3 filter">
+
+                        <br>
+
+                        <form action="/Online_Quiz/public/searchboxresgistration" method="get" class="form-inline my-2 my-lg-0">
+
+                            <div class="h6">Search by SubjectName: </div>
+
+
+                            <div class="input-group input-group-sm">
+                                <input value="${txtS}" name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button type="submit">Search</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+
+                </div>
+
+                <div class="col-sm-9"
+
+                     <div class="table-wrapper">
+                        <div class="table-title">
                             <div class="row">
-                                <div class="col-md-8"><h4><b>Registration</b></h4></div>
-                                <div class="col-md-4 search-box"> 
-                                <form action="/Online_Quiz/public/searchboxresgistration" method="get" class="form-inline my-2 my-lg-0">
-                                    <div class="input-group input-group-sm">
-                                        <input value="${txtS}" name="txt" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
-                                        <div class="input-group-append">
-                                            <button type="submit">Search</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="col-sm-10 text-primary">
+                                    <h2>My<b>Registrations</b></h2>
+                                </div>
+                                <div class="col-sm-2">
+
+
+                                </div>
                             </div>
-                            </div>
-                            
-                        </div> 
+                        </div>
                         <table class="table table-hover">
                             <thead>
                                 <tr>                        
@@ -52,6 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <c:forEach items="${listO}" var="o">
                                     <tr>
                                         <td>${o.id}</td>
@@ -67,37 +95,29 @@
                             </tbody>
                         </table>
 
-                                        <div class="back-to-shop"><a href="/Online_Quiz/public/listsubject">&leftarrow;</a><span class="text-muted">Back to Subject Register</span></div>
+                        <c:set var="index" value="${requestScope.index}"/>                
+
+
+                        <ul class="pagination">
+                            <c:forEach begin="1" end="${numpage}" var="i">
+                                <li class="page-item ${i==index?"active":""}"><a class="page-link" href="simulationexams?index=${i}&did=${did}&lid=${lid}&search=${ts}">${i}</a></li>
+                                </c:forEach>
+                        </ul>
+
+
+
+
 
                     </div>
 
-
-
-                    <!--                    <div class="col-md-4 summary">
-                                            <div><h5><b>Summary</b></h5></div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col" style="padding-left:0;">ITEMS 3</div>
-                                                <div class="col text-right">&dollar; 132.00</div>
-                                            </div>
-                                            <form>
-                                                <p>SHIPPING</p>
-                                                <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
-                                                <p>GIVE CODE</p>
-                                                <input id="code" placeholder="Enter your code">
-                                            </form>
-                                            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                                <div class="col">TOTAL PRICE</div>
-                                                <div class="col text-right">&dollar; 137.00</div>
-                                            </div>
-                                            <button class="btn">CHECKOUT</button>
-                                        </div>-->
                 </div>
-            <!--</form>-->
-        </div>
-                                        <div class="so_si">
-                        <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
-                    </div>
+                <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
+            </div>
+
+            <jsp:include page="../common/social_sidebar.jsp"></jsp:include>  
+
+            <jsp:include page="../common/footer.jsp"></jsp:include>
+
 
 
     </body>

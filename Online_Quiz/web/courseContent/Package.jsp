@@ -40,26 +40,26 @@
                                 <div class="col-sm-2">
                                     <a class="btn btn-success" href="pricepackage?do=add&sid=${requestScope.sid}">Add New Package</a>
 
-                                </div>
-
                             </div>
+
                         </div>
                     </div>
-                    <table class="table table-striped table-hover table-sm table-bordered">
-                        <thead >
-                            <tr>
+                </div>
+                <table class="table table-striped table-hover table-sm table-bordered">
+                    <thead >
+                        <tr>
 
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Access Duration (in months)</th>
-                                <th>Status</th>
-                                <th>List Price</th>
-                                <th>Sale Price</th>
-                                <th>Description</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Access Duration (in months)</th>
+                            <th>Status</th>
+                            <th>List Price</th>
+                            <th>Sale Price</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <%int num = 1;%>
                         <c:forEach items="${listPP}" var="o">
 
@@ -88,7 +88,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                        <input type="hidden" name="sid" value="${requestScope.sid}">
+                <input type="hidden" name="sid" value="${requestScope.sid}">
                 <c:set var="index" value="${requestScope.index}"/>                
 
                 <ul class="pagination">
@@ -102,7 +102,7 @@
             <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
         </div>
 
-
+        <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
 
 

@@ -7,19 +7,26 @@ package Controller;
 
 import DAO.AccountDAO;
 import Model.Account;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author PREDATOR
  */
+@MultipartConfig
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/common/profile"})
 public class ProfileServlet extends HttpServlet {
 
@@ -40,7 +47,7 @@ public class ProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfileServlet</title>");            
+            out.println("<title>Servlet ProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
@@ -92,14 +99,55 @@ public class ProfileServlet extends HttpServlet {
             boolean gender = Boolean.parseBoolean(gender_raw);
             AccountDAO DAO = new AccountDAO();
             Account a = new Account(x.getId(), fullname, email, phone, x.getPassword(), gender, x.getStatus(), x.getAvatar());
-            DAO.EditProfile(fullname, email, phone, gender, id);
+            //img
+            String img = "../img/";
+            Part part = request.getPart("file");
+            String fileName = part.getSubmittedFileName();
+            String path = getServletContext().getRealPath("/").replace("\\build", "") + "img" + File.separator + fileName;
+            InputStream is = part.getInputStream();
+            boolean succs = upoloadFile(is, path);
+
+            is.close();
+            img += fileName;
+            //-------------------------------
+            if (fileName.equals("")) {
+                img = "";
+            }
             Account lg = DAO.login(email, x.getPassword());
+            
+            System.out.println(lg);
+            DAO.EditProfile(fullname, email, phone, gender, id, img);
+
             session.setAttribute("acc", lg);
-            request.setAttribute("mess", "Update successfully!");
             request.getRequestDispatcher("/common/profile.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    private boolean upoloadFile(InputStream is, String path) {
+        boolean test = false;
+        try {
+            byte[] byt = new byte[1024];
+            int read = 0;
+
+            OutputStream fops = new FileOutputStream(path);
+            while ((read = is.read(byt)) != -1) {
+                fops.write(byt, 0, read);
+            }
+            fops.flush();
+
+            fops.close();
+            is.close();
+//            try {
+//                  TimeUnit.SECONDS.sleep(2);                
+//            } catch (InterruptedException ex) {
+//               
+//            }
+            test = true;
+        } catch (Exception e) {
+        }
+        return test;
     }
 
     /**

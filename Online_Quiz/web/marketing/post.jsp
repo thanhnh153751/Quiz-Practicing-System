@@ -24,49 +24,53 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
-        <link rel="stylesheet" href="../css/post.css"/>
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/ManageListSubject.css">
+        <link rel="stylesheet" href="../css/nav.css">
         <script src="../js/post.js"></script>
         <title>Document</title>
-        <style>
-            .back-to-home{
-    margin-top: 4.5rem;
-}
-        </style>
+        
     </head>
 
     <body>
-       
 
-        <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-        <div id="main">
-            <div class="container-fluid">
+
+        <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
+            <div class="header">
+            <jsp:include page="../common/header.jsp"></jsp:include>
+            </div>
+            <div class="container "style="padding-top: 50px">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-10"> <h1>List of Post</h1>
+
+
+                    <div class="col-sm-12"
+
+                         <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-9 text-primary">
+                                        <h2>List <b>Of Post</b></h2>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a href="/Online_Quiz/marketing/postdetails?do=add"  class="btn btn-success" data-toggle="modal"> <span>Add New Course</span></a>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2" style=""> 
-                                <a href="/Online_Quiz/marketing/postdetails?do=add">Add New Post</a>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#ID</th>
+                                        <th scope="col">Post Title</th>
+                                        <th scope="col">Brief Information</th>
+                                        <th scope="col">Author</th>
+                                        <th scope="col">Status</th>
 
-                            </div>
-                        </div>
-                    </div>
+                                        <th scope="col"> Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                    <div class="col-md-12">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#ID</th>
-                                    <th scope="col">Post Title</th>
-                                    <th scope="col">Brief Information</th>
-                                    <th scope="col">Author</th>
-                                    <th scope="col">Status</th>
-
-                                    <th scope="col"> Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
                                 <c:forEach items="${listP}" var="o">
                                     <tr>
                                         <th scope="row">${o.id}</th>
@@ -122,32 +126,27 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                                                <div class="back-to-home"><a href="/Online_Quiz/public/home">&leftarrow;</a><span class="text-muted">Back to Home</span></div>
+                        <c:set var="index" value="${requestScope.index}"/>                
 
-                        <!--                        <nav aria-label="Page navigation example">
-                                                    <ul class="pagination">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="#" aria-label="Next">
-                        
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>-->
+
+                        <!--                        <ul class="pagination">
+                        <c:forEach begin="1" end="${numpage}" var="i">
+                            <li class="page-item ${i==index?"active":""}"><a class="page-link" href="managersubjectlist?index=${i}&status=${status}&did=${did}&cid=${cid}&search=${ts}">${i}</a></li>
+                        </c:forEach>
+                </ul>-->
+
+
+
+
+
                     </div>
+
                 </div>
+                <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
             </div>
-        </div>
+
+
+            <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
 
 </html>

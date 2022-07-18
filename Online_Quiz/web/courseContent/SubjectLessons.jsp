@@ -136,7 +136,7 @@
             <!--            <a href="#"><button type="button" class="btn btn-primary">Back to home</button>-->
         </div>
 
-
+                <jsp:include page="../common/footer.jsp"></jsp:include>
     </body>
     <script src="../js/jquery/jquery.js"></script>
     <script src="../js/jquery/jquery-migrate.js"></script>
