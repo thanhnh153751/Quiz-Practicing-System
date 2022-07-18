@@ -40,7 +40,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 set-form">
                         <div class="quiz-timer d-flex justify-content-between ">
                             <div class="quiz-timer-left">
                                 <h5>Question ${questionIndex}/${numberOfQuestion}</h5>

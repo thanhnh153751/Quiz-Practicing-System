@@ -20,7 +20,7 @@
               crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="../css/nav.css">
-
+        <link href="../css/listSubject.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="../css/subjectDetail.css">
         <!--<script src="./js/index.js"></script>-->
         <title>JSP Page</title>

@@ -70,6 +70,7 @@
             </header>
             
             <div class="container"style="padding-top: 50px">
+                <c:set var="index" value="${requestScope.index}"/> 
                 <div class="row">
                     <div>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -80,10 +81,10 @@
                                 <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lesson</button>
                             </li>
                             <li class="nav-item " role="presentation">
-                                <a style="text-decoration: none" href="/Online_Quiz/common/subdimension?sid=${sub.id}"><button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Dimention</button></a>
+                                <a style="text-decoration: none" href="/Online_Quiz/common/subdimension?sid=${index}"><button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Dimention</button></a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button>
+                                <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/courseContent/pricepackage?sid=${index}"><button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button></a>
                             </li>
                         </ul>
                     </div>                       
@@ -151,7 +152,8 @@
                                     </c:if>
                                 </td>
 
-                            </tr>
+                            </tr> 
+                             
                         <div class="modal fade" id="exampleModal${o.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -164,7 +166,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                        <a href="subjectlesson?do=changing&id=${o.id}&status=${o.status}"  type="button" class="btn btn-primary">Yes</a>
+                                        <a href="subjectlesson?do=changing&id=${o.id}&status=${o.status}&sid=${index}"  type="button" class="btn btn-primary">Yes</a>
                                     </div>
                                 </div>
                             </div>
@@ -176,8 +178,8 @@
                 </table>
 
                 <input type="hidden" name="sid" value="${requestScope.sid}">
-                <c:set var="index" value="${requestScope.index}"/>                
-
+                              
+                
                 <ul class="pagination">
                     <c:forEach begin="1" end="${requestScope.num}" var="i">
                         <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subjectlesson?index=${i}&sid=${requestScope.sid}">${i}</a></li>

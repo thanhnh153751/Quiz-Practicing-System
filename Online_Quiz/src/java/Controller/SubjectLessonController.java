@@ -68,10 +68,12 @@ public class SubjectLessonController extends HttpServlet {
         request.setAttribute("sid", sid);
         request.getRequestDispatcher("/courseContent/SubjectLessons.jsp").forward(request, response);
         }else if (service.equalsIgnoreCase("changing")){
+            String sid = request.getParameter("sid");
             String id = request.getParameter("id");
             String status = request.getParameter("status");
             dao.changestatus(Integer.parseInt(id), Integer.parseInt(status));
-            response.sendRedirect("subjectlesson");
+            response.sendRedirect("subjectlesson?sid="+sid);
+//        request.getRequestDispatcher("/courseContent/SubjectLessons.jsp").forward(request, response);
         }
         
     }
