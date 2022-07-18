@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--thinh lm baif de-->
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -189,12 +190,12 @@
                                                                 <td>
                                                                     <c:if test="${acc.gender==true}">
                                                                         <input name="gender" placeholder="gender" value="Male"
-                                                                               readonly>
+                                                                               >
 
                                                                     </c:if>
                                                                     <c:if test="${acc.gender==false}">
                                                                         <input name="gender" placeholder="gender" value="Female"
-                                                                               readonly >
+                                                                                >
 
                                                                     </c:if>
                                                                 </td>
