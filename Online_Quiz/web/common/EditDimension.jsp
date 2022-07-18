@@ -62,6 +62,10 @@
                                                         </li>
                                                         <li class="breadcrumb-item">Subjects List</li>
                                                         <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="#">Subjects Dimension</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="#">Edit Dimension</a>
 
                                                         </li>
                                                     </ol>

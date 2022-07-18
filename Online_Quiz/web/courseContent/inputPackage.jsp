@@ -56,7 +56,11 @@
                                                         </li>
                                                         <li class="breadcrumb-item">Subjects List</li>
                                                         <li class="breadcrumb-item">
-                                                            
+                                                            <a style="text-decoration: none" href="#">Price Package</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="#">Add new Package</a>
+
                                                         </li>
                                                     </ol>
                                                 </nav>

@@ -11,10 +11,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/profile.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/slick/slick.css">
+        <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/sidenav.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+              integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../css/profile.css">
+        
         <style>
             .image-upload>input {
                 display: none;
@@ -48,11 +56,46 @@
 
     </head>
     <body>
-        <jsp:useBean id="a" class="DAO.DAO" scope="request"></jsp:useBean>
-            <div class="header">
-            <jsp:include page="../common/header.jsp"></jsp:include>
-            </div>
-            <div class="container">
+        <jsp:include page="../common/header.jsp"></jsp:include>
+            <div id="main">
+
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
+                    <a class="" href="/Online_Quiz/common/practicesList">Practices List</a>
+
+                </div>
+                <div class="container"style="padding-top: 50px">
+                    <div class="row">
+                        
+                        <header id="page-header" class="row" style="margin-top: -15px; padding-left: -30px">
+                            <div class="col-12 pt-3 pb-3" >
+                                <div class="card ">
+                                    <div class="card-body " style="margin-left: 20px">
+                                        <div class="d-flex">
+                                            <div class="mr-auto">
+                                                <div class="page-context-header"><div class="page-header-headings "><h1 style="color: rgb(35, 35, 201)">Quiz<b> Online</b></h1></div></div>
+                                            </div>                                       
+                                        </div>
+                                        <div class="d-flex flex-wrap">
+                                            <div id="page-navbar">
+                                                <nav role="navigation" aria-label="Breadcrumb trail">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item">
+                                                            <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
+                                                        </li>
+                                                        <li class="breadcrumb-item">Profile</li>
+                                                        <li class="breadcrumb-item">
+                                                            
+                                                        </li>
+                                                    </ol>
+                                                </nav>
+                                            </div>                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
                 <form action="profile" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-12">
@@ -91,7 +134,8 @@
                                             <!-- BEGIN profile-header-info -->
                                             <div class="profile-header-info">
                                                 <h4 class="m-t-10 m-b-5">${acc.fullname}</h4> 
-                                            <p class="m-b-10 ">UXUI + Frontend Developer</p>
+                                                <br>
+                                                <br>
                                             <a href="editprofile.jsp"><button  type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" >Edit Profile</button></a><h5 style="color: red"> ${mess}</h5>
 
                                         </div>
@@ -126,14 +170,14 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr class="highlight">
-                                                        <td class="field">Fullname</td>
+                                                        <td class="field">Fullname: </td>
                                                         <td>${acc.fullname}</td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="field">Mobile</td>
+                                                        <td class="field">Mobile: </td>
                                                         <td>${acc.phone}
                                                         </td>
                                                     </tr>
@@ -141,14 +185,14 @@
                                                         <td colspan="2"></td>
                                                     </tr>
                                                     <tr class="highlight">
-                                                        <td class="field">Email</td>
+                                                        <td class="field">Email: </td>
                                                         <td>${acc.email}</td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="field">Gender</td>
+                                                        <td class="field">Gender: </td>
                                                         <td>
                                                             <c:if test="${acc.gender==true}">
                                                                 Male
@@ -187,13 +231,20 @@
                 </div>
             </form>
         </div>
-        <jsp:include page="../common/footer.jsp"></jsp:include>
-    </body>
-    <script src="../js/jquery/jquery.js"></script>
-    <script src="../js/jquery/jquery-migrate.js"></script>
-    <script src="../js/boostrap/bootstrap.min.js"></script>
-    <script src="../js/slick/slick.min.js"></script>
-    <script src="../js/index.js"></script>
+                                                    </div>
+        <br>
+            <br>
+            <br>
+            
+            <jsp:include page="../common/footer.jsp"></jsp:include>
+        </div>
+
+        <script src="../js/jquery/jquery.js"></script>
+        <script src="../js/jquery/jquery-migrate.js"></script>
+        <script src="../js/boostrap/bootstrap.min.js"></script>
+        <script src="../js/slick/slick.min.js"></script>
+        <script src="../js/index.js"></script>
+        <script src="../js/sidenav.js"></script>
     <script>
                                                                 //dưới là dấu x
                                                                 var loadFile = function (event) {
