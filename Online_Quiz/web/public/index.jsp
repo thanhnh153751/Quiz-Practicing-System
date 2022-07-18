@@ -33,7 +33,7 @@
 
                             <div id="slider_1" class="slider">
                             <c:forEach items="${requestScope.loadLatestPost}" var="p">
-                                <div class="card slider-item col-md-3" style="width: 16rem;">
+                                <div class="card slider-item-1 col-md-3" style="width: 16rem;">
                                     <a href="">
                                         <img src="${p.thumbnail}"
                                              class="card-img-top img-responsive" alt="...">
@@ -45,8 +45,8 @@
 
                             </c:forEach>
                             <c:forEach items="${requestScope.subjectLast}" var="p">
-                                    <div class="card slider-item col-md-3" style="width: 16rem;">
-                                        <a href="">
+                                    <div class="card slider-item-1 col-md-3" style="width: 16rem;">
+                                        <a href="subjectdetail?ids=${p.id}">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
                                             <div class="card-body slider-item-body">
@@ -66,31 +66,33 @@
                         <div class="row combo_head">
 
                             <div class="col-3 lastPost">
-                                <h2>Latest Posts</h2>
-                                <div class="overflow-auto">
+                                <h3 class="">Latest Posts</h3>
+                            <div class="overflow-auto tag-late" id="lapost">
                                 <c:forEach items="${requestScope.loadLatestPost}" var="p">
-                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                    <div class="card card-late slider-item-latest col-md-3" style="width: 16.5rem; height: 15rem;">
                                         <a href="">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
-                                            <div class="card-body slider-item-body">
+                                            <div class="card-body slider-item-body-2">
                                                 <h6 class="card-title">${p.post_title}</h6>
                                             </div>
                                         </a>
                                     </div>
+                                            <br>
                                 </c:forEach>
                             </div>
                         </div>
 
-                        <div class="col-9">    
-                            <h2>Hot Post</h2>
-                            <div id="slider_2" class="slider_2">
+                        <div class="col-9"> 
+                            <div class="hotPost">
+                            <h3>Hot Post</h3>
+                            <div id="" class="slider_2 mb-5">
                                 <c:forEach items="${requestScope.loadHotPost}" var="p">
-                                    <div class="card slider-item col-md-3" style="width: 16rem;">
+                                    <div class="card slider-item col-md-3" style="width: 16rem; height: 15rem;">
                                         <a href="">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
-                                            <div class="card-body slider-item-body">
+                                            <div class="card-body slider-item-body-2">
                                                 <h6 class="card-title">${p.post_title}</h6>
                                             </div>
                                         </a>
@@ -98,20 +100,23 @@
                                 </c:forEach>
 
                             </div>
-
-                            <h2>featured subjects</h2>
-                            <div id="slider_2" class="slider_2">
+                            </div>
+                            
+                            <div class="" id="featured-subjects">
+                            <h3>featured subjects</h3>
+                            <div id="" class="slider_2">
                                 <c:forEach items="${requestScope.subjectLast}" var="p">
-                                    <div class="card slider-item col-md-3" style="width: 16rem;">
-                                        <a href="">
+                                    <div class="card slider-item col-md-3" style="width: 16rem;height: 15rem;">
+                                        <a href="subjectdetail?ids=${p.id}">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
-                                            <div class="card-body slider-item-body">
+                                            <div class="card-body slider-item-body-2">
                                                 <h6 class="card-title">${p.title}</h6>
                                             </div>
                                         </a>
                                     </div>
                                 </c:forEach>
+                            </div>
                             </div>
                         </div>
 
@@ -122,17 +127,19 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+<!--                <div class="col-md-12">
                     <div class="header">
                         <h2>Course</h2>
                     </div>
-                </div>
-
+                </div>-->
+                
+                <h3 class="course-tag">Course</h3>
+                <div class="row course-tag-home" >
                 <c:forEach items="${requestScope.subjectList}" var="s">
                     
                     <div class="col-md-3">
                         <div class="card course-item" style="width: 18rem;">
-                            <a href="">
+                            <a href="subjectdetail?ids=${s.id}">
                                 <img src="${s.thumbnail}"
                                      class="card-img-top" alt="...">
                                 <div class="course-card-body">
@@ -147,41 +154,38 @@
                         </div>
                     </div>
 
-
-
-
                 </c:forEach>
-
-                <div class="col-md-12 d-flex justify-content-center show-more-btn">
+                </div>
+                
+               
+                <div class="col-md-12 d-flex justify-content-center show-more-btn mt-5">
                     <a href="<c:url value="/public/listsubject"/>" type="button" class="btn btn-outline-primary">Show more</a>
                 </div>
             </div>
 
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="header">
-                        <h2>Blog</h2>
-                    </div>
-                </div>
-
+                
+                <h3 class="course-tag">Blog</h3>
+                <div class="row course-tag-home" >
                 <c:forEach items="${requestScope.loadAllPost}" var="p">
                     <div class="col-md-3">
                         <div class="card blog-item" style="width: 18rem;" >
                             <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
                                 <div class="img-warper">
-                                    <img src="${p.thumbnail}" class="card-img-top img-responsive" alt="...">
+                                    <img src="${p.thumbnail}" class="card-img-top " alt="...">
                                 </div>
-                                <div class="blog-card-body d-flex justify-content-between">
+                                <div class="blog-card-body ">
                                     <h6 class="card-title">${p.post_title}</h6>
+                                  
                                     <p class="date-update">${p.update_date}</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </c:forEach>
-
-                <div class="col-md-12 d-flex justify-content-center show-more-btn">
+                </div>
+                <div class="col-md-12 d-flex justify-content-center show-more-btn mt-5">
                     <a href="<c:url value="/public/bloglist"/>" type="button" class="btn btn-outline-primary">Show more</a>
                 </div>
             </div>

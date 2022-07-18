@@ -24,37 +24,54 @@
             <div class="header">
             <jsp:include page="../common/header.jsp"></jsp:include>
             </div>
-            <div class="container "style="padding-top: 50px">
-                <div class="row shadow-sm rounded  py-4">                    
-                    <div class="col-sm-12">
+            <div class="container ">
+                <c:set var="index" value="${requestScope.index}"/> 
+            <div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a href="/Online_Quiz/courseContent/subjectdetailmanager?sid=${index}"><button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">Suject Detail</button></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lesson</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a><button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="true">Dimention</button></a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Price Package</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="row shadow-sm rounded  py-4">                    
+                <div class="col-sm-12">
 
-                        <div class="table-wrapper">
-                            <div class="table-title">
-                                <div class="row">
-                                    <div class="col-sm-11 text-primary">
-                                        <h2>Subjects <b>Dimension</b></h2>
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <!--<a href="#addEmployeeModal"class="btn btn-success" data-toggle="modal"> <span>Add New</span></a>-->
-                                        <button id="open-add" type="button" class="btn btn-success">
-                                            Add New
-                                        </button>
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-11 text-primary">
+                                    <h2>Subjects <b>Dimension</b></h2>
+                                </div>
+                                <div class="col-sm-1">
+                                    <!--<a href="#addEmployeeModal"class="btn btn-success" data-toggle="modal"> <span>Add New</span></a>-->
+                                    <button id="open-add" type="button" class="btn btn-success">
+                                        Add New
+                                    </button>
 
-                                    </div>
                                 </div>
                             </div>
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
 
-                                        <th>ID</th>
-                                        <th>Type</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
                                 <c:forEach items="${listD}" var="o">
 
@@ -68,7 +85,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <c:set var="index" value="${requestScope.index}"/>                
+                                       
                         <ul class="pagination">
                             <c:forEach begin="1" end="${numpage}" var="i">
                                 <li class="page-item ${i==index?"active":""}"><a class="page-link" href="subdimension?index=${i}">${i}</a></li>
@@ -106,10 +123,10 @@
 
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-lg" data-bs-dismiss="modal">Close</button>
-                        <input type="button" id="add" class="btn btn-success" value="Add">
-                    </div>
-                        
+                            <button type="button" class="btn btn-lg" data-bs-dismiss="modal">Close</button>
+                            <input type="button" id="add" class="btn btn-success" value="Add">
+                        </div>
+
                     </form>
                 </div>
             </div>

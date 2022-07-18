@@ -59,8 +59,8 @@
             }
 
             .upload-icon {
-                width: 200px;
-                height: 97px;
+                width: 221px;
+                height: 150px;
                 border: 2px solid #5642BE;
                 border-style: dotted;
                 border-radius: 18px;
@@ -69,8 +69,8 @@
 
 
             .upload-icon .icon {
-                width: 60px;
-                height: 60px;
+                width: 170px;
+                height: 110px;
                 margin: 19px;
                 cursor: pointer;
             }
@@ -139,8 +139,9 @@
                                     <div class="image-upload">
                                         <label for="file-input" id="thumbnail-image-label">
                                             <div class="upload-icon">
-                                                <img class="icon" src="https://image.flaticon.com/icons/png/128/61/61112.png">
-                                                <img class="prev" src="https://image.flaticon.com/icons/png/128/61/61112.png">
+                                                <img class="icon" src="../img/insert-image.png">
+                                                <img class="prev" src="../img/insert-image.png">
+                                                
                                             </div>
                                         </label>
                                         <input id="file-input" type="file" name="file" onchange="loadFile(event)" />
