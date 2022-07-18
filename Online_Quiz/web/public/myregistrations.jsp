@@ -31,7 +31,8 @@
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <a class="activenav" href="/Online_Quiz/public/myregistrations">My Registrations</a>
-                <a href="/Online_Quiz/common/practicesList">Practices List</a>            
+                <a href="/Online_Quiz/common/practicesList">Practices List</a>       
+                <a href="/Online_Quiz/public/listsubject">List Subject</a> 
             </div>
             <div class="container "style="padding-top: 50px">
                 <div class="row">

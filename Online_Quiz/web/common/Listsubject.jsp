@@ -12,11 +12,12 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        
         <link rel="stylesheet" href="../css/slick/slick.css">
-        <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
+        <link rel="stylesheet" href="../css/index.css">        
         <link rel="stylesheet" href="../css/sidenav.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />

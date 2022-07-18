@@ -36,7 +36,7 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
                     <a href="/Online_Quiz/common/practicesList">Practices List</a>
-                        
+                    <a href="/Online_Quiz/public/listsubject">List Subject</a>    
                     </c:if>
                 </c:forEach>
 

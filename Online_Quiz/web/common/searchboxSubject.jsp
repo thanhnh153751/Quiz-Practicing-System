@@ -103,10 +103,10 @@
 
                                 <div class="content">
                                     <ul class="items">
-                                        Sub_Category:
+                                        
 
 
-                                        <p>Subject_Subcategory</p>
+                                        <p>Subject_Subcategory:</p>
                                     <c:forEach items="${requestScope.subCategorySubject}" var="sub">
 
                                         <%
