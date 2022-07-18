@@ -113,11 +113,11 @@ public class ProfileServlet extends HttpServlet {
             if (fileName.equals("")) {
                 img = "";
             }
-            Account lg = DAO.login(email, x.getPassword());
             
-            System.out.println(lg);
+            
+            //System.out.println(lg);
             DAO.EditProfile(fullname, email, phone, gender, id, img);
-
+            Account lg = DAO.login(email, x.getPassword());
             session.setAttribute("acc", lg);
             request.getRequestDispatcher("/common/profile.jsp").forward(request, response);
         } catch (Exception e) {
