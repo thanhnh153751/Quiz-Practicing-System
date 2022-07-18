@@ -73,14 +73,17 @@
                                                     <label for="file-input" id="thumbnail-image-label">
                                                         <div class="upload-icon">
                                                             <img class="icon" src="../img/insert-image.png">
-                                                            
+
                                                             <img class="prev" src="../img/insert-image.png">
                                                         </div>
                                                     </label>
                                                     <input id="file-input" type="file" name="file" onchange="loadFile(event)" />
 
                                                     <div id="cont">
-
+                                                        <div id="rowdiv0" onchange="loadFile(event)">
+                                                            <span><img src="${acc.avatar}" id="output0" width="200"></span>
+                                                            <button id="btn" onclick="del()" style="cursor: pointer;" >x</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,8 +92,8 @@
                                             <div class="profile-header-info">
                                                 <h4 class="m-t-10 m-b-5">${acc.fullname}</h4> 
                                             <p class="m-b-10 ">UXUI + Frontend Developer</p>
-                                            <a href="common/editprofile"><input  type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" /></a><h5 style="color: red"> ${mess}</h5>
-                                            
+                                            <a href="editprofile.jsp"><button  type="button" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" >Edit Profile</button></a><h5 style="color: red"> ${mess}</h5>
+
                                         </div>
                                         <!-- END profile-header-info -->
                                     </div>
@@ -124,14 +127,14 @@
                                                 <tbody>
                                                     <tr class="highlight">
                                                         <td class="field">Fullname</td>
-                                                        <td><input name="fullname" placeholder="fullname" value="${acc.fullname}" ></td>
+                                                        <td>${acc.fullname}</td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="field">Mobile</td>
-                                                        <td><input name="phone" placeholder="phone" value="${acc.phone}" >
+                                                        <td>${acc.phone}
                                                         </td>
                                                     </tr>
                                                     <tr class="divider">
@@ -139,7 +142,7 @@
                                                     </tr>
                                                     <tr class="highlight">
                                                         <td class="field">Email</td>
-                                                        <td><input name="gmail" placeholder="gmail" value="${acc.email}" readonly></td>
+                                                        <td>${acc.email}</td>
                                                     </tr>
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
@@ -148,13 +151,11 @@
                                                         <td class="field">Gender</td>
                                                         <td>
                                                             <c:if test="${acc.gender==true}">
-                                                                <input name="gender" placeholder="gender" value="Male"
-                                                                       readonly>
+                                                                Male
 
                                                             </c:if>
                                                             <c:if test="${acc.gender==false}">
-                                                                <input name="gender" placeholder="gender" value="Female"
-                                                                       readonly>
+                                                                Female
 
                                                             </c:if>
                                                         </td>
@@ -162,15 +163,15 @@
                                                     <tr class="divider">
                                                         <td colspan="2"></td>
                                                     </tr>
-<!--                                                    <tr class="highlight">
-                                                        <td class="field">&nbsp;</td>
-                                                        <td class="p-t-10 p-b-10">
-                                                            <button type="submit"
-                                                                    class="btn btn-primary width-150">Update</button>
-                                                            <button type="submit"
-                                                                    class="btn btn-white btn-white-without-border width-150 m-l-5">Cancel</button>
-                                                        </td>
-                                                    </tr>-->
+                                                    <!--                                                    <tr class="highlight">
+                                                                                                            <td class="field">&nbsp;</td>
+                                                                                                            <td class="p-t-10 p-b-10">
+                                                                                                                <button type="submit"
+                                                                                                                        class="btn btn-primary width-150">Update</button>
+                                                                                                                <button type="submit"
+                                                                                                                        class="btn btn-white btn-white-without-border width-150 m-l-5">Cancel</button>
+                                                                                                            </td>
+                                                                                                        </tr>-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -194,41 +195,69 @@
     <script src="../js/slick/slick.min.js"></script>
     <script src="../js/index.js"></script>
     <script>
-        //dưới là dấu x
-        var loadFile = function (event) {
-            var imgCont = document.getElementById("cont");
-            imgCont.innerHTML = "";
-            var label = document.getElementById('thumbnail-image-label')
-            label.style = "display: none;"
+                                                                //dưới là dấu x
+                                                                var loadFile = function (event) {
+                                                                    var imgCont = document.getElementById("cont");
+                                                                    imgCont.innerHTML = "";
+                                                                    var label = document.getElementById('thumbnail-image-label')
+                                                                    label.style = "display: none;"
 
-            for (let i = 0; i < event.target.files.length; i++) {
-                var divElm = document.createElement('div');
-                divElm.id = "rowdiv" + i;
+                                                                    for (let i = 0; i < event.target.files.length; i++) {
+                                                                        var divElm = document.createElement('div');
+                                                                        divElm.id = "rowdiv" + i;
 
 
 
-                var spanElm = document.createElement('span');
-                var image = document.createElement('img');
-                image.src = URL.createObjectURL(event.target.files[i]);
-                image.id = "output" + i;
-                image.width = "200";
+                                                                        var spanElm = document.createElement('span');
+                                                                        var image = document.createElement('img');
+                                                                        image.src = URL.createObjectURL(event.target.files[i]);
+                                                                        image.id = "output" + i;
+                                                                        image.width = "200";
 
-                spanElm.appendChild(image);
-                var deleteImg = document.createElement('button');
-                deleteImg.innerHTML = "x";
-                deleteImg.style = "cursor: pointer";
+                                                                        spanElm.appendChild(image);
+                                                                        var deleteImg = document.createElement('button');
+                                                                        deleteImg.innerHTML = "x";
+                                                                        deleteImg.style = "cursor: pointer";
 
-                deleteImg.onclick = function () {
-                    this.parentNode.remove();
-                    label.style = "";
-                    document.getElementById('file-input').value = null;
-                };
+                                                                        deleteImg.onclick = function () {
+                                                                            this.parentNode.remove();
+                                                                            label.style = "";
+                                                                            document.getElementById('file-input').value = null;
+                                                                        };
 
-                divElm.appendChild(spanElm);
-                divElm.appendChild(deleteImg);
-                imgCont.appendChild(divElm);
-            }
-        };
+                                                                        divElm.appendChild(spanElm);
+                                                                        divElm.appendChild(deleteImg);
+                                                                        imgCont.appendChild(divElm);
+                                                                    }
+                                                                };
+
+                                                                function del() {
+                                                                    document.getElementById('cont').innerHTML = "";
+                                                                    var label = document.getElementById('thumbnail-image-label')
+                                                                    label.style = "";
+                                                                }
+                                                                ;
+                                                                
+                                                                var something = (function () {
+                                                                    var executed = false;
+                                                                    return function () {
+                                                                        if (!executed) {
+                                                                            executed = true;
+                                                                            // do something
+                                                                            var label = document.getElementById('thumbnail-image-label')
+                                                                            label.style = "display: none;"
+                                                                            var del = function () {
+
+                                                                            }
+
+                                                                        }
+                                                                    };
+                                                                })();
+                                                                something(); // "do something" happens
+                                                                something();
+
+
+
     </script>
 
 </html>

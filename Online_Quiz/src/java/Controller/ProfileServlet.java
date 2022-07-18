@@ -47,7 +47,7 @@ public class ProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfileServlet</title>");            
+            out.println("<title>Servlet ProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
@@ -99,7 +99,6 @@ public class ProfileServlet extends HttpServlet {
             boolean gender = Boolean.parseBoolean(gender_raw);
             AccountDAO DAO = new AccountDAO();
             Account a = new Account(x.getId(), fullname, email, phone, x.getPassword(), gender, x.getStatus(), x.getAvatar());
-            Account lg = DAO.login(email, x.getPassword());
             //img
             String img = "../img/";
             Part part = request.getPart("file");
@@ -111,8 +110,13 @@ public class ProfileServlet extends HttpServlet {
             is.close();
             img += fileName;
             //-------------------------------
-            if(fileName.equals("")) img="";
+            if (fileName.equals("")) {
+                img = "";
+            }
+            Account lg = DAO.login(email, x.getPassword());
             
+            System.out.println(lg);
+            DAO.EditProfile(fullname, email, phone, gender, id, img);
 
             session.setAttribute("acc", lg);
             request.getRequestDispatcher("/common/profile.jsp").forward(request, response);
@@ -120,7 +124,7 @@ public class ProfileServlet extends HttpServlet {
             System.out.println(e);
         }
     }
-    
+
     private boolean upoloadFile(InputStream is, String path) {
         boolean test = false;
         try {
