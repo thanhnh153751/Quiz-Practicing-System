@@ -19,7 +19,7 @@
 body {
     background: rgb(255, 254, 254);
     color: rgb(8, 7, 7);
-    font-family: 'Poppins', sans-serif;
+    font-family: inherit;
     margin: 0;
 }
 

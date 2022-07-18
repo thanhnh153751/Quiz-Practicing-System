@@ -17,6 +17,9 @@ and open the template in the editor.
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 8;
 }
 
 .brand{

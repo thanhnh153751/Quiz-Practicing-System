@@ -5,10 +5,13 @@
  */
 package Controller;
 
+import DAO.AuthorizationDAO;
 import DAO.SubjectDAO;
 import DAO.PostDAO;
+import Model.Account;
 import Model.Post;
 import Model.Subject;
+import Model.UserPermission;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -69,6 +73,7 @@ public class HomeServerlet extends HttpServlet {
         request.setAttribute("subjectList", subjectList);
         List<Subject> subjectLast = sjd.loadFeaturedSubject();
         request.setAttribute("subjectLast", subjectLast);
+        
         //dành cho blog
 
         PostDAO pd = new PostDAO();
@@ -79,7 +84,12 @@ public class HomeServerlet extends HttpServlet {
         request.setAttribute("loadLatestPost", loadLatestPost);
         request.setAttribute("loadHotPost", loadHotPost);
         
-        
+        //danh cho role
+        AuthorizationDAO dao = new AuthorizationDAO();
+        HttpSession Session = request.getSession();
+        Account a = (Account) Session.getAttribute("acc");
+        List<UserPermission> userPermission = dao.getListPermissionByAid(a.getId());
+        request.setAttribute("listrole", userPermission);
         
         
         request.getRequestDispatcher("/public/index.jsp").forward(request, response);

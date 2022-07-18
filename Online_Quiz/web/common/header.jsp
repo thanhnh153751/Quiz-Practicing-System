@@ -8,11 +8,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <nav class="navbar">
-    <div class="brand"><a href="<c:url value="/public/home"/>">Quiz Online</a></div>
-    <div class="search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="search" placeholder="Search anything...">
+    <div class="brand"><a style="text-decoration: none; color: black" href="<c:url value="/public/home"/>">Quiz Online</a>
+    <a href="#" onclick="openNav()"><i class="fa-solid fa-bars"></i></a>
     </div>
+    
     <c:if test="${sessionScope.acc == null}">
         <div class="auth">
             <input type="button" value="Login" id="nav-login">
@@ -23,11 +22,10 @@
             <div><i class="fa-solid fa-user" class="dropbtn"></i> Hello, ${sessionScope.acc.fullname}</div>
             <div class="dropdown-content">
                 <a href="<c:url value="/common/managersubjectlist"/>">Subject List</a>
-                <a href="/Online_Quiz/common/quizzeslist">Quizzes List</a>
-                <a href="/Online_Quiz/common/questionlist">Question List</a>
+<!--                <a href="/Online_Quiz/common/quizzeslist">Quizzes List</a>
+                <a href="/Online_Quiz/common/questionlist">Question List</a>-->
                 <a href="<c:url value="/common/profile"/>">Profile</a>
-                <a href="<c:url value="/marketing/postdetails"/>">Post</a>
-                <a href="<c:url value="/Online_Quiz/public/myregistrations"/>">My Registrations</a>
+
                 
                 <a id="changepass-nav" data-toggle="modal"> Change password</a>
                 <a href="<c:url value="/public/logout"/>">Logout</a>

@@ -7,6 +7,7 @@ package DAO;
 
 import Model.Action;
 import Model.Permission;
+import Model.UserPermission;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -73,11 +74,27 @@ public class AuthorizationDAO extends DBContext {
         return null;
     }
     
+    public List<UserPermission> getListPermissionByAid(int aid) {
+        List<UserPermission> permissions = new ArrayList<>();
+        String query = "select  * from User_Permission where account_id ="+aid;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);         
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                permissions.add(new UserPermission(rs.getInt("id"),rs.getInt("account_id"),rs.getInt("permission_id"), rs.getBoolean("licensed")));
+            }
+            return permissions;
+        } catch (SQLException e) {
+            System.out.println("[AuthorizationDAO]: " + e);
+        }
+        return null;
+    }
+    
     public static void main(String[] args) {
         AuthorizationDAO dao = new AuthorizationDAO();
-        List<Action> actions = dao.getActionByAccount(2);
-        for (Action action : actions) {
-            System.out.println(action.getAction_code());
+        List<UserPermission> actions = dao.getListPermissionByAid(3);
+        for (UserPermission action : actions) {
+            System.out.println(action.getPermission_id()+"abc "+action.isLicensed());
         }
     }
 }

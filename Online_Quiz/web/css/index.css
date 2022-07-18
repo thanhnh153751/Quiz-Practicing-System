@@ -55,7 +55,7 @@ h2{
 /* Css for body */
 
 body{
-    font-family: sans-serif;
+    font-family: inherit;
     background-color: #f7f9fa;
 }
 

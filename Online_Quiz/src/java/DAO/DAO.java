@@ -142,7 +142,7 @@ public class DAO extends DBContext {
                 + "                							 and sc.id between ? and ? \n"
                 + "                							 and title like ?\n"
                 + "											 and ssc.id between ? and ?\n"
-                + "                							 group by s.id,s.title,s.contact,s.status,sc.name,ssc.name order by s.id offset ? rows fetch first 3 rows only";
+                + "                							 group by s.id,s.title,s.contact,s.status,sc.name,ssc.name order by s.id offset ? rows fetch first 4 rows only";
         try {
             ps = connection.prepareStatement(query);
             if (status == -1) {
@@ -173,7 +173,7 @@ public class DAO extends DBContext {
                 ps.setInt(6, scid);
                 ps.setInt(7, scid);
             }
-            ps.setInt(8, (index - 1) * 3);
+            ps.setInt(8, (index - 1) * 4);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Subject(rs.getInt(1),
@@ -302,8 +302,8 @@ public class DAO extends DBContext {
 
             while (rs.next()) {
                 int totalA = rs.getInt(1);
-                total = totalA / 3;
-                if (totalA % 3 != 0) {
+                total = totalA / 5;
+                if (totalA % 5 != 0) {
                     total++;
                 }
             }
@@ -357,8 +357,8 @@ public class DAO extends DBContext {
 
             while (rs.next()) {
                 int totalA = rs.getInt(1);
-                total = totalA / 3;
-                if (totalA % 3 != 0) {
+                total = totalA / 4;
+                if (totalA % 4 != 0) {
                     total++;
                 }
             }
@@ -389,6 +389,34 @@ public class DAO extends DBContext {
 //        }
 //        return arr;
 //    }
+    
+        public List<Quiz> getAllPracticesList() {
+        List<Quiz> list = new ArrayList<>();
+        DAO dao = new DAO();
+        String query = "select l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate from Subject s\n" +
+"                                join Lesson l on s.id = l.sid\n" +
+"                                join Lesson_Details ld on l.id = ld.lid\n" +
+"                                join Quiz_Lesson ql on ld.id = ql.lesson_id\n" +
+"                                join Quiz q on ql.quiz_id = q.id\n" +
+"				 join Quiz_Type qt on q.type = qt.id\n" +
+"                                group by l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Quiz(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getLong(6)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public List<Subject> getAllSimulation(int id, int lid, String quiz_name, int index) {
         List<Subject> list = new ArrayList<>();
         DAO dao = new DAO();
@@ -554,8 +582,8 @@ public class DAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 int totalA = rs.getInt(1);
-                total = totalA / 3;
-                if (totalA % 3 != 0) {
+                total = totalA / 6;
+                if (totalA % 6 != 0) {
                     total++;
                 }
             }
@@ -567,11 +595,11 @@ public class DAO extends DBContext {
     public List<Subject> getAllSubjectDimension(int id, int index) {
         List<Subject> list = new ArrayList<>();
         String query = "select sd.id,sd.sid,sd.type,sd.name,sd.description from Subject s join Subject_Dimension sd on s.id = sd.sid where s.id= ?\n"
-                + "order by s.id offset ? rows fetch first 3 rows only";
+                + "order by s.id offset ? rows fetch first 4 rows only";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, id);
-            ps.setInt(2, (index - 1) * 3);
+            ps.setInt(2, (index - 1) * 4);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Subject(rs.getInt(1),
@@ -596,8 +624,8 @@ public class DAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 int totalA = rs.getInt(1);
-                total = totalA / 3;
-                if (totalA % 3 != 0) {
+                total = totalA / 4;
+                if (totalA % 4 != 0) {
                     total++;
                 }
             }
@@ -700,7 +728,7 @@ public class DAO extends DBContext {
                 + "                               join Quiz_Level qul on q.level = qul.id\n"
                 + "				join Quiz_Type qt on q.type = qt.id\n"
                 + "                               join Question qus on q.id = qus.quiz_id where s.id between ? and ? and qt.id between ? and ?  and q.quiz_name like ?\n"
-                + "                               group by q.id,q.quiz_name, s.title, qul.[level],q.duration,q.passrate,qt.[type] order by q.id offset ? rows fetch first 3 rows only";
+                + "                               group by q.id,q.quiz_name, s.title, qul.[level],q.duration,q.passrate,qt.[type] order by q.id offset ? rows fetch first 6 rows only";
         try {
             ps = connection.prepareStatement(query);
 
@@ -723,7 +751,7 @@ public class DAO extends DBContext {
             } else {
                 ps.setString(5, "%" + quiz_name + "%");
             }
-            ps.setInt(6, (index - 1) * 3);
+            ps.setInt(6, (index - 1) * 6);
 
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -779,8 +807,8 @@ public class DAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 int totalA = rs.getInt(1);
-                total = totalA / 3;
-                if (totalA % 3 != 0) {
+                total = totalA / 4;
+                if (totalA % 4 != 0) {
                     total++;
                 }
             }
@@ -988,9 +1016,17 @@ public class DAO extends DBContext {
         }
         return arr;
     }    
+    
+    public List<Quiz> getListByPageQ(List<Quiz> list, int start, int end) {
+        ArrayList<Quiz> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }  
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        System.out.println(dao.getAllNew(-1, -1, -1, "", 1));
+        System.out.println(dao.totalPage(-1, -1, "%%"));
     }
 }
