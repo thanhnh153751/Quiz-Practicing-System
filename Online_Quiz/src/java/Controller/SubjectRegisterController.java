@@ -75,24 +75,44 @@ public class SubjectRegisterController extends HttpServlet {
                 out.println("<h4>select the appropriate subscription package</h4>");
                 out.println("<fmt:setLocale value = \"en_US\"/>");
                 
-//                out.println("<table>");
-//                out.println("<tr>");
-//                
-//                out.println("</tr>");
-//                out.println("</table>");
+                out.println("<table>");
+                out.println("<tr>");
+                out.println("<th>Price</th>\n" +
+"                            <th>Time package</th>");
+                
+                out.println("</tr>");
                 
                 for (Package pac : packages) {
+                    out.println("<tr>");
+                    out.println("<td>");
                     // out.println("<p>" + pac.getName() + "</p>");
                     if (pac.getSale_price() != 0) {
                         out.println("<span style=\"color: red;\" >Sale :" + pac.getSale_price() + "$</span>");
                     } else {
                         out.println("<span>" + pac.getList_price() + "$</span>");
                     }
-
+                    out.println("</td>");
+                    
+                    out.println("<td>");
                     out.println("<input type=\"radio\" id=\"html\" name=\"package\" value=\"" + pac.getId() + "\"" + pac.getId() + "\">");
                     out.println("<label for=\"vehicle1\"> " + pac.getName() + "</label><br>");
-
+                    out.println("</td>");
+                    out.println("</tr>");
                 }
+                out.println("</table>");
+                
+//                for (Package pac : packages) {
+//                    // out.println("<p>" + pac.getName() + "</p>");
+//                    if (pac.getSale_price() != 0) {
+//                        out.println("<span style=\"color: red;\" >Sale :" + pac.getSale_price() + "$</span>");
+//                    } else {
+//                        out.println("<span>" + pac.getList_price() + "$</span>");
+//                    }
+//
+//                    out.println("<input type=\"radio\" id=\"html\" name=\"package\" value=\"" + pac.getId() + "\"" + pac.getId() + "\">");
+//                    out.println("<label for=\"vehicle1\"> " + pac.getName() + "</label><br>");
+//
+//                }
 
                 out.println("<a id=\"myBtn2\" class=\"btn btn-outline-primary\" onclick=\"getData()\" > Register</a>");
 

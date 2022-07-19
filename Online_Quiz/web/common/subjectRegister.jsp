@@ -55,6 +55,23 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+
+            tbody, td, tfoot, th, thead, tr {
+                border-color: inherit;
+                border-style: solid;
+                border-width: 0;
+                border: 1px solid;
+            }
+            table {
+                caption-side: bottom;
+                border-collapse: collapse;
+                text-align: center;
+                border: 1px solid;
+                width: 400px;
+            }
+            #myBtn2{
+                float: right;
+            }
         </style>
     </head>
     <body>
@@ -81,7 +98,8 @@
                     $('#staticBackdrop').modal('show');
                     // $("#register-tab").tab('show');
 
-                };
+                }
+                ;
             </script>
         </div>
         <script>
