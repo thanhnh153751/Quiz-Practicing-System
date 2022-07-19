@@ -124,8 +124,9 @@
 
                                                     <div id="cont">
                                                         <div id="rowdiv0" onchange="loadFile(event)">
-                                                            <span><img src="${acc.avatar}" id="output0" width="200"></span>
-                                                            <button id="btn" onclick="del()" style="cursor: pointer;" >x</button>
+                                                        <c:if test="${acc.avatar == ''}"><span><img src="../img/image_defaut.jpg" id="output0" width="200"></span></c:if>
+                                                        <c:if test="${acc.avatar != ''}"><span><img src="${acc.avatar}" id="output0" width="200"></span></c:if>
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>

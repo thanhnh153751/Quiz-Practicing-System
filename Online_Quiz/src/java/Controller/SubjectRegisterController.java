@@ -74,6 +74,13 @@ public class SubjectRegisterController extends HttpServlet {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<h4>select the appropriate subscription package</h4>");
                 out.println("<fmt:setLocale value = \"en_US\"/>");
+                
+//                out.println("<table>");
+//                out.println("<tr>");
+//                
+//                out.println("</tr>");
+//                out.println("</table>");
+                
                 for (Package pac : packages) {
                     // out.println("<p>" + pac.getName() + "</p>");
                     if (pac.getSale_price() != 0) {

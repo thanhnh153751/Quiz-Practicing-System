@@ -83,7 +83,7 @@
 
                                 <c:forEach items="${requestScope.listSubject}" var="s">
                                     <div class=" col-xs-12 col-sm-6 col-lg-3 mb-4 courseInfor">
-                                        <article class="course-item grid-style p-2">
+                                        <article class="course-item grid-style p-2 h-100">
                                             <a title="title name" href="subjectdetail?ids=${s.id}" class="wrap-course-item">
                                                 <div class="course-thumb ">
                                                     <img class="img-fluid" src="${s.thumbnail}" alt="name courses">

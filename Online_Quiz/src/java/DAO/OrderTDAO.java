@@ -72,11 +72,11 @@ public class OrderTDAO extends DBContext {
         }
     }
     public static void main(String[] args) {
-//      LocalDate curDate = LocalDate.MAX;
-//      LocalDate Date = curDate.plusMonths(3);
-//      String date = curDate.toString();
-//      
-//        System.out.println(date);
+      LocalDate curDate = LocalDate.now();
+      LocalDate Date = curDate.plusMonths(3);
+      String date = Date.toString();
+      
+        System.out.println(date);
         
     }
 
