@@ -10,6 +10,7 @@ import Model.Subject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -18,12 +19,25 @@ import java.sql.SQLException;
 public class OrderTDAO extends DBContext {
 
     public void addOrder(Account c, Subject s, Model.Package p) {
-//        LocalDate curDate = LocalDate.now();
-//        String date = curDate.toString();
+        LocalDate curDate = LocalDate.now();
+        String curdate = curDate.toString();
+        String afdate = "";
+        if(p.getName().equalsIgnoreCase("3 months")){
+            LocalDate afDate = curDate.plusMonths(3);
+            afdate = afDate.toString();
+        }
+        if(p.getName().equalsIgnoreCase("6 months")){
+            LocalDate afDate = curDate.plusMonths(6);
+            afdate = afDate.toString();
+        }
+        if(p.getName().equalsIgnoreCase("unlimited")){
+            
+        }
+        
         try {
             //add order
-            String sql = "INSERT INTO [Order] (aid, email, [subject], [package],total_cost)\n"
-                    + "VALUES (?, ?, ?, ?,?);";
+            String sql = "INSERT INTO [Order] (aid, email, [subject], [package],total_cost,valid_from,valid_to,registration_time)\n"
+                    + "VALUES (?, ?, ?, ?,?,?,?,?);";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, c.getId());
 //            st.setString(2, date);
@@ -31,6 +45,9 @@ public class OrderTDAO extends DBContext {
             st.setNString(3, s.getTitle());
             st.setNString(4, p.getName());
             st.setInt(5, (p.getSale_price() != 0) ? p.getSale_price() : p.getList_price());
+            st.setNString(6, curdate);
+            st.setNString(7, afdate);
+            st.setNString(8, curdate);
             st.executeUpdate();
             //lay id cua order vua add
             String sql1 = "select top 1 id from [Order] order by id  desc";
@@ -53,6 +70,14 @@ public class OrderTDAO extends DBContext {
         } catch (SQLException e) {
 
         }
+    }
+    public static void main(String[] args) {
+//      LocalDate curDate = LocalDate.MAX;
+//      LocalDate Date = curDate.plusMonths(3);
+//      String date = curDate.toString();
+//      
+//        System.out.println(date);
+        
     }
 
 }

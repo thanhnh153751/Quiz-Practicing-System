@@ -53,7 +53,7 @@
                             <div id="slider_1" class="slider">
                             <c:forEach items="${requestScope.loadLatestPost}" var="p">
                                 <div class="card slider-item-1 col-md-3" style="width: 16rem;">
-                                    <a href="">
+                                    <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
                                         <img src="${p.thumbnail}"
                                              class="card-img-top img-responsive" alt="...">
                                         <div class="card-body slider-item-body">
@@ -89,7 +89,7 @@
                             <div class="overflow-auto tag-late" id="lapost">
                                 <c:forEach items="${requestScope.loadLatestPost}" var="p">
                                     <div class="card card-late slider-item-latest col-md-3" style="width: 16.5rem; height: 15rem;">
-                                        <a href="">
+                                        <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
                                             <div class="card-body slider-item-body-2">
@@ -108,7 +108,7 @@
                             <div id="" class="slider_2 mb-5">
                                 <c:forEach items="${requestScope.loadHotPost}" var="p">
                                     <div class="card slider-item col-md-3" style="width: 16rem; height: 15rem;">
-                                        <a href="">
+                                        <a href="<c:url value="/public/postdetails?id=${p.id}"/>">
                                             <img src="${p.thumbnail}"
                                                  class="card-img-top img-responsive" alt="...">
                                             <div class="card-body slider-item-body-2">
