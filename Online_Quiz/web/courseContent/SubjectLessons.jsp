@@ -132,7 +132,7 @@
 
                                 </c:if>
 
-                                <td><a href="#"><i class="fas fa-eye"></i>View</a>
+                                <td><a href="#"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-danger" href="#">Edit</a> 
                                     
 

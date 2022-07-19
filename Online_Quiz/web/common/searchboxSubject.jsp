@@ -67,14 +67,8 @@
                     <div class="d-flex">
                      <input class="form-control me-2 searchBox" type="search" placeholder="Search course by title,tag,description,..." aria-label="Search" name="name" value="${requestScope.key}">
                     <i class="fas fa-search"></i>   
-                    </div>
-                    
-
+                    </div>                   
                     <h5>Subject category</h5>
-
-
-
-
                     <!--test below-->  
                     <div>
                         Filter by Category: 

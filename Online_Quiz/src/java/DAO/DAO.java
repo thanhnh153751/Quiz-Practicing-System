@@ -14,6 +14,7 @@ import Model.Lesson;
 import Model.Level;
 import Model.Question;
 import Model.Quiz;
+import Model.Sliders;
 import Model.Subject;
 import Model.SubjectCategory;
 import Model.SubjectDimension;
@@ -389,17 +390,16 @@ public class DAO extends DBContext {
 //        }
 //        return arr;
 //    }
-    
-        public List<Quiz> getAllPracticesList() {
+    public List<Quiz> getAllPracticesList() {
         List<Quiz> list = new ArrayList<>();
         DAO dao = new DAO();
-        String query = "select l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate from Subject s\n" +
-"                                join Lesson l on s.id = l.sid\n" +
-"                                join Lesson_Details ld on l.id = ld.lid\n" +
-"                                join Quiz_Lesson ql on ld.id = ql.lesson_id\n" +
-"                                join Quiz q on ql.quiz_id = q.id\n" +
-"				 join Quiz_Type qt on q.type = qt.id\n" +
-"                                group by l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate";
+        String query = "select l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate from Subject s\n"
+                + "                                join Lesson l on s.id = l.sid\n"
+                + "                                join Lesson_Details ld on l.id = ld.lid\n"
+                + "                                join Quiz_Lesson ql on ld.id = ql.lesson_id\n"
+                + "                                join Quiz q on ql.quiz_id = q.id\n"
+                + "				 join Quiz_Type qt on q.type = qt.id\n"
+                + "                                group by l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate";
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -416,7 +416,7 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Subject> getAllSimulation(int id, int lid, String quiz_name, int index) {
         List<Subject> list = new ArrayList<>();
         DAO dao = new DAO();
@@ -933,7 +933,7 @@ public class DAO extends DBContext {
                 ps.setInt(1, sid);
                 ps.setInt(2, sid);
             }
-            
+
             if (lid.equalsIgnoreCase("all")) {
                 ps.setString(3, "%%");
             } else {
@@ -947,7 +947,6 @@ public class DAO extends DBContext {
 //                ps.setInt(3, lid);
 //                ps.setInt(4, lid);
 //            }
-
             if (sdid == -1) {
                 ps.setInt(4, 0);
                 ps.setInt(5, 9);
@@ -989,17 +988,17 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public void changestatusQuestion(int id, String status) {
         String query = "update Question set status = ? where id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             if (status.equalsIgnoreCase("false")) {
-                ps.setString(1,"true");
+                ps.setString(1, "true");
 
             }
             if (status.equalsIgnoreCase("true")) {
-                ps.setString(1,"false");
+                ps.setString(1, "false");
 
             }
             ps.setInt(2, id);
@@ -1008,22 +1007,125 @@ public class DAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
+
     public List<Question> getListByPage(List<Question> list, int start, int end) {
         ArrayList<Question> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
             arr.add(list.get(i));
         }
         return arr;
-    }    
-    
+    }
+
     public List<Quiz> getListByPageQ(List<Quiz> list, int start, int end) {
         ArrayList<Quiz> arr = new ArrayList<>();
         for (int i = start; i < end; i++) {
             arr.add(list.get(i));
         }
         return arr;
-    }  
+    }
+
+    public List<Sliders> getAllSliders(int status, String search) {
+        List<Sliders> list = new ArrayList<>();
+        String query = "select * from Sliders where status between ? and ? and title like ?";
+        try {
+            ps = connection.prepareStatement(query);
+            if (status == -1) {
+                ps.setInt(1, 0);
+                ps.setInt(2, 1);
+            } else {
+                ps.setInt(1, status);
+                ps.setInt(2, status);
+            }
+            if (search == null) {
+                ps.setString(3, "%" + "%");
+            } else {
+                ps.setString(3, "%" + search + "%");
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Sliders(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getBoolean(5)
+                ));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void changestatusSliders(int id, String status) {
+        String query = "update Sliders set status = ? where id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            if (status.equalsIgnoreCase("false")) {
+                ps.setString(1, "true");
+
+            }
+            if (status.equalsIgnoreCase("true")) {
+                ps.setString(1, "false");
+
+            }
+            ps.setInt(2, id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Sliders> getListByPageSlider(List<Sliders> list, int start, int end) {
+        ArrayList<Sliders> arr = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            arr.add(list.get(i));
+        }
+        return arr;
+    }
+
+    public void editSliders(int id, String title, String image, String backlink,int status, String notes) {
+        String sql = "UPDATE [dbo].[Sliders]\n"
+                + "   SET \n"
+                + "      [title] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[backlink] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[notes] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+
+            ps.setString(1, title);
+            ps.setString(2, image);
+            ps.setString(3, backlink);
+            ps.setInt(4, status);
+            ps.setString(5, notes);
+            ps.setInt(6, id);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+    }
+    
+    public Sliders getAllSlidersbyid(int id) {
+        String query = "select * from Sliders where id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Sliders(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getBoolean(5),
+                        rs.getString(6)
+                );
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         DAO dao = new DAO();

@@ -35,9 +35,7 @@
 
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a class="" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
-                    <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
-                    <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>             
+                    <a class="activenav" href="/Online_Quiz/marketing/postdetails">List Of Post</a>            
                 </div>
                 <div class="container "style="padding-top: 50px">
                     <div class="row">

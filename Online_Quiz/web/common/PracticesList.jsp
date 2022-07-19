@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <table class="table table-striped table-hover table-sm table-bordered">
-                                    <thead class="table-success" >
+                                    <thead class="" >
                                         <tr>
 
                                             <th>ID</th>

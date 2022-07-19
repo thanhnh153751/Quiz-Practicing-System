@@ -1,7 +1,7 @@
 <%-- 
-    Document   : inputPost
-    Created on : Jun 12, 2022, 1:14:24 AM
-    Author     : PREDATOR
+    Document   : ManagerProduct
+    Created on : Dec 28, 2020, 5:19:02 PM
+    Author     : trinh
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,8 +12,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">      
+        <title>CRUD Data </title>
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
@@ -21,7 +23,7 @@
         <link rel="stylesheet" href="../css/sidenav.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-              crossorigin="anonymous" referrerpolicy="no-referrer"
+              crossorigin="anonymous" referrerpolicy="no-referrer"        
               <link href="css/manager.css" rel="stylesheet" type="text/css"/>
         <style>
             img{
@@ -30,12 +32,15 @@
             }
         </style>
     <body>
+
         <jsp:include page="../common/header.jsp"></jsp:include>
             <div id="main">
 
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a class="activenav" href="/Online_Quiz/marketing/postdetails">List Of Post</a>             
+                    <a class="activenav" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
+                    <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
+                    <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>             
                 </div>
                 <div class="container "style="padding-top: 50px">
                     <div class="row">
@@ -55,12 +60,13 @@
                                                         <li class="breadcrumb-item">
                                                             <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
                                                         </li>
-                                                        <li class="breadcrumb-item">List Of Post</li>
+                                                        <li class="breadcrumb-item">Subjects List</li>
                                                         <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="#">Post Details</a>
+                                                            <a style="text-decoration: none" href="#">Subjects Dimension</a>
                                                         </li>
                                                         <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="#">Add New Posts</a>
+                                                            <a style="text-decoration: none" href="#">Edit Dimension</a>
+
                                                         </li>
                                                     </ol>
                                                 </nav>
@@ -70,59 +76,46 @@
                                 </div>
                             </div>
                         </header>
-                        
+
+
                         <div id="editEmployeeModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="/Online_Quiz/marketing/postdetails?do=${do}&filter=1" method="post">
-                                    <div class="modal-header">						
-                                        <h4 class="modal-title">Add Post</h4>
-
-                                    </div>
-                                    <div class="modal-body">					
-
-
-                                        <div class="form-group">
-                                            <label>Post_title</label>
-                                            <input  name="posttitle" type="text" class="form-control" required>
+                                    <form action="/Online_Quiz/marketing/editsliders" method="post">
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Edit Dimension</h4>
+                                            <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                                         </div>
-                                        <div class="form-group">
-                                            <label>Brief</label>
-                                            <input  name="biref" type="text" class="form-control" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Details</label>
-                                            <textarea name="details" class="form-control" required></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Author</label>
-                                            <input name="author" class="form-control" type="text" required></input>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Contact</label>
-                                            <input name="contact" class="form-control" type="email" required></input>
-                                        </div>
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id" class="btn btn-info" value="${id}">
 
                                         <div class="form-group">
-                                            <label>Category Post</label>
-                                            <select name="category" class="form-select" aria-label="Default select example">
-                                                <c:forEach items="${listPC}" var="o">
-                                                    <option value="${o.id}">${o.name}</option>
-                                                </c:forEach>
-                                            </select>
+                                            <label>Type</label>
+                                            <input value="${listD.title}" name="title" type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input value="${listD.image}" name="image" type="text" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input value="${listD.backlink}" name="backlink" type="text" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select name="status" class="form-select" aria-label="Default select example">
-
                                                 <option value="1">Active</option>
-
+                                                <option value="0">Deactive</option>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input value="${listD.note}" name="note" type="text" class="form-control" required>
+                                        </div>                               
 
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" class="btn btn-success" value="Add">
+                                        <input type="submit" name="submit" id="edit" class="btn btn-success" value="Edit">
                                     </div>
                                 </form>
                             </div>
@@ -130,24 +123,21 @@
                     </div>
 
                 </div>
-            </div>
-            <br>
-            <br>
-            <br>
 
+
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>                      
             <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
-
-
-        <script src="js/manager.js" type="text/javascript"></script>
-        <script src="../js/jquery/jquery.js"></script>
-        <script src="../js/jquery/jquery-migrate.js"></script>
-        <script src="../js/boostrap/bootstrap.min.js"></script>
-        <script src="../js/slick/slick.min.js"></script>
-        <script src="../js/index.js"></script>
-        <script src="../js/sidenav.js"></script>
-
-
-        <script src="js/manager.js" type="text/javascript"></script>
     </body>
+    <script src="js/manager.js" type="text/javascript"></script>
+    <script src="../js/jquery/jquery.js"></script>
+    <script src="../js/jquery/jquery-migrate.js"></script>
+    <script src="../js/boostrap/bootstrap.min.js"></script>
+    <script src="../js/slick/slick.min.js"></script>
+    <script src="../js/index.js"></script>
 </html>

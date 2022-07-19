@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/nav.css">
-        <link rel="stylesheet" href="../css/sidenav.css">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
               crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -53,13 +53,7 @@
         <jsp:include page="../common/header.jsp"></jsp:include>
             <div id="main">
 
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
-                    <a class="" href="/Online_Quiz/common/practicesList">Practices List</a>
-                    <a href="/Online_Quiz/public/listsubject">List Subject</a> 
-
-                </div>
+               
                 <div class="container"style="padding-top: 50px">
                     <div class="row">
 
@@ -134,6 +128,8 @@
                                                 <!-- BEGIN profile-header-info -->
                                                 <div class="profile-header-info">
                                                     <h4 class="m-t-10 m-b-5">${acc.fullname}</h4> 
+                                                    <br>
+                                                    <br>
                                                     <br>
                                                     <br>
                                                     <input  type="submit" class="profile-edit-btn" name="btnAddMore" value="Update Profile" /><h5 style="color: red"> ${mess}</h5>

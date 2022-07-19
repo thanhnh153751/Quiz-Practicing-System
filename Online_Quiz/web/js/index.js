@@ -70,6 +70,10 @@ $(document).ready(function () {
         var sid = document.getElementById('sid').value;
         window.location = "/Online_Quiz/common/subdimension?sid="+sid;
     })
+    $('#editmd').on('hidden.bs.modal', function (e) {
+        var sid = document.getElementById('sid').value;
+        window.location = "/Online_Quiz/common/subdimension?sid="+sid;
+    })
     $("#close").click(function () {
         window.location.reload();
         // $("#register-tab").tab('show');

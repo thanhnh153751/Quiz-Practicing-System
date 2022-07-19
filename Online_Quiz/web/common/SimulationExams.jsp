@@ -73,7 +73,7 @@
                             <form action="/Online_Quiz/common/simulationexams">
                                 <div class="h6">Subject:</div>
                                 <select class="select-css" name="did" onchange="this.form.submit()">
-                                    <option value="-1">--------------------Subject--------------------</option>
+                                    <option value="-1">------------------All Subject------------------</option>
                                 <c:forEach items="${listbysubject}" var="D">
                                     <option value="${D.id}" ${D.id == did ?"selected":""}>${D.title}</option>
                                 </c:forEach>
@@ -81,7 +81,7 @@
                             <div class="h6">Level:</div>
 
                             <select class="select-css" name="lid" onchange="this.form.submit()">
-                                <option value="-1">---------------------Level--------------------</option>
+                                <option value="-1">-------------------All Level------------------</option>
                                 <c:forEach items="${listbylevel}" var="D">
                                     <option value="${D.id}" ${D.id == lid ?"selected":""}>${D.level}</option>
                                 </c:forEach>
@@ -122,8 +122,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-striped table-hover table-sm table-bordered">
-                                <thead class="table-success" >
+                            <table class="table table-striped table-hover table-sm  table-bordered">
+                                <thead class="" >
                                     <tr>
 
                                         <th>ID</th>

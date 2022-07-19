@@ -20,12 +20,9 @@
     <c:if test="${sessionScope.acc != null}">
         <div class="auth">
             <div><i class="fa-solid fa-user" class="dropbtn"></i> Hello, ${sessionScope.acc.fullname}</div>
+            
             <div class="dropdown-content">
-                <a href="<c:url value="/common/managersubjectlist"/>">Subject List</a>
-<!--                <a href="/Online_Quiz/common/quizzeslist">Quizzes List</a>
-                <a href="/Online_Quiz/common/questionlist">Question List</a>-->
-                <a href="<c:url value="/common/profile"/>">Profile</a>
-                
+                <a href="<c:url value="/common/profile"/>">Profile</a>              
                 <a id="changepass-nav" data-toggle="modal"> Change password</a>
                 <a href="<c:url value="/public/logout"/>">Logout</a>
             </div>
