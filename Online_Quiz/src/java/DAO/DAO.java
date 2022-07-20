@@ -1118,7 +1118,7 @@ public class DAO extends DBContext {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getBoolean(5),
+                        rs.getBoolean("status"),
                         rs.getString(6)
                 );
             }
@@ -1129,6 +1129,6 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO dao = new DAO();
-        System.out.println(dao.totalPage(-1, -1, "%%"));
+        System.out.println(dao.getAllSlidersbyid(1).isStatus());
     }
 }

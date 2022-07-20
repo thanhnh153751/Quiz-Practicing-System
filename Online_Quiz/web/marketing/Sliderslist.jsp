@@ -31,7 +31,7 @@
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <a class="" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
-                    <a class="activenav" href="/Online_Quiz/marketing/postdetails">Sliders list</a>
+                    <a class="activenav" href="/Online_Quiz/marketing/sliders">Sliders list</a>
 
                 </div>
                 <div class="container"style="padding-top: 50px">
@@ -119,7 +119,7 @@
                                         <th>Image</th>
                                         <th>Backlink</th>
                                         <th>status</th>  
-                                        <th style="width: 15%">Actions</th>
+                                        <th style="width: 20%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -140,7 +140,11 @@
 
                                             </c:if>
 
-                                                <td><a href="editsliders?id=${o.id}" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a>
+                                                <td><a style="text-decoration: none" href="sliderdetail?id=${o.id}" class="btn btn-success fas fa-eye" data-toggle="modal"><span></span></a>
+                                                    <a href="editsliders?id=${o.id}" class="btn btn-danger" data-toggle="modal"><span>Edit</span></a>
+                                                    
+                                                    
+                                                        
                                                     <c:if test="${o.status == true }">
                                                         <a class="btn btn-warning" href="questionlist?do=changing&id=${o.id}&status=${o.status}" 
                                                            data-bs-toggle="modal" data-bs-target="#exampleModalh${o.id}">Hide</a>

@@ -15,7 +15,7 @@ and open the template in the editor.
 
 .sidenav {
     height: 100%; 
-    width: 250px; 
+    width: 0px; 
     position: fixed; 
     z-index: 1; 
     top: 0; 
@@ -61,7 +61,7 @@ and open the template in the editor.
   #main {
     transition: margin-left .5s;
     padding: 20px;
-    margin-left: 250px;
+    margin-left: 0px;
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

@@ -30,28 +30,35 @@
         <jsp:include page="../common/header.jsp"></jsp:include>
 
             <div id="main">
+            <c:if test="${sessionScope.acc == null}">
+                
+            </c:if>
+            <c:if test="${sessionScope.acc != null}">
                 <div id="mySidenav" class="sidenav">
-                <c:forEach items="${requestScope.listrole}" var="role">
-                    <c:if test="${role.permission_id == 3 && role.licensed == true}">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
-                        <a href="/Online_Quiz/common/practicesList">Practices List</a>
-                        <a href="/Online_Quiz/public/listsubject">List Subject</a>    
-                    </c:if>
-                    <c:if test="${role.permission_id == 1 && role.licensed == true}">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a class="" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
-                        <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
-                        <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>    
-                    </c:if>
-                    <c:if test="${role.permission_id == 4 && role.licensed == true}">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a class="" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
-                            
-                    </c:if>    
-                </c:forEach>
+                    <c:forEach items="${requestScope.listrole}" var="role">
+                        <c:if test="${role.permission_id == 3 && role.licensed == true}">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                            <a href="/Online_Quiz/public/myregistrations">My Registrations</a>
+                            <a href="/Online_Quiz/common/practicesList">Practices List</a>
+                            <a href="/Online_Quiz/public/listsubject">List Subject</a>    
+                        </c:if>
+                        <c:if test="${role.permission_id == 1 && role.licensed == true}">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                            <a class="" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
+                            <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
+                            <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>    
+                        </c:if>
+                        <c:if test="${role.permission_id == 4 && role.licensed == true}">
+                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                            <a class="" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
+                            <a class="" href="/Online_Quiz/marketing/sliders">Sliders list</a>
 
-            </div>
+                        </c:if>    
+                    </c:forEach>
+
+                </div>
+            </c:if>
+
 
 
 

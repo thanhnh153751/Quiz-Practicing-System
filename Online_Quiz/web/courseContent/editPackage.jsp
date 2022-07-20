@@ -80,7 +80,7 @@
 
                         <div id="editEmployeeModal">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content" style="width: 210%; margin-left: -270px">
                                     <form action="pricepackage?do=edit&sid=${sid}" method="post">
                                     <div class="modal-header">						
                                         <h4 class="modal-title">Edit Package</h4>

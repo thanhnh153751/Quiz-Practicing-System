@@ -84,15 +84,20 @@ public class HomeServerlet extends HttpServlet {
         request.setAttribute("loadLatestPost", loadLatestPost);
         request.setAttribute("loadHotPost", loadHotPost);
         
+        
         //danh cho role
         AuthorizationDAO dao = new AuthorizationDAO();
         HttpSession Session = request.getSession();
-        Account a = (Account) Session.getAttribute("acc");
+        Account a = (Account) Session.getAttribute("acc");  
+        if(a != null){
         List<UserPermission> userPermission = dao.getListPermissionByAid(a.getId());
         request.setAttribute("listrole", userPermission);
-        
-        
+        }
+
         request.getRequestDispatcher("/public/index.jsp").forward(request, response);
+        
+        
+        
     }
 
     /**

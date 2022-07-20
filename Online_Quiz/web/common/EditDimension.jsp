@@ -80,10 +80,10 @@
 
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 210%; margin-left: -270px">
                         <form action="/Online_Quiz/common/editdimension" method="post">
-                            <div class="modal-header">						
-                                <h4 class="modal-title">Edit Dimension</h4>
+                            <div class="modal-header text-center">						
+                                <h4 class="modal-title center">Edit Dimension</h4>
                                 <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                             </div>
                             <div class="modal-body">

@@ -151,7 +151,7 @@
         </div>
         <div id="addEmployeeModal" class="modal fade">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="width: 210%; margin-left: -200px">
                     <form action="/Online_Quiz/common/loadadddimension" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">  Add New Dimension</h4>

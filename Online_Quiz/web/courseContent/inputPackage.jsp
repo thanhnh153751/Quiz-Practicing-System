@@ -73,7 +73,7 @@
         <div class="container">
            
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content" style="width: 210%; margin-left: -270px">
                         <form action="pricepackage?do=add&filter=1" method="post">
                             <input type="hidden" name="sid" value="${requestScope.sid}">
                             <div class="modal-header">						

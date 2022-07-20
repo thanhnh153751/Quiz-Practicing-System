@@ -5,20 +5,22 @@
  */
 package Controller;
 
+import DAO.DAO;
+import Model.Sliders;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author PREDATOR
+ * @author Viet Dung
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/public/logout"})
-public class LogoutController extends HttpServlet {
+@WebServlet(name = "SliderdetailController", urlPatterns = {"/marketing/sliderdetail"})
+public class SliderdetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +33,16 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        session.removeAttribute("acc");
-        response.sendRedirect("home");
+        DAO dao = new DAO();
+        String did = request.getParameter("id");
+//            System.out.println(did);
+System.out.println("vcl");
+        int id = Integer.parseInt(did);
+        Sliders list = dao.getAllSlidersbyid(id);
+        System.out.println(list);
+        request.setAttribute("listD", list);
+        request.setAttribute("id", id);
+        request.getRequestDispatcher("/marketing/Sliderdetails.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

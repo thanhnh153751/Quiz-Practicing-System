@@ -36,12 +36,12 @@
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <a class="activenav" href="/Online_Quiz/public/bloglist">Blog list</a>
-                    
+
 
                 </div>
                 <div class="container"style="padding-top: 50px">
                     <div class="row">
-                        
+
                         <header id="page-header" class="row" style="margin-top: -15px; padding-left: -30px">
                             <div class="col-12 pt-3 pb-3" >
                                 <div class="card ">
@@ -60,7 +60,7 @@
                                                         </li>
                                                         <li class="breadcrumb-item">Blog list</li>
                                                         <li class="breadcrumb-item">
-                                                            
+
                                                         </li>
                                                     </ol>
                                                 </nav>
@@ -70,70 +70,79 @@
                                 </div>
                             </div>
                         </header>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="blog-list">
-                            <h1 class="text-center text-primary"><b>Blog list</b></h1>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="blog-list">
+                                    <h1 class="text-center text-primary"><b>Blog list</b></h1>
 
-                            <form action="/Online_Quiz/public/blogsearch">
-                                <input name="searchname" type="text" placeholder="Search blogs">
+                                    <form action="/Online_Quiz/public/blogsearch">
+                                        <input name="searchname" type="text" placeholder="Search blogs">
 
-                                <select  id="" name="category">
-                                    <option value="">Blog Category</option>
-                                <c:forEach items="${listc}" var="lst">
-                                    <option value="${lst.id}">${lst.name}</option>
+                                        <select  id="" name="category">
+                                            <option value="">Blog Category</option>
+                                        <c:forEach items="${listc}" var="lst">
+                                            <option value="${lst.id}">${lst.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <button>Search</button>
+                                </form>
+
+                                <c:forEach items="${post}" var="pst">
+                                    <div class="post-item">
+                                        <a href="<c:url value="/public/postdetails?id=${pst.id}"/>">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <div><img class="img-responsive img-thumbnail" src="${pst.thumbnail}"></div>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                    <h1>${pst.post_title}</h1>
+                                                    <p>${pst.biref}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </c:forEach>
-                            </select>
-                            <button>Search</button>
-                        </form>
 
-                        <c:forEach items="${post}" var="pst">
-                            <div class="post-item">
-                                <a href="<c:url value="/public/postdetails?id=${pst.id}"/>">
-                                    <h1>${pst.post_title}</h1>
-                                    <p>${pst.biref}</p>
-                                </a>
                             </div>
-                        </c:forEach>
+                        </div>
+                        <div class="col-md-12">
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    <c:forEach begin="1" end="${lastP}" var="i">
+                                        <li class="page-item"><a class="page-link" href="<c:url value="/public/bloglist?indexP=${i}"/>">${i}</a></li>
+                                        </c:forEach>
+                                    <!--                            <li class="page-item disabled">
+                                                                    <span class="page-link">Previous</span>
+                                                                </li>
+                                                                
+                                                                <li class="page-item active">
+                                                                    <span class="page-link">2</span>
+                                                                </li>
+                                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="#">Next</a>
+                                                                </li>-->
+                                </ul>
+                            </nav>
+                        </div>
 
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                        <c:forEach begin="1" end="${lastP}" var="i">
-                            <li class="page-item"><a class="page-link" href="<c:url value="/public/bloglist?indexP=${i}"/>">${i}</a></li>
-                        </c:forEach>
-<!--                            <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
-                            </li>
-                            
-                            <li class="page-item active">
-                                <span class="page-link">2</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>-->
-                        </ul>
-                    </nav>
-                </div>
-
             </div>
+            <br>
+
+
+            <jsp:include page="../common/footer.jsp"></jsp:include>
         </div>
-                </div>
-<br>
-                       
-                        
-                        <jsp:include page="../common/footer.jsp"></jsp:include>
-                        </div>
-                        
-            <script src="../js/jquery/jquery.js"></script>
-            <script src="../js/jquery/jquery-migrate.js"></script>
-            <script src="../js/boostrap/bootstrap.min.js"></script>
-            <script src="../js/slick/slick.min.js"></script>
-            <script src="../js/index.js"></script>
-            <script src="../js/sidenav.js"></script>
+
+        <script src="../js/jquery/jquery.js"></script>
+        <script src="../js/jquery/jquery-migrate.js"></script>
+        <script src="../js/boostrap/bootstrap.min.js"></script>
+        <script src="../js/slick/slick.min.js"></script>
+        <script src="../js/index.js"></script>
+        <script src="../js/sidenav.js"></script>
 
 
     </body>
