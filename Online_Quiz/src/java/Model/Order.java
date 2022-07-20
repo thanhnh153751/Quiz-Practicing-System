@@ -54,6 +54,12 @@ public class Order {
         this.valid_to = valid_to;
     }
 
+    public Order(int id, String packagee) {
+        this.id = id;
+        this.packagee = packagee;
+    }
+    
+
     public int getId() {
         return id;
     }

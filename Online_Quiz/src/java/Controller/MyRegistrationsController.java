@@ -47,6 +47,13 @@ public class MyRegistrationsController extends HttpServlet {
         HttpSession session = request.getSession();           
         Account a = (Account)session.getAttribute("acc");
         int id = a.getId();
+        if(request.getParameter("removeId")!= null){
+            int rid = Integer.parseInt(request.getParameter("removeId"));
+            dao.RemoveOrder(rid);
+        }
+        
+        
+        
         List<Order> listO = dao.Order(id);
         request.setAttribute("listO", listO);
         request.getRequestDispatcher("/public/myregistrations.jsp").forward(request, response);

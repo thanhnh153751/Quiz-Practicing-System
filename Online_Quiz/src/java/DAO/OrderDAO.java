@@ -113,6 +113,22 @@ public class OrderDAO extends DBContext {
         }
         return null;
     }
+    
+        public void RemoveOrder(int id) {
+        
+        String query = "Delete from Order_Details where oid ="+id;
+        String query2 = "Delete from [Order] where id ="+id;
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.executeUpdate();
+            PreparedStatement ps1 = connection.prepareStatement(query2);
+            ps1.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("\tOrderDAO5: " + e);
+        }
+     
+    }
 
     public List<Order> searchBySubject(String txtSearch) {
         List<Order> Order = new ArrayList<>();
@@ -141,6 +157,8 @@ public class OrderDAO extends DBContext {
         }
         return Order;
     }
+    
+    
     
 
 
