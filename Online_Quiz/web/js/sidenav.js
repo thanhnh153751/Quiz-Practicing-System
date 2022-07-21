@@ -18,15 +18,4 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 
-// Lấy các phần tử có class là menu
-let x = document.getElementsByClassName("menu");
 
-// Lặp qua các phần tử có class là menu
-for (let i = 0; i < x.length; i++) {
-    
-    // Lắng nghe sự kiện click
-    // và đổi màu chữ thành màu đỏ
-    x[i].onclick = function() {
-        this.style.color = "red";
-    };
-}
