@@ -73,7 +73,7 @@
                         
                         <div id="editEmployeeModal">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content" style="width: 210%; margin-left: -270px">
                                     <form action="/Online_Quiz/marketing/postdetails?do=${do}&filter=1" method="post">
                                     <div class="modal-header">						
                                         <h4 class="modal-title">Add Post</h4>

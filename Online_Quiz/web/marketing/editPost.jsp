@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+        <title>Edit Post</title>
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">      
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
@@ -73,7 +73,7 @@
 
                         <div id="editEmployeeModal">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content" style="width: 210%; margin-left: -270px">
                                     <form action="/Online_Quiz/marketing/postdetails?do=${do}&filteredit=1" method="post">
                                     <div class="modal-header">						
                                         <h4 class="modal-title">Edit Post</h4>

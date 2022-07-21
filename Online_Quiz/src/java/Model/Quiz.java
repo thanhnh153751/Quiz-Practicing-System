@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author hongd
@@ -14,16 +16,19 @@ public class Quiz {
     private int id;
     private int lid;
     private String quiz_name;
-    private int total_score;
+    private double total_score;
     private int level;
     private float passrate;
     private int type;
     private long duration;
-
+    private Timestamp finishtime;
     private String subject;
     private String qlevel;
     private String qtype;
     private int numofquess;
+    
+    private int quiztake_id;
+    private int quiz_id;
 
     public Quiz() {
     }
@@ -45,7 +50,7 @@ public class Quiz {
 
     }
 
-    public Quiz(int id, int lid, String quiz_name, int total_score, int level, float passrate, int type, long duration) {
+    public Quiz(int id, int lid, String quiz_name, double total_score, int level, float passrate, int type, long duration) {
         this.id = id;
         this.lid = lid;
         this.quiz_name = quiz_name;
@@ -55,6 +60,7 @@ public class Quiz {
         this.type = type;
         this.duration = duration;
     }
+    
 
     public Quiz(int lid, String subject, String quiz_name, String qtype, long duration, float passrate) {
         this.lid = lid;
@@ -64,6 +70,50 @@ public class Quiz {
         this.duration = duration;
         this.passrate = passrate;
 
+    }
+    
+    public Quiz(int lid, String subject, String quiz_name, String qtype, long duration, float passrate,double total_score,Timestamp finishtime,int quiztake_id,int quiz_id) {
+        this.lid = lid;
+        this.subject = subject;
+        this.quiz_name = quiz_name;
+        this.qtype = qtype;
+        this.duration = duration;
+        this.passrate = passrate;
+        this.total_score = total_score;
+        this.finishtime = finishtime;
+        this.quiztake_id = quiztake_id;
+        this.quiz_id = quiz_id;
+    }
+
+
+    
+    
+
+    public int getQuiztake_id() {
+        return quiztake_id;
+    }
+
+    public void setQuiztake_id(int quiztake_id) {
+        this.quiztake_id = quiztake_id;
+    }
+
+    public int getQuiz_id() {
+        return quiz_id;
+    }
+
+    public void setQuiz_id(int quiz_id) {
+        this.quiz_id = quiz_id;
+    }
+
+
+    
+
+    public Timestamp getFinishtime() {
+        return finishtime;
+    }
+
+    public void setFinishtime(Timestamp finishtime) {
+        this.finishtime = finishtime;
     }
 
     public int getId() {
@@ -90,11 +140,11 @@ public class Quiz {
         this.quiz_name = quiz_name;
     }
 
-    public int getTotal_score() {
+    public double getTotal_score() {
         return total_score;
     }
 
-    public void setTotal_score(int total_score) {
+    public void setTotal_score(double total_score) {
         this.total_score = total_score;
     }
 

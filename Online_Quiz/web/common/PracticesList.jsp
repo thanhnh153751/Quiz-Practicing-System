@@ -4,6 +4,7 @@
     Author     : Viet Dung
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -87,12 +88,15 @@
                                     <thead class="" >
                                         <tr>
 
-                                            <th>ID</th>
+                                            <th>Lesson ID</th>
                                             <th>Subject Name</th>
                                             <th>Exam name</th>
                                             <th>Type</th>                                       
                                             <th>Duration</th>
                                             <th>Pass rate</th>
+                                            <th>Score</th>
+                                            <th>Finish Time</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,7 +110,10 @@
                                             <td>${o.qtype}</td>
                                             <td>${o.duration}p </td>
                                             <td>${o.passrate}%</td>
-
+                                            <td>${o.total_score*100}</td>
+                                            <td><fmt:formatDate value="${o.finishtime}" pattern="MM/dd/yyyy HH:mm"/></td>
+                                            <td><a onclick="Redirect('${o.quiztake_id}', '${o.quiz_id}')"><button type="button" class="btn btn-outline-danger btn-sm">Review</button></a></td>
+                                                
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -147,6 +154,7 @@
         <script src="../js/slick/slick.min.js"></script>
         <script src="../js/index.js"></script>
         <script src="../js/sidenav.js"></script>
+        <script src="../js/quizfinish.js"></script>
 
     </body>
 

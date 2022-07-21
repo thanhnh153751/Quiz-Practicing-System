@@ -17,7 +17,7 @@ public class QuizTake {
     private int aid;
     private int quiz_id;
     private int status;
-    private int score;
+    private double score;
     private Timestamp create_time;
     private Timestamp update_time;
     private Timestamp start_time;
@@ -26,7 +26,7 @@ public class QuizTake {
     public QuizTake() {
     }
 
-    public QuizTake(int id, int aid, int quiz_id, int status, int score, Timestamp create_time, Timestamp update_time, Timestamp start_time, Timestamp finish_time) {
+    public QuizTake(int id, int aid, int quiz_id, int status, double score, Timestamp create_time, Timestamp update_time, Timestamp start_time, Timestamp finish_time) {
         this.id = id;
         this.aid = aid;
         this.quiz_id = quiz_id;
@@ -70,11 +70,11 @@ public class QuizTake {
         this.status = status;
     }
 
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(double score) {
         this.score = score;
     }
 

@@ -71,7 +71,7 @@ public class QuizReviewController extends HttpServlet {
 
         String quiz_id_raw = request.getParameter("quiz_id");
         String index_question_raw = request.getParameter("index_quiz");
-        String take_id_raw = request.getParameter("quiz_take");
+        String take_id_raw = request.getParameter("quiz_take");//la id cua bang quiz_take
 
         try {
 
@@ -99,6 +99,7 @@ public class QuizReviewController extends HttpServlet {
                 List<Question> questionList = quiz.getQuestionList(quiz_id);
                 Question currentQuestion = questionList.get(questionIndex - 1);
                 QuizTake quiztake = quiz.getQuizTake(account.getId());
+                QuizTake quiztakeobj = quiz.getQuizTakeById(take_id);
                 List<Answer> answerList = quiz.getAnswerList(quiz_id, questionIndex);
 
                 QuizTakeDetails qtDetails = quiz.getQtDetails(take_id, questionIndex);
@@ -106,6 +107,7 @@ public class QuizReviewController extends HttpServlet {
                     request.setAttribute("quiz_take_details", qtDetails);
                     request.setAttribute("quiz_take", quiztake);
                     request.setAttribute("quizId", quiz_id);
+                    request.setAttribute("score", quiztakeobj.getScore());
                     request.setAttribute("answerList", answerList);
                     request.setAttribute("questionInfo", currentQuestion);
                     request.setAttribute("questionIndex", questionIndex);

@@ -81,7 +81,7 @@
                                     <h5>Question ${questionIndex}/${numberOfQuestion}</h5>
                             </div>
                             <div class="quiz-timer-right">
-                                <h5 id="timer"></h5>
+                                <h5 id="timer">${score*100}/100</h5>
                             </div>
 
                         </div>

@@ -12,10 +12,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CRUD Data </title>
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-
-
+        <title>Edit Sliders</title>
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">      
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/slick/slick.css">
         <link rel="stylesheet" href="../css/index.css">
@@ -23,8 +21,8 @@
         <link rel="stylesheet" href="../css/sidenav.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
               integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-              crossorigin="anonymous" referrerpolicy="no-referrer"        
-              <link href="css/manager.css" rel="stylesheet" type="text/css"/>
+              crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link href="css/manager.css" rel="stylesheet" type="text/css"/>
         <style>
             img{
                 width: 200px;
@@ -38,9 +36,8 @@
 
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a class="activenav" href="http://localhost:8080/Online_Quiz/common/managersubjectlist">Subjects List </a>
-                    <a href="http://localhost:8080/Online_Quiz/common/questionlist">Questions List </a>
-                    <a href="http://localhost:8080/Online_Quiz/common/quizzeslist">Quizzes List </a>             
+                    <a class="" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
+                    <a class="activenav" href="/Online_Quiz/marketing/sliders">Sliders list</a>            
                 </div>
                 <div class="container "style="padding-top: 50px">
                     <div class="row">
@@ -60,13 +57,9 @@
                                                         <li class="breadcrumb-item">
                                                             <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
                                                         </li>
-                                                        <li class="breadcrumb-item">Subjects List</li>
+                                                        <li class="breadcrumb-item">Sliders list</li>
                                                         <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="#">Subjects Dimension</a>
-                                                        </li>
-                                                        <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="#">Edit Dimension</a>
-
+                                                            <a style="text-decoration: none" href="#">Edit Sliders</a>
                                                         </li>
                                                     </ol>
                                                 </nav>

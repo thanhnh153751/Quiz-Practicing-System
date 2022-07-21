@@ -62,7 +62,8 @@
 
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a class="activenav" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
+                    <a class="" href="/Online_Quiz/marketing/postdetails">List Of Post</a>
+                    <a class="activenav" href="/Online_Quiz/marketing/sliders">Sliders list</a>
 
                 </div>
                 <div class="container"style="padding-top: 50px">
@@ -83,10 +84,11 @@
                                                         <li class="breadcrumb-item">
                                                             <a style="text-decoration: none" href="http://localhost:8080/Online_Quiz/public/home">Home</a>
                                                         </li>
-                                                        <li class="breadcrumb-item">List Of Post</li>
+                                                        <li class="breadcrumb-item">Sliders list</li>
                                                         <li class="breadcrumb-item">
-                                                            <a style="text-decoration: none" href="#">Post Details</a>
+                                                            <a style="text-decoration: none" href="#">Slider Details</a>
                                                         </li>
+
 
                                                     </ol>
                                                 </nav>

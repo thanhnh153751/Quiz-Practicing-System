@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.DAO;
+import Model.Account;
 import Model.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,7 +38,11 @@ public class PracticesListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DAO dao = new DAO();
-        List<Quiz> list = dao.getAllPracticesList();
+        
+        HttpSession Session = request.getSession();
+        Account a = (Account) Session.getAttribute("acc"); 
+        
+        List<Quiz> list = dao.getAllPracticesListByAid(a.getId());
         int page,numberpage = 5;
         int size = list.size();
         int num = (size%5==0?(size/5):((size/5)+1));

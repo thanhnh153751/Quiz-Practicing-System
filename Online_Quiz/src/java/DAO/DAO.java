@@ -390,16 +390,17 @@ public class DAO extends DBContext {
 //        }
 //        return arr;
 //    }
-    public List<Quiz> getAllPracticesList() {
+    public List<Quiz> getAllPracticesListByAid(int aid) {
         List<Quiz> list = new ArrayList<>();
         DAO dao = new DAO();
-        String query = "select l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate from Subject s\n"
-                + "                                join Lesson l on s.id = l.sid\n"
-                + "                                join Lesson_Details ld on l.id = ld.lid\n"
-                + "                                join Quiz_Lesson ql on ld.id = ql.lesson_id\n"
-                + "                                join Quiz q on ql.quiz_id = q.id\n"
-                + "				 join Quiz_Type qt on q.type = qt.id\n"
-                + "                                group by l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate";
+        String query = "  select l.id, s.title,q.quiz_name,qt.type,q.duration,q.passrate,qqt.score,qqt.finish_time,qqt.id,qqt.quiz_id from Subject s\n" +
+"                                           join Lesson l on s.id = l.sid\n" +
+"                                           join Lesson_Details ld on l.id = ld.lid\n" +
+"                                           join Quiz_Lesson ql on ld.id = ql.lesson_id\n" +
+"                                           join Quiz q on ql.quiz_id = q.id\n" +
+"                						   join Quiz_Type qt on q.type = qt.id\n" +
+"										   join quiz_take qqt on q.id = qqt.quiz_id\n" +
+"										   where qqt.aid ="+aid;
         try {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
@@ -409,7 +410,12 @@ public class DAO extends DBContext {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getInt(5),
-                        rs.getLong(6)
+                        rs.getLong(6),
+                        rs.getDouble(7),
+                        rs.getTimestamp(8),
+                        rs.getInt(9),
+                        rs.getInt(10)
+                        
                 ));
             }
         } catch (Exception e) {

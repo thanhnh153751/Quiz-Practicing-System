@@ -100,7 +100,7 @@ public class QuizSubmitController extends HttpServlet {
             double score_raw = (double)total_question_correct/(double)numberOfAnswer;
             System.out.println(score_raw);
             if (time <= (quizObj.getDuration() * 60) && time >= 0) {
-                quiz.submitQuiz(takeid);
+                quiz.submitQuiz(takeid,score_raw);
                 request.setAttribute("message", "Quiz submit successfully");
                 request.setAttribute("status", true);
                 request.setAttribute("duration", quizObj.getDuration());

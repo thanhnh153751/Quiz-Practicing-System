@@ -175,7 +175,6 @@
                 </header>
 
 
-                <h1 class="center">Course Details</h1>
                 <div class="container">
                     <div class="">
                         <div>
@@ -325,7 +324,7 @@
 
                                     <div class="modal-body" style="padding-left: 40px; padding-right: 40px">
                                             <div class="form-group">
-                                                <h2 class="modal-title" style="text-align: center">Add new Course</h2>
+                                                <h2 class="modal-title" style="text-align: center">Edit Course</h2>
                                             </div>
 
                                             <div class="form-group">
@@ -396,7 +395,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="submit" name="submit" id="edit" class="btn btn-success" value="Add new Course">
+                                            <input type="submit" name="submit" id="edit" class="btn btn-success" value="Edit Course">
 
                                         </div>
                                         <p style="color: red">${requestScope.mess}</p>

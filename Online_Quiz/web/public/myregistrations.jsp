@@ -172,6 +172,10 @@
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
+                        
+                        
 
                     <jsp:include page="../common/footer.jsp"></jsp:include>
                     </div>
@@ -193,7 +197,7 @@
                                                                 $(document).ready(function () {//chuyển sid về sever
                                                                     $('.myBtn').click(function () {
                                                                         let idrow = $(this).closest('tr').attr('id');
-
+                                                                       
                                                                         $.ajax({
                                                                             url: "/Online_Quiz/public/editmyregistrations",
                                                                             type: "get", //send it through get method

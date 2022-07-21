@@ -179,7 +179,7 @@ public class QuizDAO extends DBContext {
                         rs.getInt("aid"),
                         rs.getInt("quiz_id"),
                         rs.getInt("status"),
-                        rs.getInt("score"),
+                        rs.getDouble("score"),
                         rs.getTimestamp("create_time"),
                         rs.getTimestamp("update_time"),
                         rs.getTimestamp("start_time"),
@@ -348,6 +348,20 @@ public class QuizDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, take_id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+        public void submitQuiz(int take_id,double score_raw) {
+        String query = "Update quiz_take\n"
+                + "Set [status] = 1, finish_time = CURRENT_TIMESTAMP, score=? \n"
+                + "where id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(2, take_id);
+            ps.setDouble(1, score_raw);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

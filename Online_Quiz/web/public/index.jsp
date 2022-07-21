@@ -31,7 +31,10 @@
 
             <div id="main">
             <c:if test="${sessionScope.acc == null}">
-                
+                <div id="mySidenav" class="sidenav">
+                    <a href="/Online_Quiz/public/listsubject">List Subject</a> 
+                    <a href="/Online_Quiz/public/bloglist">Blog </a> 
+                </div>
             </c:if>
             <c:if test="${sessionScope.acc != null}">
                 <div id="mySidenav" class="sidenav">
@@ -140,7 +143,7 @@
                                 </div>
 
                                 <div class="" id="featured-subjects">
-                                    <h3>featured subjects</h3>
+                                    <h3>Featured Subjects</h3>
                                     <div id="" class="slider_2">
                                         <c:forEach items="${requestScope.subjectLast}" var="p">
                                             <div class="card slider-item col-md-3" style="width: 16rem;height: 15rem;">

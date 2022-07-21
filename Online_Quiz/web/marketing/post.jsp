@@ -77,7 +77,6 @@
                                             <h2>List <b>Of Post</b></h2>
                                         </div>
                                         <div class="col-sm-3">
-                                            <a href="/Online_Quiz/marketing/postdetails?do=add"  class="btn btn-success" data-toggle="modal"> <span>Add New Course</span></a>
 
                                         </div>
                                     </div>

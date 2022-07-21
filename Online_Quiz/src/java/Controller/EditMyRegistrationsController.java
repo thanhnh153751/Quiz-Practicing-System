@@ -48,7 +48,7 @@ public class EditMyRegistrationsController extends HttpServlet {
         int ids = od.geSIdbyOid(oid);
         String id_pac_raw = request.getParameter("idpac");
         String status = request.getParameter("sta");
-        if (id_pac_raw != null || status!= null) {//sau khi chon goi xong
+        if (id_pac_raw != null ) {//sau khi chon goi xong
             int id_pac = Integer.parseInt(id_pac_raw);
             Model.Package p = d.loadPackagesByPid(id_pac);
             Subject s = sd.loadSubjectDetail(p.getSid());
